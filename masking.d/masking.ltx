@@ -1,0 +1,572 @@
+\documentclass[draft,12pt]{amsart}
+
+\usepackage[final]{listings}
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
+\usepackage{arydshln}
+
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{url}
+\usepackage[final]{hyperref}
+\usepackage{placeins}
+\usepackage{mfirstuc}
+\usepackage{ifdraft}
+\usepackage[obeyDraft]{todonotes}
+\usepackage{datetime2}
+\ifdraft{
+    \usepackage{draftwatermark}
+}{}
+
+% Fix conflict between todonotes and amsart packages
+% See http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/todonotes/todonotes.pdf,
+% p. 10.
+\makeatletter
+\providecommand\@dotsep{5}
+\def\listtodoname{List of TODOs}
+\def\listoftodos{\@starttoc{tdo}\listtodoname}
+\makeatother
+
+\makeatletter
+\renewcommand{\listofalgorithms}{\@starttoc{loa}{List of algorithms}}
+\let\l@algorithm=\l@figure
+\makeatother
+
+% Re hbox's, see
+% https://tex.stackexchange.com/questions/241343/what-is-the-meaning-of-fussy-sloppy-emergencystretch-tolerance-hbadness
+\raggedbottom
+
+% Replaced by todonotes package
+% \newcommand{\todo}[1]{\par{\large\bf Todo: #1}\par}
+
+\newcommand{\mymathop}[1]{\mathop{\texttt{#1}}}
+\newcommand{\mymathbin}[1]{\mathbin{\texttt{#1}}}
+
+% For a type name, when it occurs in text
+\newcommand{\type}[1]{\ensuremath{\texttt{#1}}}
+
+\newcommand{\mult}{\mathbin{\ast}}
+\newcommand{\dfn}[1]{{\bf #1}}
+\newcommand{\sep}{\,\mid\,}
+\newcommand{\mydot}{\raisebox{.05em}{$\,\bullet\,$}}
+\newcommand{\cat}{\,.\,}
+\newcommand{\size}[1]{\ensuremath{\left | {#1} \right |}}
+\newcommand{\bigsize}[1]{\ensuremath{\bigl| {#1} \bigr|}}
+\newcommand{\order}[1]{\ensuremath{{\mathcal O}(#1)}\xspace}
+\newcommand{\Oc}{\order{1}}
+\newcommand{\On}{\order{\var{n}}}
+\newcommand{\inference}[2]{\genfrac{}{}{1pt}{}{#1}{#2}}
+
+\newcommand{\tuple}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+
+\newcommand{\mcolon}{\mathrel:}
+\newcommand{\mcoloncolon}{\mathrel{\vcenter{\hbox{$::$}}}}
+
+\newcommand{\suchthat}{\mcoloncolon}
+\newcommand{\quantify}[3]{% quantifier, binding, predicate
+    \ensuremath{\mathrel{#1}#2 \; \suchthat \; #3}%
+}
+
+% I use hyphens in variable names,
+% so I need to ensure that subtraction is
+% clearly distinguished by the typography
+\newcommand{\subtract}{\,-\,}
+
+\newcommand{\var}[1]{\ensuremath{\texttt{#1}}}
+\newcommand{\V}[1]{\ensuremath{\texttt{\mbox{#1}}}}
+
+\newcommand{\cfg}{CFG}
+
+\newcommand{\de}{\mathrel{::=}}
+\newcommand{\derives}{\Rightarrow}
+\newcommand{\destar}
+    {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
+\newcommand{\deplus}
+    {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
+\newcommand{\derivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
+\newcommand{\derivrg}[2]{\mathrel{\mbox{$\:\stackrel{\!{#1}}%
+        {\Rightarrow\!}\:$}}}
+
+% For the type subscript for powersets
+\newcommand{\setOf}[1]{{{#1}^{\mbox{\normalsize $\ast$}}}}
+
+\newcommand{\set}[1]{{\left\lbrace #1 \right\rbrace} }
+\newcommand{\bigset}[1]{{\bigl\lbrace #1 \bigr\rbrace} }
+\newcommand{\Bigset}[1]{{\Bigl\lbrace #1 \Bigr\rbrace} }
+
+% use internal counter of algorithmicx
+\newcommand{\algnested}{ %
+  \makeatletter\ALG@nested\makeatother %
+}
+
+\newcommand{\algstrut}{\rule{0pt}{.85\baselineskip}}
+
+\newcommand{\myparbox}[2][\algparwidth]{%
+  \parbox[t]{#1}{%
+  % \linespread{1.15}\selectfont
+  \ignorespaces#2\par%
+  }%
+}
+
+\newcommand{\parcomment}[2]{\hspace{\dimexpr \algorithmicindent * #1}$\triangleright$ #2}
+
+% \newcommand{\rawparcomment}[2][\algparwidth]{%
+  % \myparbox[#1]{#2}%
+% }
+% \newcommand{\parcomment}[2][\algparwidth]{%
+  % \myparbox[#1]{$\triangleright$ #2}%
+% }
+% \newcommand{\parcomment}[1]{\hspace{\dimexpr \algorithmicindent - \labelwidth }$\triangleright$
+  % \protect\parbox[t]{\dimexpr \textwidth - (\algorithmicindent - \labelwidth)}{#1}%
+% }
+
+% I want to use 'call' outside of pseudocode
+\newcommand\call[2]{\textproc{#1}\ifthenelse{\equal{#2}{}}{}{(#2)}}%
+
+\newcommand{\mname}[1]{\mbox{\sf #1}}
+% [O]perator [A]pplication
+\newcommand{\Oname}[1]{\mname{#1}}
+% The \mathopen{} and \mathclose{} eliminate unwanted extra space
+\newcommand{\OA}[2]{\ensuremath{%
+    \mathop{\Oname{#1}}\mathopen{}\left(#2\right)\mathclose{}%
+}}
+\newcommand{\VOA}[2]{\OA{#1}{\V{#2}}}
+% [F]unction [A]pplication, replaces \myfn
+\newcommand{\smallrawfn}[2]{\ensuremath{\mathop{#1}(#2)}}
+% The \mathopen{} and \mathclose{} eliminate unwanted extra space
+\newcommand{\rawfn}[2]{\ensuremath{\mathop{#1}\mathopen{}\left(#2\right)\mathclose{}}}
+\newcommand{\Fname}[1]{\V{#1}}
+\newcommand{\FA}[2]{\ensuremath{\rawfn{\mathop{\Fname{#1}}}{#2}}}
+\newcommand{\VFA}[2]{\FA{#1}{\V{#2}}}
+
+\hyphenation{oper-and oper-ands}
+\hyphenation{look-ahead}
+\hyphenation{memo-ization}
+
+% I like to silence underfull hbox messages.
+% This is syntactic sugar for doing that.
+\newenvironment{MYsloppy}[1][3em]{\par\tolerance9999 \emergencystretch#1\relax}{\par}
+% This form allows the resetting of hbadness, which may be necessary to
+% shut up an "underfull" warning.
+\newenvironment{MYsloppyB}[2]{\par\tolerance9999 \emergencystretch#1 \hbadness#2\relax}{\par}
+% This form is for a trick:  Tolerances are evaluated line by line, so a tolerance
+% less than 9999 may produce a better looking paragraph and reduce the "badness".
+\newenvironment{MYsloppyC}[3]{\par\tolerance#3 \emergencystretch#1 \hbadness#2\relax}{\par}
+
+\title
+  [Masking Thoughts]
+  {Thoughts on optimizing the computation of masks}
+
+\author{Jeffrey Kegler}
+\ifdraft{
+    % legacy draftwatermark options -- update?
+    \SetWatermarkLightness{0}
+    \SetWatermarkText{DRAFT \DTMnow{} DRAFT}
+    \SetWatermarkAngle{0}
+    % \SetWatermarkScale{1}
+    % \SetWatermarkHorCenter{1.5in}
+    \SetWatermarkVerCenter{.5in}
+}{}
+\ifdraft{ \thanks{DRAFT as of \DTMnow} }{}
+\date{\DTMnow.}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{About this document}
+\label{sec:about-me}
+
+This document outlines a method for optimizing mask computation in
+Guidance.
+
+\section{The Basic Idea}
+
+The basic idea behind the suggestions in this document is more
+aggressive use of the Ruby Slippers.
+The Ruby Slippers is
+a parsing technique discovered independently by Jeffrey Kegler%
+\cite{Kegler2011a}\cite{Kegler2011b}\cite{Kegler2023}
+and
+Michal Moskal\cite{llguidance}.
+It takes advantage of the ability of certain variants of the Earley
+parser to tell the application
+exactly which terminals will be acceptable at
+any point in the parse.
+This allows the application to change the lexeme stream to match
+the parser's expectations.
+The application can, for example, invent a lexeme on the fly
+to accomodate the parser.\footnote{%
+    The name ``Ruby Slippers'' comes from a incident in the movie
+    {\it Wizard of Oz}.  In it Dorothy, the protagonist is trying
+    to return to her home in Kansas.  After many adventures she
+    discovers that a pair of ruby slippers, which she has been
+    wearing throughout the movie, grant her this ability.
+    She has merely to click her heels and wish.}
+
+The Ruby Slippers are already in use
+in llguidance.
+An \url{allowed\_lexemes} vector is computed,
+and applied at certain points.
+
+In this document, we note that much of the work of applying the
+Ruby Slippers can be done when the grammar is compiled, rather
+than ``online'', as the parse progresses.
+Other work, while not efficient to do at pre-computation,
+can be done ``lazily'' and cached.\footnote{%
+        For discussion of the trade-offs between precomputation and
+        lazy computation with caching, see Section \ref{sec:lazy}.
+        }
+It is hoped that this will allow considerable savings in time.
+
+\section{Pre-computing lexsuf vectors}
+
+The compile-time pre-computation should produce, for every node
+in the toktrie, a vector of lexeme suffixes,
+or ``lexsuf'''s.
+In this document, we will sometimes call these simply ``suffixes''.
+A ``lexsuf'' is an optional triple:
+\[ (\V{lex},\V{off},\V{eol}) \].
+Here
+\begin{itemize}
+\item \V{lex} is a ``possible'' lexeme,
+\item \V{off} is a non-negative number which is the offset into the lexeme
+        of the lexeme suffix, and
+\item \V{eol} is a boolean which is true if and only if the lexeme \V{lex}
+    could end at \V{off}.
+\end{itemize}
+The triple is optional to allow for lazy evaluation.
+
+A lexsuf $\V{x} = (\V{lex},\V{off},\V{eol})$
+is ``possible'' at toktrie node \V{n} if and only if the
+byte string corresponding to \V{n} matches the an \V{off}-length prefix of
+\V{lex}.
+
+\FloatBarrier
+
+\section{The structure of the byte stream}
+\label{sec:byte-stream}
+
+\noindent
+\begin{figure}
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+	\multicolumn{2}{c}{TB} &
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+	% ===
+\rule{30pt}{0pt} &
+	\multicolumn{2}{c|}{ALA} &
+\multicolumn{2}{p{72pt}}{\centering Current} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+	% ===
+	\multicolumn{2}{p{72pt}|}{\rule{30pt}{0pt}} &
+	\multicolumn{1}{p{30pt}|}{\rule{30pt}{0pt}} &
+	\multicolumn{1}{p{30pt}|}{\rule{30pt}{0pt}} &
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+	% ===
+\cline{1-4}\cdashline{5-5}
+	\multicolumn{2}{|p{72pt}|}{\centering \hyphenpenalty=10000 accepted lexeme} &
+	% 30pt * 5 + 12pt * 4 = 198pt
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt} working lexeme}
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+	% ===
+\cline{1-4}\cdashline{5-6}
+\rule{30pt}{0pt} &
+	\multicolumn{2}{|p{72pt}|}{\centering committed token} &
+	% 30pt * 3 + 12pt * 2 = 114pt
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt} working token} &
+        \rule{30pt}{0pt} \\
+	% ===
+\cline{1-4}\cdashline{5-7}
+	\multicolumn{4}{|p{156pt}|}{\centering seen input} &
+	\multicolumn{3}{|p{114pt}}{\centering unseen input} \\
+\cline{1-4}\cdashline{5-7}
+\end{tabular}
+\par\vspace{12pt}
+\noindent
+``Current'' is Current location in the byte stream. \\
+``ALA'' is the Allowed Lexeme Anchor. \\
+``TB'' is the Toktrie Base. \\
+\vspace{6pt}
+\caption{Input structure}
+\label{fig:input-1}
+\end{figure}
+
+\noindent
+\begin{figure}
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+\multicolumn{2}{c}{TB} &
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\rule{30pt}{0pt} &
+\multicolumn{2}{c|}{ALA} &
+\multicolumn{2}{c}{Current} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\multicolumn{2}{c|}{} &
+\multicolumn{1}{c|}{} &
+\multicolumn{1}{c|}{} &
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\cline{1-4}\cdashline{5-7}
+	\multicolumn{2}{|p{72pt}|}{\centering \hyphenpenalty=10000 accepted lexeme} &
+	% 30pt * 5 + 12pt * 4 = 198pt
+	\multicolumn{5}{|p{198pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
+\cline{1-4}\cdashline{5-7}
+\rule{30pt}{0pt} &
+	\multicolumn{2}{|p{72pt}|}{\centering committed token} &
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token} &
+        \rule{30pt}{0pt} \\
+\cline{1-4}\cdashline{5-7}
+	\multicolumn{4}{|p{156pt}|}{\centering seen input} &
+	\multicolumn{3}{|p{114pt}}{\centering unseen input} \\
+\cline{1-4}\cdashline{5-7}
+\end{tabular}
+\vspace{6pt}
+\caption{Input structure with long working lexeme}
+\label{fig:input-2}
+\end{figure}
+
+\FloatBarrier
+
+\noindent
+\begin{figure}
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c}{ALA} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{TB} &
+        \multicolumn{2}{c}{Current} \\
+
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+
+\cline{1-5}\cdashline{6-7}
+\multicolumn{4}{|c|}{accepted lexeme} &
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
+\cline{1-5}\cdashline{6-7}
+        \rule{30pt}{0pt} &
+        \multicolumn{2}{|p{6em}|}{\centering committed token} &
+        \multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token}
+        \\
+\cline{1-5}\cdashline{6-7}
+\multicolumn{5}{|c|}{seen input} &
+        \multicolumn{2}{|c}{unseen input} \\
+\cline{1-5}\cdashline{6-7}
+\end{tabular}
+\vspace{6pt}
+\caption{Input structure with token split between lexemes}
+\label{fig:input-3}
+\end{figure}
+
+As a reminder, in performing the mask computation we are simulating byte streams
+which are divided into tokens,
+and checking them for acceptability against a parser which divides that same byte stream into lexemes.
+From the parser we know which lexemes are acceptable.
+We are given the list of acceptable lexemes
+and we want to know which tokens are acceptable.
+Once we know which tokens are acceptable,
+we can produce a token mask,
+which in turn allows us to sample a token.
+
+To determine the acceptable tokens, this we travserse a trie of the tokens,
+implicitly checking the tokens against all possible byte streams.
+At any given point in the trie traversal, we are considering a single byte stream,
+which may be seen as structured according to the scheme in
+Figure \ref{fig:input-1}
+on page \pageref{fig:input-1}.
+
+In our byte stream diagrams, we have identified
+\begin{itemize}
+	\item the most recently accepted lexeme,
+	\item the most recently committed token,
+	\item a lexeme in progress (aka the ''working lexeme''), and
+	\item a token in progress (aka the ''working token'').
+\end{itemize}
+In the byte stream, we note three locations of special significance:
+\begin{itemize}
+	\item The current location, which is the byte location location
+		implied by our token trie traversal.  We abbreviate this
+		as \V{Current}.
+	\item The ``toktrie base'', that is, the start location for our toktrie
+		traversal, which we abbreviate \V{TB}.
+		\V{TB} is at the end of the last committed token,
+		if it exists, and at the start of parsing otherwise.
+	\item The location for which we calculated the allowed lexemes,
+		that is, the ``allowed lexeme location''.
+		We abbreviate this as \V{ALA}.
+		\V{ALA} is at the end of the last accepted lexeme,
+		if it exists, and at the start of parsing otherwise.
+\end{itemize}
+
+It is always the case the current location is at or after TB.
+It is also always the case the current location
+is at or after the ALA.
+Further, the ALA is always at or before the TB.
+Summarizing these comparisons, we have
+\begin{equation}
+\label{eq:invariant}
+\V{ALA} \le \V{TB} \le \V{Current}.
+\end{equation}
+
+Our byte stream diagrams will make some assumptions
+without loss of generality.
+They will assume
+there is a last committed token and
+a last accepted lexeme.
+And, while the invariant of equation \ref{eq:invariant}
+on page \pageref{eq:invariant} will always be obeyed,
+otherwise they may make arbitrary
+assumptions about the relative length of the tokens and lexemes.
+For example, Figure \ref{fig:input-2}
+on page \pageref{fig:input-2}
+is similar to Figure \ref{fig:input-1}
+on page \pageref{fig:input-1},
+except that, while Figure \ref{fig:input-1} shows a working
+lexeme that ends before the working token,
+Figure \ref{fig:input-1} shows a working
+token the ends {\bf after} the working token.
+
+\section{Lexeme prefixes and suffixes}
+
+\section{Stage 1: Calculating allowed tokens}
+
+The lexsuf vectors can be used to eliminate calls to
+\url{try\_push\_byte}.
+We will refer the code snippet\footnote{%
+    This code snippet is similar to, and taken from,
+    \url{https://github.com/microsoft/llguidance/blob/0ca091a701a50134e0503fa03c5c12b206e182a3/toktrie/src/toktree.rs\#L945}.
+}
+in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
+\begin{figure}
+\begin{lstlisting}
+    while p < endp {
+        r.pop_bytes(next_pop);
+        let n = &self.nodes[p];
+        let b = n.byte();
+        // Click ruby slipper heels here
+        if r.try_push_byte(b) {
+            toks.allow_token(n.token_id().
+                unwrap_or(defl_tok)
+            );
+            // ... stuff here ...
+        } else {
+            // ... other stuff here ...
+        }
+    }
+\end{lstlisting}
+\caption{Ruby Slippers Click Point%
+    \label{fig:try-push-byte}%
+}
+\end{figure}
+
+The test {\tt r.try\_push\_byte(b)} is true if and only if
+the intersection of the possible lexsufs at trie node \V{n}
+and the allowed lexsufs at that point in the code is non-empty.
+By testing for this non-empty intersection, we hope to save most
+calls to \url{try\_push\_byte}.
+
+\section{Stage 2: Track EOLs}
+\label{sec:stage2}
+
+\section{Optimization}
+
+\section{Forcing}
+
+In this document we say we are ``lexeme forcing'' when there is only one
+relevant lexeme at a location.
+The optimization described here detects situations where lexemes can be
+forced and handles their tokenization in the same way as it handles
+the tokenization of other lexemes.
+
+\FloatBarrier
+
+{
+\clearpage
+
+% Ragged right, do not hyphenate.
+\RaggedRight
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% Silence current hbox warnings, but allow them if
+% badness increases further
+\hbadness=2000
+
+\begin{thebibliography}{10}
+
+\bibitem{Kegler2011a}
+\newblock{Jeffrey Kegler.}
+\newblock{``What is the Marpa algorithm?''.}
+\newblock{\url{https://blogs.perl.org/users/jeffrey_kegler/2011/11/what-is-the-marpa-algorithm.html}.
+   Retrieved 2 Dec, 2024.}
+
+\bibitem{Kegler2011b}
+\newblock{Jeffrey Kegler.}
+\newblock{``Marpa and the Ruby Slippers''.}
+\newblock{\url{http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2011/11/marpa-and-the-ruby-slippers.html}.
+   Retrieved 2 Dec, 2024.}
+
+\bibitem{Kegler2023}
+\newblock{Jeffrey Kegler.}
+\newblock{``Marpa, A practical general parser: the recognizer''.}
+\newblock{\url{https://arxiv.org/abs/1910.08129}.
+   Retrieved 2 Dec, 2024.}
+
+\bibitem{llguidance}
+\newblock{llguidance.}
+\newblock{"Low-level guidance parser."}
+\newblock{
+  \url{https://github.com/microsoft/llguidance}.
+  Retrieved 2 Dec, 2024.}
+
+\end{thebibliography}
+
+} % RaggedRight
+
+% \clearpage
+% \phantomsection
+% \listofalgorithms
+
+\ifdraft{
+    \clearpage
+    \phantomsection
+    \listoftodos
+}{}
+
+\end{document}
