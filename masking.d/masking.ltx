@@ -204,7 +204,7 @@ the parser's expectations.
 The application could, for example, invent a lexeme on the fly
 to accomodate the parser.\footnote{%
     The name ``Ruby Slippers'' comes from a incident in the movie
-    {\it Wizard of Oz}.  In it Dorothy, the protagonist is trying
+    {\it Wizard of Oz}.  In it Dorothy, the protagonist, is trying
     to return to her home in Kansas.  After many adventures she
     discovers that a pair of ruby slippers, which she has been
     wearing throughout the movie, grant her this ability.
@@ -228,14 +228,13 @@ can be done ``lazily'' and cached.\footnote{%
         }
 It is hoped that this will allow considerable savings in time.
 
+\FloatBarrier
 
 \section{The structure of the byte stream}
 \label{sec:byte-stream}
 
-\FloatBarrier
-
 \noindent
-\begin{figure}
+\begin{figure}[ht]
 \vspace{6pt}
 % note: default tabcolsep is 6pt
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
@@ -289,7 +288,7 @@ It is hoped that this will allow considerable savings in time.
 \end{figure}
 
 \noindent
-\begin{figure}
+\begin{figure}[ht]
 \vspace{6pt}
 % note: default tabcolsep is 6pt
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
@@ -333,7 +332,7 @@ It is hoped that this will allow considerable savings in time.
 \FloatBarrier
 
 \noindent
-\begin{figure}
+\begin{figure}[ht]
 \vspace{6pt}
 % note: default tabcolsep is 6pt
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
@@ -375,19 +374,19 @@ It is hoped that this will allow considerable savings in time.
 \label{fig:input-3}
 \end{figure}
 
-As a reminder, in performing the mask computation we are simulating byte streams
+As a reminder, in performing the mask computation we simulate byte streams
 which are divided into tokens,
-and checking them for acceptability against a parser which divides that same byte stream into lexemes.
-From the parser we know which lexemes are acceptable.
-We are given the list of acceptable lexemes
-and we want to know which tokens are acceptable.
+and check them for acceptability against a parser which divides that same byte stream into lexemes.
+From the parser 
+we are given a list of acceptable lexemes.
+We want to use this to determine which tokens are acceptable.
 Once we know which tokens are acceptable,
 we can produce a token mask,
-which in turn allows us to sample a token.
+which in turn will allow us to sample a token.
 
-To determine the acceptable tokens, this we travserse a trie of the tokens,
+To determine the acceptable tokens, we travserse a trie of the tokens,
 implicitly checking the tokens against all possible byte streams.
-At any given point in the trie traversal, we are considering a single byte stream,
+Every node in the trie traversal implies a single byte stream,
 which may be seen as structured according to the scheme in
 Figure \ref{fig:input-1}
 on page \pageref{fig:input-1}.
