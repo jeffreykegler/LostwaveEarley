@@ -228,33 +228,11 @@ can be done ``lazily'' and cached.\footnote{%
         }
 It is hoped that this will allow considerable savings in time.
 
-\section{Pre-computing lexsuf vectors}
-
-The compile-time pre-computation should produce, for every node
-in the toktrie, a vector of lexeme suffixes,
-or ``lexsuf'''s.
-In this document, we will sometimes call these simply ``suffixes''.
-A ``lexsuf'' is an optional triple:
-\[ (\V{lex},\V{off},\V{eol}) \].
-Here
-\begin{itemize}
-\item \V{lex} is a ``possible'' lexeme,
-\item \V{off} is a non-negative number which is the offset into the lexeme
-        of the lexeme suffix, and
-\item \V{eol} is a boolean which is true if and only if the lexeme \V{lex}
-    could end at \V{off}.
-\end{itemize}
-The triple is optional to allow for lazy evaluation.
-
-A lexsuf $\V{x} = (\V{lex},\V{off},\V{eol})$
-is ``possible'' at toktrie node \V{n} if and only if the
-byte string corresponding to \V{n} matches the an \V{off}-length prefix of
-\V{lex}.
-
-\FloatBarrier
 
 \section{The structure of the byte stream}
 \label{sec:byte-stream}
+
+\FloatBarrier
 
 \noindent
 \begin{figure}
@@ -461,11 +439,32 @@ on page \pageref{fig:input-2}
 is similar to Figure \ref{fig:input-1}
 on page \pageref{fig:input-1},
 except that, while Figure \ref{fig:input-1} shows a working
-lexeme that ends before the working token,
+lexeme that ends {bf before} the working token,
 Figure \ref{fig:input-1} shows a working
 token the ends {\bf after} the working token.
 
 \section{Lexeme prefixes and suffixes}
+
+The compile-time pre-computation should produce, for every node
+in the toktrie, a vector of lexeme suffixes,
+or ``lexsuf'''s.
+In this document, we will sometimes call these simply ``suffixes''.
+A ``lexsuf'' is an optional triple:
+\[ (\V{lex},\V{off},\V{eol}) \].
+Here
+\begin{itemize}
+\item \V{lex} is a ``possible'' lexeme,
+\item \V{off} is a non-negative number which is the offset into the lexeme
+        of the lexeme suffix, and
+\item \V{eol} is a boolean which is true if and only if the lexeme \V{lex}
+    could end at \V{off}.
+\end{itemize}
+The triple is optional to allow for lazy evaluation.
+
+A lexsuf $\V{x} = (\V{lex},\V{off},\V{eol})$
+is ``possible'' at toktrie node \V{n} if and only if the
+byte string corresponding to \V{n} matches the an \V{off}-length prefix of
+\V{lex}.
 
 \section{Stage 1: Calculating allowed tokens}
 
