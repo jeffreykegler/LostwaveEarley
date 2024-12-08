@@ -287,92 +287,7 @@ It is hoped that this will allow considerable savings in time.
 \label{fig:input-1}
 \end{figure}
 
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
-\rule{30pt}{0pt} &
-\rule{30pt}{0pt} &
-\multicolumn{2}{c}{TB} &
-\rule{30pt}{0pt} &
-\rule{30pt}{0pt} &
-        \rule{30pt}{0pt} \\
-\rule{30pt}{0pt} &
-\multicolumn{2}{c|}{ALA} &
-\multicolumn{2}{c}{Current} &
-\rule{30pt}{0pt} &
-        \rule{30pt}{0pt} \\
-\multicolumn{2}{c|}{} &
-\multicolumn{1}{c|}{} &
-\multicolumn{1}{c|}{} &
-        \rule{30pt}{0pt} &
-        \rule{30pt}{0pt} &
-        \rule{30pt}{0pt} \\
-\cline{1-4}\cdashline{5-7}
-	\multicolumn{2}{|p{72pt}|}{\centering \hyphenpenalty=10000 accepted lexeme} &
-	% 30pt * 5 + 12pt * 4 = 198pt
-	\multicolumn{5}{|p{198pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
-\cline{1-4}\cdashline{5-7}
-\rule{30pt}{0pt} &
-	\multicolumn{2}{|p{72pt}|}{\centering committed token} &
-	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token} &
-        \rule{30pt}{0pt} \\
-\cline{1-4}\cdashline{5-7}
-	\multicolumn{4}{|p{156pt}|}{\centering seen input} &
-	\multicolumn{3}{|p{114pt}}{\centering unseen input} \\
-\cline{1-4}\cdashline{5-7}
-\end{tabular}
-\vspace{6pt}
-\caption{Input structure with long working lexeme}
-\label{fig:input-2}
-\end{figure}
-
 \FloatBarrier
-
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c}{ALA} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} \\
-
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c|}{TB} &
-        \multicolumn{2}{c}{Current} \\
-
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c|}{} &
-	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
-	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} \\
-
-\cline{1-5}\cdashline{6-7}
-\multicolumn{4}{|c|}{accepted lexeme} &
-	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
-\cline{1-5}\cdashline{6-7}
-        \rule{30pt}{0pt} &
-        \multicolumn{2}{|p{6em}|}{\centering committed token} &
-        \multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token}
-        \\
-\cline{1-5}\cdashline{6-7}
-\multicolumn{5}{|c|}{seen input} &
-        \multicolumn{2}{|c}{unseen input} \\
-\cline{1-5}\cdashline{6-7}
-\end{tabular}
-\vspace{6pt}
-\caption{Input structure with token split between lexemes}
-\label{fig:input-3}
-\end{figure}
 
 As a reminder, in performing the mask computation we simulate byte streams
 which are divided into tokens,
@@ -414,33 +329,79 @@ In the byte stream, we note three locations of special significance:
 		if it exists, and at the start of parsing otherwise.
 \end{itemize}
 
-It is always the case the current location is at or after TB.
+It is always the case the current location is at or after TB:
+\begin{equation}
+\label{eq:invariant-1}
+\V{TB} \le \V{Current}.
+\end{equation}
 It is also always the case the current location
-is at or after the ALA.
-Further, the ALA is always at or before the TB.
-Summarizing these comparisons, we have
+is at or after the ALA:
 \begin{equation}
 \label{eq:invariant}
-\V{ALA} \le \V{TB} \le \V{Current}.
+\V{ALA} \le \V{Current}.
 \end{equation}
 
 Our byte stream diagrams will make some assumptions
 without loss of generality.
-They will assume
+We will assume
 there is a last committed token and
 a last accepted lexeme.
-And, while the invariant of equation \ref{eq:invariant}
-on page \pageref{eq:invariant} will always be obeyed,
-otherwise they may make arbitrary
+And, while the invariants of
+equation \ref{eq:invariant-1} on page \pageref{eq:invariant-1} and
+equation \ref{eq:invariant-2} on page \pageref{eq:invariant-2}
+will always be obeyed,
+otherwise our byte stream diagrams may make arbitrary
 assumptions about the relative length of the tokens and lexemes.
 For example, Figure \ref{fig:input-2}
 on page \pageref{fig:input-2}
 is similar to Figure \ref{fig:input-1}
 on page \pageref{fig:input-1},
 except that, while Figure \ref{fig:input-1} shows a working
-lexeme that ends {bf before} the working token,
+lexeme that ends {\bf before} the working token,
 Figure \ref{fig:input-1} shows a working
-token the ends {\bf after} the working token.
+token that ends {\bf after} the working token.
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+\multicolumn{2}{c}{TB} &
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\rule{30pt}{0pt} &
+\multicolumn{2}{c|}{ALA} &
+\multicolumn{2}{c}{Current} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\multicolumn{2}{c|}{} &
+\multicolumn{1}{c|}{} &
+\multicolumn{1}{c|}{} &
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\cline{1-4}\cdashline{5-7}
+	\multicolumn{2}{|p{72pt}|}{\centering \hyphenpenalty=10000 accepted lexeme} &
+	% 30pt * 5 + 12pt * 4 = 198pt
+	\multicolumn{5}{|p{198pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
+\cline{1-4}\cdashline{5-7}
+\rule{30pt}{0pt} &
+	\multicolumn{2}{|p{72pt}|}{\centering committed token} &
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token} &
+        \rule{30pt}{0pt} \\
+\cline{1-4}\cdashline{5-7}
+	\multicolumn{4}{|p{156pt}|}{\centering seen input} &
+	\multicolumn{3}{|p{114pt}}{\centering unseen input} \\
+\cline{1-4}\cdashline{5-7}
+\end{tabular}
+\vspace{6pt}
+\caption{Input structure with long working lexeme}
+\label{fig:input-2}
+\end{figure}
 
 \section{Lexeme prefixes and suffixes}
 
@@ -501,6 +462,50 @@ the intersection of the possible lexsufs at trie node \V{n}
 and the allowed lexsufs at that point in the code is non-empty.
 By testing for this non-empty intersection, we hope to save most
 calls to \url{try\_push\_byte}.
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c}{ALA} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+	% ===
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{TB} &
+        \multicolumn{2}{c}{Current} \\
+	% ===
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+	% ===
+\cline{1-5}\cdashline{6-7}
+\multicolumn{4}{|c|}{accepted lexeme} &
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
+\cline{1-5}\cdashline{6-7}
+        \rule{30pt}{0pt} &
+        \multicolumn{2}{|p{6em}|}{\centering committed token} &
+        \multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token}
+        \\
+	% ===
+\cline{1-5}\cdashline{6-7}
+\multicolumn{5}{|c|}{seen input} &
+        \multicolumn{2}{|c}{unseen input} \\
+\cline{1-5}\cdashline{6-7}
+\end{tabular}
+\vspace{6pt}
+\caption{Input structure with token split between lexemes}
+\label{fig:input-3}
+\end{figure}
 
 \section{Stage 2: Track EOLs}
 \label{sec:stage2}
