@@ -201,7 +201,7 @@ exactly which terminals will be acceptable at
 any point in the parse.
 This allows the application to change the lexeme stream to match
 the parser's expectations.
-The application can, for example, invent a lexeme on the fly
+The application could, for example, invent a lexeme on the fly
 to accomodate the parser.\footnote{%
     The name ``Ruby Slippers'' comes from a incident in the movie
     {\it Wizard of Oz}.  In it Dorothy, the protagonist is trying
@@ -215,10 +215,13 @@ in llguidance.
 An \url{allowed\_lexemes} vector is computed,
 and applied at certain points.
 
-In this document, we note that much of the work of applying the
+Looking ahead
+in this document, we are going to claim
+that the Ruby Slippers can be used earlier and more extensively,
+that much of the work of applying the
 Ruby Slippers can be done when the grammar is compiled, rather
-than ``online'', as the parse progresses.
-Other work, while not efficient to do at pre-computation,
+than ``online'', as the parse progresses,
+and that other work, not efficient to do at pre-computation,
 can be done ``lazily'' and cached.\footnote{%
         For discussion of the trade-offs between precomputation and
         lazy computation with caching, see Section \ref{sec:lazy}.
