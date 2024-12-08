@@ -292,7 +292,7 @@ It is hoped that this will allow considerable savings in time.
 As a reminder, in performing the mask computation we simulate byte streams
 which are divided into tokens,
 and check them for acceptability against a parser which divides that same byte stream into lexemes.
-From the parser 
+From the parser
 we are given a list of acceptable lexemes.
 We want to use this to determine which tokens are acceptable.
 Once we know which tokens are acceptable,
@@ -405,22 +405,41 @@ token that ends {\bf after} the working token.
 
 \section{Lexeme prefixes and suffixes}
 
-The compile-time pre-computation should produce, for every node
-in the toktrie, a vector of lexeme suffixes,
-or ``lexsuf'''s.
-In this document, we will sometimes call these simply ``suffixes''.
-A ``lexsuf'' is an optional triple:
-\[ (\V{lex},\V{off},\V{eol}) \].
-Here
-\begin{itemize}
-\item \V{lex} is a ``possible'' lexeme,
-\item \V{off} is a non-negative number which is the offset into the lexeme
-        of the lexeme suffix, and
-\item \V{eol} is a boolean which is true if and only if the lexeme \V{lex}
-    could end at \V{off}.
-\end{itemize}
-The triple is optional to allow for lazy evaluation.
+The \V{ALA} may occur before or after the \V{TB}.
+Where
+\begin{equation}
+\label{eq:offset}
+	\V{off} = \V{TB} \subtract \V{ALA},
+\end{equation}
+we call \V{off} the {\bf lexeme offset}.
 
+In this document, we denote {\bf lexeme segments}
+as $(\V{lex}, \V{off})$,
+where \V{lex} is the lexeme (which may be seen as a byte vector)
+and \V{off} is the offset of the lexeme segment.
+\V{off} may be positive, negative or zero.\footnote{
+	Readers may note that, while the use of duples of string
+	and integer to designate string segments is common,
+	the convention in this document is non-standard.
+	We hope its convenience in this context justifies
+	our deviation.}
+\begin{itemize}
+\item When \V{lex} is positive, we treat it as the length of
+	a suffix.
+\item When \V{lex} is negative, we treat it as the length of
+	a prefix.
+\item When \V{off} is zero, the lexeme segment is the empty
+	string.
+\end{itemize}
+Therefore, we have
+\begin{gather}
+	(\texttt{"abcdef"}, 3) = \texttt{"def"} \\
+	(\texttt{"abcdef"}, -3) = \texttt{"abc"} \\
+	(\texttt{"abcdef"}, 0) = \texttt{""} \\
+	(\texttt{"abcdef"}, 1) = \texttt{"f"} \\
+	(\texttt{"abcdef"}, -1) = \texttt{"a"}
+\end{gather}
+      
 A lexsuf $\V{x} = (\V{lex},\V{off},\V{eol})$
 is ``possible'' at toktrie node \V{n} if and only if the
 byte string corresponding to \V{n} matches the an \V{off}-length prefix of
