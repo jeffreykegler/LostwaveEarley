@@ -62,6 +62,17 @@
 \newcommand{\On}{\order{\var{n}}}
 \newcommand{\inference}[2]{\genfrac{}{}{1pt}{}{#1}{#2}}
 
+\newcommand{\lastix}[1]{\ensuremath{\##1}}
+\newcommand{\Vlastix}[1]{\ensuremath{\lastix{\V{#1}}}}
+\newcommand{\VlastElement}[1]{\Velement{#1}{\Vlastix{#1}}}
+\newcommand{\element}[2]{\ensuremath{\mathop{#1}
+    \mathopen{}\left[#2\right]\mathclose{}}}
+\newcommand{\Velement}[2]{\ensuremath{\mathop{\V{#1}}
+    \mathopen{}\left[#2\right]\mathclose{}}}
+\newcommand{\VVelement}[2]{\ensuremath{\mathop{\V{#1}}
+    \mathopen{}\left[ \V{#2}
+    \right]\mathclose{} }}
+
 \newcommand{\tuple}[1]{\ensuremath{\left\langle #1 \right\rangle}}
 
 \newcommand{\mcolon}{\mathrel:}
@@ -185,6 +196,20 @@
 
 This document outlines a method for optimizing mask computation in
 Guidance.
+It assumes some familiarity with the code in
+llguidance\cite{llguidance}.
+
+\section{Conventions}
+\begin{itemize}
+\item ``Iff'' (or ``iff'') abbreviates
+	``if and only if''.
+\item String ranges are inclusive start,
+	exclusive end, so that
+		\begin{gather*}
+			\element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
+			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
+		\end{gather*}
+\end{itemize}
 
 \section{The Basic Idea}
 
@@ -439,11 +464,6 @@ Therefore, we have
 	(\texttt{"abcdef"}, 1) = \texttt{"f"} \\
 	(\texttt{"abcdef"}, -1) = \texttt{"a"}
 \end{gather}
-      
-A lexsuf $\V{x} = (\V{lex},\V{off},\V{eol})$
-is ``possible'' at toktrie node \V{n} if and only if the
-byte string corresponding to \V{n} matches the an \V{off}-length prefix of
-\V{lex}.
 
 \section{Stage 1: Calculating allowed tokens}
 
@@ -476,7 +496,7 @@ in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 }
 \end{figure}
 
-The test {\tt r.try\_push\_byte(b)} is true if and only if
+The test {\tt r.try\_push\_byte(b)} is true iff
 the intersection of the possible lexsufs at trie node \V{n}
 and the allowed lexsufs at that point in the code is non-empty.
 By testing for this non-empty intersection, we hope to save most
