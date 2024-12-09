@@ -56,6 +56,7 @@
 \newcommand{\mydot}{\raisebox{.05em}{$\,\bullet\,$}}
 \newcommand{\cat}{\,.\,}
 \newcommand{\size}[1]{\ensuremath{\left | {#1} \right |}}
+\newcommand{\Vsize}[1]{\ensuremath{\size{\var{#1}}}}
 \newcommand{\bigsize}[1]{\ensuremath{\bigl| {#1} \bigr|}}
 \newcommand{\order}[1]{\ensuremath{{\mathcal O}(#1)}\xspace}
 \newcommand{\Oc}{\order{1}}
@@ -203,8 +204,8 @@ llguidance\cite{llguidance}.
 \begin{itemize}
 \item ``Iff'' (or ``iff'') abbreviates
 	``if and only if''.
-\item String ranges are inclusive start,
-	exclusive end, so that
+\item Ranges are inclusive start,
+	exclusive end so that, for example,
 		\begin{gather*}
 			\element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
 			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
@@ -428,42 +429,88 @@ token that ends {\bf after} the working token.
 \label{fig:input-2}
 \end{figure}
 
-\section{Lexeme prefixes and suffixes}
-
 The \V{ALA} may occur before or after the \V{TB}.
 Where
 \begin{equation}
 \label{eq:offset}
 	\V{off} = \V{TB} \subtract \V{ALA},
 \end{equation}
-we call \V{off} the {\bf lexeme offset}.
+we call \V{off} the
+{\bf lexeme offset}\label{loc:lexeme-offset}.
 
-In this document, we denote {\bf lexeme segments}
-as $(\V{lex}, \V{off})$,
-where \V{lex} is the lexeme (which may be seen as a byte vector)
-and \V{off} is the offset of the lexeme segment.
-\V{off} may be positive, negative or zero.\footnote{
-	Readers may note that, while the use of duples of string
-	and integer to designate string segments is common,
-	the convention in this document is non-standard.
-	We hope its convenience in this context justifies
-	our deviation.}
-\begin{itemize}
-\item When \V{lex} is positive, we treat it as the length of
-	a suffix.
-\item When \V{lex} is negative, we treat it as the length of
-	a prefix.
-\item When \V{off} is zero, the lexeme segment is the empty
-	string.
-\end{itemize}
-Therefore, we have
-\begin{gather}
-	(\texttt{"abcdef"}, 3) = \texttt{"def"} \\
-	(\texttt{"abcdef"}, -3) = \texttt{"abc"} \\
-	(\texttt{"abcdef"}, 0) = \texttt{""} \\
-	(\texttt{"abcdef"}, 1) = \texttt{"f"} \\
-	(\texttt{"abcdef"}, -1) = \texttt{"a"}
-\end{gather}
+\section{Lexeme slices}
+
+Lexeme slices are like string slices, and are represented similarly,
+so that $\Velement{lex}{0,2}$ is a lexeme which matches the first two
+characters of a string which matches \V{lex} and $\Velement{lex}{2,3}$
+is a lexeme which matches the third character of a string which matches
+\V{lex}.
+
+Not all lexemes can be sliced conveniently.
+When a lexeme is hard to slice,
+we say that it is {\bf tough}.
+We consider cases.
+
+\subsection{Fixed strings}
+
+Where a lexeme is a fixed string,
+its slices {\bf are} string slices,
+and can be easily computed.
+In practice, most
+lexemes are fixed strings.
+
+\subsection{Regular expressions without Kleene stars}
+
+When a lexeme has no Kleene star,
+it is also easy to compute its slices.
+
+\subsection{Regular expressions with Kleene stars}
+
+Lexemes with Kleene stars can be tough,
+but some are easily sliceable.
+For example, if $\V{lex} = /a*/$, then
+$\Velement{lex}[0,2] = /aa/$
+and 
+$\Velement{lex}[2,3] = /a/$.
+
+\subsection{Other lexemes}
+
+Lexemes can be many other things besides regular expressions,
+including subgrammars.
+If a lexeme indicates how it can be sliced,
+then it may be sliceable,
+but often such lexemes will be tough.
+
+\section{Lexeme slices and token trie nodes}
+
+In the context of token trie nodes,
+lexeme slices anchored around the current token
+trie node are of special interest.
+We call these ``anchored lexeme slices''.
+Anchored lexeme slices can be conveniently represented as a duple.
+
+Recall (equation \ref{eq:lexeme-offset} on page \pageref{loc:lexeme-offset})
+that we defined the lexeme offset as \V{off}
+where $\V{off} = \V{TB} \subtract \V{ALA}.$
+An anchored lexeme slice can be represented as
+as $(\V{lex}, \V{off})$.
+
+For convenience in defining, anchored lexeme slices
+we set out some definitions.
+Let \V{node} be a token trie node,
+let \V{path} be the path from the trie root
+to \V{node}, treated as a vector of nodes.
+We represent the length of \V{path}, also
+called the depth of \V{node},
+as \Vsize{path}.
+Abusing notation a bit, we also write
+\Vsize{path} as \Vsize{node}.
+
+If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
+then
+\[
+	(\V{lex}, \V{off}) = \Velement{lex}{(\V{TB}\subtract\V{ALA}), (\V{Curr}\subtract\V{ALA)}}.
+\]
 
 \section{Stage 1: Calculating allowed tokens}
 
