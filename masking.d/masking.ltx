@@ -250,7 +250,7 @@ than ``online'', as the parse progresses,
 and that other work, not efficient to do at pre-computation,
 can be done ``lazily'' and cached.\footnote{%
         For discussion of the trade-offs between precomputation and
-        lazy computation with caching, see Section \ref{sec:lazy}.
+        lazy computation with caching, see Section \ref{sec:caching}.
         }
 It is hoped that this will allow considerable savings in time.
 
@@ -363,7 +363,7 @@ It is always the case the current location is at or after TB:
 It is also always the case the current location
 is at or after the ALA:
 \begin{equation}
-\label{eq:invariant}
+\label{eq:invariant-2}
 \V{ALA} \le \V{Current}.
 \end{equation}
 
@@ -432,7 +432,7 @@ token that ends {\bf after} the working token.
 The \V{ALA} may occur before or after the \V{TB}.
 Where
 \begin{equation}
-\label{eq:offset}
+\label{eq:lexeme-offset}
 	\V{off} = \V{TB} \subtract \V{ALA},
 \end{equation}
 we call \V{off} the
@@ -470,7 +470,7 @@ Lexemes with Kleene stars can be tough,
 but some are easily sliceable.
 For example, if $\V{lex} = /a*/$, then
 $\Velement{lex}[0,2] = /aa/$
-and 
+and
 $\Velement{lex}[2,3] = /a/$.
 
 \subsection{Other lexemes}
@@ -501,22 +501,31 @@ Let \V{node} be a token trie node,
 let \V{path} be the path from the trie root
 to \V{node}, treated as a vector of nodes.
 We represent the length of \V{path}, also
-called the depth of \V{node},
+called the depth, of \V{node},
 as \Vsize{path}.
 Abusing notation a bit, we also write
 \Vsize{path} as \Vsize{node}.
+The node vector \V{path}, mapped to
+a string of bytes, is \VFA{toString}{path}.
 
 If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 then
 \[
-	(\V{lex}, \V{off}) = \Velement{lex}{(\V{TB}\subtract\V{ALA}), (\V{Curr}\subtract\V{ALA)}}.
+	\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{path}}.
+\]
+If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
+then
+\[
+	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{path}}.
 \]
 
-\section{Stage 1: Calculating allowed tokens}
+\section{Stage 1: Calculating the allowed bytes}
 
-The lexsuf vectors can be used to eliminate calls to
+As a first step, we go from the allowed lexemes
+to the allowed bytes of tokens,
+and use this to eliminate calls to
 \url{try\_push\_byte}.
-We will refer the code snippet\footnote{%
+We refer to the code snippet\footnote{%
     This code snippet is similar to, and taken from,
     \url{https://github.com/microsoft/llguidance/blob/0ca091a701a50134e0503fa03c5c12b206e182a3/toktrie/src/toktree.rs\#L945}.
 }
@@ -543,11 +552,28 @@ in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 }
 \end{figure}
 
-The test {\tt r.try\_push\_byte(b)} is true iff
-the intersection of the possible lexsufs at trie node \V{n}
-and the allowed lexsufs at that point in the code is non-empty.
-By testing for this non-empty intersection, we hope to save most
-calls to \url{try\_push\_byte}.
+Let \V{lexes} be the set of allowed lexemes at
+the ``click point'' in
+Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
+The test {\tt r.try\_push\_byte(b)} will be true only if,
+\begin{equation}
+	\label{eq:click-point-test}
+	\exists \; \V{lex} \in \V{lexes} \; \mid \; \VFA{toString}{path} \, \sim \, (\V{lex}, \V{off}),
+\end{equation}
+where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the recognizer
+\V{recce}.
+When \eqref{eq:click-point-test} is false,
+the call to {\tt r.try\_push\_byte(b)} can be skipped.
+For a ``tough'' lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
+always matches, so that the call
+to {\tt r.try\_push\_byte(b)} is forced.
+
+In practice,
+most lexemes are sliceable,
+and allowed and possible lexemes are sparse.
+So even at stage 1,
+this optimization should be significant.
+But a more substantial payoff should be realized in Stage 2.
 
 \noindent
 \begin{figure}[ht]
@@ -596,7 +622,8 @@ calls to \url{try\_push\_byte}.
 \section{Stage 2: Track EOLs}
 \label{sec:stage2}
 
-\section{Optimization}
+\section{Caching}
+\label{sec:caching}
 
 \section{Forcing}
 
