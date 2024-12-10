@@ -468,10 +468,10 @@ it is also easy to compute its slices.
 
 Lexemes with Kleene stars can be tough,
 but some are easily sliceable.
-For example, if $\V{lex} = /a*/$, then
-$\Velement{lex}[0,2] = /aa/$
+For example, if $\V{lex} = \texttt{/a*/}$, then
+$\Velement{lex}{0,2} = \texttt{/aa/}$
 and
-$\Velement{lex}[2,3] = /a/$.
+$\Velement{lex}{2,3} = \texttt{/a/}$.
 
 \subsection{Other lexemes}
 
@@ -498,25 +498,28 @@ as $(\V{lex}, \V{off})$.
 For convenience in defining, anchored lexeme slices
 we set out some definitions.
 Let \V{node} be a token trie node,
-let \V{path} be the path from the trie root
+let \VFA{path}{node} be the path from the trie root
 to \V{node}, treated as a vector of nodes.
-We represent the length of \V{path}, also
+We represent the length of \VFA{path{node}}, also
 called the depth, of \V{node},
-as \Vsize{path}.
+as \size{\VFA{path}{node}}.
 Abusing notation a bit, we also write
-\Vsize{path} as \Vsize{node}.
-The node vector \V{path}, mapped to
-a string of bytes, is \VFA{toString}{path}.
+\size{\VFA{path}{node}} as \Vsize{node}.
+The node vector \VFA{path}{node}, mapped to
+a string of bytes, is \FA{toString}{\VFA{path}{node}}.
+We usually overload the notation
+and write \FA{toString}{\VFA{path}{node}}
+as \VFA{toString}{node}.
 
 If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 then
 \[
-	\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{path}}.
+	\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}}.
 \]
 If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
 then
 \[
-	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{path}}.
+	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}}.
 \]
 
 \section{Stage 1: Calculating the allowed bytes}
@@ -558,7 +561,7 @@ Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 The test {\tt r.try\_push\_byte(b)} will be true only if,
 \begin{equation}
 	\label{eq:click-point-test}
-	\exists \; \V{lex} \in \V{lexes} \; \mid \; \VFA{toString}{path} \, \sim \, (\V{lex}, \V{off}),
+	\exists \; \V{lex} \in \V{lexes} \; \mid \; \VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}),
 \end{equation}
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the recognizer
 \V{recce}.
@@ -619,11 +622,65 @@ But a more substantial payoff should be realized in Stage 2.
 \label{fig:input-3}
 \end{figure}
 
-\section{Stage 2: Track EOLs}
-\label{sec:stage2}
-
 \section{Caching}
 \label{sec:caching}
+
+Stage 1 relies on, for every node \V{node},
+begin knowing the value of
+\[
+	\VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}).
+\]
+To really achieve optimization,
+these results should be cached,
+so that
+\begin{equation}
+\label{eq:ruby}
+	\FA{Ruby}{\V{node}, \V{lex}, \V{off}}
+\end{equation}
+is a boolean partial function.
+We will call
+\[
+	(\V{node}, \V{lex}, \V{off})
+\]
+a ``Ruby triple'',
+so that \Fname{Ruby} in \eqref{eq:ruby}
+is a partial function from Ruby triples to booleans.
+
+It may be best to vary the caching strategy.
+For small absolute values of \V{off}, the cache
+will be dense,
+and the likelihood of hits in a fully pre-populated
+cache will be high.
+In this case,
+pre-computation at grammar compile time makes sense.
+Computing many of these values in a single token trie
+traversal would allow for optimizations.
+
+Lexemes may be of arbitrary length,
+so pre-computation of all Ruby triple values
+is not just costly, but impossible.
+Further,
+in practical applications,
+the users of
+very large absolute values of \V{off}
+will be very long strings or here-documents.
+These are unlikely to be repeated,
+so that the likelihood of cache hits would
+be very low.
+Therefore, for absolute values of \V{off}
+above a certain threshold,
+it is likely to make sense to not cache the
+value of Ruby triples.
+
+We have spoken of varying the caching strategy according
+to the value of \V{off}.
+It may also make sense to vary the caching strategy by
+lexeme.
+For example, we may want a different caching strategy
+depending on whether a lexeme is sliceable or tough.
+
+\section{Stage 2: Track EOLs}
+\label{sec:stage2}
 
 \section{Forcing}
 
