@@ -477,9 +477,10 @@ $\Velement{lex}{2,3} = \texttt{/a/}$.
 
 Lexemes can be many other things besides regular expressions,
 including subgrammars.
-If a lexeme indicates how it can be sliced,
-then it may be sliceable,
-but often such lexemes will be tough.
+Some of these problematic lexemes may be sliceable nonetheless.
+For example, they could explicitly specify,
+how they can be sliced.
+But many of these will be tough lexemes.
 
 \section{Lexeme slices and token trie nodes}
 
@@ -524,7 +525,14 @@ then
 
 \section{Stage 1: Calculating the allowed bytes}
 
-As a first step, we go from the allowed lexemes
+We set out our algorithm in two stages.
+While each stage does result in an optimization,
+our separation of the algorithm into stages
+is to simplify the presentation.
+It is not (at last not necessarily)
+a suggestion for gradual implementation.
+
+In Stage 1, we go from the allowed lexemes
 to the allowed bytes of tokens,
 and use this to eliminate calls to
 \url{try\_push\_byte}.
@@ -558,7 +566,7 @@ in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 Let \V{lexes} be the set of allowed lexemes at
 the ``click point'' in
 Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
-The test {\tt r.try\_push\_byte(b)} will be true only if,
+The test \url{try\_push\_byte} will be true only if,
 \begin{equation}
 	\label{eq:click-point-test}
 	\exists \; \V{lex} \in \V{lexes} \; \mid \; \VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}),
@@ -566,15 +574,15 @@ The test {\tt r.try\_push\_byte(b)} will be true only if,
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the recognizer
 \V{recce}.
 When \eqref{eq:click-point-test} is false,
-the call to {\tt r.try\_push\_byte(b)} can be skipped.
+the call to \url{try\_push\_byte} can be skipped.
 For a ``tough'' lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
 always matches, so that the call
-to {\tt r.try\_push\_byte(b)} is forced.
+to \url{try\_push\_byte} is forced.
 
 In practice,
 most lexemes are sliceable,
 and allowed and possible lexemes are sparse.
-So even at stage 1,
+So even at Stage 1,
 this optimization should be significant.
 But a more substantial payoff should be realized in Stage 2.
 
@@ -679,8 +687,23 @@ lexeme.
 For example, we may want a different caching strategy
 depending on whether a lexeme is sliceable or tough.
 
-\section{Stage 2: Track EOLs}
+\section{Stage 2: Track ends of lexeme}
 \label{sec:stage2}
+
+We call a location where a lexeme can end,
+an ``end of lexeme'', or EOL.
+In Stage 2, we build on Stage 1 by tracking EOLs.
+In cases where \url{try\_push\_byte(b)}
+is called when we are not at an EOL,
+\url{try\_push\_byte(b)} simply stores byte \V{b}.
+If we skip the call to \url{try\_push\_byte(b)},
+but turn out to need the value of byte \V{b}
+later, we can find it from context.
+
+Note that,
+while Stage 1 required no changes in the logic of
+\url{try\_push\_byte},
+Stage 2 may require some modifications.
 
 \section{Forcing}
 
