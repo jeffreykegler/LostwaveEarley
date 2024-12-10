@@ -466,8 +466,26 @@ it is also easy to compute its slices.
 
 \subsection{Regular expressions with Kleene stars}
 
-Lexemes with Kleene stars can be tough,
-but some are easily sliceable.
+Lexemes with Kleene stars can be tough,\footnote{%
+	Note that we cannot use derivatives where
+	the lexeme offset \eqref{eq:lexeme-offset}
+	is positive, as in Figure \ref{fig:input-1}
+	on page \pageref{fig:input-1}.
+	Computing a derivative require knowing the exact byte
+	string that precedes the derivative.
+	We need to compute slices which are invariant
+	for every occurrence of a Ruby triple \eqref{eq:ruby-triple}
+	throughout the parse, and therefore
+	for which the byte strings which preceed
+	the Ruby triple may vary.
+	However, where the lexeme offset is negative,
+	as in Figure \ref{fig:input-3}
+	on page \pageref{fig:input-3},
+	the preceeding byte string is entirely in the token trie,
+	and so is invariant for every Ruby triple.
+	We could therefore make use of derivatives in
+	the case where lexeme offsets are negative.}
+but many are easily sliceable.
 For example, if $\V{lex} = \texttt{/a*/}$, then
 $\Velement{lex}{0,2} = \texttt{/aa/}$
 and
@@ -501,11 +519,12 @@ we set out some definitions.
 Let \V{node} be a token trie node,
 let \VFA{path}{node} be the path from the trie root
 to \V{node}, treated as a vector of nodes.
-We represent the length of \VFA{path{node}}, also
-called the depth, of \V{node},
+We represent the length of \VFA{path}{node}
 as \size{\VFA{path}{node}}.
 Abusing notation a bit, we also write
 \size{\VFA{path}{node}} as \Vsize{node}.
+\Vsize{node} is also called the ``depth''
+of \V{node}.
 The node vector \VFA{path}{node}, mapped to
 a string of bytes, is \FA{toString}{\VFA{path}{node}}.
 We usually overload the notation
@@ -642,7 +661,7 @@ To really achieve optimization,
 these results should be cached,
 so that
 \begin{equation}
-\label{eq:ruby}
+\label{eq:ruby-triple}
 	\FA{Ruby}{\V{node}, \V{lex}, \V{off}}
 \end{equation}
 is a boolean partial function.
