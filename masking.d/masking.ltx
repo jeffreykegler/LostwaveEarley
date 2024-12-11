@@ -582,6 +582,8 @@ The token-consistent lexemes might be equivalent
 to the allowed lexemes.
 When $\V{TB} \le \V{ALA}$, this will always be
 the case.
+A token-consistent lexeme is always an allowed
+lexeme, by definition.
 
 \section{Stage 1: Calculating the allowed bytes}
 
@@ -592,7 +594,7 @@ is to simplify the presentation.
 It is not (at last not necessarily)
 a suggestion for gradual implementation.
 
-In Stage 1, we go from the allowed lexemes
+In Stage 1, we go from the token-consistent lexemes
 to the allowed bytes of tokens,
 and use this to eliminate calls to
 \url{try\_push\_byte}.
@@ -623,13 +625,13 @@ in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 }
 \end{figure}
 
-Let \V{lexes} be the set of allowed lexemes at
+Let \V{TClexes} be the set of token-consistent lexemes at
 the ``click point'' in
 Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 The test \url{try\_push\_byte} will be true only if,
 \begin{equation}
 	\label{eq:click-point-test}
-	\exists \; \V{lex} \in \V{lexes} \; \mid \; \VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}),
+	\exists \; \V{lex} \in \V{TClexes} \; \mid \; \VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}),
 \end{equation}
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the recognizer
 \V{recce}.
