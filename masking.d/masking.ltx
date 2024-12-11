@@ -542,6 +542,47 @@ then
 	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}}.
 \]
 
+\section{Token-consistent lexemes}
+
+At the start of parse, and after every lexeme,
+there is a set of ``allowed lexemes''.
+The allowed lexemes are those which, if accepted,
+can result in a valid parse,
+according to the parser.
+{\tt llguidance} already calculates the allowed lexemes for its \url{allowed\_lexemes} vector.
+
+Recall the location for which the allowed lexemes
+are calculated is called the ALA.
+The location where the last committed token ends
+is the TB.
+If $\V{TB} > \V{ALA}$, it becomes possible
+that an allowed lexeme might be inconsistent
+with the committed tokens.
+
+For example, if the lexemes {\tt foreach} and {\tt while} are
+allowed at location $\ell$,
+and the token {\tt "wh"} is committed, starting at
+$\ell$,
+then only the lexeme {\tt while} will be consistent with
+the committed tokens.
+While according to the parser, the lexeme {\tt foreach}, if accepted,
+could result in a valid parse,
+the lexeme {\tt foreach} would be inconsistent with the
+committed tokens
+and would cause the parse to become inconsistent,
+and/or fail.
+
+We therefore, whenever we commit a token,
+calculate the subset of the allowed lexemes
+which can still produce a parse both in terms
+of the parser and the tokenization.
+We call these the ``token-consistent lexemes''.
+
+The token-consistent lexemes might be equivalent
+to the allowed lexemes.
+When $\V{TB} \le \V{ALA}$, this will always be
+the case.
+
 \section{Stage 1: Calculating the allowed bytes}
 
 We set out our algorithm in two stages.
@@ -670,7 +711,7 @@ We will call
 	(\V{node}, \V{lex}, \V{off})
 \]
 a ``Ruby triple'',
-so that \Fname{Ruby} in \eqref{eq:ruby}
+so that \Fname{Ruby} in \eqref{eq:ruby-triple}
 is a partial function from Ruby triples to booleans.
 
 It may be best to vary the caching strategy.
