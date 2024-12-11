@@ -696,27 +696,44 @@ But a more substantial payoff should be realized in Stage 2.
 \label{sec:caching}
 
 Stage 1 relies on, for every node \V{node},
-begin knowing the value of
-\[
+knowing the value of
+\begin{equation}
+\label{eq:ruby-triple-test}
 	\VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}).
-\]
-To really achieve optimization,
-these results should be cached,
-so that
+\end{equation}
+We call
 \begin{equation}
 \label{eq:ruby-triple}
+	(\V{node}, \V{lex}, \V{off})
+\end{equation}
+a ``Ruby triple'',
+To really achieve optimization,
+The  results of \eqref{eq:ruby-triple-test}
+for \eqref{eq:ruby-triple}
+should be cached.
+This is possible when \V{lex} is sliceable,
+because then the value of \eqref{eq:ruby-triple-test}
+depends only on the values of
+\V{node}, \V{lex}, and \V{off}
+so that
+\begin{equation}
+\label{eq:ruby-function}
 	\FA{Ruby}{\V{node}, \V{lex}, \V{off}}
 \end{equation}
-is a boolean partial function.
-We will call
-\[
-	(\V{node}, \V{lex}, \V{off})
-\]
-a ``Ruby triple'',
-so that \Fname{Ruby} in \eqref{eq:ruby-triple}
-is a partial function from Ruby triples to booleans.
+is a boolean function.
+We can make \eqref{eq:ruby-function}
+a total function by treating it as true
+whenever \V{lex} is not sliceable.
 
-It may be best to vary the caching strategy.
+It may be best to vary the caching strategy.\footnote{%
+	In this section we discuss varying the caching strategy
+	only for different absolute values of \V{off}.
+	Further investigation
+	may show that it makes sense to
+	take into account the sign of \V{off},
+	or to vary the caching strategy by
+	lexeme.
+}
 For small absolute values of \V{off}, the cache
 will be dense,
 and the likelihood of hits in a fully pre-populated
@@ -726,28 +743,25 @@ pre-computation at grammar compile time makes sense.
 Computing many of these values in a single token trie
 traversal would allow for optimizations.
 
+\begin{MYsloppy}
 Lexemes may be of arbitrary length,
-so pre-computation of all Ruby triple values
+so that, in practice,
+pre-computation of all Ruby triple values
 is not just costly, but impossible.
 Further,
 in practical applications,
-the users of
+the lexemes of
 very large absolute values of \V{off}
-will be very long strings or here-documents.
-These are unlikely to be repeated,
+will usually be very long strings or here-documents.
+Long strings and here-documents
+are unlikely to be repeated exactly,
 so that the likelihood of cache hits would
 be very low.
 Therefore, for absolute values of \V{off}
 above a certain threshold,
 it is likely to make sense to not cache the
 value of Ruby triples.
-
-We have spoken of varying the caching strategy according
-to the value of \V{off}.
-It may also make sense to vary the caching strategy by
-lexeme.
-For example, we may want a different caching strategy
-depending on whether a lexeme is sliceable or tough.
+\end{MYsloppy}
 
 \section{Stage 2: Track ends of lexeme}
 \label{sec:stage2}
@@ -761,11 +775,34 @@ is called when we are not at an EOL,
 If we skip the call to \url{try\_push\_byte(b)},
 but turn out to need the value of byte \V{b}
 later, we can find it from context.
-
 Note that,
 while Stage 1 required no changes in the logic of
 \url{try\_push\_byte},
 Stage 2 may require some modifications.
+
+To implement stage 2,
+we will want to cache a boolean that indicates
+whether every Ruby triple is at an end of lexeme.
+\begin{equation}
+\label{eq:eol-function}
+	\FA{EOL}{\V{node}, \V{lex}, \V{off}}
+\end{equation}
+We need not cache values of
+\eqref{eq:eol-function} when
+the \Fname{Ruby} function~\eqref{ruby-function}
+is false.
+\eqref{eq:eol-function} should be true,
+whenever \V{lex} is a tough lexeme.
+
+In stage 2, calls to \url{try\_push\_byte(b)}
+need only be made at end of lexeme,
+and for tough lexemes.
+Since for most nodes there none of the
+tough lexemes will be token-consistent,
+and most toktrie nodes will not match
+most Ruby triples,
+calls to \url{try\_push\_byte(b)}
+should be reduced greatly.
 
 \section{Forcing}
 
