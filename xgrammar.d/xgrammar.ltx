@@ -266,7 +266,7 @@ This is the case even in a small grammar.
 As the application
 scales, the debugging can soon become, for practical purposes, impossible.
 
-Earley parsing, particularly in the form llguidance and Marpa use it, are
+Earley parsing, particularly in the form llguidance and Marpa use it, is
 much friendlier to debugging.  llguidance doesn't
 yet take full advantage of this, but Marpa does.  How Marpa's focused
 error messages show the programmer exactly where things went wrong,
@@ -286,32 +286,34 @@ a programmer in pursuit of a bug.
 
 \section{Remarks on ``context expansion''}
 
-The XGrammar paper\cite[Section 3.2]{XGrammar2024}
+\cite[Section 3.2]{XGrammar2024}
 introduces a technique called context expansion.
-This is a form of lookahead,
-a technique much explored in the parsing literature.
+This is a form of lookahead.
+Lookahead has been much explored in the parsing literature.
 
-Their context expansion algorithm does not recurse through
-rules,
+The context expansion algorithm of~\cite{XGrammar2024}
+does not recurse through rules,
 causing it to miss many context expansions (aka lookaheads),
-as they acknowledge indirectly.\footnote{%
+as \cite{XGrammar2024} acknowledges indirectly.\footnote{%
+		\cite[Section 3.2]{XGrammar2024}:
 	``Although we do not consider rule-referencing edges
 	   when extracting the expanded context automata,
 	   this algorithm can still extract many [much?]
-	   useful information.'' Section 3.2, \cite{XGrammar2024}.
+	   useful information.''
 	}
 In order to alleviate this issue in specific cases,
-they use ``Rule inlining''\cite[Section 3.4]{XGrammar2024},
+\cite[Section 3.4]{XGrammar2024} introduces ``rule inlining'',
 which essentially flattens pairs of rules into a single rule.
 The lookahead provided by ``context expansion'' is apparently enough
 to deal with JSON strings,
-which are their example.\cite[Figure 6]{XGrammar2024}.
+which are the example.\cite[Figure 6]{XGrammar2024}.
 
 The parsing literature contains algorithms for computing
 lookahead tables, which can deal with rule recursion,
 so why \cite{XGrammar2024} chooses the methods it did
 is unclear.
-One reason may be that they require an automaton,
+One reason may be that \cite{XGrammar2024}
+requires an automaton,
 but the transformation from a lookahead table to an
 automaton seems as if it should be straightforward.
 
