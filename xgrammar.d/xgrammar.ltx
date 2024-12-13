@@ -271,8 +271,11 @@ much friendlier to debugging.  llguidance doesn't
 yet take full advantage of this, but Marpa does.  How Marpa's focused
 error messages show the programmer exactly where things went wrong,
 and allow them to explore the context, is described in detail in Marpa's
-documentation.\cite{MarpaProgress}  Nothing like this has been achieved using a backtracking
-parser.
+documentation.\cite{MarpaProgress}
+Nothing like this has been achieved using a backtracking
+parser.\footnote{%
+	In fact, I do not know of any parser with Marpa's error
+	handling and recovery abilities.}
 
 In fact, Earley parsers are much more debugging-friendly than
 traditional parsers.  This is because Earley tables store a lot of
