@@ -245,14 +245,19 @@ Looking ahead
 in this document, we are going to claim
 that the Ruby Slippers can be used earlier and more extensively,
 that much of the work of applying the
-Ruby Slippers can be done when the grammar is compiled, rather
-than ``online'', as the parse progresses,
-and that other work, not efficient to do at pre-computation,
-can be done ``lazily'' and cached.\footnote{%
+Ruby Slippers is context-independent.
+Work which is context-independent
+can be done once and cached.
+It can also be done when the grammar is compiled, rather
+than ``online'', as the parse progresses.
+.\footnote{%
         For discussion of the trade-offs between precomputation and
         lazy computation with caching, see Section \ref{sec:caching}.
         }
 It is hoped that this will allow considerable savings in time.
+\todo{Expand on context-independent vs. context-independent}
+\todo{cite XGrammar paper}
+\todo{use XGrammar's ``1\%'' statistic (section 3.1)}
 
 \FloatBarrier
 
@@ -320,8 +325,8 @@ which are divided into tokens,
 and check them for acceptability against a parser which divides that same byte stream into lexemes.
 From the parser
 we are given a list of acceptable lexemes.
-We want to use this to determine which tokens are acceptable.
-Once we know which tokens are acceptable,
+We want to use this to determine which tokens are consistent with the parse so far.
+Once we know which tokens are parse-consistent,
 we can produce a token mask,
 which in turn will allow us to sample a token.
 
@@ -332,7 +337,9 @@ which may be seen as structured according to the scheme in
 Figure \ref{fig:input-1}
 on page \pageref{fig:input-1}.
 
-In our byte stream diagrams, we have identified
+In Figure \ref{fig:input-1}
+and our other
+byte stream diagrams, we have identified
 \begin{itemize}
 	\item the most recently accepted lexeme,
 	\item the most recently committed token,
@@ -342,7 +349,7 @@ In our byte stream diagrams, we have identified
 In the byte stream, we note three locations of special significance:
 \begin{itemize}
 	\item The current location, which is the byte location location
-		implied by our token trie traversal.  We abbreviate this
+		our current position in the our token trie traversal.  We abbreviate this
 		as \V{Current}.
 	\item The ``toktrie base'', that is, the start location for our toktrie
 		traversal, which we abbreviate \V{TB}.
@@ -449,6 +456,9 @@ is a lexeme which matches the third character of a string which matches
 Not all lexemes can be sliced conveniently.
 When a lexeme is hard to slice,
 we say that it is {\bf tough}.
+Other lexemes simply cannot be sliced.
+When a lexeme cannot be sliced,
+we say that it is {\bf unsliceable}.
 We consider cases.
 
 \subsection{Fixed strings}
@@ -466,7 +476,14 @@ it is also easy to compute its slices.
 
 \subsection{Regular expressions with Kleene stars}
 
-Lexemes with Kleene stars can be tough,\footnote{%
+All regular expressions are sliceable in theory.
+Often regular expressions with Kleene stars
+are easily sliceable in practice.
+For example, if $\V{lex} = \texttt{/a*/}$, then
+$\Velement{lex}{0,2} = \texttt{/aa/}$
+and
+$\Velement{lex}{2,3} = \texttt{/a/}$.
+But some Kleene star lexemes can be tough.\footnote{%
 	Note that we cannot use derivatives where
 	the lexeme offset \eqref{eq:lexeme-offset}
 	is positive, as in Figure \ref{fig:input-1}
@@ -485,26 +502,22 @@ Lexemes with Kleene stars can be tough,\footnote{%
 	and so is invariant for every Ruby triple.
 	We could therefore make use of derivatives in
 	the case where lexeme offsets are negative.}
-but many are easily sliceable.
-For example, if $\V{lex} = \texttt{/a*/}$, then
-$\Velement{lex}{0,2} = \texttt{/aa/}$
-and
-$\Velement{lex}{2,3} = \texttt{/a/}$.
 
 \subsection{Other lexemes}
 
 Lexemes can be many other things besides regular expressions,
 including subgrammars.
 Some of these problematic lexemes may be sliceable nonetheless.
-For example, they could explicitly specify,
+For example, they could explicitly specify
 how they can be sliced.
 But many of these will be tough lexemes.
+\todo{Mention over-approximation}
 
 \section{Lexeme slices and token trie nodes}
 
 In the context of token trie nodes,
-lexeme slices anchored around the current token
-trie node are of special interest.
+lexeme slices anchored around the toktrie base (TB)
+are of special interest.
 We call these ``anchored lexeme slices''.
 Anchored lexeme slices can be conveniently represented as a duple.
 
@@ -514,10 +527,10 @@ where $\V{off} = \V{TB} \subtract \V{ALA}.$
 An anchored lexeme slice can be represented as
 as $(\V{lex}, \V{off})$.
 
-For convenience in defining, anchored lexeme slices
+For convenience in defining anchored lexeme slices
 we set out some definitions.
-Let \V{node} be a token trie node,
-let \VFA{path}{node} be the path from the trie root
+Let \V{node} be a token trie node.
+Let \VFA{path}{node} be the path from the trie root
 to \V{node}, treated as a vector of nodes.
 We represent the length of \VFA{path}{node}
 as \size{\VFA{path}{node}}.
@@ -534,7 +547,7 @@ as \VFA{toString}{node}.
 If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 then
 \[
-	\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}}.
+	(\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}}.
 \]
 If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
 then
@@ -554,7 +567,7 @@ according to the parser.
 Recall the location for which the allowed lexemes
 are calculated is called the ALA.
 The location where the last committed token ends
-is the TB.
+is TB.
 If $\V{TB} > \V{ALA}$, it becomes possible
 that an allowed lexeme might be inconsistent
 with the committed tokens.
@@ -582,15 +595,14 @@ The token-consistent lexemes might be equivalent
 to the allowed lexemes.
 When $\V{TB} \le \V{ALA}$, this will always be
 the case.
-A token-consistent lexeme is always an allowed
-lexeme, by definition.
+A token-consistent lexeme is always an allowed lexeme.
 
 \section{Stage 1: Calculating the allowed bytes}
 
 We set out our algorithm in two stages.
 While each stage does result in an optimization,
 our separation of the algorithm into stages
-is to simplify the presentation.
+is primarily to simplify the presentation.
 It is not (at last not necessarily)
 a suggestion for gradual implementation.
 
@@ -637,7 +649,7 @@ where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the reco
 \V{recce}.
 When \eqref{eq:click-point-test} is false,
 the call to \url{try\_push\_byte} can be skipped.
-For a ``tough'' lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
+For an unsliceable lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
 always matches, so that the call
 to \url{try\_push\_byte} is forced.
 
@@ -695,8 +707,11 @@ But a more substantial payoff should be realized in Stage 2.
 \section{Caching}
 \label{sec:caching}
 
-Stage 1 relies on, for every node \V{node},
-knowing the value of
+Stage 1 relies on,
+for every node \V{node},
+every lexeme \V{lex},
+and every offset \V{off}
+accessing the value of
 \begin{equation}
 \label{eq:ruby-triple-test}
 	\VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}).
@@ -789,10 +804,10 @@ whether every Ruby triple is at an end of lexeme.
 \end{equation}
 We need not cache values of
 \eqref{eq:eol-function} when
-the \Fname{Ruby} function~\eqref{ruby-function}
+the \Fname{Ruby} function~\eqref{eq:ruby-function}
 is false.
 \eqref{eq:eol-function} should be true,
-whenever \V{lex} is a tough lexeme.
+whenever \V{lex} is an unsliceable lexeme.
 
 In stage 2, calls to \url{try\_push\_byte(b)}
 need only be made at end of lexeme,
