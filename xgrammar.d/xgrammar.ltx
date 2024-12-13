@@ -199,7 +199,10 @@ be useful.
 
 XGrammar's parse engine is a PDA.  These seem to be fascinating the
 AI realm, despite the parsing literature up to now treating them as of
-strictly theoretical interest.
+strictly theoretical interest.\footnote{%
+	From \cite{AH1972v1}, p. 281:
+	``It should be clearly stated at the outset that backtrack parsing
+	algorithms should be shunned in most practical applications.''}
 
 Why are PDA's being revisited?  Every parsing method becomes a general BNF
 parsing method when you add backtracking.  This means that, repeatedly in
@@ -251,7 +254,14 @@ perhaps the best illustration of this.  If the programmer expects a
 grammar to accept an input, and it does not,
 in the presence of backtracking,
 it is very hard to tell
-where the problem occurred
+where the problem occurred.\footnote{%
+	In fact, in XGrammar the parsing data structure that is backtracked
+	over is a
+	``persistent execution stack''.\cite[Section 3.3]{XGrammar2024}
+	\cite{XGrammar2024} does not discuss error recovery,
+	but it looks like it would be even more complex than
+	error recovery in an ordinary backtracking implementation.}
+
 This is the case even in a small grammar.
 As the application
 scales, the debugging can soon become, for practical purposes, impossible.
@@ -273,6 +283,37 @@ a lot of information about the parse.
 This make traditional
 parsers less capable of helping
 a programmer in pursuit of a bug.
+
+\section{Remarks on ``context expansion''}
+
+The XGrammar paper\cite[Section 3.2]{XGrammar2024}
+introduces a technique called context expansion.
+This is a form of lookahead,
+a technique much explored in the parsing literature.
+
+Their context expansion algorithm does not recurse through
+rules,
+causing it to miss many context expansions (aka lookaheads),
+as they acknowledge indirectly.\footnote{%
+	``Although we do not consider rule-referencing edges
+	   when extracting the expanded context automata,
+	   this algorithm can still extract many [much?]
+	   useful information.'' Section 3.2, \cite{XGrammar2024}.
+	}
+In order to alleviate this issue in specific cases,
+they use ``Rule inlining''\cite[Section 3.4]{XGrammar2024},
+which essentially flattens pairs of rules into a single rule.
+The lookahead provided by ``context expansion'' is apparently enough
+to deal with JSON strings,
+which are their example.\cite[Figure 6]{XGrammar2024}.
+
+The parsing literature contains algorithms for computing
+lookahead tables, which can deal with rule recursion,
+so why \cite{XGrammar2024} chooses the methods it did
+is unclear.
+One reason may be that they require an automaton,
+but the transformation from a lookahead table to an
+automaton seems as if it should be straightforward.
 
 {
 
@@ -298,6 +339,11 @@ a programmer in pursuit of a bug.
 \newblock{``Marpa::R2::Progress''}.
 \newblock{\url{https://metacpan.org/dist/Marpa-R2/view/pod/Progress.pod}.
 	Retrieved 12 Dec 2024.}
+
+\bibitem{AH1972v1}
+\newblock{Aho, Alfred V., and Jeffrey D. Ullman.}
+\newblock{\em The theory of parsing, translation, and compiling. Vol. 1.}
+\newblock{Prentice-Hall, 1972.}
 
 \end{thebibliography}
 
