@@ -5,6 +5,7 @@
 \floatstyle{boxed}
 \restylefloat{figure}
 \usepackage{arydshln}
+\usepackage{multirow}
 
 \usepackage{amssymb}
 \usepackage{algorithm}
@@ -764,10 +765,11 @@ But a more substantial payoff should be realized in Stage 2.
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Lexemes	& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
-		 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
+		\multirow{2}{*}{Lexemes}
+			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
+			 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
 		\hline
-		Slices	& & \texttt{/aa/} \\
+		\multirow{2}{*}{Slices}	& & \texttt{/aa/} \\
 		 & & \texttt{/bb/} \\
 		\hline
 		Token segments & \texttt{"aaa"} & \texttt{"aa"} \\
