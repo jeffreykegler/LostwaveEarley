@@ -6,6 +6,7 @@
 \restylefloat{figure}
 \usepackage{arydshln}
 \usepackage{multirow}
+\usepackage{needspace}
 
 \usepackage{amssymb}
 \usepackage{algorithm}
@@ -262,6 +263,8 @@ It is hoped that this will allow considerable savings in time.
 
 \FloatBarrier
 
+\needspace{3in}
+
 \section{The structure of the byte stream}
 \label{sec:byte-stream}
 
@@ -484,6 +487,7 @@ For example, if $\V{lex} = \texttt{/a*/}$, then
 $\Velement{lex}{0,2} = \texttt{/aa/}$
 and
 $\Velement{lex}{2,3} = \texttt{/a/}$.
+\todo{Move this to examples, replace with reference.}
 But some Kleene star lexemes can be tough.\footnote{%
 	Note that we cannot use derivatives where
 	the lexeme offset \eqref{eq:lexeme-offset}
@@ -705,9 +709,16 @@ But a more substantial payoff should be realized in Stage 2.
 \label{fig:input-3}
 \end{figure}
 
+\FloatBarrier
+
 \section{Examples}
 \label{sec:examples}
 
+\todo{In explication of examples, discuss token-consistent lexemes}
+
+{%
+\floatstyle{plain}
+\restylefloat{figure}
 \noindent
 \begin{figure}[ht]
 \vspace{6pt}
@@ -727,9 +738,12 @@ But a more substantial payoff should be realized in Stage 2.
 		\hline
 \end{tabular}
 \vspace{6pt}
-\caption{Example 1}
+\caption{Example 1: Fixed string}
 \label{fig:example-1}
 \end{figure}
+} % group for floatstyle
+
+\todo{Example for regex with CI slice: /a+/}
 
 \noindent
 \begin{figure}[ht]
@@ -750,7 +764,7 @@ But a more substantial payoff should be realized in Stage 2.
 		\hline
 \end{tabular}
 \vspace{6pt}
-\caption{Example 2}
+\caption{Example 2: No context-insensitive slice}
 \label{fig:example-2}
 \end{figure}
 
