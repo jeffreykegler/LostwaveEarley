@@ -704,6 +704,103 @@ But a more substantial payoff should be realized in Stage 2.
 \label{fig:input-3}
 \end{figure}
 
+\section{Examples}
+\label{sec:examples}
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{"abcdef"}} \\
+		\hline
+		Slice	& & \texttt{"def"} \\
+		\hline
+		Token segments & \texttt{"abc"} & \texttt{"def"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Example 1}
+\label{fig:example-1}
+\end{figure}
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
+		\hline
+		Slice	& & none \\
+		\hline
+		Token segments & \texttt{"aaa"} & \texttt{"bb"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Example 2}
+\label{fig:example-2}
+\end{figure}
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexemes	& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
+		 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
+		\hline
+		Slices	& & \texttt{/aa/} \\
+		 & & \texttt{/bb/} \\
+		\hline
+		Token segments & \texttt{"aaa"} & \texttt{"aa"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Example 3: Factored regular expression}
+\label{fig:example-3}
+\end{figure}
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
+		\hline
+		Overapproximated Slice	& & \texttt{/[ab][ab]/} \\
+		\hline
+		Token segments & \texttt{"aaa"} & \texttt{"ab"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Example 4: Overapproximated slice}
+\label{fig:example-4}
+\end{figure}
+
 \section{Caching}
 \label{sec:caching}
 
