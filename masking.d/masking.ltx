@@ -205,7 +205,7 @@
 This document outlines a method for optimizing mask computation in
 Guidance.
 It assumes some familiarity with the code in
-llguidance\cite{llguidance}.
+\llguidance\cite{llguidance}.
 
 \section{Conventions}
 \begin{itemize}
@@ -262,7 +262,7 @@ to accomodate the parser.\footnote{%
     She has merely to click her heels and wish.}
 
 The Ruby Slippers are already in use
-in llguidance.
+in \llguidance.
 An \al vector is computed,
 and applied at certain points.
 
@@ -277,7 +277,13 @@ It is hoped that this will allow considerable savings in time.
 Need to access information about the stack is often
 send as an obstacle to location-independence:
 Any computation which refers to the stack, it is thought,
-must be location dependent.
+must be location dependent.\footnote{%
+	For example,
+	from Section 1, ``Introduction'' in \cite{XGrammar2024}:
+	``CFG interpretation
+	requires a stack state that tracks the recursive rules matched
+	so far, making it impossible to precompute and cache all
+	combinatorial combinations of stack patterns ahead of time.''}
 We can use the Ruby Slippers, however, to make
 most computation involving the stack location-independent.
 
@@ -291,6 +297,9 @@ the list of allowed lexemes is quickly found.
 In fact, in \llguidance, the list of allowed lexemes
 is already computed as \al,
 so that it comes at literally zero cost.
+For our purposes, the only cause of location-dependence will
+be reference to portions of the input too early
+to be found in the token trie.
 
 \FloatBarrier
 
@@ -355,6 +364,7 @@ so that it comes at literally zero cost.
 
 \FloatBarrier
 
+We assuming some knowledge of the codebase of \llguidance.
 As a reminder, in performing the mask computation we simulate byte streams
 which are divided into tokens,
 and check them for acceptability against a parser which divides that same byte stream into lexemes.
@@ -383,9 +393,9 @@ byte stream diagrams, we have identified
 \end{itemize}
 In the byte stream, we note three locations of special significance:
 \begin{itemize}
-	\item The current location, which is the byte location location
-		our current position in the our token trie traversal.  We abbreviate this
-		as \V{Current}.
+	\item The current location, which is the location in the input stream
+		corresponding to our current position in the our token trie traversal.
+		We abbreviate this as \V{Current}.
 	\item The ``toktrie base'', that is, the start location for our toktrie
 		traversal, which we abbreviate \V{TB}.
 		\V{TB} is at the end of the last committed token,
@@ -471,6 +481,7 @@ token that ends {\bf after} the working token.
 \label{fig:input-2}
 \end{figure}
 
+\needspace{100pt}
 The \V{ALA} may occur before or after the \V{TB}.
 Where
 \begin{equation}
@@ -488,66 +499,83 @@ characters of a string which matches \V{lex} and $\Velement{lex}{2,3}$
 is a lexeme which matches the third character of a string which matches
 \V{lex}.
 
-Not all lexemes can be sliced conveniently.
-When a lexeme is hard to slice,
-we say that it is {\bf tough}.
-Other lexemes simply cannot be sliced.
-When a lexeme cannot be sliced,
-we say that it is {\bf unsliceable}.
+In this document, we refer to a lexeme slice as location-independent (LI)
+if the slice matches correctly regardless of any earlier bytes in the
+string.
+For example,
+\begin{enumerate}
+\item
+    $\element{(\texttt{/abcd/})}{2,3} = \texttt{/c/}$
+    is an LI slice, because the string \texttt{"c"}
+    will always match the third character of any string
+    which matches $\texttt{/abcd/}$.
+\item
+    $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$ does not have an LI slice,
+    because the third character of it must be either
+    \texttt{"a"} or \texttt{"b"}.
+    If the third character
+    is \texttt{"a"} it will not match the third character of
+		\texttt{"bbbbbb"} even though
+		\texttt{"bbbbbb"} matches
+    \texttt{/(aaaaaa|bbbbbb)/}.
+    If the third character
+    is \texttt{"b"} it will not match the third character of
+		\texttt{"aaaaaa"} even though
+		\texttt{"aaaaaa"} matches
+    \texttt{/(aaaaaa|bbbbbb)/}.
+    The $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$
+		can be dealt with by (see Section \ref{sec:overapproximation}
+		on page \pageref{sec:overapproximation}).
+\item
+    $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{0,3}
+		= \texttt{/(aaa|bbb)/}$ is an LI slice.
+		In fact, every slice which begins at location
+		0 of the lexeme is an LI slice.
+\item
+	\label{li:kleene}
+    $\element{(\texttt{/a*/})}{2,4}
+		= \texttt{/aa/}$ is an LI slice.
+		In fact, every slice which begins at location
+		0 of the lexeme is an LI slice.
+\end{enumerate}
+
+If there is a range for which there is no LI slice
+for a lexeme,
+we say that it is ``unsliceable''.
+We sliceing a lexeme is problematic,
+we say that the lexeme is ``tough''
+
 We consider cases.
 
-\subsection{Fixed strings}
-
-Where a lexeme is a fixed string,
-its slices {\bf are} string slices,
-and can be easily computed.
+\begin{itemize}
+	\item Every fixed string is sliceable,
+and none of the them should be tough.
 In practice, most
 lexemes are fixed strings.
-
-\subsection{Regular expressions without Kleene stars}
-
+\item
 When a lexeme has no Kleene star,
-it is also easy to compute its slices.
-
-\subsection{Regular expressions with Kleene stars}
-
-All regular expressions are sliceable in theory.
-Often regular expressions with Kleene stars
-are easily sliceable in practice.
-For example, if $\V{lex} = \texttt{/a*/}$, then
-$\Velement{lex}{0,2} = \texttt{/aa/}$
-and
-$\Velement{lex}{2,3} = \texttt{/a/}$.
-\todo{Move this to examples, replace with reference.}
-But some Kleene star lexemes can be tough.\footnote{%
-	Note that we cannot use derivatives where
-	the lexeme offset \eqref{eq:lexeme-offset}
-	is positive, as in Figure \ref{fig:input-1}
-	on page \pageref{fig:input-1}.
-	Computing a derivative require knowing the exact byte
-	string that precedes the derivative.
-	We need to compute slices which are invariant
-	for every occurrence of a Ruby triple \eqref{eq:ruby-triple}
-	throughout the parse, and therefore
-	for which the byte strings which preceed
-	the Ruby triple may vary.
-	However, where the lexeme offset is negative,
-	as in Figure \ref{fig:input-3}
-	on page \pageref{fig:input-3},
-	the preceeding byte string is entirely in the token trie,
-	and so is invariant for every Ruby triple.
-	We could therefore make use of derivatives in
-	the case where lexeme offsets are negative.}
-
-\subsection{Other lexemes}
-
-Lexemes can be many other things besides regular expressions,
+it is sliceable by ``factoring'' it into fixed
+strings.
+Some factorings may be exponential, however,
+so that regular expression lexemes,
+even would Kleene stars, can be tough.
+\item
+	Not all all Kleene star regular expressions
+	are sliceable, but may are,
+	as we saw in the example numbered \ref{li:kleene}
+	on page \ref{li:kleene}.
+\item Lexemes can be many other things besides regular expressions,
 including subgrammars.
 Some of these problematic lexemes may be sliceable nonetheless.
 For example, they could explicitly specify
 how they can be sliced.
 But many of these will be tough lexemes.
-\todo{Mention over-approximation}
+\end{itemize}
+
+\section{Overapproximation}
+\label{sec:overapproximation}
+
+\todo{Mention overapproximation}
 
 \section{Lexeme slices and token trie nodes}
 
@@ -598,7 +626,7 @@ there is a set of ``allowed lexemes''.
 The allowed lexemes are those which, if accepted,
 can result in a valid parse,
 according to the parser.
-{\tt llguidance} already calculates the allowed lexemes for its \al vector.
+\llguidance already calculates the allowed lexemes for its \al vector.
 
 Recall the location for which the allowed lexemes
 are calculated is called the ALA.
@@ -774,7 +802,7 @@ But a more substantial payoff should be realized in Stage 2.
 \end{figure}
 } % group for floatstyle
 
-\todo{Example for regex with CI slice: /a+/}
+\todo{Example for regex with LI slice: /a+/}
 
 \noindent
 \begin{figure}[ht]
@@ -991,31 +1019,37 @@ the tokenization of other lexemes.
 \newblock{Jeffrey Kegler.}
 \newblock{``What is the Marpa algorithm?''.}
 \newblock{\url{https://blogs.perl.org/users/jeffrey_kegler/2011/11/what-is-the-marpa-algorithm.html}.
-   Retrieved 2 Dec, 2024.}
+   Retrieved 2 December, 2024.}
 
 \bibitem{Kegler2011b}
 \newblock{Jeffrey Kegler.}
 \newblock{``Marpa and the Ruby Slippers''.}
 \newblock{\url{http://jeffreykegler.github.io/Ocean-of-Awareness-blog/individual/2011/11/marpa-and-the-ruby-slippers.html}.
-   Retrieved 2 Dec, 2024.}
+   Retrieved 2 December, 2024.}
 
 \bibitem{Kegler2023}
 \newblock{Jeffrey Kegler.}
 \newblock{``Marpa, A practical general parser: the recognizer''.}
 \newblock{\url{https://arxiv.org/abs/1910.08129}.
-   Retrieved 2 Dec, 2024.}
+   Retrieved 2 December, 2024.}
 
 \bibitem{llguidance}
 \newblock{llguidance team.}
 \newblock{"Low-level guidance parser".}
 \newblock{
   \url{https://github.com/microsoft/llguidance}.
-  Retrieved 2 Dec, 2024.}
+  Retrieved 2 December, 2024.}
 
 \bibitem{wiki-loop-invariant}
 \newblock{Wikipedia contributors.}
 \newblock{"Loop-invariant code motion --- {Wikipedia}{,} The Free Encyclopedia".}
 \newblock{\url{https://en.wikipedia.org/w/index.php?title=Loop-invariant_code_motion&oldid=1249559170}.
+	Retrieved 16 December 2024.}
+
+\bibitem{XGrammar2024}
+\newblock{Yixin Dong, Charlie F. Ruan, Yaxing Cai, Ruihang Lai, Ziyi Xu, Yilong Zhao and Tianqi Chen.}
+\newblock{``XGrammar: Flexible and Efficient Structured Generation Engine for Large Language Models''.}
+\newblock{\url{https://arxiv.org/abs/2411.15100}.
 	Retrieved 16 December 2024.}
 
 \end{thebibliography}
