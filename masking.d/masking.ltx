@@ -510,6 +510,7 @@ For example,
     will always match the third character of any string
     which matches $\texttt{/abcd/}$.
 \item
+\label{li:unsliceable}
     $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$ does not have an LI slice,
     because the third character of it must be either
     \texttt{"a"} or \texttt{"b"}.
@@ -532,11 +533,18 @@ For example,
 		In fact, every slice which begins at location
 		0 of the lexeme is an LI slice.
 \item
-	\label{li:kleene}
+\label{li:kleene}
     $\element{(\texttt{/a*/})}{2,4}
 		= \texttt{/aa/}$ is an LI slice.
 		In fact, every slice which begins at location
 		0 of the lexeme is an LI slice.
+\item
+	Case-insensitiviy is not a problem for slicing.
+	Writing case-insensitive \texttt{/lorem/} as
+	\texttt{/[Ll][Oo][Rr][Ee][Mm]/},
+		we see that
+		$\element{(\texttt{/[Ll][Oo][Rr][Ee][Mm]/ })}{2,3} = \texttt{/[Rr]/}$
+		is an LI slice.
 \end{enumerate}
 
 If there is a range for which there is no LI slice
@@ -549,7 +557,7 @@ We consider cases.
 
 \begin{itemize}
 	\item Every fixed string is sliceable,
-and none of the them should be tough.
+and none of them are tough.
 In practice, most
 lexemes are fixed strings.
 \item
@@ -575,7 +583,41 @@ But many of these will be tough lexemes.
 \section{Overapproximation}
 \label{sec:overapproximation}
 
-\todo{Mention overapproximation}
+Above, we introduced the idea of tough and unsliceable lexemes.
+These can be handled with overapproximation.
+Our overapproximation must not reject any matching lexemes (``false negative''),
+but they may accept non-matching lexemes (``false positives'').
+
+As an example of overapproximation, we revisit
+example \ref{li:unsliceable} on
+page \pageref{li:unsliceable}:
+\begin{equation}
+	\label{eq:unsliceable}
+    \element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}
+\end{equation}
+\eqref{eq:unsliceable} was not sliceable.
+An good overapproximation to
+\eqref{eq:unsliceable} is
+\begin{equation}
+	\label{eq:approx}
+\texttt{/[ab]/}
+\end{equation}
+\eqref{eq:approx} matches either
+\texttt{"a"} or \texttt{"b"}.
+\eqref{eq:approx} avoids false negatives,
+as required.
+\eqref{eq:approx} does return false positives,
+but only in the case of one byte out of
+the 256 possibities,
+so the accuracy of
+\eqref{eq:approx} is high.
+
+The overapproximation of last resort is a ``wildcard'',
+which matches everything.
+Almost all lexemes will be sliceable in practice,
+and an implementation is likely to find it most convenient
+to treat all lexemes as if they were sliceable.
+The wildcard approximation allows this.
 
 \section{Lexeme slices and token trie nodes}
 
