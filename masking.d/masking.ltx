@@ -189,6 +189,11 @@
 \ifdraft{ \thanks{DRAFT as of \DTMnow} }{}
 \date{\DTMnow.}
 
+\newcommand{\tpb}{\url{try\_push\_byte}\xspace}
+\newcommand{\tpbb}{\url{try\_push\_byte(b)}\xspace}
+\newcommand{\al}{\url{allowed\_lexemes}\xspace}
+\newcommand{\llguidance}{{\tt llguidance}\xspace}
+
 \begin{document}
 
 \maketitle
@@ -214,9 +219,27 @@ llguidance\cite{llguidance}.
 		\end{gather*}
 \end{itemize}
 
-\section{The Basic Idea}
+\section{The first basic idea}
 
-The basic idea behind the suggestions in this document is more
+The first basic idea behind the suggestions in this document is
+the well-known one of taking invariant code called repeatedly,
+arranging for it to be called only once.\cite{wiki-loop-invariant}
+In our case, instead of moving the invariant code before the repeating
+logic,
+we may compute its value once and cache it.\footnote{%
+	See Section \ref{sec:caching}
+	on page \pageref{sec:caching}.}
+
+To be ``invariant'' in a sense useful for us,
+the result logic must be ``location-independent'' (LI),
+in the sense that it produces the same result
+regardless of the parse location at which it is called.
+Logic which is not location-independent is
+called ``location-dependent''.
+
+\section{The second basic idea}
+
+The second basic idea behind this document is more
 aggressive use of the Ruby Slippers.
 The Ruby Slippers is
 a parsing technique discovered independently by Jeffrey Kegler%
@@ -240,26 +263,34 @@ to accomodate the parser.\footnote{%
 
 The Ruby Slippers are already in use
 in llguidance.
-An \url{allowed\_lexemes} vector is computed,
+An \al vector is computed,
 and applied at certain points.
 
 Looking ahead
 in this document, we are going to claim
 that the Ruby Slippers can be used earlier and more extensively,
-that much of the work of applying the
-Ruby Slippers is context-independent.
-Work which is context-independent
-can be done once and cached.
-It can also be done when the grammar is compiled, rather
-than ``online'', as the parse progresses.
-.\footnote{%
-        For discussion of the trade-offs between precomputation and
-        lazy computation with caching, see Section \ref{sec:caching}.
-        }
+and that most of the work of applying the
+Ruby Slippers is location-independent.
 It is hoped that this will allow considerable savings in time.
-\todo{Expand on context-independent vs. context-independent}
-\todo{cite XGrammar paper}
 \todo{use XGrammar's ``1\%'' statistic (section 3.1)}
+
+Need to access information about the stack is often
+send as an obstacle to location-independence:
+Any computation which refers to the stack, it is thought,
+must be location dependent.
+We can use the Ruby Slippers, however, to make
+most computation involving the stack location-independent.
+
+To do this, we note that the only stack information we care
+about is the list of ``allowed lexemes'', and information
+about them.
+The information about the allowed lexemes is location-independent,
+and, in a Ruby-Slippers-ready implementation of the Earley algorithm,
+like \llguidance,
+the list of allowed lexemes is quickly found.
+In fact, in \llguidance, the list of allowed lexemes
+is already computed as \al,
+so that it comes at literally zero cost.
 
 \FloatBarrier
 
@@ -567,7 +598,7 @@ there is a set of ``allowed lexemes''.
 The allowed lexemes are those which, if accepted,
 can result in a valid parse,
 according to the parser.
-{\tt llguidance} already calculates the allowed lexemes for its \url{allowed\_lexemes} vector.
+{\tt llguidance} already calculates the allowed lexemes for its \al vector.
 
 Recall the location for which the allowed lexemes
 are calculated is called the ALA.
@@ -614,7 +645,7 @@ a suggestion for gradual implementation.
 In Stage 1, we go from the token-consistent lexemes
 to the allowed bytes of tokens,
 and use this to eliminate calls to
-\url{try\_push\_byte}.
+\tpb.
 We refer to the code snippet\footnote{%
     This code snippet is similar to, and taken from,
     \url{https://github.com/microsoft/llguidance/blob/0ca091a701a50134e0503fa03c5c12b206e182a3/toktrie/src/toktree.rs\#L945}.
@@ -645,7 +676,7 @@ in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 Let \V{TClexes} be the set of token-consistent lexemes at
 the ``click point'' in
 Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
-The test \url{try\_push\_byte} will be true only if,
+The test \tpbb will be true only if,
 \begin{equation}
 	\label{eq:click-point-test}
 	\exists \; \V{lex} \in \V{TClexes} \; \mid \; \VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}),
@@ -653,10 +684,10 @@ The test \url{try\_push\_byte} will be true only if,
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the recognizer
 \V{recce}.
 When \eqref{eq:click-point-test} is false,
-the call to \url{try\_push\_byte} can be skipped.
+the call to \tpb can be skipped.
 For an unsliceable lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
 always matches, so that the call
-to \url{try\_push\_byte} is forced.
+to \tpb is forced.
 
 In practice,
 most lexemes are sliceable,
@@ -897,15 +928,15 @@ value of Ruby triples.
 We call a location where a lexeme can end,
 an ``end of lexeme'', or EOL.
 In Stage 2, we build on Stage 1 by tracking EOLs.
-In cases where \url{try\_push\_byte(b)}
+In cases where \tpbb
 is called when we are not at an EOL,
-\url{try\_push\_byte(b)} simply stores byte \V{b}.
-If we skip the call to \url{try\_push\_byte(b)},
+\tpbb simply stores byte \V{b}.
+If we skip the call to \tpbb,
 but turn out to need the value of byte \V{b}
 later, we can find it from context.
 Note that,
 while Stage 1 required no changes in the logic of
-\url{try\_push\_byte},
+\tpb,
 Stage 2 may require some modifications.
 
 To implement stage 2,
@@ -922,14 +953,14 @@ is false.
 \eqref{eq:eol-function} should be true,
 whenever \V{lex} is an unsliceable lexeme.
 
-In stage 2, calls to \url{try\_push\_byte(b)}
+In stage 2, calls to \tpbb
 need only be made at end of lexeme,
 and for tough lexemes.
 Since for most nodes there none of the
 tough lexemes will be token-consistent,
 and most toktrie nodes will not match
 most Ruby triples,
-calls to \url{try\_push\_byte(b)}
+calls to \tpbb
 should be reduced greatly.
 
 \section{Forcing}
@@ -975,11 +1006,17 @@ the tokenization of other lexemes.
    Retrieved 2 Dec, 2024.}
 
 \bibitem{llguidance}
-\newblock{llguidance.}
-\newblock{"Low-level guidance parser."}
+\newblock{llguidance team.}
+\newblock{"Low-level guidance parser".}
 \newblock{
   \url{https://github.com/microsoft/llguidance}.
   Retrieved 2 Dec, 2024.}
+
+\bibitem{wiki-loop-invariant}
+\newblock{Wikipedia contributors.}
+\newblock{"Loop-invariant code motion --- {Wikipedia}{,} The Free Encyclopedia".}
+\newblock{\url{https://en.wikipedia.org/w/index.php?title=Loop-invariant_code_motion&oldid=1249559170}.
+	Retrieved 16 December 2024.}
 
 \end{thebibliography}
 
