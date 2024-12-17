@@ -272,7 +272,6 @@ that the Ruby Slippers can be used earlier and more extensively,
 and that most of the work of applying the
 Ruby Slippers is location-independent.
 It is hoped that this will allow considerable savings in time.
-\todo{use XGrammar's ``1\%'' statistic (section 3.1)?}
 
 Need to access information about the stack is often
 send as an obstacle to location-independence:
@@ -894,8 +893,6 @@ when \V{lex} is tough.
 \section{Examples}
 \label{sec:examples}
 
-\todo{Talk about negative offset examples}
-
 \needspace{3in}
 \FloatBarrier
 
@@ -1204,6 +1201,68 @@ which does not match.
 We therefore cache a boolean false
 for the Ruby triple
 $(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
+
+\FloatBarrier
+
+\subsection {Example of negative offset}
+\label{sec:negative-offset-example}
+
+{%
+\floatstyle{plain}
+\restylefloat{figure}
+\noindent
+\begin{figure}[H]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[TB,ALA]}
+			& \multicolumn{1}{|c|}{[ALA,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/ab*/}} \\
+		\hline
+		LI Slice & & \texttt{/abb/} \\
+		\hline
+		Token segments & \texttt{"xyz"} & \texttt{"abb"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Negative offset example}
+\label{fig:example-negative-offset}
+\end{figure}
+} % group for floatstyle
+
+All our examples so far have been positive-offset lexemes.
+That is because they present the most difficult cases.
+In this section we look at a negative-offset lexeme
+
+Our lexeme is \texttt{/ab*/}.
+The lexeme offset is
+\[
+	\V{off} = (\V{TB} \subtract \V{ALA}) = {-3},
+\]
+which is negative.
+Applying the formula for slices of negative offsets~\eqref{eq:negative-offset},
+\
+\begin{equation}
+\begin{gathered}
+(\V{lex}, \V{off}) \\
+	= \Velement{lex}{0, \Vsize{node}} \\
+	= \Velement{(\texttt{/ab*/})}{0, 3} \\
+    = \texttt{/abb/}.
+\end{gathered}
+\end{equation}
+We note that all slices of the lexemes for
+negative offsets start at 0,
+and that the set of prefixes of a regular language
+is always a regular language,
+so that
+regular expression lexemes with negative offsets
+are always sliceable.
+
+\todo{Finish this section}
 
 \FloatBarrier
 
