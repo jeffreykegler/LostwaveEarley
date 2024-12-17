@@ -638,44 +638,53 @@ The wildcard approximation allows this.
 \section{Lexeme slices and token trie nodes}
 
 In the context of token trie nodes,
-lexeme slices anchored around the toktrie base (TB)
+lexeme slices anchored to either side of the toktrie base (TB)
 are of special interest.
 We call these ``anchored lexeme slices''.
 Anchored lexeme slices can be conveniently represented as a duple.
 
 Recall (equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset})
 that we defined the lexeme offset as \V{off}
-where $\V{off} = \V{TB} \subtract \V{ALA}.$
-An anchored lexeme slice can be represented as
+where
+\[
+	\V{off} = \V{TB} \subtract \V{ALA}.
+\]
+An anchored lexeme slice can be represented
 as $(\V{lex}, \V{off})$.
 
 For convenience in defining anchored lexeme slices
-we set out some definitions.
-Let \V{node} be a token trie node.
-Let \VFA{path}{node} be the path from the trie root
+we first set out some definitions.
+\begin{itemize}
+	\item Let \V{node} be a token trie node.
+	\item Let \VFA{path}{node} be the path from the trie root
 to \V{node}, treated as a vector of nodes.
-We represent the length of \VFA{path}{node}
+\item We represent the length of \VFA{path}{node}
 as \size{\VFA{path}{node}}.
 Abusing notation a bit, we also write
 \size{\VFA{path}{node}} as \Vsize{node}.
 \Vsize{node} is also called the ``depth''
 of \V{node}.
-The node vector \VFA{path}{node}, mapped to
+\item The node vector \VFA{path}{node}, mapped to
 a string of bytes, is \FA{toString}{\VFA{path}{node}}.
 We usually overload the notation
 and write \FA{toString}{\VFA{path}{node}}
 as \VFA{toString}{node}.
+\end{itemize}
 
-If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
+With these definition, we are in a position to state the value
+of the anchored lexeme slice duples.
+\begin{itemize}
+\item If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 then
 \[
 	(\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}}.
 \]
-If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
+\item If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
 then
 \[
 	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}}.
 \]
+\end{itemize}
 
 \section{Token-consistent lexemes}
 
@@ -684,7 +693,8 @@ there is a set of ``allowed lexemes''.
 The allowed lexemes are those which, if accepted,
 can result in a valid parse,
 according to the parser.
-\llguidance already calculates the allowed lexemes for its \al vector.
+\llguidance already calculates the allowed lexemes,
+which it tracks in its \al vector.
 
 Recall the location for which the allowed lexemes
 are calculated is called the ALA.
@@ -762,7 +772,7 @@ in Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
 Let \V{TClexes} be the set of token-consistent lexemes at
 the ``click point'' in
 Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
-The test \tpbb will be true only if,
+The test \tpbb will be true only if
 \begin{equation}
 	\label{eq:click-point-test}
 	\exists \; \V{lex} \in \V{TClexes} \; \mid \; \VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}),
@@ -771,13 +781,14 @@ where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the reco
 \V{recce}.
 When \eqref{eq:click-point-test} is false,
 the call to \tpb can be skipped.
-For an unsliceable lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
-always matches, so that the call
-to \tpb is forced.
+For a tough lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
+might overapproximate, so that an unnecessary call
+to \tpb might be made.
 
 In practice,
+allowed and token-consistent lexemes are sparse,
 most lexemes are sliceable,
-and allowed and possible lexemes are sparse.
+and most tough lexemes have good overapproximations.
 So even at Stage 1,
 this optimization should be significant.
 But a more substantial payoff should be realized in Stage 2.
