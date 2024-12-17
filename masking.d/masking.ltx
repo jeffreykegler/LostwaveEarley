@@ -1027,6 +1027,7 @@ $(\V{node}, \V{lex}, \V{off})$.
 \needspace{3in}
 \FloatBarrier
 \subsection {Example without LI slice}
+\label{sec:example-no-li-slice}
 
 {%
 \floatstyle{plain}
@@ -1097,10 +1098,10 @@ overapproximation.
 			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
 			 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
 		\hline
-		\multirow{2}{*}{LI Slices} & & \texttt{/aa/} \\
-		 & & \texttt{/bb/} \\
+		\multirow{2}{*}{LI Slices} & & \texttt{/aaa/} \\
+		 & & \texttt{/bbb/} \\
 		\hline
-		Token segments & \texttt{"aaa"} & \texttt{"aa"} \\
+		Token segments & \texttt{"aaa"} & \texttt{"aaa"} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1108,6 +1109,36 @@ overapproximation.
 \label{fig:example-factored}
 \end{figure}
 } % group for floatstyle
+
+One solution to the problem presented in
+Section~\ref{sec:example-no-li-slice}
+on page~\pageref{sec:example-no-li-slice}
+is ``factoring''.
+Any regular expression which does not use the Kleene star
+can be factored into fixed string lexemes.
+We do note that such regular expressions might still be tough:
+the number of factored strings can be large enough to make
+a factoring solution impractical.
+
+In this example, factoring is quite practical.
+\texttt{/(aaaaaa|bbbbbb)/}
+can be factored into the two lexemes
+\texttt{/aaaaaa/} and \texttt{/bbbbbb/}.
+As in the previous examples, the offset is 3,
+and the range is \texttt{[3,6]}.
+Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+their slices are easily found to be, respectively,
+\texttt{/aaa/} and \texttt{/bbb/}.
+\VFA{toString}{node} is \texttt{"aaa"},
+so that
+\texttt{/aaa/} matches
+and \texttt{/bbb/} does not.
+We cache a boolean true
+for the Ruby triple
+$(\V{node}, \texttt{/aaaaaa/}, 3)$
+and a boolean false
+for the Ruby triple
+$(\V{node}, \texttt{/bbbbbb/}, 3)$.
 
 \subsection {Example of overapproximation}
 \label{sec:overapproximation-example}
