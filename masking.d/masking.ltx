@@ -952,6 +952,33 @@ for the Ruby triple
 \FloatBarrier
 \subsection {Example for Kleene regex}
 
+{%
+\floatstyle{plain}
+\restylefloat{figure}
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/a+/}} \\
+		\hline
+		LI Slice	& & \texttt{/aaa/} \\
+		\hline
+		Token segments & \texttt{"aaa"} & \texttt{"aaa"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Fixed string example}
+\label{fig:example-fixed}
+\end{figure}
+} % group for floatstyle
+
 \todo{Example for Kleene regex: /a+/}
 
 \needspace{3in}
