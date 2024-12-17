@@ -899,7 +899,7 @@ when \V{lex} is tough.
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{"abcdef"}} \\
 		\hline
-		LI Slice	& & \texttt{/def/} \\
+		LI Slice & & \texttt{/def/} \\
 		\hline
 		Token segments & \texttt{"abc"} & \texttt{"def"} \\
 		\hline
@@ -968,7 +968,7 @@ for the Ruby triple
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/aa*/}} \\
 		\hline
-		LI Slice	& & \texttt{/aaa/} \\
+		LI Slice & & \texttt{/aaa/} \\
 		\hline
 		Token segments & \texttt{"aaa"} & \texttt{"aaa"} \\
 		\hline
@@ -1044,7 +1044,7 @@ $(\V{node}, \V{lex}, \V{off})$.
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
 		\hline
-		Slice	& & none \\
+		LI Slice	& & none \\
 		\hline
 		Token segments & \texttt{"aaa"} & \texttt{"bb"} \\
 		\hline
@@ -1055,12 +1055,29 @@ $(\V{node}, \V{lex}, \V{off})$.
 \end{figure}
 } % group for floatstyle
 
-\needspace{3in}
-\FloatBarrier
+In the case of
+Figure~\ref{fig:example-no-li-slice},
+we are considering the lexeme
+\texttt{/(aaaaaa|bbbbbb)/} for which
+there is no LI slice.
+We must remedy this in order
+to determine a boolean true
+for the Ruby triple
+$(\V{node}, \V{lex}, \V{off})$.
+Figure~\ref{fig:example-factored}
+on page~\pageref{fig:example-factored}
+shows a solution that involves factoring
+\texttt{/(aaaaaa|bbbbbb)/}
+into two lexemes,
+one for each alternative.
+Figure~\ref{fig:example-overapproximation}
+on page~\pageref{fig:example-overapproximation}
+shows a solution that uses
+overapproximation.
 
 \needspace{3in}
 \FloatBarrier
-\subsection {Factored alternative example}
+\subsection{Example of factored alternatives}
 
 {%
 \floatstyle{plain}
@@ -1080,7 +1097,7 @@ $(\V{node}, \V{lex}, \V{off})$.
 			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
 			 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
 		\hline
-		\multirow{2}{*}{Slices}	& & \texttt{/aa/} \\
+		\multirow{2}{*}{LI Slices} & & \texttt{/aa/} \\
 		 & & \texttt{/bb/} \\
 		\hline
 		Token segments & \texttt{"aaa"} & \texttt{"aa"} \\
@@ -1088,11 +1105,12 @@ $(\V{node}, \V{lex}, \V{off})$.
 \end{tabular}
 \vspace{6pt}
 \caption{Factored regular expression example}
-\label{fig:example-3}
+\label{fig:example-factored}
 \end{figure}
 } % group for floatstyle
 
 \subsection {Example of overapproximation}
+\label{sec:overapproximation-example}
 
 {%
 \floatstyle{plain}
@@ -1110,14 +1128,14 @@ $(\V{node}, \V{lex}, \V{off})$.
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
 		\hline
-		Overapproximated Slice	& & \texttt{/[ab][ab]/} \\
+		Overapproximated LI Slice & & \texttt{/[ab][ab]/} \\
 		\hline
 		Token segments & \texttt{"aaa"} & \texttt{"ab"} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
 \caption{Overapproximated slice example}
-\label{fig:example-overapproximated}
+\label{fig:example-overapproximation}
 \end{figure}
 } % group for floatstyle
 
