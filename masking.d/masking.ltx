@@ -877,6 +877,9 @@ when \V{lex} is tough.
 \section{Examples}
 \label{sec:examples}
 
+\todo{Talk about negative offset examples}
+
+\needspace{3in}
 \FloatBarrier
 
 \subsection {Example of fixed string lexeme}
@@ -945,12 +948,13 @@ for the Ruby triple
 	(\V{node}, \V{lex}, \V{off}).
 \]
 
+\needspace{3in}
 \FloatBarrier
+\subsection {Factored alternative example}
 
-\todo{Example for regex with LI slice: /a+/}
-
-\FloatBarrier
-
+{%
+\floatstyle{plain}
+\restylefloat{figure}
 \noindent
 \begin{figure}[ht]
 \vspace{6pt}
@@ -973,14 +977,24 @@ for the Ruby triple
 		\hline
 \end{tabular}
 \vspace{6pt}
-\caption{Example 3: Factored regular expression}
+\caption{Factored regular expression example}
 \label{fig:example-3}
 \end{figure}
+} % group for floatstyle
 
+\needspace{3in}
 \FloatBarrier
+\subsection {Example for Kleene regex}
 
+\todo{Example for Kleene regex: /a+/}
+
+\needspace{3in}
+\FloatBarrier
 \subsection {Example without LI slice}
 
+{%
+\floatstyle{plain}
+\restylefloat{figure}
 \noindent
 \begin{figure}[H]
 \vspace{6pt}
@@ -1000,14 +1014,19 @@ for the Ruby triple
 		\hline
 \end{tabular}
 \vspace{6pt}
-\caption{Example 2: No LI slice}
-\label{fig:example-2}
+\caption{No LI slice example}
+\label{fig:example-no-li-slice}
 \end{figure}
+} % group for floatstyle
 
+\needspace{3in}
 \FloatBarrier
 
 \subsection {Example of overapproximation}
 
+{%
+\floatstyle{plain}
+\restylefloat{figure}
 \noindent
 \begin{figure}[H]
 \vspace{6pt}
@@ -1027,9 +1046,10 @@ for the Ruby triple
 		\hline
 \end{tabular}
 \vspace{6pt}
-\caption{Example 4: Overapproximated slice}
-\label{fig:example-4}
+\caption{Overapproximated slice example}
+\label{fig:example-overapproximated}
 \end{figure}
+} % group for floatstyle
 
 \FloatBarrier
 
