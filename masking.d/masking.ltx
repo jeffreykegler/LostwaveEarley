@@ -301,6 +301,20 @@ For our purposes, the only cause of location-dependence will
 be reference to portions of the input too early
 to be found in the token trie.
 
+The results of the LI logic are single booleans,
+which are cached and used to avoid
+calls to \tpbb.
+Using this optimization,
+\tpbb typically will only be called
+when a new lexeme is ready to be accepted.
+In a minority of instances,
+the logic necessary to determine when
+a new lexeme is ready to be accepted
+cannot be made LI.
+In those cases,
+the cached booleans will be overapproximations,
+and \tpbb is used as a fallback.
+
 \FloatBarrier
 
 \needspace{3in}
@@ -1035,11 +1049,12 @@ should be reduced greatly.
 
 \section{Forcing}
 
-In this document we say we are ``lexeme forcing'' when there is only one
-relevant lexeme at a location.
-The optimization described here detects situations where lexemes can be
-forced and handles their tokenization in the same way as it handles
-the tokenization of other lexemes.
+The optimization described here detects all situations where there is
+only one token-consistent lexeme at a location.
+In this way, it can be said to auto-detect all cases of forcing.
+This is done as a natural extension of its usual logic for
+token-consistent lexemes and their tokenization,
+rather than by special-casing.
 
 \FloatBarrier
 
