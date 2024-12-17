@@ -272,7 +272,7 @@ that the Ruby Slippers can be used earlier and more extensively,
 and that most of the work of applying the
 Ruby Slippers is location-independent.
 It is hoped that this will allow considerable savings in time.
-\todo{use XGrammar's ``1\%'' statistic (section 3.1)}
+\todo{use XGrammar's ``1\%'' statistic (section 3.1)?}
 
 Need to access information about the stack is often
 send as an obstacle to location-independence:
@@ -673,18 +673,17 @@ as \VFA{toString}{node}.
 
 With these definition, we are in a position to state the value
 of the anchored lexeme slice duples.
-\begin{itemize}
-\item If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
+If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
+\begin{equation}
+\label{eq:positive-offset}
+	(\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
+\end{equation}
+If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
 then
-\[
-	(\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}}.
-\]
-\item If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
-then
-\[
+\begin{equation}
+\label{eq:negative-offset}
 	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}}.
-\]
-\end{itemize}
+\end{equation}
 
 \section{Token-consistent lexemes}
 
@@ -839,112 +838,6 @@ But a more substantial payoff should be realized in Stage 2.
 
 \FloatBarrier
 
-\section{Examples}
-\label{sec:examples}
-
-\todo{In explication of examples, discuss token-consistent lexemes}
-
-{%
-\floatstyle{plain}
-\restylefloat{figure}
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-	\begin{tabular}{|c|r|l|}
-		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
-			& \multicolumn{1}{|c|}{[TB,Current]}
-			\\
-		\hline
-		Lexeme	& \multicolumn{2}{|c|}{\texttt{"abcdef"}} \\
-		\hline
-		Slice	& & \texttt{"def"} \\
-		\hline
-		Token segments & \texttt{"abc"} & \texttt{"def"} \\
-		\hline
-\end{tabular}
-\vspace{6pt}
-\caption{Example 1: Fixed string}
-\label{fig:example-1}
-\end{figure}
-} % group for floatstyle
-
-\todo{Example for regex with LI slice: /a+/}
-
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-	\begin{tabular}{|c|r|l|}
-		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
-			& \multicolumn{1}{|c|}{[TB,Current]}
-			\\
-		\hline
-		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
-		\hline
-		Slice	& & none \\
-		\hline
-		Token segments & \texttt{"aaa"} & \texttt{"bb"} \\
-		\hline
-\end{tabular}
-\vspace{6pt}
-\caption{Example 2: No context-insensitive slice}
-\label{fig:example-2}
-\end{figure}
-
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-	\begin{tabular}{|c|r|l|}
-		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
-			& \multicolumn{1}{|c|}{[TB,Current]}
-			\\
-		\hline
-		\multirow{2}{*}{Lexemes}
-			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
-			 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
-		\hline
-		\multirow{2}{*}{Slices}	& & \texttt{/aa/} \\
-		 & & \texttt{/bb/} \\
-		\hline
-		Token segments & \texttt{"aaa"} & \texttt{"aa"} \\
-		\hline
-\end{tabular}
-\vspace{6pt}
-\caption{Example 3: Factored regular expression}
-\label{fig:example-3}
-\end{figure}
-
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-	\begin{tabular}{|c|r|l|}
-		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
-			& \multicolumn{1}{|c|}{[TB,Current]}
-			\\
-		\hline
-		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
-		\hline
-		Overapproximated Slice	& & \texttt{/[ab][ab]/} \\
-		\hline
-		Token segments & \texttt{"aaa"} & \texttt{"ab"} \\
-		\hline
-\end{tabular}
-\vspace{6pt}
-\caption{Example 4: Overapproximated slice}
-\label{fig:example-4}
-\end{figure}
-
 \section{Caching}
 \label{sec:caching}
 
@@ -978,8 +871,171 @@ so that
 \end{equation}
 is a boolean function.
 We can make \eqref{eq:ruby-function}
-a total function by treating it as true
-whenever \V{lex} is not sliceable.
+a total function by using the wildcard slice
+when \V{lex} is tough.
+
+\section{Examples}
+\label{sec:examples}
+
+\FloatBarrier
+
+\subsection {Example of fixed string lexeme}
+{%
+\floatstyle{plain}
+\restylefloat{figure}
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{"abcdef"}} \\
+		\hline
+		LI Slice	& & \texttt{/def/} \\
+		\hline
+		Token segments & \texttt{"abc"} & \texttt{"def"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Fixed string example}
+\label{fig:example-fixed}
+\end{figure}
+} % group for floatstyle
+
+Figure~\ref{fig:example-fixed} shows the situation if
+we have committed a token ending in \texttt{"abc"},
+and \VFA{toString}{node},
+the string implied by \V{node} of the token trie,
+is \texttt{"def"}.
+If, for purposes of caching a result,
+we are considering
+the token-consistent lexeme \texttt{/abcdef/}
+the relevant range is \texttt{[3,6]},
+so that there is an LI slice: \texttt{/def/}.
+The lexeme offset is
+\[
+	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
+\]
+which is positive.
+Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+\
+\begin{equation}
+\begin{gathered}
+(\V{lex}, \V{off}) \\
+	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
+	= \Velement{(\texttt{/abcdef/})}{3, (3+3) } \\
+    = \texttt{/def/}.
+\end{gathered}
+\end{equation}
+Again, \VFA{toString}{node},
+the string implied by \V{node} of the token trie,
+is \texttt{"def"} and
+\[
+     \texttt{"def"} \sim \texttt{/def/},
+\]
+which is a match,
+so we would cache a boolean true
+for the Ruby triple
+\[
+	(\V{node}, \V{lex}, \V{off}).
+\]
+
+\FloatBarrier
+
+\todo{Example for regex with LI slice: /a+/}
+
+\FloatBarrier
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		\multirow{2}{*}{Lexemes}
+			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
+			 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
+		\hline
+		\multirow{2}{*}{Slices}	& & \texttt{/aa/} \\
+		 & & \texttt{/bb/} \\
+		\hline
+		Token segments & \texttt{"aaa"} & \texttt{"aa"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Example 3: Factored regular expression}
+\label{fig:example-3}
+\end{figure}
+
+\FloatBarrier
+
+\subsection {Example without LI slice}
+
+\noindent
+\begin{figure}[H]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
+		\hline
+		Slice	& & none \\
+		\hline
+		Token segments & \texttt{"aaa"} & \texttt{"bb"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Example 2: No LI slice}
+\label{fig:example-2}
+\end{figure}
+
+\FloatBarrier
+
+\subsection {Example of overapproximation}
+
+\noindent
+\begin{figure}[H]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+	\begin{tabular}{|c|r|l|}
+		\hline
+		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+			& \multicolumn{1}{|c|}{[TB,Current]}
+			\\
+		\hline
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
+		\hline
+		Overapproximated Slice	& & \texttt{/[ab][ab]/} \\
+		\hline
+		Token segments & \texttt{"aaa"} & \texttt{"ab"} \\
+		\hline
+\end{tabular}
+\vspace{6pt}
+\caption{Example 4: Overapproximated slice}
+\label{fig:example-4}
+\end{figure}
+
+\FloatBarrier
+
+\section{Caching strategy}
+\label{sec:caching-strategy}
+
 
 It may be best to vary the caching strategy.\footnote{%
 	In this section we discuss varying the caching strategy
