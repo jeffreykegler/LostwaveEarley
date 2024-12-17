@@ -228,7 +228,7 @@ In our case, instead of moving the invariant code before the repeating
 logic,
 we may compute its value once and cache it.\footnote{%
 	See Section \ref{sec:caching}
-	on page \pageref{sec:caching}.}
+	on page~\pageref{sec:caching}.}
 
 To be ``invariant'' in a sense useful for us,
 the result logic must be ``location-independent'' (LI),
@@ -394,7 +394,7 @@ implicitly checking the tokens against all possible byte streams.
 Every node in the trie traversal implies a single byte stream,
 which may be seen as structured according to the scheme in
 Figure \ref{fig:input-1}
-on page \pageref{fig:input-1}.
+on page~\pageref{fig:input-1}.
 
 In Figure \ref{fig:input-1}
 and our other
@@ -439,15 +439,15 @@ We will assume
 there is a last committed token and
 a last accepted lexeme.
 And, while the invariants of
-equation \ref{eq:invariant-1} on page \pageref{eq:invariant-1} and
-equation \ref{eq:invariant-2} on page \pageref{eq:invariant-2}
+equation \ref{eq:invariant-1} on page~\pageref{eq:invariant-1} and
+equation \ref{eq:invariant-2} on page~\pageref{eq:invariant-2}
 will always be obeyed,
 otherwise our byte stream diagrams may make arbitrary
 assumptions about the relative length of the tokens and lexemes.
 For example, Figure \ref{fig:input-2}
-on page \pageref{fig:input-2}
+on page~\pageref{fig:input-2}
 is similar to Figure \ref{fig:input-1}
-on page \pageref{fig:input-1},
+on page~\pageref{fig:input-1},
 except that, while Figure \ref{fig:input-1} shows a working
 lexeme that ends {\bf before} the working token,
 Figure \ref{fig:input-1} shows a working
@@ -517,6 +517,7 @@ In this document, we refer to a lexeme slice as location-independent (LI)
 if the slice matches correctly regardless of any earlier bytes in the
 string.
 For example,
+\MYsloppy{%
 \begin{enumerate}
 \item
     $\element{(\texttt{/abcd/})}{2,3} = \texttt{/c/}$
@@ -539,8 +540,9 @@ For example,
 		\texttt{"aaaaaa"} matches
     \texttt{/(aaaaaa|bbbbbb)/}.
     The $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$
-		can be dealt with by (see Section \ref{sec:overapproximation}
-		on page \pageref{sec:overapproximation}).
+		can be dealt with by overapproximation
+		(see Section \ref{sec:overapproximation}
+		on page~\pageref{sec:overapproximation}).
 \item
     $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{0,3}
 		= \texttt{/(aaa|bbb)/}$ is an LI slice.
@@ -548,10 +550,9 @@ For example,
 		0 of the lexeme is an LI slice.
 \item
 \label{li:kleene}
+    Kleene star regular expressions often have LI slices.
     $\element{(\texttt{/a*/})}{2,4}
 		= \texttt{/aa/}$ is an LI slice.
-		In fact, every slice which begins at location
-		0 of the lexeme is an LI slice.
 \item
 	Case-insensitiviy is not a problem for slicing.
 	Writing case-insensitive \texttt{/lorem/} as
@@ -560,11 +561,12 @@ For example,
 		$\element{(\texttt{/[Ll][Oo][Rr][Ee][Mm]/ })}{2,3} = \texttt{/[Rr]/}$
 		is an LI slice.
 \end{enumerate}
+} % end of Mysloppy
 
 If there is a range for which there is no LI slice
 for a lexeme,
 we say that it is ``unsliceable''.
-We sliceing a lexeme is problematic,
+When slicing a lexeme is problematic,
 we say that the lexeme is ``tough''
 
 We consider cases.
@@ -582,14 +584,14 @@ Some factorings may be exponential, however,
 so that regular expression lexemes,
 even would Kleene stars, can be tough.
 \item
-	Not all all Kleene star regular expressions
-	are sliceable, but may are,
+	Not all Kleene star regular expressions
+	are sliceable, but many are,
 	as we saw in the example numbered \ref{li:kleene}
-	on page \ref{li:kleene}.
+	on page~\ref{li:kleene}.
 \item Lexemes can be many other things besides regular expressions,
 including subgrammars.
 Some of these problematic lexemes may be sliceable nonetheless.
-For example, they could explicitly specify
+For example, the application could explicitly specify
 how they can be sliced.
 But many of these will be tough lexemes.
 \end{itemize}
@@ -604,25 +606,25 @@ but they may accept non-matching lexemes (``false positives'').
 
 As an example of overapproximation, we revisit
 example \ref{li:unsliceable} on
-page \pageref{li:unsliceable}:
+page~\pageref{li:unsliceable}:
 \begin{equation}
 	\label{eq:unsliceable}
     \element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}
 \end{equation}
-\eqref{eq:unsliceable} was not sliceable.
-An good overapproximation to
+is not sliceable.
+But a good overapproximation to
 \eqref{eq:unsliceable} is
 \begin{equation}
 	\label{eq:approx}
-\texttt{/[ab]/}
+\texttt{/[ab]/},
 \end{equation}
-\eqref{eq:approx} matches either
+which matches either
 \texttt{"a"} or \texttt{"b"}.
 \eqref{eq:approx} avoids false negatives,
 as required.
 \eqref{eq:approx} does return false positives,
 but only in the case of one byte out of
-the 256 possibities,
+the 256 possibilities,
 so the accuracy of
 \eqref{eq:approx} is high.
 
@@ -641,7 +643,7 @@ are of special interest.
 We call these ``anchored lexeme slices''.
 Anchored lexeme slices can be conveniently represented as a duple.
 
-Recall (equation \ref{eq:lexeme-offset} on page \pageref{loc:lexeme-offset})
+Recall (equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset})
 that we defined the lexeme offset as \V{off}
 where $\V{off} = \V{TB} \subtract \V{ALA}.$
 An anchored lexeme slice can be represented as
@@ -734,7 +736,7 @@ We refer to the code snippet\footnote{%
     This code snippet is similar to, and taken from,
     \url{https://github.com/microsoft/llguidance/blob/0ca091a701a50134e0503fa03c5c12b206e182a3/toktrie/src/toktree.rs\#L945}.
 }
-in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
+in Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
 \begin{figure}
 \begin{lstlisting}
     while p < endp {
@@ -759,7 +761,7 @@ in Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
 
 Let \V{TClexes} be the set of token-consistent lexemes at
 the ``click point'' in
-Figure \ref{fig:try-push-byte} on page \pageref{fig:try-push-byte}.
+Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
 The test \tpbb will be true only if,
 \begin{equation}
 	\label{eq:click-point-test}
