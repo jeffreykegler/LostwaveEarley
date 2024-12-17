@@ -788,20 +788,21 @@ In practice,
 allowed and token-consistent lexemes are sparse\footnote{%
 	For \cite{XGrammar2024}
 	the nearest approximation to ``token-consistent lexemes'' is
-	their ``context-dependent tokens''
-	(see Section 3.1, ``Adaptive Token Mask Cache'').
+	their ``context-dependent tokens''.
 	In one experiment, with a JSON parser,
-	They put ``context-dependent tokens'' at "less than 1\%
-	(1134 out of 128k)".
+	they put ``context-dependent tokens'' at "less than 1\%
+	(1134 out of 128k)"
+	(Section 3.1, ``Adaptive Token Mask Cache'').
 	Our Earley engine has far more information about the parse
 	than the PDA of \cite{XGrammar2024}, so we would expect
 	``token-consistent lexemes'' to be even sparser
-	than ``context-dependent'' tokens.
+	than ``context-dependent tokens''.
 	Comparing statistics from the two approaches, however,
 	is a risky business.
 	Also, JSON is, by design, a very easy to parse language,
-	so should not challenge an AI parser.
-	},
+	so should naturally yield a low count of 
+	both ``token-consistent lexemes'' and
+	``context-dependent tokens''.},
 most lexemes are sliceable,
 and most tough lexemes have good overapproximations.
 So even at Stage 1,
