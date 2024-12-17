@@ -950,7 +950,7 @@ for the Ruby triple
 
 \needspace{3in}
 \FloatBarrier
-\subsection {Example for Kleene regex}
+\subsection {Example for Kleene star regex}
 
 {%
 \floatstyle{plain}
@@ -966,7 +966,7 @@ for the Ruby triple
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Lexeme	& \multicolumn{2}{|c|}{\texttt{/a+/}} \\
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/aa*/}} \\
 		\hline
 		LI Slice	& & \texttt{/aaa/} \\
 		\hline
@@ -974,12 +974,55 @@ for the Ruby triple
 		\hline
 \end{tabular}
 \vspace{6pt}
-\caption{Fixed string example}
-\label{fig:example-fixed}
+\caption{Kleene regex star example}
+\label{fig:example-kleene}
 \end{figure}
 } % group for floatstyle
 
-\todo{Example for Kleene regex: /a+/}
+Figure~\ref{fig:example-kleene} illustrates the handling of Kleene star
+regular expressions.
+In Figure~\ref{fig:example-kleene}
+we have committed a token ending in \texttt{"aaa"},
+and \VFA{toString}{node}
+is also \texttt{"aaa"}.
+If, for purposes of caching a result,
+we are considering
+the token-consistent lexeme \texttt{/aa*/}
+the relevant range is \texttt{[3,6]},
+there is an LI slice: \texttt{/aaa/}.\footnote{%
+	For Kleene star regular expressions there will not necessarily
+	be an LI slice.
+	In that case we use overapproximation.
+	See Section~\ref{sec:overapproximation-example}
+	on page~\pageref{sec:overapproximation-example}
+	for an
+	example of overapproximation, in that case for regular
+	expressions using alternatives.
+}
+The lexeme offset is
+\[
+	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
+\]
+which is positive.
+Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+\
+\begin{equation}
+\begin{gathered}
+(\V{lex}, \V{off}) \\
+	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
+	= \Velement{(\texttt{/aa*/})}{3, (3+3) } \\
+    = \texttt{/aaa/}.
+\end{gathered}
+\end{equation}
+Again, \VFA{toString}{node}
+is \texttt{"aaa"}.
+\[
+     \texttt{"aaa"} \sim \texttt{/aaa/}
+\]
+is a match,
+so we would cache a boolean true
+for the Ruby triple
+$(\V{node}, \V{lex}, \V{off})$.
 
 \needspace{3in}
 \FloatBarrier
