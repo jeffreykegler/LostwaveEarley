@@ -1159,9 +1159,9 @@ $(\V{node}, \texttt{/bbbbbb/}, 3)$.
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
 		\hline
-		Overapproximated LI Slice & & \texttt{/[ab][ab]/} \\
+		Overapproximated LI Slice & & \texttt{/[ab][ab][ab]/} \\
 		\hline
-		Token segments & \texttt{"aaa"} & \texttt{"ab"} \\
+		Token segments & \texttt{"aaa"} & \texttt{"abc"} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1169,6 +1169,24 @@ $(\V{node}, \texttt{/bbbbbb/}, 3)$.
 \label{fig:example-overapproximation}
 \end{figure}
 } % group for floatstyle
+
+A second solution to the problem presented in
+Section~\ref{sec:example-no-li-slice}
+on page~\pageref{sec:example-no-li-slice}
+is overapproximation.
+
+Again, our lexeme is
+\texttt{/(aaaaaa|bbbbbb)/}.
+Again, the offset is 3,
+and the range is \texttt{[3,6]}.
+An excellent overapproximated slice for
+\element{(\texttt{/(aaaaaa|bbbbbb)/})}{3,6} is
+\texttt{/[ab][ab][ab]/}.
+\VFA{toString}{node} is \texttt{"abc"},
+which does not match.
+We therefore cache a boolean false
+for the Ruby triple
+$(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
 
 \FloatBarrier
 
