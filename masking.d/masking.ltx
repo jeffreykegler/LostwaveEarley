@@ -786,7 +786,7 @@ the entire lexeme overlaps the last bytes
 of \VFA{toString}{node},
 so that
 \begin{equation}
-\label{eq:negative-offset}
+\label{eq:negative-overlap}
 	\FA{overlap}{\V{node},\V{off}} =
 		\element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.
 \end{equation}
@@ -989,7 +989,7 @@ which is a match,
 so we would cache a boolean true
 for the Ruby triple
 \[
-	(\V{node}, \V{lex}, \V{off}).
+	(\V{node}, \texttt{"abcdef"}, 3).
 \]
 
 \needspace{3in}
@@ -1073,7 +1073,7 @@ and matching the overlap against the slice,
 \eqref{eq:aaa-match} is a match,
 so we would cache a boolean true
 for the Ruby triple
-$(\V{node}, \V{lex}, \V{off})$.
+$(\V{node}, \texttt{/aa*/}, 3)$.
 
 \needspace{3in}
 \FloatBarrier
@@ -1098,7 +1098,7 @@ $(\V{node}, \V{lex}, \V{off})$.
 		\hline
 		LI Slice	& & none \\
 		\hline
-		Token segments & \texttt{"aaa"} & \texttt{"bb"} \\
+		Token segments & \texttt{"aaa"} & \texttt{"bbb"} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1115,7 +1115,7 @@ there is no LI slice.
 We must remedy this in order
 to determine a boolean true
 for the Ruby triple
-$(\V{node}, \V{lex}, \V{off})$.
+$(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
 Figure~\ref{fig:example-factored}
 on page~\pageref{fig:example-factored}
 shows a solution that involves factoring
@@ -1304,7 +1304,7 @@ are always sliceable.
 
 Determining the overlap for a negative offset is slightly more
 complicated that it has been for the positive values of \V{off}.
-Applying the formula for overlaps of negative offsets~\eqref{eq:negative-offset},
+Applying the formula for overlaps of negative offsets~\eqref{eq:negative-overlap},
 \begin{equation}
 \begin{gathered}
 	\FA{overlap}{\V{node},\V{off}} \\
