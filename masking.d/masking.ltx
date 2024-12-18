@@ -1382,12 +1382,11 @@ is called when we are not at an EOL,
 If we skip the call to \tpbb,
 but turn out to need the value of byte \V{b}
 later, we can find it from context.
-Note that,
-while Stage 1 required no changes in the logic of
-\tpb,
-Stage 2 may require some modifications.
+Even more than Stage 1,
+Stage 2 is likely to require modifications
+to \tpb.
 
-To implement stage 2,
+To implement Stage 2,
 we will want to cache a boolean that indicates
 whether every Ruby triple is at an end of lexeme.
 \begin{equation}
@@ -1399,16 +1398,18 @@ We need not cache values of
 the \Fname{Ruby} function~\eqref{eq:ruby-function}
 is false.
 \eqref{eq:eol-function} should be true,
-whenever \V{lex} is an unsliceable lexeme.
+whenever 
+the \Fname{Ruby} function~\eqref{eq:ruby-function}
+is true due to an overapproximation.
 
-In stage 2, calls to \tpbb
+In Stage 2, calls to \tpbb
 need only be made at end of lexeme,
 and for tough lexemes.
-Since for most nodes there none of the
-tough lexemes will be token-consistent,
-and most toktrie nodes will not match
-most Ruby triples,
-calls to \tpbb
+As noted previously,
+token-consistent lexemes in general,
+and tough lexemes in particular,
+should be sparse,
+and calls to \tpbb
 should be reduced greatly.
 
 \section{Forcing}
