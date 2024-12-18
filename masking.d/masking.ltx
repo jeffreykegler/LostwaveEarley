@@ -767,13 +767,37 @@ in Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
 }
 \end{figure}
 
+In what follows we will be interested in the overlap of the lexeme
+and \VFA{toString}{node}, the string implied by \V{node} in the
+token trie.
+We write this overlap as
+\[
+	\FA{overlap}{\V{node},\V{off}}
+\]
+If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
+the entire token trie overlaps the lexeme,
+so that \VFA{toString}{node} is identical to the overlap:
+\begin{equation}
+\label{eq:positive-overlap}
+	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node}
+\end{equation}
+If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
+the entire lexeme overlaps the last bytes
+of \VFA{toString}{node},
+so that
+\begin{equation}
+\label{eq:negative-offset}
+	\FA{overlap}{\V{node},\V{off}} =
+		\element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.
+\end{equation}
+
 Let \V{TClexes} be the set of token-consistent lexemes at
 the ``click point'' in
 Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
 The test \tpbb will be true only if
 \begin{equation}
 	\label{eq:click-point-test}
-	\exists \; \V{lex} \in \V{TClexes} \; \mid \; \VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}),
+	\exists \; \V{lex} \in \V{TClexes} \; \mid \; \FA{overlap}{\V{node},\V{off}} \, \sim \, (\V{lex}, \V{off}),
 \end{equation}
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the recognizer
 \V{recce}.
@@ -864,7 +888,7 @@ and every offset \V{off}
 accessing the value of
 \begin{equation}
 \label{eq:ruby-triple-test}
-	\VFA{toString}{node} \, \sim \, (\V{lex}, \V{off}).
+	\VFA{overlap}{\V{node},\V{off}} \, \sim \, (\V{lex}, \V{off}).
 \end{equation}
 We call
 \begin{equation}
@@ -949,9 +973,15 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
     = \texttt{/def/}.
 \end{gathered}
 \end{equation}
+
 Again, \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
-is \texttt{"def"} and
+is \texttt{"def"}.
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-offset},
+\[
+	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"def"}.
+\]
+Attempting to match the overlap to the slice, we have
 \[
      \texttt{"def"} \sim \texttt{/def/},
 \]
@@ -1028,12 +1058,19 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
     = \texttt{/aaa/}.
 \end{gathered}
 \end{equation}
+
 Again, \VFA{toString}{node}
 is \texttt{"aaa"}.
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-offset},
 \[
-     \texttt{"aaa"} \sim \texttt{/aaa/}
+	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"aaa"}.
 \]
-is a match,
+and matching the overlap against the slice,
+\begin{equation}
+\label{eq:aaa-match}
+     \texttt{"aaa"} \sim \texttt{/aaa/}.
+\end{equation}
+\eqref{eq:aaa-match} is a match,
 so we would cache a boolean true
 for the Ruby triple
 $(\V{node}, \V{lex}, \V{off})$.
@@ -1144,7 +1181,8 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
 their slices are easily found to be, respectively,
 \texttt{/aaa/} and \texttt{/bbb/}.
 \VFA{toString}{node} is \texttt{"aaa"},
-so that
+and \FA{overlap}{\V{node},3} is \texttt{"aaa"}.
+Therefore
 \texttt{/aaa/} matches
 and \texttt{/bbb/} does not.
 We cache a boolean true
@@ -1197,6 +1235,8 @@ An excellent overapproximated slice for
 \element{(\texttt{/(aaaaaa|bbbbbb)/})}{3,6} is
 \texttt{/[ab][ab][ab]/}.
 \VFA{toString}{node} is \texttt{"abc"},
+which means that
+\FA{overlap}{\V{node},3} is \texttt{"abc"},
 which does not match.
 We therefore cache a boolean false
 for the Ruby triple
@@ -1262,7 +1302,29 @@ so that
 regular expression lexemes with negative offsets
 are always sliceable.
 
-\todo{Finish this section}
+Determining the overlap for a negative offset is slightly more
+complicated that it has been for the positive values of \V{off}.
+Applying the formula for overlaps of negative offsets~\eqref{eq:negative-offset},
+\begin{equation}
+\begin{gathered}
+	\FA{overlap}{\V{node},\V{off}} \\
+	= \element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.\\
+	= \element{(\texttt{"xyzabc"})}{6+(-3), 6} \\
+	= \element{(\texttt{"xyzabc"})}{3, 6} \\
+	= \texttt{"abc"}.
+\end{gathered}
+\end{equation}
+
+Comparing the overlap to the slice,
+\[
+     \texttt{"abc"} \sim \texttt{/abb/}
+\]
+is not a match.
+We therefore cache a boolean false
+for the Ruby triple
+\[
+	(\V{node}, \texttt{/ab*/}, {-3}).
+\]
 
 \FloatBarrier
 
