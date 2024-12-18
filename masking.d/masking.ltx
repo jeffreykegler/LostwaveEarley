@@ -1039,11 +1039,10 @@ In Figure~\ref{fig:example-kleene}
 we have committed a token ending in \texttt{"aaa"},
 and \VFA{toString}{node}
 is also \texttt{"aaa"}.
-If, for purposes of caching a result,
-we are considering
-the token-consistent lexeme \texttt{/aa*/}
-the relevant range is \texttt{[3,6]},
-there is an LI slice: \texttt{/aaa/}.\footnote{%
+We are considering
+the token-consistent lexeme \texttt{/aa*/}.
+The relevant range is \texttt{[3,6]}
+and there is an LI slice: \texttt{/aaa/}.\footnote{%
 	For Kleene star regular expressions there will not necessarily
 	be an LI slice.
 	In that case we use overapproximation.
@@ -1122,7 +1121,7 @@ Figure~\ref{fig:example-no-li-slice},
 we are considering the lexeme
 \texttt{/(aaaaaa|bbbbbb)/} for which
 there is no LI slice.
-We must {remedy} this in order
+We must \mbox{remedy} this in order
 to determine a boolean true
 for the Ruby triple
 $(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
