@@ -223,7 +223,7 @@ It assumes some familiarity with the code in
 
 The first basic idea behind the suggestions in this document is
 the well-known one of taking invariant code called repeatedly,
-arranging for it to be called only once.\cite{wiki-loop-invariant}
+and arranging for it to be called only once.\cite{wiki-loop-invariant}
 In our case, instead of moving the invariant code before the repeating
 logic,
 we may compute its value once and cache it.\footnote{%
@@ -231,7 +231,7 @@ we may compute its value once and cache it.\footnote{%
 	on page~\pageref{sec:caching}.}
 
 To be ``invariant'' in a sense useful for us,
-the result logic must be ``location-independent'' (LI),
+the result logic must be ``location-independent'' (LI)
 in the sense that it produces the same result
 regardless of the parse location at which it is called.
 Logic which is not location-independent is
@@ -273,10 +273,10 @@ and that most of the work of applying the
 Ruby Slippers is location-independent.
 It is hoped that this will allow considerable savings in time.
 
-Need to access information about the stack is often
-send as an obstacle to location-independence:
+The need to access information about the stack is often
+seen as an obstacle to location-independence:
 Any computation which refers to the stack, it is thought,
-must be location dependent.\footnote{%
+must be location-dependent.\footnote{%
 	For example,
 	from Section 1, ``Introduction'' in \cite{XGrammar2024}:
 	``CFG interpretation
@@ -296,11 +296,11 @@ the list of allowed lexemes is quickly found.
 In fact, in \llguidance, the list of allowed lexemes
 is already computed as \al,
 so that it comes at literally zero cost.
-For our purposes, the only cause of location-dependence will
+For our purposes, therefore, the only cause of location-dependence will
 be reference to portions of the input too early
 to be found in the token trie.
 
-The results of the LI logic are single booleans,
+The results of the LI logic are booleans,
 which are cached and used to avoid
 calls to \tpbb.
 Using this optimization,
@@ -312,7 +312,7 @@ a new lexeme is ready to be accepted
 cannot be made LI.
 In those cases,
 the cached booleans will be overapproximations,
-and \tpbb is used as a fallback.
+and \tpbb will be used as a fallback.
 
 \FloatBarrier
 
@@ -377,7 +377,7 @@ and \tpbb is used as a fallback.
 
 \FloatBarrier
 
-We assuming some knowledge of the codebase of \llguidance.
+We assume some knowledge of the codebase of \llguidance.
 As a reminder, in performing the mask computation we simulate byte streams
 which are divided into tokens,
 and check them for acceptability against a parser which divides that same byte stream into lexemes.
@@ -388,7 +388,7 @@ Once we know which tokens are parse-consistent,
 we can produce a token mask,
 which in turn will allow us to sample a token.
 
-To determine the acceptable tokens, we travserse a trie of the tokens,
+To determine the acceptable tokens, we traverse a trie of the tokens,
 implicitly checking the tokens against all possible byte streams.
 Every node in the trie traversal implies a single byte stream,
 which may be seen as structured according to the scheme in
@@ -432,14 +432,15 @@ is at or after the ALA:
 \V{ALA} \le \V{Current}.
 \end{equation}
 
-Our byte stream diagrams will make some assumptions
-without loss of generality.
+For ease of drawing,
+and without loss of generality,
+our byte stream diagrams
+will make several assumptions.
 We will assume
 there is a last committed token and
 a last accepted lexeme.
 And, while the invariants of
-equation \ref{eq:invariant-1} on page~\pageref{eq:invariant-1} and
-equation \ref{eq:invariant-2} on page~\pageref{eq:invariant-2}
+\eqref{eq:invariant-1} and \eqref{eq:invariant-2}
 will always be obeyed,
 otherwise our byte stream diagrams may make arbitrary
 assumptions about the relative length of the tokens and lexemes.
@@ -538,14 +539,17 @@ For example,
 		\texttt{"aaaaaa"} even though
 		\texttt{"aaaaaa"} matches
     \texttt{/(aaaaaa|bbbbbb)/}.
-    The $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$
+    The lexeme $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$
 		can be dealt with by overapproximation
 		(see Section \ref{sec:overapproximation}
 		on page~\pageref{sec:overapproximation}).
 \item
     $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{0,3}
 		= \texttt{/(aaa|bbb)/}$ is an LI slice.
-		In fact, every slice which begins at location
+		In fact,
+		because the set of prefixes of a regular language
+		is always a regular language,
+		every slice which begins at location
 		0 of the lexeme is an LI slice.
 \item
 \label{li:kleene}
@@ -566,9 +570,9 @@ If there is a range for which there is no LI slice
 for a lexeme,
 we say that it is ``unsliceable''.
 When slicing a lexeme is problematic,
-we say that the lexeme is ``tough''
+we say that the lexeme is ``tough''.
 
-We consider cases.
+We consider cases:
 
 \begin{itemize}
 	\item Every fixed string is sliceable,
@@ -581,16 +585,16 @@ it is sliceable by ``factoring'' it into fixed
 strings.
 Some factorings may be exponential, however,
 so that regular expression lexemes,
-even would Kleene stars, can be tough.
+even without Kleene stars, can be tough.
 \item
 	Not all Kleene star regular expressions
 	are sliceable, but many are,
 	as we saw in the example numbered \ref{li:kleene}
-	on page~\ref{li:kleene}.
+	on page~\pageref{li:kleene}.
 \item Lexemes can be many other things besides regular expressions,
 including subgrammars.
 Some of these problematic lexemes may be sliceable nonetheless.
-For example, the application could explicitly specify
+For example, the application could specify explicitly
 how they can be sliced.
 But many of these will be tough lexemes.
 \end{itemize}
@@ -600,7 +604,7 @@ But many of these will be tough lexemes.
 
 Above, we introduced the idea of tough and unsliceable lexemes.
 These can be handled with overapproximation.
-Our overapproximation must not reject any matching lexemes (``false negative''),
+Our overapproximation must not reject any matching lexemes (``false negatives''),
 but they may accept non-matching lexemes (``false positives'').
 
 As an example of overapproximation, we revisit
@@ -677,12 +681,64 @@ If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 \label{eq:positive-offset}
 	(\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
 \end{equation}
-If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
+
+\needspace{3in}
+\FloatBarrier
+
+If \V{off} is negative,
+as in Figure~\ref{fig:input-3},
+so that $\V{ALA} > \V{TB}$,
 then
 \begin{equation}
 \label{eq:negative-offset}
-	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}}.
+	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}+\V{off}}.
 \end{equation}
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c}{ALA} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+	% ===
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{TB} &
+        \multicolumn{2}{c}{Current} \\
+	% ===
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+	% ===
+\cline{1-5}\cdashline{6-7}
+\multicolumn{4}{|c|}{accepted lexeme} &
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
+\cline{1-5}\cdashline{6-7}
+        \rule{30pt}{0pt} &
+        \multicolumn{2}{|p{6em}|}{\centering committed token} &
+        \multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token}
+        \\
+	% ===
+\cline{1-5}\cdashline{6-7}
+\multicolumn{5}{|c|}{seen input} &
+        \multicolumn{2}{|c}{unseen input} \\
+\cline{1-5}\cdashline{6-7}
+\end{tabular}
+\vspace{6pt}
+\caption{Input structure with token split between lexemes}
+\label{fig:input-3}
+\end{figure}
+
+\FloatBarrier
 
 \section{Token-consistent lexemes}
 
@@ -831,52 +887,6 @@ and most tough lexemes have good overapproximations.
 So even at Stage 1,
 this optimization should be significant.
 But a more substantial payoff should be realized in Stage 2.
-
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c}{ALA} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} \\
-	% ===
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c|}{TB} &
-        \multicolumn{2}{c}{Current} \\
-	% ===
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c|}{} &
-	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
-	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} \\
-	% ===
-\cline{1-5}\cdashline{6-7}
-\multicolumn{4}{|c|}{accepted lexeme} &
-	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
-\cline{1-5}\cdashline{6-7}
-        \rule{30pt}{0pt} &
-        \multicolumn{2}{|p{6em}|}{\centering committed token} &
-        \multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token}
-        \\
-	% ===
-\cline{1-5}\cdashline{6-7}
-\multicolumn{5}{|c|}{seen input} &
-        \multicolumn{2}{|c}{unseen input} \\
-\cline{1-5}\cdashline{6-7}
-\end{tabular}
-\vspace{6pt}
-\caption{Input structure with token split between lexemes}
-\label{fig:input-3}
-\end{figure}
-
-\FloatBarrier
 
 \section{Caching}
 \label{sec:caching}
@@ -1296,8 +1306,6 @@ Applying the formula for slices of negative offsets~\eqref{eq:negative-offset},
 \end{equation}
 We note that all slices of the lexemes for
 negative offsets start at 0,
-and that the set of prefixes of a regular language
-is always a regular language,
 so that
 regular expression lexemes with negative offsets
 are always sliceable.
