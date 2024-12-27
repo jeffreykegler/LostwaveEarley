@@ -516,17 +516,24 @@ is a lexeme which matches the third character of a string which matches
 In this document, we refer to a lexeme slice as location-independent (LI)
 if the slice matches correctly regardless of any earlier bytes in the
 string.
-For example,
-\MYsloppy{%
-\begin{enumerate}
-\item
-    $\element{(\texttt{/abcd/})}{2,3} = \texttt{/c/}$
+Some examples follow.
+
+\begin{equation}
+	\label{eq:li-ex-fixed}
+	\tag{FIXED}
+    \element{(\texttt{/abcd/})}{2,3} = \texttt{/c/}
+\end{equation}
     is an LI slice, because the string \texttt{"c"}
     will always match the third character of any string
     which matches $\texttt{/abcd/}$.
-\item
-\label{li:unsliceable}
-    $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$ does not have an LI slice,
+
+\begin{equation}
+	\label{eq:li-ex-no-slice}
+	\tag{NO SLICE}
+    \element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}
+\end{equation}
+
+	does not have an LI slice,
     because the third character of it must be either
     \texttt{"a"} or \texttt{"b"}.
     If the third character
@@ -543,28 +550,41 @@ For example,
 		can be dealt with by overapproximation
 		(see Section \ref{sec:overapproximation}
 		on page~\pageref{sec:overapproximation}).
-\item
-    $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{0,3}
-		= \texttt{/(aaa|bbb)/}$ is an LI slice.
+
+\begin{equation}
+	\label{eq:li-ex-factored}
+	\tag{FACTORED}
+    \element{(\texttt{/(aaaaaa|bbbbbb)/})}{0,3}
+		= \texttt{/(aaa|bbb)/}
+\end{equation}
+		is an LI slice.
 		In fact,
 		because the set of prefixes of a regular language
 		is always a regular language,
 		every slice which begins at location
 		0 of the lexeme is an LI slice.
-\item
-\label{li:kleene}
+
+\begin{equation}
+	\label{eq:li-ex-kleene}
+	\tag{KLEENE}
+    \element{(\texttt{/a*/})}{2,4}
+		= \texttt{/aa/}
+\end{equation}
+		is an LI slice.
     Kleene star regular expressions often have LI slices.
-    $\element{(\texttt{/a*/})}{2,4}
-		= \texttt{/aa/}$ is an LI slice.
-\item
-	Case-insensitivity is not a problem for slicing.
+
+\begin{equation}
+	\label{eq:li-ex-case-insensitive}
+	\tag{CASE-INSENSITIVE}
+	\element{(\texttt{/[Ll][Oo][Rr][Ee][Mm]/ })}{2,3} = \texttt{/[Rr]/}
+\end{equation}
+	Case-insensitive lexemes like
+	\eqref{eq:li-ex-case-insensitive}
+	are not a problem for slicing.
 	Writing case-insensitive \texttt{/lorem/} as
 	\texttt{/[Ll][Oo][Rr][Ee][Mm]/},
 		we see that
-		$\element{(\texttt{/[Ll][Oo][Rr][Ee][Mm]/ })}{2,3} = \texttt{/[Rr]/}$
 		is an LI slice.
-\end{enumerate}
-} % end of Mysloppy
 
 If there is a range for which there is no LI slice
 for a lexeme,
