@@ -212,7 +212,7 @@ It assumes some familiarity with the code in
 \item ``Iff'' (or ``iff'') abbreviates
 	``if and only if''.
 \item Ranges are inclusive start,
-	exclusive end so that, for example,
+	exclusive end, so that, for example,
 		\begin{gather*}
 			\element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
 			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
@@ -306,8 +306,8 @@ calls to \tpbb.
 Using this optimization,
 \tpbb typically will only be called
 when a new lexeme is ready to be accepted.
-In a minority of instances,
-the logic necessary to determine when
+The exception is a minority of instances,
+where the logic necessary to determine when
 a new lexeme is ready to be accepted
 cannot be made LI.
 In those cases,
@@ -450,8 +450,8 @@ is similar to Figure \ref{fig:input-1}
 on page~\pageref{fig:input-1},
 except that, while Figure \ref{fig:input-1} shows a working
 lexeme that ends {\bf before} the working token,
-Figure \ref{fig:input-1} shows a working
-token that ends {\bf after} the working token.
+Figure \ref{fig:input-2} shows a working
+lexeme that ends {\bf after} the working token.
 
 \noindent
 \begin{figure}[ht]
