@@ -700,7 +700,9 @@ as \VFA{toString}{node}.
 
 With these definitions, we are in a position to state the value
 of the anchored lexeme slice duples.
-If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
+If \V{off} is positive,
+as in Figure~\ref{fig:input-1} on page~\pageref{fig:input-1},
+so that $\V{TB} > \V{ALA}$,
 \begin{equation}
 \label{eq:positive-offset}
 	(\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
@@ -710,7 +712,7 @@ If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 \FloatBarrier
 
 If \V{off} is negative,
-as in Figure~\ref{fig:input-3},
+as in Figure~\ref{fig:input-3} on page~\pageref{fig:input-3},
 so that $\V{ALA} > \V{TB}$,
 then
 \begin{equation}
@@ -882,6 +884,10 @@ The test \tpbb will be true only if
 \end{equation}
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s} matches the recognizer
 \V{recce}.
+We say \tpbb is true ``only if'' \eqref{eq:click-point-test},
+instead of ``if and only if'' \eqref{eq:click-point-test},
+in order to allow for
+``false positives''.
 
 When \eqref{eq:click-point-test} is false,
 the call to \tpb can be skipped.
@@ -903,7 +909,8 @@ allowed and token-consistent lexemes are sparse\footnote{%
 	than ``context-dependent tokens''.
 	Comparing statistics from the two approaches, however,
 	is a risky business.
-	Also, JSON is, by design, a very easy to parse language,
+	We also should keep in mind that JSON is, by design,
+	a very easy to parse language,
 	so should naturally yield a low count of
 	both ``token-consistent lexemes'' and
 	``context-dependent tokens''.},
@@ -913,6 +920,7 @@ So even at Stage 1,
 this optimization should be significant.
 But a more substantial payoff should be realized in Stage 2.
 
+\needspace{3in}
 \section{Caching}
 \label{sec:caching}
 
@@ -970,7 +978,7 @@ when \V{lex} is tough.
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Lexeme	& \multicolumn{2}{|c|}{\texttt{"abcdef"}} \\
+		Lexeme	& \multicolumn{2}{|c|}{\texttt{/abcdef/}} \\
 		\hline
 		LI Slice & & \texttt{/def/} \\
 		\hline
@@ -1011,7 +1019,7 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
 Again, \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
 is \texttt{"def"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-offset},
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-overlap},
 \[
 	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"def"}.
 \]
@@ -1023,7 +1031,7 @@ which is a match,
 so we would cache a boolean true
 for the Ruby triple
 \[
-	(\V{node}, \texttt{"abcdef"}, 3).
+	(\V{node}, \texttt{/abcdef/}, 3).
 \]
 
 \needspace{3in}
@@ -1070,8 +1078,8 @@ and there is an LI slice: \texttt{/aaa/}.\footnote{%
 	For Kleene star regular expressions there will not necessarily
 	be an LI slice.
 	In that case we use overapproximation.
-	See Section~\ref{sec:overapproximation-example}
-	on page~\pageref{sec:overapproximation-example}
+	See Section~\ref{sec:example-overapproximation}
+	on page~\pageref{sec:example-overapproximation}
 	for an
 	example of overapproximation, in that case for regular
 	expressions using alternatives.
@@ -1094,7 +1102,7 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
 
 Again, \VFA{toString}{node}
 is \texttt{"aaa"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-offset},
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-overlap},
 \[
 	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"aaa"}.
 \]
@@ -1149,13 +1157,13 @@ We must \mbox{remedy} this in order
 to determine a boolean true
 for the Ruby triple
 $(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
-Figure~\ref{fig:example-factored}
+Section~\ref{sec:example-factored}
 on page~\pageref{fig:example-factored}
 shows a solution that involves factoring
 \texttt{/(aaaaaa|bbbbbb)/}
 into two lexemes,
 one for each alternative.
-Figure~\ref{fig:example-overapproximation}
+Section~\ref{sec:example-overapproximation}
 on page~\pageref{fig:example-overapproximation}
 shows a solution that uses
 overapproximation.
@@ -1163,6 +1171,7 @@ overapproximation.
 \needspace{3in}
 \FloatBarrier
 \subsection{Example of factored alternatives}
+\label{sec:example-factored}
 
 {%
 \floatstyle{plain}
@@ -1226,7 +1235,7 @@ for the Ruby triple
 $(\V{node}, \texttt{/bbbbbb/}, 3)$.
 
 \subsection {Example of overapproximation}
-\label{sec:overapproximation-example}
+\label{sec:example-overapproximation}
 
 {%
 \floatstyle{plain}
@@ -1273,6 +1282,11 @@ which does not match.
 We therefore cache a boolean false
 for the Ruby triple
 $(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
+
+We note that,
+if \VFA{toString}{node} was \texttt{"aaa"},
+we would match,
+but our match would be a false positive.
 
 \FloatBarrier
 
@@ -1364,16 +1378,7 @@ for the Ruby triple
 \section{Caching strategy}
 \label{sec:caching-strategy}
 
-
-It may be best to vary the caching strategy.\footnote{%
-	In this section we discuss varying the caching strategy
-	only for different absolute values of \V{off}.
-	Further investigation
-	may show that it makes sense to
-	take into account the sign of \V{off},
-	or to vary the caching strategy by
-	lexeme.
-}
+It may be best to vary the caching strategy.
 For small absolute values of \V{off}, the cache
 will be dense,
 and the likelihood of hits in a fully pre-populated
@@ -1403,6 +1408,15 @@ it is likely to make sense to not cache the
 value of Ruby triples.
 \end{MYsloppy}
 
+So far in this section
+we have discussed varying the caching strategy
+only for different absolute values of \V{off}.
+Further investigation
+may show that it makes sense to
+take into account the sign of \V{off},
+or to vary the caching strategy by
+lexeme.
+
 \section{Stage 2: Track ends of lexeme}
 \label{sec:stage2}
 
@@ -1430,10 +1444,11 @@ We need not cache values of
 \eqref{eq:eol-function} when
 the \Fname{Ruby} function~\eqref{eq:ruby-function}
 is false.
-\eqref{eq:eol-function} should be set to true,
+Also,
 whenever 
 the \Fname{Ruby} function~\eqref{eq:ruby-function}
-is true due to an overapproximation.
+is true due to an overapproximation,
+\eqref{eq:eol-function} should be set to true.
 
 In Stage 2, calls to \tpbb
 need only be made at end of lexeme,
