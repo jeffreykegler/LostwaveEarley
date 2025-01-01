@@ -1,0 +1,272 @@
+\documentclass[draft,12pt]{amsart}
+
+\usepackage[final]{listings}
+\usepackage{float}
+\floatstyle{boxed}
+\restylefloat{figure}
+\usepackage{arydshln}
+\usepackage{multirow}
+\usepackage{needspace}
+
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{url}
+\usepackage[final]{hyperref}
+\usepackage{placeins}
+\usepackage{mfirstuc}
+\usepackage{ifdraft}
+\usepackage[obeyDraft]{todonotes}
+\usepackage{datetime2}
+\ifdraft{
+    \usepackage{draftwatermark}
+}{}
+
+% Fix conflict between todonotes and amsart packages
+% See http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/todonotes/todonotes.pdf,
+% p. 10.
+\makeatletter
+\providecommand\@dotsep{5}
+\def\listtodoname{List of TODOs}
+\def\listoftodos{\@starttoc{tdo}\listtodoname}
+\makeatother
+
+\makeatletter
+\renewcommand{\listofalgorithms}{\@starttoc{loa}{List of algorithms}}
+\let\l@algorithm=\l@figure
+\makeatother
+
+% Re hbox's, see
+% https://tex.stackexchange.com/questions/241343/what-is-the-meaning-of-fussy-sloppy-emergencystretch-tolerance-hbadness
+\raggedbottom
+
+% Replaced by todonotes package
+% \newcommand{\todo}[1]{\par{\large\bf Todo: #1}\par}
+
+\newcommand{\mymathop}[1]{\mathop{\texttt{#1}}}
+\newcommand{\mymathbin}[1]{\mathbin{\texttt{#1}}}
+
+% For a type name, when it occurs in text
+\newcommand{\type}[1]{\ensuremath{\texttt{#1}}}
+
+\newcommand{\mult}{\mathbin{\ast}}
+\newcommand{\dfn}[1]{{\bf #1}}
+\newcommand{\sep}{\,\mid\,}
+\newcommand{\mydot}{\raisebox{.05em}{$\,\bullet\,$}}
+\newcommand{\cat}{\,.\,}
+\newcommand{\size}[1]{\ensuremath{\left | {#1} \right |}}
+\newcommand{\Vsize}[1]{\ensuremath{\size{\var{#1}}}}
+\newcommand{\bigsize}[1]{\ensuremath{\bigl| {#1} \bigr|}}
+\newcommand{\order}[1]{\ensuremath{{\mathcal O}(#1)}\xspace}
+\newcommand{\Oc}{\order{1}}
+\newcommand{\On}{\order{\var{n}}}
+\newcommand{\inference}[2]{\genfrac{}{}{1pt}{}{#1}{#2}}
+
+\newcommand{\lastix}[1]{\ensuremath{\##1}}
+\newcommand{\Vlastix}[1]{\ensuremath{\lastix{\V{#1}}}}
+\newcommand{\VlastElement}[1]{\Velement{#1}{\Vlastix{#1}}}
+\newcommand{\element}[2]{\ensuremath{\mathop{#1}
+    \mathopen{}\left[#2\right]\mathclose{}}}
+\newcommand{\Velement}[2]{\ensuremath{\mathop{\V{#1}}
+    \mathopen{}\left[#2\right]\mathclose{}}}
+\newcommand{\VVelement}[2]{\ensuremath{\mathop{\V{#1}}
+    \mathopen{}\left[ \V{#2}
+    \right]\mathclose{} }}
+
+\newcommand{\tuple}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+
+\newcommand{\mcolon}{\mathrel:}
+\newcommand{\mcoloncolon}{\mathrel{\vcenter{\hbox{$::$}}}}
+
+\newcommand{\suchthat}{\mcoloncolon}
+\newcommand{\quantify}[3]{% quantifier, binding, predicate
+    \ensuremath{\mathrel{#1}#2 \; \suchthat \; #3}%
+}
+
+% I use hyphens in variable names,
+% so I need to ensure that subtraction is
+% clearly distinguished by the typography
+\newcommand{\subtract}{\,-\,}
+
+\newcommand{\var}[1]{\ensuremath{\texttt{#1}}}
+\newcommand{\V}[1]{\ensuremath{\texttt{\mbox{#1}}}}
+
+\newcommand{\cfg}{CFG}
+
+\newcommand{\de}{\mathrel{::=}}
+\newcommand{\derives}{\Rightarrow}
+\newcommand{\destar}
+    {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
+\newcommand{\deplus}
+    {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
+\newcommand{\derivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
+\newcommand{\derivrg}[2]{\mathrel{\mbox{$\:\stackrel{\!{#1}}%
+        {\Rightarrow\!}\:$}}}
+
+% For the type subscript for powersets
+\newcommand{\setOf}[1]{{{#1}^{\mbox{\normalsize $\ast$}}}}
+
+\newcommand{\set}[1]{{\left\lbrace #1 \right\rbrace} }
+\newcommand{\bigset}[1]{{\bigl\lbrace #1 \bigr\rbrace} }
+\newcommand{\Bigset}[1]{{\Bigl\lbrace #1 \Bigr\rbrace} }
+
+% use internal counter of algorithmicx
+\newcommand{\algnested}{ %
+  \makeatletter\ALG@nested\makeatother %
+}
+
+\newcommand{\algstrut}{\rule{0pt}{.85\baselineskip}}
+
+\newcommand{\myparbox}[2][\algparwidth]{%
+  \parbox[t]{#1}{%
+  % \linespread{1.15}\selectfont
+  \ignorespaces#2\par%
+  }%
+}
+
+\newcommand{\parcomment}[2]{\hspace{\dimexpr \algorithmicindent * #1}$\triangleright$ #2}
+
+% \newcommand{\rawparcomment}[2][\algparwidth]{%
+  % \myparbox[#1]{#2}%
+% }
+% \newcommand{\parcomment}[2][\algparwidth]{%
+  % \myparbox[#1]{$\triangleright$ #2}%
+% }
+% \newcommand{\parcomment}[1]{\hspace{\dimexpr \algorithmicindent - \labelwidth }$\triangleright$
+  % \protect\parbox[t]{\dimexpr \textwidth - (\algorithmicindent - \labelwidth)}{#1}%
+% }
+
+% I want to use 'call' outside of pseudocode
+\newcommand\call[2]{\textproc{#1}\ifthenelse{\equal{#2}{}}{}{(#2)}}%
+
+\newcommand{\mname}[1]{\mbox{\sf #1}}
+% [O]perator [A]pplication
+\newcommand{\Oname}[1]{\mname{#1}}
+% The \mathopen{} and \mathclose{} eliminate unwanted extra space
+\newcommand{\OA}[2]{\ensuremath{%
+    \mathop{\Oname{#1}}\mathopen{}\left(#2\right)\mathclose{}%
+}}
+\newcommand{\VOA}[2]{\OA{#1}{\V{#2}}}
+% [F]unction [A]pplication, replaces \myfn
+\newcommand{\smallrawfn}[2]{\ensuremath{\mathop{#1}(#2)}}
+% The \mathopen{} and \mathclose{} eliminate unwanted extra space
+\newcommand{\rawfn}[2]{\ensuremath{\mathop{#1}\mathopen{}\left(#2\right)\mathclose{}}}
+\newcommand{\Fname}[1]{\V{#1}}
+\newcommand{\FA}[2]{\ensuremath{\rawfn{\mathop{\Fname{#1}}}{#2}}}
+\newcommand{\VFA}[2]{\FA{#1}{\V{#2}}}
+
+\hyphenation{oper-and oper-ands}
+\hyphenation{look-ahead}
+\hyphenation{memo-ization}
+
+% I like to silence underfull hbox messages.
+% This is syntactic sugar for doing that.
+\newenvironment{MYsloppy}[1][3em]{\par\tolerance9999 \emergencystretch#1\relax}{\par}
+% This form allows the resetting of hbadness, which may be necessary to
+% shut up an "underfull" warning.
+\newenvironment{MYsloppyB}[2]{\par\tolerance9999 \emergencystretch#1 \hbadness#2\relax}{\par}
+% This form is for a trick:  Tolerances are evaluated line by line, so a tolerance
+% less than 9999 may produce a better looking paragraph and reduce the "badness".
+\newenvironment{MYsloppyC}[3]{\par\tolerance#3 \emergencystretch#1 \hbadness#2\relax}{\par}
+
+\title
+  [llguidance proof]
+  {Completeness proof for llguidance Earley variant}
+
+\author{Jeffrey Kegler}
+\ifdraft{
+    % legacy draftwatermark options -- update?
+    \SetWatermarkLightness{0}
+    \SetWatermarkText{DRAFT \DTMnow{} DRAFT}
+    \SetWatermarkAngle{0}
+    \SetWatermarkScale{.4}
+    % \SetWatermarkHorCenter{1.5in}
+    \SetWatermarkVerCenter{.5in}
+}{}
+\ifdraft{ \thanks{DRAFT as of \DTMnow} }{}
+\date{\DTMnow.}
+
+\newcommand{\llguidance}{{\tt llguidance}\xspace}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{About this document}
+\label{sec:about-me}
+
+This document contains a proof of completeness for the variant of
+Earley's algorithm in \llguidance.
+It assumes some familiarity with the code in
+\llguidance\cite{llguidance},
+and with the traditional proof of correctness
+for Earley's algorithm.\footnote{%
+	As found, for example,
+	in~\cite[pp. 323-325]{AH2002}.
+	}
+
+\section{Conventions}
+\begin{itemize}
+\item ``Iff'' (or ``iff'') abbreviates
+	``if and only if''.
+\item Ranges are inclusive start,
+	exclusive end, so that, for example,
+		\begin{gather*}
+			\element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
+			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
+		\end{gather*}
+\end{itemize}
+
+\FloatBarrier
+
+{
+\clearpage
+
+% Ragged right, do not hyphenate.
+\RaggedRight
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% Silence current hbox warnings, but allow them if
+% badness increases further
+\hbadness=2000
+
+\begin{thebibliography}{10}
+
+\bibitem{AH1972v1}
+\newblock{Aho, Alfred V., and Jeffrey D. Ullman.}
+\newblock{\em The theory of parsing, translation, and compiling. Vol. 1.}
+\newblock{Prentice-Hall, 1972.}
+
+\bibitem{Kegler2023}
+\newblock{Jeffrey Kegler.}
+\newblock{``Marpa, A practical general parser: the recognizer''.}
+\newblock{\url{https://arxiv.org/abs/1910.08129}.
+   Retrieved 2 December, 2024.}
+
+\bibitem{llguidance}
+\newblock{llguidance team.}
+\newblock{"Low-level guidance parser".}
+\newblock{
+  \url{https://github.com/microsoft/llguidance}.
+  Retrieved 2 December, 2024.}
+
+\end{thebibliography}
+
+} % RaggedRight
+
+% \clearpage
+% \phantomsection
+% \listofalgorithms
+
+\ifdraft{
+    \clearpage
+    \phantomsection
+    \listoftodos
+}{}
+
+\end{document}
