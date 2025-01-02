@@ -215,27 +215,27 @@ It assumes some familiarity with the code in
 \llguidance\cite{llguidance},
 and with the traditional proof of correctness
 for Earley's algorithm.\footnote{%
-	As found, for example,
-	in~\cite[pp. 323-325]{AH1972v1}.
-	}
+    As found, for example,
+    in~\cite[pp. 323-325]{AH1972v1}.
+    }
 
 \section{Conventions}
 \begin{itemize}
 \item ``Iff'' (or ``iff'') abbreviates
-	``if and only if''.
+    ``if and only if''.
 \item Ranges are inclusive start,
-	exclusive end, so that, for example,
-		\begin{gather*}
-			\element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
-			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
-		\end{gather*}
+    exclusive end, so that, for example,
+        \begin{gather*}
+            \element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
+            \element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
+        \end{gather*}
 \end{itemize}
 
 \section{Definitions}
 
-We will consider the grammar 
+We will consider the grammar
 \[
-		\V{g} = \tuple{\V{Syms},\V{T},\V{P},\V{S}},
+        \V{g} = \tuple{\V{Syms},\V{T},\V{P},\V{S}},
 \]
 where \V{Syms} is a set of symbols,
 $\V{T} \subseteq \V{Syms}$ is a set of terminals,
@@ -246,7 +246,7 @@ the start symbol.
 
 We will write an Earley item as
 \[
-		\tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
+        \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
 \]
 where
 $\V{A} \de \alpha \beta$ is a rule in the grammar,
@@ -255,49 +255,58 @@ $\mydot$ indicates the dot location in the rule,
 \V{current} is the location of the dot in the input,
 or dot location.
 
-The fundamental invariant for the \llguidance
+The fundamental invariant\footnote{
+        This fundamental invariant is similar to the traditional
+        one, as found in~\cite[Slide 12/39]{Kallmeyer2018}
+        and~\cite[Theorem 4.9, p. 323]{AH1972v1}
+}
+for the \llguidance
 Earley parser is
 \begin{equation}
-		\label{eq:invariant}
-		\tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
-		\equiv \FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}.
+        \label{eq:invariant}
+        \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
+        \equiv \FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}.
 \end{equation}
 In \eqref{eq:invariant},
 \[
-		\FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}
+        \FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}
 \]
 is defined as
 \begin{equation}
-		\label{eq:def-DI}
-		\begin{gathered}
-		\existQ{\gamma, \delta}{ \\
-		\V{S} \destar \gamma \cat \V{A} \cat \delta \\
-		\land \; \V{gamma} \destar \Velement{w}{0,\V{i}} \\
-		\land \; \V{A} \de \alpha \cat \beta \\
-		\land \; \alpha \destar \Velement{w}{\V{i},\V{j}} \\
-				\land \; ( \V{i} \neq \V{j} \lor \alpha = \epsilon )
-		}
-		\end{gathered}
+        \label{eq:def-DI}
+        \begin{gathered}
+        \existQ{\gamma, \delta}{ \V{S} \destar \gamma \cat \V{A} \cat \delta \\
+        \land \; \V{gamma} \destar \Velement{w}{0,\V{i}} \land \V{A} \de \alpha \cat \beta \\
+        \land \; \alpha \destar \Velement{w}{\V{i},\V{j}} \land ( \V{i} \neq \V{j} \lor \alpha = \epsilon ).
+        }
+        \end{gathered}
 \end{equation}
+\todo{Explicate this equation in text}
+In \eqref{eq:def-DI},
+$\V{i} \neq \V{j} \lor \alpha = \epsilon$
+indicates that we do not create zero length Earley items
+(Earley items where $\V{i}=\V{j}$),
+unless they are predictions (the dot is at the beginning of the RHS,
+so that $\alpha$ is the empty string).
 
 For the purposes of this proof, we will divide the Earley items
 in an Earley row into \textbf{generations}.
 If an Earley item is scanned, that is, if it is
 \[
-		\tuple{\V{A} \de \alpha \V{T} \mydot \beta, \V{origin}, \V{current}},
+        \tuple{\V{A} \de \alpha \V{T} \mydot \beta, \V{origin}, \V{current}},
 \]
 where \V{T} is a terminal,
 then it is in generation 0 in Earley row \V{current}.
 
 If an Earley item is
 \begin{equation}
-		\label{eq:nt-generation}
-		\tuple{\V{A} \de \alpha \V{N} \mydot \beta, \V{origin}, \V{current}},
+        \label{eq:nt-generation}
+        \tuple{\V{A} \de \alpha \V{N} \mydot \beta, \V{origin}, \V{current}},
 \end{equation}
 where \V{N} is a non-terminal,
 and
 \begin{equation}
-		\tuple{\V{A} \de \alpha \mydot \V{N} \beta, \V{origin}, \V{i}}
+        \tuple{\V{A} \de \alpha \mydot \V{N} \beta, \V{origin}, \V{i}}
 \end{equation}
 is in generation $\V{g} \subtract 1$, then
 \eqref{eq:nt-generation} is in generation \V{g}.
@@ -323,6 +332,13 @@ is in generation $\V{g} \subtract 1$, then
 \newblock{Aho, Alfred V., and Jeffrey D. Ullman.}
 \newblock{\em The theory of parsing, translation, and compiling. Vol. 1.}
 \newblock{Prentice-Hall, 1972.}
+
+\bibitem{Kallmeyer2018}
+\newblock{Laura Kallmeyer.}
+\newblock{``Parsing: Earley parsing''.}
+\newblock{Winter 2017/2018, Heinrich Heine Universitaet, Dusseldorf.}
+\newblock{\url{https://user.phil-fak.uni-duesseldorf.de/~kallmeyer/Parsing/earley.pdf}.
+        Retrieved 18 Sep 2024.}
 
 \bibitem{Kegler2023}
 \newblock{Jeffrey Kegler.}
