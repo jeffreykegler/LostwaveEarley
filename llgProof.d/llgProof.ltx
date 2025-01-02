@@ -76,7 +76,8 @@
     \mathopen{}\left[ \V{#2}
     \right]\mathclose{} }}
 
-\newcommand{\tuple}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+% \newcommand{\tuple}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\newcommand{\tuple}[1]{\ensuremath{\mathopen{}\left[#1\right]\mathclose{}}}
 
 \newcommand{\mcolon}{\mathrel:}
 \newcommand{\mcoloncolon}{\mathrel{\vcenter{\hbox{$::$}}}}
@@ -85,6 +86,15 @@
 \newcommand{\quantify}[3]{% quantifier, binding, predicate
     \ensuremath{\mathrel{#1}#2 \; \suchthat \; #3}%
 }
+
+\newcommand{\existUniqQOp}{\mathop{\exists{!}}}
+\newcommand{\existUniqQ}[2]{\quantify{\existUniqQOp}{#1}{#2}}
+% extra {} in existQOP and univQOp to raise to baseline
+\newcommand{\existQOp}{\mathop{\exists{}}}
+\newcommand{\existQ}[2]{\quantify{\existQOp}{#1}{#2}}
+% extra {} in existQOP and univQOp to raise to baseline
+\newcommand{\univQOp}{\mathop{\forall{}\,}}
+\newcommand{\univQ}[2]{\quantify{\univQOp}{#1}{#2}}
 
 % I use hyphens in variable names,
 % so I need to ensure that subtraction is
@@ -206,7 +216,7 @@ It assumes some familiarity with the code in
 and with the traditional proof of correctness
 for Earley's algorithm.\footnote{%
 	As found, for example,
-	in~\cite[pp. 323-325]{AH2002}.
+	in~\cite[pp. 323-325]{AH1972v1}.
 	}
 
 \section{Conventions}
@@ -220,6 +230,78 @@ for Earley's algorithm.\footnote{%
 			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
 		\end{gather*}
 \end{itemize}
+
+\section{Definitions}
+
+We will consider the grammar 
+\[
+		\V{g} = \tuple{\V{Syms},\V{T},\V{P},\V{S}},
+\]
+where \V{Syms} is a set of symbols,
+$\V{T} \subseteq \V{Syms}$ is a set of terminals,
+\V{P} is the set of rules, or productions,
+and $\V{S} \in (\V{Syms} \subtract \V{T})$ is
+the start symbol.
+\V{w} is the input.
+
+We will write an Earley item as
+\[
+		\tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
+\]
+where
+$\V{A} \de \alpha \beta$ is a rule in the grammar,
+$\mydot$ indicates the dot location in the rule,
+\V{origin} is the origin location of the item in the input, and
+\V{current} is the location of the dot in the input,
+or dot location.
+
+The fundamental invariant for the \llguidance
+Earley parser is
+\begin{equation}
+		\label{eq:invariant}
+		\tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
+		\equiv \FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}.
+\end{equation}
+In \eqref{eq:invariant},
+\[
+		\FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}
+\]
+is defined as
+\begin{equation}
+		\label{eq:def-DI}
+		\begin{gathered}
+		\existQ{\gamma, \delta}{ \\
+		\V{S} \destar \gamma \cat \V{A} \cat \delta \\
+		\land \; \V{gamma} \destar \Velement{w}{0,\V{i}} \\
+		\land \; \V{A} \de \alpha \cat \beta \\
+		\land \; \alpha \destar \Velement{w}{\V{i},\V{j}} \\
+				\land \; ( \V{i} \neq \V{j} \lor \alpha = \epsilon )
+		}
+		\end{gathered}
+\end{equation}
+
+For the purposes of this proof, we will divide the Earley items
+in an Earley row into \textbf{generations}.
+If an Earley item is scanned, that is, if it is
+\[
+		\tuple{\V{A} \de \alpha \V{T} \mydot \beta, \V{origin}, \V{current}},
+\]
+where \V{T} is a terminal,
+then it is in generation 0 in Earley row \V{current}.
+
+If an Earley item is
+\begin{equation}
+		\label{eq:nt-generation}
+		\tuple{\V{A} \de \alpha \V{N} \mydot \beta, \V{origin}, \V{current}},
+\end{equation}
+where \V{N} is a non-terminal,
+and
+\begin{equation}
+		\tuple{\V{A} \de \alpha \mydot \V{N} \beta, \V{origin}, \V{i}}
+\end{equation}
+is in generation $\V{g} \subtract 1$, then
+\eqref{eq:nt-generation} is in generation \V{g}.
+
 
 \FloatBarrier
 
