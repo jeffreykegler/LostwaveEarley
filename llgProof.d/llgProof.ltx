@@ -279,7 +279,7 @@ In \eqref{eq:invariant},
 \[
         \FA{DI}{\V{predot},\V{postdot},\V{A},\V{origin},\V{current}}
 \]
-is called a \textbf{derivation instance}, and
+is called a \textbf{derivation instance} (DI), and
 is defined as
 \begin{equation}
         \label{eq:def-DI-1}
@@ -297,8 +297,8 @@ and
                 \implies \;
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \V{predot} \cat \V{postdot} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \cat \V{postdot} \cat \V{unseen}
+                \destar \Velement{w}{0,\V{origin}} \cat \V{predot} \mydot \V{postdot} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen}
                 \end{gathered} \right)
                 }
         \end{gathered}
@@ -310,29 +310,62 @@ indicates that we do not create zero length Earley items
 (Earley items where $\V{origin}=\V{current}$),
 unless they are predictions (the dot is at the beginning of the RHS,
 so that $\V{predot}$ is the empty string).
+Note that dot positions, formally, are only meaningful in Earley items,
+and that when we indicate the dot (or \V{current}) position
+in a DI, it is as an aide to reading only.
+
+A confirmed derivation instance at \V{current}
+can derive another one.
+Without loss of generality, we write the two derivation
+instances as
+\begin{equation}
+        \label{eq:linked-DI-A}
+        \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{originA},\V{current}}
+\end{equation}
+and
+\begin{equation}
+        \label{eq:linked-DI-B}
+        \FA{DI}{\V{predotB},\V{postdotB},\V{B},\V{originB},\V{current}}
+\end{equation}
+where
+\begin{equation}
+        \label{eq:linked-DI-condition}
+        \V{predotA} = \V{antepredotA} \cat \V{B}.
+\end{equation}
+Expanding \eqref{eq:linked-DI-A}, \eqref{eq:linked-DI-B},
+and \eqref{eq:linked-DI-condition},
+we have
+\begin{equation}
+        \label{eq:linked-DIs-1}
+        \begin{gathered}
+        \V{predotA} \in (\V{N} \cup \V{T})^\ast \land \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
+        \land \; \V{predotB} \in (\V{N} \cup \V{T})^\ast \land \V{postdotB} \in (\V{N} \cup \V{T})^\ast \\
+                \land \; (\V{A} \de \V{predotA} \cat \V{postdotA}) \in \V{P} \\
+                \land \; (\V{B} \de \V{rhsB} \in \V{P}
+        \end{gathered}
+\end{equation}
+and
+\todo{Work out conditions wrt predictions, nulled items}
+\begin{equation}
+        \label{eq:linked-DIs-2}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ 
+                ( \V{originA} \neq \V{current} ) \\
+                \implies \;
+                \left( \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{originA}} \cat \V{A} \cat \V{unseen} \\
+                \destar  \Velement{w}{0,\V{originA}} \cat \V{predotA} \mydot \V{postdotA} \cat \V{unseen} \\
+                = \Velement{w}{0,\V{originA}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen}  \\
+                \destar \Velement{w}{0,\V{originB}} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \derives \Velement{w}{0,\V{originB}} \cat \V{rhsB} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen} \\
+                \end{gathered} \right)
+                }
+        \end{gathered}
+\end{equation}
 
 For the purposes of this proof, we will divide the Earley items
 in an Earley row into \textbf{generations}.
-If an Earley item is scanned, that is, if it is
-\[
-        \tuple{\V{A} \de \alpha \V{T} \mydot \beta, \V{origin}, \V{current}},
-\]
-where \V{T} is a terminal,
-then it is in generation 0 in Earley row \V{current}.
-
-If an Earley item is
-\begin{equation}
-        \label{eq:nt-generation}
-        \tuple{\V{A} \de \alpha \V{N} \mydot \beta, \V{origin}, \V{current}},
-\end{equation}
-where \V{N} is a non-terminal,
-and
-\begin{equation}
-        \tuple{\V{A} \de \alpha \mydot \V{N} \beta, \V{origin}, \V{i}}
-\end{equation}
-is in generation $\V{g} \subtract 1$, then
-\eqref{eq:nt-generation} is in generation \V{g}.
-
 
 \FloatBarrier
 
