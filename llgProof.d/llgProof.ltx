@@ -235,12 +235,12 @@ for Earley's algorithm.\footnote{%
 
 We will consider the grammar
 \[
-        \V{g} = \tuple{\V{Syms},\V{T},\V{P},\V{S}},
+        \V{g} = \tuple{\V{N},\V{T},\V{P},\V{S}},
 \]
-where \V{Syms} is a set of symbols,
-$\V{T} \subseteq \V{Syms}$ is a set of terminals,
+where \V{N} (the non-terminals)
+and \V{T} (the terminals) are disjoint sets of symbols.
 \V{P} is the set of rules, or productions,
-and $\V{S} \in (\V{Syms} \subtract \V{T})$ is
+and $\V{S} \in \V{N}$ is
 the start symbol.
 \V{w} is the input.
 
@@ -248,9 +248,15 @@ We will write an Earley item as
 \[
         \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
 \]
-where
-$\V{A} \de \alpha \beta$ is a rule in the grammar,
-$\mydot$ indicates the dot location in the rule,
+where $\alpha$ and $\beta$ are sentential forms,
+\[
+        \alpha \in (\V{N} \cup \V{T}^\ast) \land \beta \in (\V{N} \cup \V{T})^\ast,
+\]
+$\V{A} \de \alpha \cat \beta$ is a rule in the grammar \V{g},
+\[
+        (\V{A} \de \alpha \cat \beta) \in \V{P}
+\]
+a large raised dot ($\mydot$) indicates the dot location in the rule,
 \V{origin} is the origin location of the item in the input, and
 \V{current} is the location of the dot in the input,
 or dot location.
@@ -264,30 +270,46 @@ for the \llguidance
 Earley parser is
 \begin{equation}
         \label{eq:invariant}
-        \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
-        \equiv \FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}.
+        \begin{gathered}
+        \tuple{\V{A} \de \V{predotA} \mydot \V{postdotA}, \V{origin}, \V{current}} \\
+        \equiv \; \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
+        \end{gathered}
 \end{equation}
 In \eqref{eq:invariant},
 \[
-        \FA{DI}{\alpha,\beta,\V{A},\V{origin},\V{current}}
+        \FA{DI}{\V{predot},\V{postdot},\V{A},\V{origin},\V{current}}
 \]
+is called a \textbf{derivation instance}, and
 is defined as
 \begin{equation}
-        \label{eq:def-DI}
+        \label{eq:def-DI-1}
         \begin{gathered}
-        \existQ{\gamma, \delta}{ \V{S} \destar \gamma \cat \V{A} \cat \delta \\
-        \land \; \V{gamma} \destar \Velement{w}{0,\V{i}} \land \V{A} \de \alpha \cat \beta \\
-        \land \; \alpha \destar \Velement{w}{\V{i},\V{j}} \land ( \V{i} \neq \V{j} \lor \alpha = \epsilon ).
-        }
+        \V{predot} \in (\V{N} \cup \V{T})^\ast \land \V{postdot} \in (\V{N} \cup \V{T})^\ast \\
+        \land \; (\V{A} \de \alpha \cat \beta) \in \V{P}
+        \end{gathered}
+\end{equation}
+and
+\begin{equation}
+        \label{eq:def-DI-2}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                ( \V{origin} \neq \V{current} \lor \size{\V{predot}} = 0 ) \\
+                \implies \;
+                \left( \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{origin}} \cat \V{predot} \cat \V{postdot} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \cat \V{postdot} \cat \V{unseen}
+                \end{gathered} \right)
+                }
         \end{gathered}
 \end{equation}
 \todo{Explicate this equation in text}
-In \eqref{eq:def-DI},
-$\V{i} \neq \V{j} \lor \alpha = \epsilon$
+In \eqref{eq:def-DI-2},
+$\V{origin} \neq \V{current} \lor \size{\V{predot}} = 0$
 indicates that we do not create zero length Earley items
-(Earley items where $\V{i}=\V{j}$),
+(Earley items where $\V{origin}=\V{current}$),
 unless they are predictions (the dot is at the beginning of the RHS,
-so that $\alpha$ is the empty string).
+so that $\V{predot}$ is the empty string).
 
 For the purposes of this proof, we will divide the Earley items
 in an Earley row into \textbf{generations}.
