@@ -314,34 +314,36 @@ Note that dot positions, formally, are only meaningful in Earley items,
 and that when we indicate the dot (or \V{current}) position
 in a DI, it is as an aide to reading only.
 
-A confirmed derivation instance at \V{current}
-can derive another one.
-Without loss of generality, we write the two derivation
-instances as
+Two DIs with the same current location
+can form a step instance, or simply \textbf{step}.
+Intuitively, we say that two DIs form a step,
+when one derives the other.
+Where \V{di1} and \V{di2} are derivation instances,
+we overload the derivation operator for sentential forms,
+and write them
+\[
+        \V{di1} \derives \V{di2}.
+\]
+
+Step instances can be
+\textbf{reductive} or \textbf{nulling}.
+A reductive step instance is of the form
 \begin{equation}
-        \label{eq:linked-DI-A}
-        \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{originA},\V{current}}
+        \label{eq:reductive-step}
+\begin{gathered}
+        \FA{DI}{(\V{antepredotA}\cat\V{B}),\V{postdotA},\V{A},\V{originA},\V{current}} \\
+        \derives
+        \FA{DI}{\V{predotB},\epsilon,\V{B},\V{originB},\V{current}}
+\end{gathered}
 \end{equation}
-and
-\begin{equation}
-        \label{eq:linked-DI-B}
-        \FA{DI}{\V{predotB},\V{postdotB},\V{B},\V{originB},\V{current}}
-\end{equation}
-where
-\begin{equation}
-        \label{eq:linked-DI-condition}
-        \V{predotA} = \V{antepredotA} \cat \V{B}.
-\end{equation}
-Expanding \eqref{eq:linked-DI-A}, \eqref{eq:linked-DI-B},
-and \eqref{eq:linked-DI-condition},
-we have
+which expands to
 \begin{equation}
         \label{eq:linked-DIs-1}
         \begin{gathered}
-        \V{predotA} \in (\V{N} \cup \V{T})^\ast \land \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
-        \land \; \V{predotB} \in (\V{N} \cup \V{T})^\ast \land \V{postdotB} \in (\V{N} \cup \V{T})^\ast \\
-                \land \; (\V{A} \de \V{predotA} \cat \V{postdotA}) \in \V{P} \\
-                \land \; (\V{B} \de \V{rhsB} \in \V{P}
+        \V{antepredotA} \in (\V{N} \cup \V{T})^\ast \land \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
+        \land \; \V{predotB} \in (\V{N} \cup \V{T})^\ast \\
+        \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \\
+                \land \; (\V{B} \de \V{predotB}) \in \V{P}
         \end{gathered}
 \end{equation}
 and
@@ -350,12 +352,11 @@ and
         \label{eq:linked-DIs-2}
         \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{
-                ( \V{originA} \neq \V{current} ) \\
+                ( \V{originB} \neq \V{current} ) \\
                 \implies \;
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{originA}} \cat \V{A} \cat \V{unseen} \\
-                \destar  \Velement{w}{0,\V{originA}} \cat \V{predotA} \mydot \V{postdotA} \cat \V{unseen} \\
-                = \Velement{w}{0,\V{originA}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen}  \\
+                \destar \Velement{w}{0,\V{originA}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen}  \\
                 \destar \Velement{w}{0,\V{originB}} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
                 \derives \Velement{w}{0,\V{originB}} \cat \V{rhsB} \mydot \V{postdotA} \cat \V{unseen} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen} \\
