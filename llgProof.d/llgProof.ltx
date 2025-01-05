@@ -168,6 +168,109 @@
 \newcommand{\FA}[2]{\ensuremath{\rawfn{\mathop{\Fname{#1}}}{#2}}}
 \newcommand{\VFA}[2]{\FA{#1}{\V{#2}}}
 
+% * Reference meta tags ("classifying prefixes") use in this document:
+% * From fancyref:
+% Chapter chap:
+% Section sec:
+% Equation eq:
+% Figure fig:
+% Table tab:
+% Enumeration enum:
+% Footnote fn:
+%
+% * Not in fancyref
+% Definition df:
+% Epigraph epi:
+% Theorem th:
+% Lemma lm:
+% Remark rm:
+% Observation obs:
+% Example ex:
+% Page page:
+
+% The "page:" metatag is for labels intended as the target of
+% page references.
+
+% The auto-placement of qed's fails a lot.
+% Semi-manual replacement using \qedhere often fails as well.
+% I went with % 100% manual placement,
+% which in fact is not any more trouble,
+% and which is the only way to guarantee the QED's wind up where I
+% want them.
+
+% Try to gather all the stuff to do with theoremoids here
+% Start off with theorems, then the other theoremoids,
+% mostly alphabetically.
+
+\renewcommand{\qedsymbol}{}
+\newcommand{\myqed}{%
+  \ifmmode\square
+  \else$\square$
+  \fi%
+}
+
+\theoremstyle{definition}
+
+% theoremoids: Th
+
+\newtheorem{theorem}{Theorem}
+\newcommand{\Thref}[2][]{%
+    \genref[#1]{th:#2}{Th}%
+}
+% some day delete \longThref
+\newcommand{\longThref}[2]{%
+  \ifmmode \text{``#1''\Thref{#2}}%
+  \else``#1'' \Thref{#2}%
+  \fi%
+}
+% "full" ref -- always includes page
+\newcommand{\ThFref}[1]{(\textrm{Th}\ref{#1}:\pageref{#1})}
+\newcommand{\thEnd}{\Circle}
+
+% theoremoids: Df
+
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\Dfref}[2][]{%
+    \genref[#1]{df:#2}{Df}%
+}
+% some day delete \longDfref
+\newcommand{\longDfref}[2]{%
+  \ifmmode \text{``#1''\Dfref{#2}}%
+  \else``#1'' \Dfref{#2}%
+  \fi%
+}
+\newcommand{\dfEnd}{\Circle}
+
+% theoremoids: Ex
+
+\newtheorem{example}[theorem]{Example}
+\newcommand{\Exref}[1]{\genref{ex:#1}{Ex}}
+\newcommand{\exEnd}{\Circle}
+
+% theoremoids: Ob
+
+\newtheorem{observation}[theorem]{Observation}
+\newcommand{\Obref}[1]{\genref{obs:#1}{Ob}}
+\newcommand{\obEnd}{\Circle}
+
+% theoremoids: Rm
+
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Rmref}[2][]{\genref[#1]{rm:#2}{Rm}}
+\newcommand{\rmEnd}{\Circle}
+
+% local theoremoids: Lm
+
+\newtheorem{lemma}{Lemma}
+\newcommand{\Lmref}[2][]{\genref[#1]{lm:#2}{Lm}}
+% some day delete \longLmref
+\newcommand{\longLmref}[2]{%
+  \ifmmode \text{``#1''\Lmref{#2}}%
+  \else``#1'' \Lmref{#2}%
+  \fi%
+}
+
+\newcommand{\lmEnd}{\thEnd}
 \hyphenation{oper-and oper-ands}
 \hyphenation{look-ahead}
 \hyphenation{memo-ization}
@@ -390,8 +493,25 @@ and
         \end{gathered}
 \end{equation}
 
-For the purposes of this proof, we will divide confirmed
-in an Earley row into \textbf{generations}.
+We will divide the confirmed DIs at each current location
+into \textbf{generations}.
+Scanned DIs are in generation 0.
+If \V{diAfter} is in generation \V{z} and
+\[ \V{diBefore} \derives \V{diAfter} \]
+is a step instance,
+then
+\V{diBefore} is in generation $\V{z}+1$.
+
+\section{Proofs}
+
+\begin{lemma}
+        \todo{Reduction DI lemma here}
+\end{lemma}
+
+\begin{proof}
+        \todo{Proof of reduction DI lemma here}
+        \myqed
+\end{proof}
 
 \FloatBarrier
 
