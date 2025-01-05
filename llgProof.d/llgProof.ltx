@@ -261,6 +261,26 @@ a large raised dot ($\mydot$) indicates the dot location in the rule,
 \V{current} is the location of the dot in the input,
 or dot location.
 
+In an Earley item
+$\tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}$,
+we call the last symbol in $\alpha$, \element{\alpha}{\lastix{\alpha}},
+the predot symbol.
+When $\size{\alpha} = 0$, there is no predot symbol.
+We say that an Earley item is predicted, or a \textbf{prediction}
+if it has no predot symbol.
+We say that an Earley item is \textbf{confirmed}, or a confirmation,
+if it is not a prediction.
+We say that an Earley item is \textbf{scanned}, or a \textbf{scansion},
+if its predot symbol is a terminal,
+                 $\element{\alpha}{\lastix{\alpha}} \in \V{T}$.
+We say that an Earley item is reduced, or a \textbf{reduction},
+if its predot symbol is a non-terminal,
+$\element{\alpha}{\lastix{\alpha}} \in \V{N}$.
+We say that an Earley item is a \textbf{nullable reduction}
+if it is a reduction whose predot symbol is nullable.
+We say that an Earley item is a \textbf{non-nullable reduction}
+if it is a reduction whose predot symbol is non-nullable.
+
 The fundamental invariant\footnote{
         This fundamental invariant is similar to the traditional
         one, as found in~\cite[Slide 12/39]{Kallmeyer2018}
@@ -314,6 +334,11 @@ Note that dot positions, formally, are only meaningful in Earley items,
 and that when we indicate the dot (or \V{current}) position
 in a DI, it is as an aide to reading only.
 
+A DIs predot type is that of its equivalent Earley item.
+Thus a DI is scanned iff its correspoding Earley item is a scansion,
+a DI is a prediction iff its correspoding Earley item is a prediction,
+etc.
+
 Two DIs with the same current location
 can form a step instance, or simply \textbf{step}.
 Intuitively, we say that two DIs form a step,
@@ -365,7 +390,7 @@ and
         \end{gathered}
 \end{equation}
 
-For the purposes of this proof, we will divide the Earley items
+For the purposes of this proof, we will divide confirmed
 in an Earley row into \textbf{generations}.
 
 \FloatBarrier
