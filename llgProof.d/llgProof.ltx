@@ -9,6 +9,7 @@
 \usepackage{needspace}
 
 \usepackage{amssymb}
+\usepackage{wasysym} % Used for \Circle
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{xspace}
@@ -269,8 +270,12 @@
   \else``#1'' \Lmref{#2}%
   \fi%
 }
-
 \newcommand{\lmEnd}{\thEnd}
+
+\newcommand{\naturals}{\ensuremath{\mathbb{N}}\xspace}
+\newcommand{\countables}{\ensuremath{\mathbb{CNT}}\xspace}
+\newcommand{\integers}{\ensuremath{\mathbb{Z}}\xspace}
+
 \hyphenation{oper-and oper-ands}
 \hyphenation{look-ahead}
 \hyphenation{memo-ization}
@@ -505,6 +510,33 @@ then
 \section{Proofs}
 
 \begin{lemma}
+Given a derivation contains a DI
+\[
+        \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}},
+\]
+        where some string derived from \V{B} contains a terminal,
+\[
+        \existQ{\V{x}\in\V{T},
+        \alpha\in(\V{N}\cup\V{T})^\ast,
+        \beta\in(\V{N}\cup\V{T})^\ast}{
+                \V{B} \derives \alpha \cat \V{x} \cat \beta
+        },
+\]
+then the derivation also contains a DI
+        \[
+\FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
+\]
+        for some \V{rhs} such that $\V{B} \de \V{rhs}$
+        and some $\V{originB} < \V{current}$.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \todo{Proof of reduction to completion lemma here}
+        \myqed
+\end{proof}
+
+\begin{lemma}
         Let \V{diRed} be a reductive DI in generation $\V{g}+1$ of row \V{current}.
         If rows 0 through $\V{current} \subtract 1$ are complete,
         and generations
@@ -512,6 +544,7 @@ then
         then \llguidance adds the Earley item corresponding to
         \V{diRed} to its Earley table.
         \todo{Reduction DI lemma here}
+        \lmEnd
 \end{lemma}
 
 \begin{proof}
