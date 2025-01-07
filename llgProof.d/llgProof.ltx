@@ -519,6 +519,7 @@ where
 \begin{gather}
         \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
         \land \; \V{B} \in \V{N}, \\
+        \label{eq:rt-di-ass-4}
         \begin{gathered}
         \text{and where some string derived from the instance of \V{B}} \\
         \text{specified in \eqref{eq:rt-di} contains a terminal.}
@@ -539,10 +540,10 @@ Then \V{drv} also contains a DI
         \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast \\
         \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
         \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \text{, and} \\
+        \label{eq:rt-di-pr-24}
         \left( \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
-                ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \\
-                \implies \;
+                ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
@@ -551,6 +552,28 @@ Then \V{drv} also contains a DI
                 }
         \end{gathered} \right)
 \end{gather}
+Incorporating \eqref{eq:rt-di-ass-4} into
+\eqref{eq:rt-di-pr-24}, we have
+\begin{gather}
+        \alpha \in (\V{N} \cup \V{T})^\ast \\
+        \land \; \beta \in (\V{N} \cup \V{T})^\ast \\
+        \land \; \V{x} \in \V{T} \text{, and} \\
+        \left( \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
+                \left( \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                        \begin{gathered}
+                        \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \alpha \cat \V{x} \cat \beta \mydot \\
+                                \V{postdotA} \cat \V{unseen}
+                        \end{gathered} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
+                \end{gathered} \right)
+                }
+        \end{gathered} \right)
+\end{gather}
+
         \todo{Finish proof of reduction to completion lemma here}
         \myqed
 \end{proof}
