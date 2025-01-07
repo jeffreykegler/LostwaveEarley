@@ -413,7 +413,7 @@ is defined as
         \label{eq:def-DI-1}
         \begin{gathered}
         \V{predot} \in (\V{N} \cup \V{T})^\ast \land \V{postdot} \in (\V{N} \cup \V{T})^\ast \\
-        \land \; (\V{A} \de \alpha \cat \beta) \in \V{P}
+                \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}
         \end{gathered}
 \end{equation}
 and
@@ -510,7 +510,7 @@ then
 \section{Proofs}
 
 \begin{lemma}[Reduction tributary]
-Consider a derivation contains a DI
+        Consider a derivation \V{drv} that contains a DI
 \begin{equation}
         \label{eq:rt-di}
         \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}},
@@ -518,17 +518,13 @@ Consider a derivation contains a DI
 where
 \begin{gather}
         \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
-        \\V{B} \in \V{N},
+        \land \; \V{B} \in \V{N}, \\
+        \begin{gathered}
+        \text{and where some string derived from the instance of \V{B}} \\
+        \text{specified in \eqref{eq:rt-di} contains a terminal.}
+        \end{gathered}
 \end{gather}
-        and where some string derived from \V{B} contains a terminal,
-\[
-        \existQ{\V{x}\in\V{T},
-        \alpha\in(\V{N}\cup\V{T})^\ast,
-        \beta\in(\V{N}\cup\V{T})^\ast}{
-                \V{B} \deplus \alpha \cat \V{x} \cat \beta
-        }.
-\]
-Then the derivation also contains a DI
+Then \V{drv} also contains a DI
         \[
 \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
@@ -542,15 +538,15 @@ Then the derivation also contains a DI
 \begin{gather}
         \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast \\
         \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
-        \land \; (\V{A} \de \alpha \cat \beta) \in \V{P} \text{, and} \\
+        \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \text{, and} \\
         \left( \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
                 ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \\
                 \implies \;
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdot} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen}
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
                 \end{gathered} \right)
                 }
         \end{gathered} \right)
