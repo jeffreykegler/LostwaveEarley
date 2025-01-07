@@ -509,20 +509,26 @@ then
 
 \section{Proofs}
 
-\begin{lemma}
-Given a derivation contains a DI
-\[
+\begin{lemma}[Reduction tributary]
+Consider a derivation contains a DI
+\begin{equation}
+        \label{eq:rt-di}
         \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}},
-\]
-        where some string derived from \V{B} contains a terminal,
+\end{equation}
+where
+\begin{gather}
+        \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
+        \\V{B} \in \V{N},
+\end{gather}
+        and where some string derived from \V{B} contains a terminal,
 \[
         \existQ{\V{x}\in\V{T},
         \alpha\in(\V{N}\cup\V{T})^\ast,
         \beta\in(\V{N}\cup\V{T})^\ast}{
-                \V{B} \derives \alpha \cat \V{x} \cat \beta
-        },
+                \V{B} \deplus \alpha \cat \V{x} \cat \beta
+        }.
 \]
-then the derivation also contains a DI
+Then the derivation also contains a DI
         \[
 \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
@@ -532,7 +538,24 @@ then the derivation also contains a DI
 \end{lemma}
 
 \begin{proof}
-        \todo{Proof of reduction to completion lemma here}
+        We can expand the DI \ref{eq:rt-di} to
+\begin{gather}
+        \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast \\
+        \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
+        \land \; (\V{A} \de \alpha \cat \beta) \in \V{P} \text{, and} \\
+        \left( \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \\
+                \implies \;
+                \left( \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdot} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen}
+                \end{gathered} \right)
+                }
+        \end{gathered} \right)
+\end{gather}
+        \todo{Finish proof of reduction to completion lemma here}
         \myqed
 \end{proof}
 
