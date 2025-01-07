@@ -518,20 +518,17 @@ then
 where
 \begin{gather}
         \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
-        \land \; \V{B} \in \V{N}, \\
+        \V{B} \de \V{rhs} \in \V{P}, \\
         \label{eq:rt-di-ass-4}
-        \begin{gathered}
-        \text{and where some string derived from the instance of \V{B}} \\
-        \text{specified in \eqref{eq:rt-di} contains a terminal.}
-        \end{gathered}
+        \V{B} \destar \Velement{w}{\V{originB},\V{current}}
+            \text{ is in \V{drv}, and} \\
+        \V{originB} < \V{current}.
 \end{gather}
-Then \V{drv} also contains a DI
-        \[
-\FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
+Then \V{drv} contains the DI
+\[
+        \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}.
+        \quad \lmEnd
 \]
-        for some \V{rhs} such that $\V{B} \de \V{rhs}$
-        and some $\V{originB} < \V{current}$.
-        \lmEnd
 \end{lemma}
 
 \begin{proof}
@@ -558,6 +555,7 @@ Incorporating \eqref{eq:rt-di-ass-4} into
         \alpha \in (\V{N} \cup \V{T})^\ast \\
         \land \; \beta \in (\V{N} \cup \V{T})^\ast \\
         \land \; \V{x} \in \V{T} \text{, and} \\
+        \label{eq:rt-di-pr-44}
         \left( \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
                 ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
@@ -573,6 +571,65 @@ Incorporating \eqref{eq:rt-di-ass-4} into
                 }
         \end{gathered} \right)
 \end{gather}
+We note in one of the derivation steps of
+        \eqref{eq:rt-di-pr-44},
+\[ \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \alpha \cat \V{x} \cat \beta \mydot
+                                \V{postdotA} \cat \V{unseen},
+\]
+that there must be terminal $\V{x} = \VVelement{w}{j}$
+where $\V{origin} \le \V{j} < \V{current}$,
+so that
+\begin{equation}
+\label{eq:rt-di-pr-46},
+    \V{origin} \neq \V{current}.
+\end{equation}
+Using \eqref{eq:rt-di-pr-46},
+        we may simplify
+\eqref{eq:rt-di-pr-44}
+to
+\begin{equation}
+        \label{eq:rt-di-pr-64}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                        \begin{gathered}
+                        \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \alpha \cat \V{x} \cat \beta \mydot \\
+                                \V{postdotA} \cat \V{unseen}
+                        \end{gathered} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
+                }
+        \end{gathered}
+\end{equation}
+There is an \V{originB} such that in the derivation of
+        \eqref{eq:rt-di-pr-64},
+        we have
+\begin{equation}
+        \label{eq:rt-di-pr-69}
+\V{antepredotA} \destar \VVelement{w}{V{origin},\V{originB}}
+\end{equation}
+        Interpolating \eqref{eq:rt-di-pr-69}
+        into
+        \eqref{eq:rt-di-pr-64},
+        we arrive at
+\begin{equation}
+        \label{eq:rt-di-pr-74}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{originB}} \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                        \begin{gathered}
+                        \deplus \Velement{w}{0,\V{originB}} \cat \alpha \cat \V{x} \cat \beta \mydot \\
+                                \V{postdotA} \cat \V{unseen}
+                        \end{gathered} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
+                }
+        \end{gathered}
+\end{equation}
 
         \todo{Finish proof of reduction to completion lemma here}
         \myqed
