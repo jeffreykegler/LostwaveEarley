@@ -425,13 +425,13 @@ and
 \begin{equation}
         \label{eq:def-DI-2}
         \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
                 ( \V{origin} < \V{current} \lor \size{\V{predot}} = 0 ) \\
                 \implies \;
                 \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \V{predot} \mydot \V{postdot} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+                \destar \Velement{w}{0,\V{origin}} \cat \V{predot} \mydot \V{postdot} \cat \V{unseen2} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen2}
                 \end{gathered} \right)
                 }
         \end{gathered}
@@ -489,7 +489,7 @@ and
 \begin{equation}
         \label{eq:linked-DIs-2}
         \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{
                 ( \V{originB} < \V{current} ) \\
                 \implies \;
                 \left( \begin{gathered}
@@ -514,28 +514,43 @@ then
 
 \section{Proofs}
 
-\begin{lemma}[Reduction tributary]
-        Consider a derivation \V{drv} that contains a DI
+\begin{definition}[Reduction tributary]
+        \label{df:rt}
+        Let \V{drv} be a derivation \V{drv} that contains a DI
 \begin{equation}
-        \label{eq:rt-di}
-        \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}},
+        \label{eq:df-rt-di}
+        \V{conf} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}},
 \end{equation}
 where
 \begin{gather}
         \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
-        \label{eq:rt-di-ass-3}
+        \label{eq:df-rt-di-ass-3}
         \V{B} \de \V{rhs} \in \V{P}, \\
-        \label{eq:rt-di-ass-4}
+        \label{eq:df-rt-di-ass-4}
         \V{B} \destar \Velement{w}{\V{originB},\V{current}}
             \text{ is in \V{drv}, and} \\
-        \label{eq:rt-di-ass-5}
+        \label{eq:df-rt-di-ass-5}
         \V{originB} < \V{current}.
 \end{gather}
-Then \V{drv} contains the DI
+Then the DI
 \[
-        \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}.
-        \quad \lmEnd
+        \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
+        in \V{drv} is called the \textbf{tributary} of
+        \V{conf},
+        and \V{conf} is called the \textbf{confluence}
+        of \textbf{tributary}.
+        \todo{Clean this up}
+        \dfEnd
+\end{definition}
+
+\begin{lemma}[Reduction tributary]
+        \label{lm:rt}
+        \todo{Clean this up}
+        \[ \label{eq:rt-di} \text{todo} \]
+        Every confluence DI as defined
+        in~\eqref{eq:rt-di}
+        on page~\pageref{df:rt} has a tributary.  \lmEnd
 \end{lemma}
 
 \begin{proof}
@@ -546,31 +561,31 @@ Then \V{drv} contains the DI
         \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \text{, and} \\
         \label{eq:rt-di-pr-24}
         \left( \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
                 ( \V{origin} < \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
                 \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}
                 \end{gathered} \right)
                 }
         \end{gathered} \right)
 \end{gather}
-Incorporating \eqref{eq:rt-di-ass-4} into
+Incorporating \eqref{eq:df-rt-di-ass-4} into
 \eqref{eq:rt-di-pr-24}, we have
 \begin{gather}
         \label{eq:rt-di-pr-44}
         \left( \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
                 ( \V{origin} < \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
                 \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
                         \begin{gathered}
                                 \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                                \V{postdotA} \cat \V{unseen}
+                                \V{postdotA} \cat \V{unseen2}
                         \end{gathered} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}
                 \end{gathered} \right)
                 }
         \end{gathered} \right)
@@ -580,11 +595,11 @@ We note that one of the derivation steps is
         \[
                 \begin{gathered}
          \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                                \V{postdotA} \cat \V{unseen},
+                                \V{postdotA} \cat \V{unseen2},
                 \end{gathered}
 \]
 so that $\V{origin} \le \V{originB}$
-and since from \eqref{eq:rt-di-ass-5} we know
+and since from \eqref{eq:df-rt-di-ass-5} we know
 $\V{originB} < \V{current}$
 we have $\V{origin} \le \V{originB} < \V{current}$ or
 \begin{equation}
@@ -598,36 +613,36 @@ to
 \begin{equation}
         \label{eq:rt-di-pr-64}
         \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
                         \begin{gathered}
                         \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                                \V{postdotA} \cat \V{unseen}
+                                \V{postdotA} \cat \V{unseen2}
                         \end{gathered} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}.
                 \end{gathered}
                 }
         \end{gathered}
 \end{equation}
 Interpolating
-\eqref{eq:rt-di-ass-3},
+\eqref{eq:df-rt-di-ass-3},
 one of our assumptions for the theorem,
 we get to
 \begin{equation}
         \label{eq:rt-di-pr-68}
         \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                        \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen} \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
+                        \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen2} \\
                         \begin{gathered}
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                                \V{postdotA} \cat \V{unseen}
+                                \V{postdotA} \cat \V{unseen2}
                         \end{gathered} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}.
                 \end{gathered}
                 }
         \end{gathered}
@@ -636,12 +651,12 @@ and removing a step we no longer need results in
 \begin{equation}
         \label{eq:rt-di-pr-72}
         \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+                \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
+                \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen2} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}.
                 \end{gathered}
                 }
         \end{gathered}
