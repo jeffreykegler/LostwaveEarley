@@ -523,6 +523,7 @@ then
 where
 \begin{gather}
         \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
+        \label{eq:rt-di-ass-3}
         \V{B} \de \V{rhs} \in \V{P}, \\
         \label{eq:rt-di-ass-4}
         \V{B} \destar \Velement{w}{\V{originB},\V{current}}
@@ -605,6 +606,41 @@ to
                         \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
                                 \V{postdotA} \cat \V{unseen}
                         \end{gathered} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
+                }
+        \end{gathered}
+\end{equation}
+Interpolating
+\eqref{eq:rt-di-ass-3},
+one of our assumptions for the theorem,
+we get to
+\begin{equation}
+        \label{eq:rt-di-pr-68}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                        \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen} \\
+                        \begin{gathered}
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
+                                \V{postdotA} \cat \V{unseen}
+                        \end{gathered} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
+                }
+        \end{gathered}
+\end{equation}
+and removing a step we no longer need results in
+\begin{equation}
+        \label{eq:rt-di-pr-72}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
+                \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
                 \end{gathered}
                 }
