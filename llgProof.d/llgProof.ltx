@@ -527,6 +527,7 @@ where
         \label{eq:rt-di-ass-4}
         \V{B} \destar \Velement{w}{\V{originB},\V{current}}
             \text{ is in \V{drv}, and} \\
+        \label{eq:rt-di-ass-5}
         \V{originB} < \V{current}.
 \end{gather}
 Then \V{drv} contains the DI
@@ -557,9 +558,6 @@ Then \V{drv} contains the DI
 Incorporating \eqref{eq:rt-di-ass-4} into
 \eqref{eq:rt-di-pr-24}, we have
 \begin{gather}
-        \alpha \in (\V{N} \cup \V{T})^\ast \\
-        \land \; \beta \in (\V{N} \cup \V{T})^\ast \\
-        \land \; \V{x} \in \V{T} \text{, and} \\
         \label{eq:rt-di-pr-44}
         \left( \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
@@ -568,7 +566,7 @@ Incorporating \eqref{eq:rt-di-ass-4} into
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
                         \begin{gathered}
-                        \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \alpha \cat \V{x} \cat \beta \mydot \\
+                                \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \Velement{w}{\V{originB},\V{current}} \mydot \\
                                 \V{postdotA} \cat \V{unseen}
                         \end{gathered} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
@@ -576,16 +574,20 @@ Incorporating \eqref{eq:rt-di-ass-4} into
                 }
         \end{gathered} \right)
 \end{gather}
-We note in one of the derivation steps of
+We note that one of the derivation steps is
         \eqref{eq:rt-di-pr-44},
-\[ \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \alpha \cat \V{x} \cat \beta \mydot
+        \[
+                \begin{gathered}
+         \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
                                 \V{postdotA} \cat \V{unseen},
+                \end{gathered}
 \]
-that there must be terminal $\V{x} = \VVelement{w}{j}$
-where $\V{origin} \le \V{j} < \V{current}$,
-so that
+so that $\V{origin} \le \V{originB}$
+and since from \eqref{eq:rt-di-ass-5} we know
+$\V{originB} < \V{current}$
+we have $\V{origin} \le \V{originB} < \V{current}$ or
 \begin{equation}
-\label{eq:rt-di-pr-46},
+\label{eq:rt-di-pr-46}
     \V{origin} < \V{current}.
 \end{equation}
 Using \eqref{eq:rt-di-pr-46},
@@ -600,34 +602,7 @@ to
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
                         \begin{gathered}
-                        \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \alpha \cat \V{x} \cat \beta \mydot \\
-                                \V{postdotA} \cat \V{unseen}
-                        \end{gathered} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
-                \end{gathered}
-                }
-        \end{gathered}
-\end{equation}
-There is an \V{originB} such that in the derivation of
-        \eqref{eq:rt-di-pr-64},
-        we have
-\begin{equation}
-        \label{eq:rt-di-pr-69}
-\V{antepredotA} \destar \VVelement{w}{V{origin},\V{originB}}
-\end{equation}
-        Interpolating \eqref{eq:rt-di-pr-69}
-        into
-        \eqref{eq:rt-di-pr-64},
-        we arrive at
-\begin{equation}
-        \label{eq:rt-di-pr-74}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
-                \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{originB}} \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                        \begin{gathered}
-                        \deplus \Velement{w}{0,\V{originB}} \cat \alpha \cat \V{x} \cat \beta \mydot \\
+                        \deplus \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
                                 \V{postdotA} \cat \V{unseen}
                         \end{gathered} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}.
