@@ -516,41 +516,36 @@ then
 
 \begin{definition}[Reduction tributary]
         \label{df:rt}
-        Let \V{drv} be a derivation \V{drv} that contains a DI
+        A \textbf{tangible reduction} is a DI of the form
 \begin{equation}
         \label{eq:df-rt-di}
-        \V{conf} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}},
-\end{equation}
-where
-\begin{gather}
-        \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
-        \label{eq:df-rt-di-ass-3}
+        \begin{gathered}
+        \V{conf} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
+        \text{where } \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
         \V{B} \de \V{rhs} \in \V{P}, \\
-        \label{eq:df-rt-di-ass-4}
         \V{B} \destar \Velement{w}{\V{originB},\V{current}}
             \text{ is in \V{drv}, and} \\
-        \label{eq:df-rt-di-ass-5}
         \V{originB} < \V{current}.
-\end{gather}
-Then the DI
+        \end{gathered}
+\end{equation}
+A DI
 \[
-        \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
+        \V{inf} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
-        in \V{drv} is called the \textbf{tributary} of
+        in \V{drv} is called a \textbf{tributary} of
         \V{conf},
         and \V{conf} is called the \textbf{confluence}
-        of \textbf{tributary}.
-        \todo{Clean this up}
+        of \V{inf}.
+        \todo{Better term for confluence}
+        \todo{Deal with bad references}
         \dfEnd
 \end{definition}
 
 \begin{lemma}[Reduction tributary]
         \label{lm:rt}
-        \todo{Clean this up}
         \[ \label{eq:rt-di} \text{todo} \]
-        Every confluence DI as defined
-        in~\eqref{eq:rt-di}
-        on page~\pageref{df:rt} has a tributary.  \lmEnd
+        Every tangible reduction DI (Definition~\ref{df:rt}
+        on page~\pageref{df:rt}) has a tributary.  \lmEnd
 \end{lemma}
 
 \begin{proof}
