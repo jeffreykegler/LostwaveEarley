@@ -347,10 +347,15 @@ We will consider the grammar
 \]
 where \V{N} (the non-terminals)
 and \V{T} (the terminals) are disjoint sets of symbols.
-\V{P} is the set of rules, or productions,
-and $\V{S} \in \V{N}$ is
+$\V{S} \in \V{N}$ is
 the start symbol.
-\V{w} is the input.
+\V{P} is the set of rules, or productions.
+The rules are of the form
+$\V{A} \de \V{rhs}$,
+where $\V{A} \in \V{N}$
+and
+$\V{rhs} \in (\V{N}\cup\V{T})^\ast$.
+\V{w}~is the input.
 
 We will write an Earley item as
 \[
@@ -360,11 +365,11 @@ where $\alpha$ and $\beta$ are sentential forms,
 \[
         \alpha \in (\V{N} \cup \V{T}^\ast) \land \beta \in (\V{N} \cup \V{T})^\ast,
 \]
-$\V{A} \de \alpha \cat \beta$ is a rule in the grammar \V{g},
+and $\V{A} \de \alpha \cat \beta$ is a rule in the grammar \V{g},
 \[
-        (\V{A} \de \alpha \cat \beta) \in \V{P}
+        (\V{A} \de \alpha \cat \beta) \in \V{P}.
 \]
-a large raised dot ($\mydot$) indicates the dot location in the rule,
+A large raised dot ($\mydot$) indicates the dot location in the rule.
 \V{origin} is the origin location of the item in the input, and
 \V{current} is the location of the dot in the input,
 or dot location.
