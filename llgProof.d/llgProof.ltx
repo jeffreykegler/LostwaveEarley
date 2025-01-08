@@ -426,7 +426,7 @@ and
         \label{eq:def-DI-2}
         \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
-                ( \V{origin} \neq \V{current} \lor \size{\V{predot}} = 0 ) \\
+                ( \V{origin} < \V{current} \lor \size{\V{predot}} = 0 ) \\
                 \implies \;
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
@@ -438,7 +438,7 @@ and
 \end{equation}
 \todo{Explicate this equation in text}
 In \eqref{eq:def-DI-2},
-$\V{origin} \neq \V{current} \lor \size{\V{predot}} = 0$
+$\V{origin} < \V{current} \lor \size{\V{predot}} = 0$
 indicates that we do not create zero length Earley items
 (Earley items where $\V{origin}=\V{current}$),
 unless they are predictions (the dot is at the beginning of the RHS,
@@ -490,7 +490,7 @@ and
         \label{eq:linked-DIs-2}
         \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{
-                ( \V{originB} \neq \V{current} ) \\
+                ( \V{originB} < \V{current} ) \\
                 \implies \;
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{originA}} \cat \V{A} \cat \V{unseen} \\
@@ -545,7 +545,7 @@ Then \V{drv} contains the DI
         \label{eq:rt-di-pr-24}
         \left( \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
-                ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
+                ( \V{origin} < \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
@@ -563,7 +563,7 @@ Incorporating \eqref{eq:rt-di-ass-4} into
         \label{eq:rt-di-pr-44}
         \left( \begin{gathered}
                 \existQ{ \V{unseen} \in \V{T}^\ast }{ \\
-                ( \V{origin} \neq \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
+                ( \V{origin} < \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
@@ -586,7 +586,7 @@ where $\V{origin} \le \V{j} < \V{current}$,
 so that
 \begin{equation}
 \label{eq:rt-di-pr-46},
-    \V{origin} \neq \V{current}.
+    \V{origin} < \V{current}.
 \end{equation}
 Using \eqref{eq:rt-di-pr-46},
         we may simplify
