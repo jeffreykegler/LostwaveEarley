@@ -514,9 +514,20 @@ then
 
 \section{Proofs}
 
-\begin{definition}[Reduction tributary]
+\begin{definition}[Reduction DI]
+        \label{df:red-di}
+        A \textbf{reduction DI} is a DI whose predot
+        symbol is a non-terminal. \dfEnd
+\end{definition}
+
+\begin{definition}[Reduction tributary DI]
         \label{df:rt}
-        A \textbf{tangible reduction} is a DI of the form
+        A \textbf{tangible reduction} in a derivation \V{drv}
+        is a reduction DI whose predot symbol derives in \V{drv}
+        at least one terminal. \dfEnd
+\end{definition}
+
+\todo{Use this equation somewhere?}
 \begin{equation}
         \label{eq:df-rt-di}
         \begin{gathered}
@@ -528,15 +539,17 @@ then
         \V{originB} < \V{current}.
         \end{gathered}
 \end{equation}
+
+\begin{definition}
 A DI
 \[
         \V{inf} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
         in \V{drv} is called a \textbf{tributary} of
         \V{conf},
-        and \V{conf} is called the \textbf{confluence}
+        and \V{down} is called the \textbf{downstream channel}
+        (or simply \V{downstream})
         of \V{inf}.
-        \todo{Better term for confluence}
         \todo{Deal with bad references}
         \dfEnd
 \end{definition}
