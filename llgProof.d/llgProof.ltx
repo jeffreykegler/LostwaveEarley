@@ -482,24 +482,40 @@ The DI \eqref{eq:invariant-di} is said to
         \todo{Clean this up}
         Suppose, without loss of generality, that
 \begin{equation}
-        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
+        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
 \end{equation}
 is a tangible reduction DI
         where
-\[
+\begin{gather*}
         \V{B} \de \V{rhs} \in \V{P}
         \land \; \V{B} \deplus \Velement{w}{\V{originB},\V{current}}.
-\]
+\end{gather*}
 Then we say that
 a DI of the form
 \[
-        \V{inf} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}},
+        \V{tributary} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
         is a \textbf{tributary} of
-        \V{down},
-        and we say that \V{down} is the \textbf{downstream channel}
-        (or simply \V{downstream})
-        of \V{inf}.
+        \V{down}.
+Then we say that
+a DI of the form
+\begin{equation*}
+        \V{mainstem} =
+        \FA{DI}{
+        \begin{gathered}
+        \; \V{antepredotA}, \; \V{B}\cat\V{postdotA}, \; \\
+                \V{A},\; \V{origin},\; \V{originB}
+        \end{gathered}
+}
+\end{equation*}
+        is a \textbf{mainstem} of
+        \V{down}.
+        We say that \V{down} is the \textbf{downstream channel}
+        (or simply \textbf{downstream})
+        of \V{tributary}.
+        We also say that \V{down} is the \textbf{downstream channel}
+        (or simply \textbf{downstream})
+        of \V{mainstem}.
         \dfEnd
 \end{definition}
 
