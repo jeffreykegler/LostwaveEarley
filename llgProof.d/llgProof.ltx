@@ -406,14 +406,14 @@ Earley parser is
         \begin{gathered}
         \tuple{\V{A} \de \V{predotA} \mydot \V{postdotA}, \V{origin}, \V{current}}
                 \text{ in \V{Rows}} \\
-                \equiv \; \FA{DI}{\V{drv},\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
+                \equiv \; \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
         \end{gathered}
 \end{equation} \text{ in \V{Rows}}
 In \eqref{eq:invariant},
 \[
         \FA{DI}{\V{predot},\V{postdot},\V{A},\V{origin},\V{current}}
 \]
-is called a \textbf{derivation instance} (DI) of the derviation \V{drv},
+is called a \textbf{derivation instance} (DI)
 and is defined as
 \begin{equation}
         \label{eq:def-DI-1}
@@ -523,8 +523,8 @@ then
 
 \begin{definition}[Reduction tributary DI]
         \label{df:rt}
-        A \textbf{tangible reduction} in a derivation \V{drv}
-        is a reduction DI whose predot symbol derives in \V{drv}
+        A \textbf{tangible reduction}
+        is a reduction DI whose predot symbol derives
         at least one terminal. \dfEnd
 \end{definition}
 
@@ -534,7 +534,7 @@ A DI
 \[
         \V{inf} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
-        in \V{drv} is called a \textbf{tributary} of
+        is called a \textbf{tributary} of
         \V{conf},
         and \V{down} is called the \textbf{downstream channel}
         (or simply \V{downstream})
@@ -553,22 +553,20 @@ A DI
 \end{lemma}
 
 \begin{proof}
-        We assumed for the lemma that we have a tangible reduction DI
-        in a derivation \V{drv}.
+        We assumed for the lemma that we have a tangible reduction DI.
         Without loss of generality, let this be
 \begin{equation}
         \label{eq:df-rt-di}
         \begin{gathered}
-        \V{conf} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
+        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
         \text{where } \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
         \V{B} \de \V{rhs} \in \V{P}, \\
-        \V{B} \destar \Velement{w}{\V{originB},\V{current}}
-            \text{ is in \V{drv}, and} \\
+        \V{B} \destar \Velement{w}{\V{originB},\V{current}} \text{ and} \\
         \V{originB} < \V{current}.
         \end{gathered}
 \end{equation}
 
-        We can expand the DI \ref{eq:rt-di} to
+        We can expand the DI \V{down} in \ref{eq:df-rt-di} to
 \begin{gather}
         \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast \\
         \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
