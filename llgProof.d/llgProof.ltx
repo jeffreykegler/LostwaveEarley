@@ -575,6 +575,7 @@ where
 \begin{gather}
         \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast \\
         \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
+        \label{eq:rt-di-pr-22}
         \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \text{, and} \\
         \label{eq:rt-di-pr-24}
         \left( \begin{gathered}
@@ -716,6 +717,11 @@ and eliminating unnecessary steps, we arrive at
                 }
         \end{gathered}
 \end{equation}
+We next switch the existential variables,
+by setting
+\V{seen} to $\V{postdotA} \cat \V{unseen2}$,
+in order to eliminate all references to the non-terminal \V{A},
+and the rule with \V{A} on its LHS \eqref{eq:rt-di-pr-22}:
 
         \todo{Finish proof of reduction to completion lemma here}
         \myqed
