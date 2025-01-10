@@ -478,7 +478,7 @@ The DI \eqref{eq:invariant-di} is said to
 \end{definition}
 
 \begin{definition}
-\label{df:tributary}
+\label{df:tangible-inflows}
         \todo{Clean this up}
         Suppose, without loss of generality, that
 \begin{equation}
@@ -523,6 +523,37 @@ a DI of the form
 \end{itemize}
 \end{definition}
 
+\begin{definition}
+\label{df:intangible-inflows}
+        \todo{Clean this up}
+        Suppose, without loss of generality, that
+\begin{equation}
+        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
+\end{equation}
+is an intangible reduction DI.
+Then we say that
+\begin{itemize}
+\item
+a DI of the form
+\begin{equation*}
+        \V{mainstem} =
+        \FA{DI}{
+        \begin{gathered}
+        \; \V{antepredotA}, \; \V{B}\cat\V{postdotA}, \; \\
+                \V{A},\; \V{origin},\; \V{current}
+        \end{gathered}
+}
+\end{equation*}
+        is a \textbf{mainstem} of
+        \V{down}:
+\item
+        \V{down} is the \textbf{downstream channel}
+        (or simply \textbf{downstream})
+        of \V{mainstem}.
+        \dfEnd
+\end{itemize}
+\end{definition}
+
 We will divide the confirmed DIs at each current location
 into \textbf{generations}.
 Scanned DIs are in generation 0.
@@ -548,7 +579,7 @@ then
         Every tangible reduction DI
         (Definition~\ref{df:rt} on page~\pageref{df:rt})
         has a tributary
-        (Definition~\ref{df:tributary} on page~\pageref{df:tributary})
+        (Definition~\ref{df:tangible-inflows} on page~\pageref{df:tangible-inflows})
         .  \lmEnd
 \end{lemma}
 
