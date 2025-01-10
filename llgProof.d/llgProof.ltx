@@ -703,25 +703,41 @@ we have
 \end{equation}
 From \eqref{eq:rt-di-pr-76},
 by merging \Velement{w}{0,\V{origin}} with \Velement{w}{\V{origin},\V{originB}},
-and eliminating unnecessary steps, we arrive at
+and by eliminating steps unwanted in what follows, we arrive at
 \begin{equation}
         \label{eq:rt-di-pr-80}
         \begin{gathered}
                 \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
+                        \destar \Velement{w}{0,\V{originB}} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
                         \derives \Velement{w}{0,\V{originB}} \cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen2} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}.
                 \end{gathered}
                 }
         \end{gathered}
 \end{equation}
-We next switch the existential variables,
-by setting
-\V{seen} to $\V{postdotA} \cat \V{unseen2}$,
-in order to eliminate all references to the non-terminal \V{A},
-and the rule with \V{A} on its LHS \eqref{eq:rt-di-pr-22}:
+We next
+eliminate all references to the non-terminal \V{A},
+and the rule with \V{A} on its LHS \eqref{eq:rt-di-pr-22}.
+As part of this, we switch the existential variable to \V{unseen},
+where
+\[
+\V{unseen} = \V{postdotA} \cat \V{unseen2}.
+\]
+This lets us state
+\begin{equation}
+        \label{eq:rt-di-pr-84}
+        \begin{gathered}
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{originB}} \cat \V{B} \cat \V{unseen} \\
+                        \derives \Velement{w}{0,\V{originB}} \cat \V{rhs} \mydot \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{unseen}.
+                \end{gathered}
+                }
+        \end{gathered}
+\end{equation}
 
         \todo{Finish proof of reduction to completion lemma here}
         \myqed
