@@ -557,14 +557,19 @@ A DI
         Without loss of generality, let this be
 \begin{equation}
         \label{eq:df-rt-di}
-        \begin{gathered}
         \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
-        \text{where } \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
-        \V{B} \de \V{rhs} \in \V{P}, \\
-        \V{B} \destar \Velement{w}{\V{originB},\V{current}} \text{ and} \\
-        \V{originB} < \V{current}.
-        \end{gathered}
 \end{equation}
+where
+\begin{gather}
+        \label{eq:rt-di-pr-10}
+\V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
+        \label{eq:rt-di-pr-12}
+\V{B} \de \V{rhs} \in \V{P}, \\
+        \label{eq:rt-di-pr-14}
+\V{B} \destar \Velement{w}{\V{originB},\V{current}} \text{ and} \\
+        \label{eq:rt-di-pr-16}
+\V{originB} < \V{current}.
+\end{gather}
 
         We can expand the DI \V{down} in \ref{eq:df-rt-di} to
 \begin{gather}
@@ -583,7 +588,7 @@ A DI
                 }
         \end{gathered} \right)
 \end{gather}
-Incorporating \eqref{eq:df-rt-di-ass-4} into
+Incorporating \eqref{eq:rt-di-pr-14} into
 \eqref{eq:rt-di-pr-24}, we have
 \begin{gather}
         \label{eq:rt-di-pr-44}
@@ -611,7 +616,7 @@ We note that one of the derivation steps is
                 \end{gathered}
 \]
 so that $\V{origin} \le \V{originB}$
-and since from \eqref{eq:df-rt-di-ass-5} we know
+and since from \eqref{eq:rt-di-pr-16} we know
 $\V{originB} < \V{current}$
 we have $\V{origin} \le \V{originB} < \V{current}$ or
 \begin{equation}
@@ -639,7 +644,7 @@ to
         \end{gathered}
 \end{equation}
 Interpolating
-\eqref{eq:df-rt-di-ass-3},
+\eqref{eq:rt-di-pr-12},
 one of our assumptions for the theorem,
 we get to
 \begin{equation}
@@ -659,20 +664,21 @@ we get to
                 }
         \end{gathered}
 \end{equation}
-and removing a step we no longer need results in
-\begin{equation}
-        \label{eq:rt-di-pr-72}
-        \begin{gathered}
-                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
-                \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen2} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}.
-                \end{gathered}
-                }
-        \end{gathered}
-\end{equation}
+
+% and removing a step we no longer need results in
+% \begin{equation}
+%         \label{eq:rt-di-pr-72}
+%         \begin{gathered}
+%                 \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
+%                 \begin{gathered}
+%                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+%                 \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
+%                 \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen2} \\
+%                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}.
+%                 \end{gathered}
+%                 }
+%         \end{gathered}
+% \end{equation}
 
         \todo{Finish proof of reduction to completion lemma here}
         \myqed
