@@ -729,13 +729,28 @@ This lets us state
 \begin{equation}
         \label{eq:rt-di-pr-84}
         \begin{gathered}
-                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{originB}} \cat \V{B} \cat \V{unseen} \\
                         \derives \Velement{w}{0,\V{originB}} \cat \V{rhs} \mydot \V{unseen} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{unseen}.
                 \end{gathered}
                 }
+        \end{gathered}
+\end{equation}
+We want to make \eqref{eq:rt-di-pr-84} take the proper form for a DI,
+so we add an antecedent inside the existential:
+\begin{equation}
+\label{eq:rt-di-pr-88}
+        \begin{gathered}
+        \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+        ( \V{originB} < \V{current} \lor \size{\V{B}} = 0 ) \implies \\
+                \left( \begin{gathered}
+        \V{S} \destar \Velement{w}{0,\V{originB}} \cat \V{B} \cat \V{unseen} \\
+                \derives \Velement{w}{0,\V{originB}} \cat \V{rhs} \mydot \V{unseen} \\
+        \destar \Velement{w}{0,\V{current}} \mydot \V{unseen}.
+                \end{gathered}  \right)
+        }
         \end{gathered}
 \end{equation}
 
