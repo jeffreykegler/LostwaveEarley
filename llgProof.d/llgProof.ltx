@@ -678,6 +678,27 @@ so that
          \label{eq:rt-di-pr-72}
         \V{antepredotA} \derives \Velement{w}{\V{origin},\V{originB}}.
 \end{equation}
+Interpolating \eqref{eq:rt-di-pr-72} into \eqref{eq:rt-di-pr-68},
+we have
+\begin{equation}
+        \label{eq:rt-di-pr-76}
+        \begin{gathered}
+                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
+                        \derives \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}}
+                                \cat \V{rhs} \mydot \V{postdotA} \cat \V{unseen2} \\
+                        \begin{gathered}
+                        \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}}
+                                \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
+                                \V{postdotA} \cat \V{unseen2}
+                        \end{gathered} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen2}.
+                \end{gathered}
+                }
+        \end{gathered}
+\end{equation}
 
         \todo{Finish proof of reduction to completion lemma here}
         \myqed
