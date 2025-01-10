@@ -379,6 +379,8 @@ $\tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}$,
 we call the last symbol in $\alpha$, \element{\alpha}{\lastix{\alpha}},
 the predot symbol.
 When $\size{\alpha} = 0$, there is no predot symbol.
+
+\todo{Remove these in favor of DI definitions?}
 We say that an Earley item is predicted, or a \textbf{prediction}
 if it has no predot symbol.
 We say that an Earley item is \textbf{confirmed}, or a confirmation,
@@ -394,22 +396,6 @@ if it is a reduction whose predot symbol is nullable.
 We say that an Earley item is a \textbf{non-nullable reduction}
 if it is a reduction whose predot symbol is non-nullable.
 
-The fundamental invariant\footnote{
-        This fundamental invariant is similar to the traditional
-        one, as found in~\cite[Slide 12/39]{Kallmeyer2018}
-        and~\cite[Theorem 4.9, p. 323]{AH1972v1}
-}
-for the \llguidance
-Earley parser is
-\begin{equation}
-        \label{eq:invariant}
-        \begin{gathered}
-        \tuple{\V{A} \de \V{predotA} \mydot \V{postdotA}, \V{origin}, \V{current}}
-                \text{ in \V{Rows}} \\
-                \equiv \; \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
-        \end{gathered}
-\end{equation} \text{ in \V{Rows}}
-In \eqref{eq:invariant},
 \[
         \FA{DI}{\V{predot},\V{postdot},\V{A},\V{origin},\V{current}}
 \]
@@ -422,6 +408,7 @@ and is defined as
                 \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}
         \end{gathered}
 \end{equation}
+\todo{Explicate this equation in text?}
 and
 \begin{equation}
         \label{eq:def-DI-2}
@@ -437,83 +424,40 @@ and
                 }
         \end{gathered}
 \end{equation}
-\todo{Explicate this equation in text}
+\todo{Explicate this equation in text?}
 In \eqref{eq:def-DI-2},
 $\V{origin} < \V{current} \lor \size{\V{predot}} = 0$
 indicates that we do not create zero length Earley items
 (Earley items where $\V{origin}=\V{current}$),
 unless they are predictions (the dot is at the beginning of the RHS,
 so that $\V{predot}$ is the empty string).
-Note that dot positions, formally, are only meaningful in Earley items,
-and that when we indicate the dot (or \V{current}) position
-in a DI, it is as an aide to reading only.
+Note our use of the raised dot ($\mydot$)
+in DI's is not formally part of the derivation in which
+it occurs,
+but is used as a reading aid,
+for a convenience for locating the dot position.
 
-A DIs predot type is that of its equivalent Earley item.
-Thus a DI is scanned iff its correspoding Earley item is a scansion,
-a DI is a prediction iff its correspoding Earley item is a prediction,
-etc.
+The fundamental invariant\footnote{
+        This fundamental invariant is similar to the traditional
+        one, as found in~\cite[Slide 12/39]{Kallmeyer2018}
+        and~\cite[Theorem 4.9, p. 323]{AH1972v1}
+}
+for the \llguidance
+Earley parser is
+\begin{gather}
+        \label{eq:invariant-eim}
+        \tuple{\V{A} \de \V{predotA} \mydot \V{postdotA}, \V{origin}, \V{current}}
+                \text{ in \V{Rows}} \\
+        \label{eq:invariant-di}
+                \equiv \; \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
+\end{gather}
 
-Two DIs with the same current location
-can form a step instance, or simply \textbf{step}.
-Intuitively, we say that two DIs form a step,
-when one derives the other.
-Where \V{di1} and \V{di2} are derivation instances,
-we overload the derivation operator for sentential forms,
-and write them
-\[
-        \V{di1} \derives \V{di2}.
-\]
-
-Step instances can be
-\textbf{reductive} or \textbf{nulling}.
-A reductive step instance is of the form
-\begin{equation}
-        \label{eq:reductive-step}
-\begin{gathered}
-        \FA{DI}{(\V{antepredotA}\cat\V{B}),\V{postdotA},\V{A},\V{originA},\V{current}} \\
-        \derives
-        \FA{DI}{\V{predotB},\epsilon,\V{B},\V{originB},\V{current}}
-\end{gathered}
-\end{equation}
-which expands to
-\begin{equation}
-        \label{eq:linked-DIs-1}
-        \begin{gathered}
-        \V{antepredotA} \in (\V{N} \cup \V{T})^\ast \land \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
-        \land \; \V{predotB} \in (\V{N} \cup \V{T})^\ast \\
-        \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \\
-                \land \; (\V{B} \de \V{predotB}) \in \V{P}
-        \end{gathered}
-\end{equation}
-and
-\todo{Work out conditions wrt predictions, nulled items}
-\begin{equation}
-        \label{eq:linked-DIs-2}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{
-                ( \V{originB} < \V{current} ) \\
-                \implies \;
-                \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{originA}} \cat \V{A} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{originA}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen}  \\
-                \destar \Velement{w}{0,\V{originB}} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                \derives \Velement{w}{0,\V{originB}} \cat \V{rhsB} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen} \\
-                \end{gathered} \right)
-                }
-        \end{gathered}
-\end{equation}
-
-We will divide the confirmed DIs at each current location
-into \textbf{generations}.
-Scanned DIs are in generation 0.
-If \V{diAfter} is in generation \V{z} and
-\[ \V{diBefore} \derives \V{diAfter} \]
-is a step instance,
-then
-\V{diBefore} is in generation $\V{z}+1$.
-
-\section{Proofs}
+\begin{definition}[DI to Earley item corresondence]
+The DI \eqref{eq:invariant-di} is said to
+        \textbf{correspond} to the Earley item 
+\eqref{eq:invariant-eim}
+\dfEnd
+\end{definition}
 
 \begin{definition}[Reduction DI]
         \label{df:red-di}
@@ -525,23 +469,60 @@ then
         \label{df:rt}
         A \textbf{tangible reduction}
         is a reduction DI whose predot symbol derives
-        at least one terminal. \dfEnd
+        at least one terminal.
+        A \textbf{intangible reduction},
+        or \textbf{nullable reduction},
+        is a reduction DI whose predot symbol derives
+        the empty string.
+        \dfEnd
 \end{definition}
 
 \begin{definition}
 \label{df:tributary}
-A DI
+        \todo{Clean this up}
+        Suppose, without loss of generality, that
+\begin{equation}
+        \label{eq:df-rt-di}
+        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
+\end{equation}
+is a tangible reduction DI
+        where
 \[
-        \V{inf} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
+        \V{B} \de \V{rhs} \in \V{P}
+        \land \; \V{B} \deplus \Velement{w}{\V{originB},\V{current}}.
 \]
-        is called a \textbf{tributary} of
-        \V{conf},
-        and \V{down} is called the \textbf{downstream channel}
+Then we say that
+a DI of the form
+\[
+        \V{inf} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}},
+\]
+        is a \textbf{tributary} of
+        \V{down},
+        and we say that \V{down} is the \textbf{downstream channel}
         (or simply \V{downstream})
         of \V{inf}.
-        \todo{Deal with bad references}
         \dfEnd
 \end{definition}
+
+We will divide the confirmed DIs at each current location
+into \textbf{generations}.
+Scanned DIs are in generation 0.
+If \V{diAfter} is in generation \V{z} and
+\[ \V{diBefore} \derives \V{diAfter} \]
+is a step instance,
+then
+\V{diBefore} is in generation $\V{z}+1$.
+
+\begin{definition}
+        A DI concept applied to an Earley item
+        if true iff the concept is true of the
+        corresponding DI of the Earley item.
+        For example, an Earley item is a reduction
+        iff its corresponding DI is a reduction.
+        \dfEnd
+\end{definition}
+
+\section{Reduction Proofs}
 
 \begin{lemma}[Reduction tributary]
         \label{lm:rt}
@@ -703,7 +684,7 @@ we have
 \end{equation}
 From \eqref{eq:rt-di-pr-76},
 by merging \Velement{w}{0,\V{origin}} with \Velement{w}{\V{origin},\V{originB}},
-and by eliminating steps unwanted in what follows, we arrive at
+and by eliminating steps unneeded for what follows, we arrive at
 \begin{equation}
         \label{eq:rt-di-pr-80}
         \begin{gathered}
@@ -748,13 +729,28 @@ so we add an antecedent inside the existential:
                 \left( \begin{gathered}
         \V{S} \destar \Velement{w}{0,\V{originB}} \cat \V{B} \cat \V{unseen} \\
                 \derives \Velement{w}{0,\V{originB}} \cat \V{rhs} \mydot \V{unseen} \\
-        \destar \Velement{w}{0,\V{current}} \mydot \V{unseen}.
-                \end{gathered}  \right)
+        \destar \Velement{w}{0,\V{current}} \mydot \V{unseen}
+                \end{gathered}  \right).
         }
         \end{gathered}
 \end{equation}
-
-        \todo{Finish proof of reduction to completion lemma here}
+From the rule for B \eqref{eq:rt-di-pr-12},
+we know that
+\begin{equation}
+\label{eq:rt-di-pr-90}
+\V{rhs} \in (\V{N}\cup\V{T})^\ast.
+\end{equation}
+Together, 
+\eqref{eq:rt-di-pr-12},
+\eqref{eq:rt-di-pr-88} and
+\eqref{eq:rt-di-pr-90} are equivalent to the DI
+\begin{equation}
+\label{eq:rt-di-pr-94}
+\FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}.
+\end{equation}
+\eqref{eq:rt-di-pr-94} is the tributary of \eqref{eq:df-rt-di}
+and therefore
+\eqref{eq:rt-di-pr-94} is what we needed to show for the lemma.
         \myqed
 \end{proof}
 
