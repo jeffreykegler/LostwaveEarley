@@ -420,7 +420,7 @@ and
         \label{eq:def-DI-2}
         \begin{gathered}
                 \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{origin} < \V{current} \lor \size{\V{predot}} = 0 ) \\
+                ( \V{origin} < \V{current} \lor \V{postdot} \neq \epsilon ) \\
                 \implies \;
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
@@ -432,16 +432,13 @@ and
 \end{equation}
 \todo{Explicate this equation in text?}
 In \eqref{eq:def-DI-2},
-$\V{origin} < \V{current} \lor \size{\V{predot}} = 0$
-indicates that we do not create zero length Earley items
-(Earley items where $\V{origin}=\V{current}$),
-unless they are predictions (the dot is at the beginning of the RHS,
-so that $\V{predot}$ is the empty string).
+$\V{origin} < \V{current} \lor \size{\V{postdot}} \neq \epsilon$
+indicates that we do not create zero length completed Earley items.
 Note our use of the raised dot ($\mydot$)
 in DI's is not formally part of the derivation in which
 it occurs,
 but is used as a reading aid,
-for a convenience for locating the dot position.
+for convenience in locating the dot position.
 
 The fundamental invariant\footnote{
         This fundamental invariant is similar to the traditional
@@ -617,7 +614,7 @@ where
         \label{eq:rt-di-pr-24}
         \left( \begin{gathered}
                 \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{origin} < \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
+                ( \V{origin} < \V{current} \lor \V{postdot} \neq \epsilon ) \implies \\
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
@@ -632,7 +629,7 @@ Incorporating \eqref{eq:rt-di-pr-14} into
         \label{eq:rt-di-pr-44}
         \left( \begin{gathered}
                 \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{origin} < \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
+                ( \V{origin} < \V{current} \lor \V{postdot} \neq \epsilon ) \implies \\
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
@@ -781,7 +778,7 @@ so we add an antecedent inside the existential:
 \label{eq:rt-di-pr-88}
         \begin{gathered}
         \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-        ( \V{originB} < \V{current} \lor \size{\V{B}} = 0 ) \implies \\
+        ( \V{originB} < \V{current} \lor \epsilon \neq \epsilon ) \implies \\
                 \left( \begin{gathered}
         \V{S} \destar \Velement{w}{0,\V{originB}} \cat \V{B} \cat \V{unseen} \\
                 \derives \Velement{w}{0,\V{originB}} \cat \V{rhs} \mydot \V{unseen} \\
@@ -848,7 +845,7 @@ where
         \label{eq:pr-rt-main-24}
         \left( \begin{gathered}
                 \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{origin} < \V{current} \lor \size{\V{antepredotA}\cat\V{B}} = 0 ) \implies \\
+                ( \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon ) \implies \\
                 \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen2} \\
