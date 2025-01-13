@@ -483,7 +483,7 @@ The DI \eqref{eq:invariant-di} is said to
         \dfEnd
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Tangible reduction inflows]
 \label{df:tangible-inflows}
         \todo{Clean this up}
         Suppose, without loss of generality, that
@@ -529,7 +529,7 @@ a DI of the form
 \end{itemize}
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Intangible reduction inflows]
 \label{df:intangible-inflows}
         \todo{Clean this up}
         Suppose, without loss of generality, that
@@ -569,7 +569,7 @@ is a step instance,
 then
 \V{diBefore} is in generation $\V{z}+1$.
 
-\begin{definition}
+\begin{definition}[DI concepts and Earley items]
         A DI concept applied to an Earley item
         is true iff the concept is true of the
         corresponding DI of the Earley item.
@@ -578,7 +578,7 @@ then
         \dfEnd
 \end{definition}
 
-\section{Reduction Proofs}
+\section{Inflow lemmas}
 
 \begin{lemma}[Reduction tributary]
         \label{lm:rt}
@@ -874,6 +874,8 @@ and can simplify \ref{eq:pr-rt-main-24} to
 \todo{Finish proof of reduction DI mainstem lemma here}
 \myqed
 \end{proof}
+
+\section{Confirmation lemmas}
 
 \begin{lemma}
         Let \V{diRed} be a reductive DI in generation $\V{g}+1$ of row \V{current}.
