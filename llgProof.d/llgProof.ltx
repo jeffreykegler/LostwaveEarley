@@ -217,6 +217,25 @@
   \fi%
 }
 
+\newcommand{\colonpageref}[1]{%
+ \ifthenelse{\equal{\pageref{#1}}{\thepage}}%
+  {}{{:}\pageref*{#1}}%
+}
+
+% genref -- generic reference
+\newcommand{\genref}[3][]{%
+    \ifthenelse{\equal{#1}{}}{}{%
+      \ifmmode \text{``#1''}%
+      \else``#1'' %
+      \fi%
+    }%
+    (\ensuremath{% To cover both cases, force math mode
+        \hyperref[#2]{%
+            \textrm{#3}\ref*{#2}\colonpageref{#2}%
+        }%
+    })%
+}
+
 \theoremstyle{definition}
 
 % theoremoids: Th
@@ -240,12 +259,6 @@
 \newtheorem{definition}[theorem]{Definition}
 \newcommand{\Dfref}[2][]{%
     \genref[#1]{df:#2}{Df}%
-}
-% some day delete \longDfref
-\newcommand{\longDfref}[2]{%
-  \ifmmode \text{``#1''\Dfref{#2}}%
-  \else``#1'' \Dfref{#2}%
-  \fi%
 }
 \newcommand{\dfEnd}{\Circle}
 
@@ -405,10 +418,13 @@ if it is a reduction whose predot symbol is nullable.
 We say that an Earley item is a \textbf{non-nullable reduction}
 if it is a reduction whose predot symbol is non-nullable.
 
+\begin{definition}{Derivation set instance (DI)}
+\label{df:di}
+A \textbf{derivation set instance} (DI)
+is of the form
 \[
         \FA{DI}{\V{predot},\V{postdot},\V{A},\V{origin},\V{current}}
 \]
-is called a \textbf{derivation instance} (DI)
 and is defined as
 \begin{equation}
         \label{eq:def-DI-1}
@@ -433,8 +449,11 @@ and
                 }
         \end{gathered}
 \end{equation}
+\dfEnd
+\end{definition}
+
 \todo{Explicate this equation in text?}
-In \eqref{eq:def-DI-2},
+In \Dfref{di},
 $\V{origin} < \V{current} \lor \size{\V{postdot}} \neq \epsilon$
 indicates that we do not create zero length completed Earley items.
 Note our use of the raised dot ($\mydot$)
