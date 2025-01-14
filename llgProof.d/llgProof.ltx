@@ -855,6 +855,24 @@ where
         \end{gathered} \right)
 \end{gather}
 
+        \todo{Clean up from here}
+We note that one of the derivation steps is
+        \eqref{eq:rt-di-pr-44},
+        \[
+                \begin{gathered}
+         \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
+                                \V{postdotA} \cat \V{unseen2},
+                \end{gathered}
+\]
+so that $\V{origin} \le \V{originB}$
+and since from \eqref{eq:rt-di-pr-16} we know
+$\V{originB} < \V{current}$
+we have $\V{origin} \le \V{originB} < \V{current}$ or
+\begin{equation}
+\label{eq:rt-di-pr-46}
+    \V{origin} < \V{current}.
+\end{equation}
+
 Since \V{B} is a non-terminal, we know that
 $\size{\V{antepredotA}\cat\V{B}} \neq 0$
 and can simplify \ref{eq:pr-rt-main-24} to
