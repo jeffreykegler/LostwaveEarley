@@ -173,6 +173,9 @@
 \newcommand{\FA}[2]{\ensuremath{\rawfn{\mathop{\Fname{#1}}}{#2}}}
 \newcommand{\VFA}[2]{\FA{#1}{\V{#2}}}
 
+\newcommand{\cuz}{\ensuremath{\mathrel{\because}}\xspace}
+\newcommand{\bcuz}{\linebreak[1]\cuz}
+
 % * Reference meta tags ("classifying prefixes") use in this document:
 % * From fancyref:
 % Chapter chap:
@@ -872,6 +875,19 @@ into \eqref{eq:pr-rt-main-24}, we have
                 }
         \end{gathered}
 \end{equation}
+
+From within \eqref{eq:pr-rt-main-28}, we can isolate
+\begin{equation}
+\label{eq:pr-rt-main-30}
+\Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}}
+\end{equation}
+which tells us
+\begin{gather}
+\label{eq:pr-rt-main-32}
+        \V{origin} \le \V{originB} \cuz \eqref{eq:pr-rt-main-30} \\
+\label{eq:pr-rt-main-34}
+        \V{origin} < \V{current} \cuz \eqref{eq:pr-rt-main-32}, \eqref{eq:rt-main-pr-16}
+\end{gather}
 
         \todo{Clean up from here}
 \todo{Finish proof of reduction DI mainstem lemma here}
