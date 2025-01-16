@@ -372,6 +372,7 @@ for Earley's algorithm.\footnote{%
 \end{definition}
 
 \begin{definition}[The grammar \V{g}]
+\label{df:g}
 We will consider the proper grammar
 \[
         \V{g} = \tuple{\V{N},\V{T},\V{P},\V{S}},
@@ -514,7 +515,8 @@ The DI \eqref{eq:invariant-di} is said to
 \begin{definition}[Tangible reduction DI]
         \label{df:rt}
         A \textbf{tangible reduction}
-        is a reduction DI whose predot symbol derives
+        is a reduction DI whose predot symbol derives,
+        in every derivation,
         at least one terminal.
 \end{definition}
 
@@ -528,7 +530,6 @@ The DI \eqref{eq:invariant-di} is said to
 
 \begin{definition}[Tangible reduction inflows]
 \label{df:tangible-inflows}
-        \todo{Clean this up}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
@@ -637,10 +638,30 @@ where
         \label{eq:rt-di-pr-12}
 \V{B} \de \V{rhs} \in \V{P}, \\
         \label{eq:rt-di-pr-14}
-\V{B} \destar \Velement{w}{\V{originB},\V{current}} \text{ and} \\
+\V{B} \deplus \Velement{w}{\V{originB},\V{current}} \text{ and} \\
         \label{eq:rt-di-pr-16}
 \V{originB} < \V{current}.
 \end{gather}
+
+To merge \eqref{eq:df-rt-di} and \eqref{eq:rt-di-pr-14}
+conveniently,
+we will need
+        \todo{Is this actually necessary?}
+        to show that the
+symbol instances of \V{B} in their expansions are identical.
+We do this by showing that the symbol instance of \V{B} in \eqref{eq:rt-di-pr-14} is unique.
+If there is a second instance of \V{B} satisifying
+\eqref{eq:rt-di-pr-14}, we have
+\begin{equation}
+        \label{eq:rt-di-pr-18}
+        \V{B} \deplus \V{B} \deplus \Velement{w}{\V{originB},\V{current}},
+\end{equation}
+and $\V{B} \deplus \V{B}$ in \eqref{eq:rt-di-pr-18} is a cycle.
+Our grammar is \V{g}, which is cycle-free \Dfref{g}.
+Therefore
+\begin{equation}
+        \text{the symbol instance of \V{B} in \eqref{eq:rt-di-pr-14} is unique.}
+\end{equation}
 
         We can expand the DI \V{down} in \ref{eq:df-rt-di} to
 \begin{gather}
@@ -790,7 +811,7 @@ and by eliminating steps unneeded for what follows, we arrive at
 \end{equation}
 We next
 eliminate all references to the non-terminal \V{A},
-and the rule with \V{A} on its LHS \eqref{eq:rt-di-pr-22}.
+and to the rule with \V{A} on its LHS \eqref{eq:rt-di-pr-22}.
 As part of this, we switch the existential variable to \V{unseen},
 where
 \[
@@ -838,18 +859,17 @@ Together,
 \label{eq:rt-di-pr-94}
 \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}.
 \end{equation}
-\eqref{eq:rt-di-pr-94} is the tributary of \eqref{eq:df-rt-di}
-and therefore
-\eqref{eq:rt-di-pr-94} is what we needed to show for the lemma.
+From \Dfref{tangible-inflows}, we see that
+\eqref{eq:rt-di-pr-94} is the tributary of \eqref{eq:df-rt-di}.
+Therefore, with
+\eqref{eq:rt-di-pr-94}, we have what we needed to show for the lemma.
         \myqed
 \end{proof}
 
 \begin{lemma}[Tangible reduction mainstem]
         \label{lm:rt-main}
-        Every tangible reduction DI
-        (Definition~\pref{df:rt})
-        has a mainstem
-        (Definition~\pref{df:tangible-inflows}).
+        Every tangible reduction DI \Dfref{rt}
+        has a mainstem \Dfref{tangible-inflows}.
         \lmEnd
 \end{lemma}
 
