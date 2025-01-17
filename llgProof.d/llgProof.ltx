@@ -967,7 +967,6 @@ we see that
 \end{equation}
 
 
-\todo{Revise from here}
 The dot location is not part of the derviations,
 and may be moved earlier on the RHS without
 changing the set of derivations in the DI of \eqref{eq:pr-rt-main-38}.
@@ -977,15 +976,16 @@ to before it.
         \label{eq:pr-rt-main-42}
         \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \\
-                                \qquad \qquad \Velement{w}{\V{originB},\V{current}} \cat \V{postdotA} \cat \V{unseen}
-                \end{gathered}
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \mydot \Velement{w}{\V{originB},\V{current}}
+                                \cat \V{postdotA} \cat \V{unseen}.
                 }
         \end{gathered}
 \end{equation}
+
+\todo{Revise from here}
 
 \todo{Finish proof of reduction DI mainstem lemma here}
 \myqed
