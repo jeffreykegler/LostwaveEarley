@@ -1014,11 +1014,39 @@ derivations in the derivation set \eqref{eq:pr-rt-main-42}.
 We now proceed to shape \eqref{eq:pr-rt-main-44}
 back into the form of a DI expansion.
 We first add an antecedant:
-
-\todo{Add consequent}
-\todo{Revise from here}
-
-\todo{Finish proof of reduction DI mainstem lemma here}
+\begin{equation}
+        \label{eq:pr-rt-main-48}
+        \begin{gathered}
+                ( \V{originB} < \V{current} \lor (\V{B} \cat \V{postdotA} \neq \epsilon) ) \implies \\
+                \left( \begin{gathered}
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{originB}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
+                \end{gathered} \right).
+                }
+        \end{gathered}
+\end{equation}
+In addition to \eqref{eq:pr-rt-main-48}, the DI expansion requires some
+preliminary assumptions.
+To obtain these, we note
+\begin{gather}
+        \label{eq:pr-rt-main-50}
+        \V{antepredotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-rt-main-20}. \\
+        \label{eq:pr-rt-main-52}
+        \V{B} \cat \V{postdotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-rt-main-20}.
+\end{gather}
+Equations \eqref{eq:pr-rt-main-22}, \eqref{eq:pr-rt-main-48}, \eqref{eq:pr-rt-main-50} and
+\eqref{eq:pr-rt-main-52} are the expansion of the DI
+\begin{equation}
+\label{eq:pr-rt-main-54}
+        \V{main} = \FA{DI}{\V{antepredotA}, \V{B}\cat\V{postdotA},\V{A},\V{origin},\V{originB}}. \\
+\end{equation}
+From \Dfref{tangible-inflows}, we see that
+\eqref{eq:pr-rt-main-54} is the tributary of \eqref{eq:df-rt-di}.
+Therefore, with
+\eqref{eq:pr-rt-main-54}, we have what we needed to show for the lemma.
+\todo{Recheck proof of reduction DI mainstem lemma}
 \myqed
 \end{proof}
 
