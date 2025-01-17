@@ -631,37 +631,16 @@ then
         \label{eq:df-rt-di}
         \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
 \end{equation}
+        \todo{Make sure predot symbol is defined}
 where
 \begin{gather}
         \label{eq:rt-di-pr-10}
 \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
         \label{eq:rt-di-pr-12}
-\V{B} \de \V{rhs} \in \V{P}, \\
-        \label{eq:rt-di-pr-14}
-\V{B} \deplus \Velement{w}{\V{originB},\V{current}} \text{ and} \\
+\text{The predot symbol instance derives $\Velement{w}{\V{originB},\V{current}}$ and} \\
         \label{eq:rt-di-pr-16}
 \V{originB} < \V{current}.
 \end{gather}
-
-To merge \eqref{eq:df-rt-di} and \eqref{eq:rt-di-pr-14}
-conveniently,
-we will need
-        \todo{Is this actually necessary?}
-        to show that the
-symbol instances of \V{B} in their expansions are identical.
-We do this by showing that the symbol instance of \V{B} in \eqref{eq:rt-di-pr-14} is unique.
-If there is a second instance of \V{B} satisifying
-\eqref{eq:rt-di-pr-14}, we have
-\begin{equation}
-        \label{eq:rt-di-pr-18}
-        \V{B} \deplus \V{B} \deplus \Velement{w}{\V{originB},\V{current}},
-\end{equation}
-and $\V{B} \deplus \V{B}$ in \eqref{eq:rt-di-pr-18} is a cycle.
-Our grammar is \V{g}, which is cycle-free \Dfref{g}.
-Therefore
-\begin{equation}
-        \text{the symbol instance of \V{B} in \eqref{eq:rt-di-pr-14} is unique.}
-\end{equation}
 
         We can expand the DI \V{down} in \ref{eq:df-rt-di} to
 \begin{gather}
@@ -681,8 +660,25 @@ Therefore
                 }
         \end{gathered} \right)
 \end{gather}
-Incorporating \eqref{eq:rt-di-pr-14} into
-\eqref{eq:rt-di-pr-24}, we have
+
+===
+In \eqref{eq:df-rt-di}, we assumed for the theorem that
+the DI \V{down} is a tangible reduction,
+so that
+\begin{equation}
+        \label{eq:rt-di-pr-25}
+        \V{B} \in \V{N}
+\end{equation}
+and, for some $\V{rhs} \in (\V{N}\cup\V{T})^\ast$,
+\begin{equation}
+        \label{eq:rt-di-pr-26}
+        \V{B} \de \V{rhs} \in \V{P}.
+\end{equation}
+
+Interpolating
+\eqref{eq:rt-di-pr-26} into
+\eqref{eq:rt-di-pr-24},
+we get to
 \begin{gather}
         \label{eq:rt-di-pr-44}
         \left( \begin{gathered}
@@ -736,9 +732,23 @@ to
                 }
         \end{gathered}
 \end{equation}
+
+In \eqref{eq:df-rt-di}, we assumed for the theorem that
+the DI \V{down} is a tangible reduction,
+so that
+\begin{equation}
+        \label{eq:rt-di-pr-66}
+        \V{B} \in \V{N}
+\end{equation}
+and, for some $\V{rhs} \in (\V{N}\cup\V{T})^\ast$,
+\begin{equation}
+        \label{eq:rt-di-pr-67}
+        \V{B} \de \V{rhs} \in \V{P}.
+\end{equation}
+
 Interpolating
-\eqref{eq:rt-di-pr-12},
-one of our assumptions for the theorem,
+\eqref{eq:rt-di-pr-67} into
+\eqref{eq:rt-di-pr-64},
 we get to
 \begin{equation}
         \label{eq:rt-di-pr-68}
@@ -884,13 +894,12 @@ where
 \begin{gather}
         \label{eq:rt-main-pr-10}
 \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
-        \label{eq:rt-main-pr-12}
-\V{B} \de \V{rhs} \in \V{P}, \\
         \label{eq:rt-main-pr-14}
-\V{B} \destar \Velement{w}{\V{originB},\V{current}} \text{ and} \\
+\text{The predot symbol instance derives $\Velement{w}{\V{originB},\V{current}}$ and} \\
         \label{eq:rt-main-pr-16}
 \V{originB} < \V{current}.
 \end{gather}
+        \todo{Define predot symbol instance}
 
         We can expand the DI \V{down} in \ref{eq:pr-rm-di} to
 \begin{gather}
