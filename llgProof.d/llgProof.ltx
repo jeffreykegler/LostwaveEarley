@@ -985,6 +985,34 @@ to before it.
         \end{gathered}
 \end{equation}
 
+To begin to put \eqref{eq:pr-rt-main-42} into the form of a DI expansion,
+we first pull back the frontier,
+so that \V{B} is in the last step of the derivation schema
+\todo{define derivation schema}
+instead of \Velement{w}{\V{originB},\V{current}}.
+\todo{Is this right?  Fix it.}
+\begin{equation}
+        \label{eq:pr-rt-main-44}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{originB}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}.
+                }
+        \end{gathered}
+\end{equation}
+
+In moving from \eqref{eq:pr-rt-main-42} to
+\eqref{eq:pr-rt-main-44} we become indifferent to the terminals which V{B} produces
+in \eqref{eq:pr-rt-main-44},
+As a result, the derivation set \eqref{eq:pr-rt-main-44} is a superset
+of the derivation set \eqref{eq:pr-rt-main-42}.
+Our chain of deductions remains valid, because it remains the case
+that the DI expansion that we are about to deduce is implied by all the
+derivations in the derivation set \eqref{eq:pr-rt-main-42}.
+
+\todo{Add consequent}
 \todo{Revise from here}
 
 \todo{Finish proof of reduction DI mainstem lemma here}
