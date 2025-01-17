@@ -938,23 +938,21 @@ From within \eqref{eq:pr-rt-main-28}, we can isolate
         \V{origin} < \V{current} \cuz \eqref{eq:pr-rt-main-32}, \eqref{eq:rt-main-pr-16}.
 \end{gather}
 
-We can now use \eqref{eq:pr-rt-main-34} to simplify \eqref{eq:pr-rt-main-28}:
+We can now use \eqref{eq:pr-rt-main-34} to simplify \eqref{eq:pr-rt-main-24}:
 \begin{equation}
         \label{eq:pr-rt-main-38}
-        \begin{gathered}
+        \left( \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \begin{gathered}
+                \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                            \qquad \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                        \V{postdotA} \cat \V{unseen}
-                \end{gathered}
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
+                \end{gathered} \right).
                 }
-        \end{gathered}
+        \end{gathered} \right).
 \end{equation}
 
+\todo{Revise from here}
 The dot location is not part of the derviation, and may be moved earlier on the RHS without
 invalidating \eqref{eq:pr-rt-main-38}.
 We now move it before the predot symbol instance:
