@@ -880,6 +880,8 @@ where
 \begin{gather}
         \label{eq:pr-rt-main-10}
 \V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
+        \label{eq:pr-rt-main-12}
+\text{The predot symbol is $\V{B} \in \V{N}$,} \\
         \label{eq:pr-rt-main-14}
 \text{The predot symbol instance derives $\Velement{w}{\V{originB},\V{current}}$ and} \\
         \label{eq:pr-rt-main-16}
@@ -931,7 +933,7 @@ We use \eqref{eq:pr-rt-main-34} to simplify \eqref{eq:pr-rt-main-24}:
         \end{gathered}
 \end{equation}
 
-From \eqref{eq:pr-rt-main-14}
+From \eqref{eq:pr-rt-main-12}, \eqref{eq:pr-rt-main-14},
 and \eqref{eq:pr-rt-main-38}
 we see that
 \begin{equation}
@@ -996,7 +998,7 @@ We first add an antecedant:
 \begin{equation}
         \label{eq:pr-rt-main-48}
         \begin{gathered}
-                ( \V{originB} < \V{current} \lor (\V{B} \cat \V{postdotA} \neq \epsilon) ) \implies \\
+                ( \V{originB} < \V{current} \lor (\V{B} \cat \V{postdotA}) \neq \epsilon ) \implies \\
                 \left( \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
