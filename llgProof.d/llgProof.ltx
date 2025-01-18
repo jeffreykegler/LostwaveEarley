@@ -967,10 +967,12 @@ to before it.
         \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \Velement{w}{\V{originB},\V{current}} \cat \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \mydot \Velement{w}{\V{originB},\V{current}}
-                                \cat \V{postdotA} \cat \V{unseen}.
+                \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
+                \destar \;
+                \begin{gathered}
+                        \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \mydot \\
+                        \Velement{w}{\V{originB},\V{current}} \cat \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
                 }
         \end{gathered}
 \end{equation}
@@ -1021,7 +1023,7 @@ preliminary assumptions.
 To obtain these, we note
 \begin{gather}
         \label{eq:pr-rt-main-50}
-        \V{antepredotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-rt-main-20}. \\
+        \V{antepredotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-rt-main-20} \text{, and} \\
         \label{eq:pr-rt-main-52}
         \V{B} \cat \V{postdotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-rt-main-20}.
 \end{gather}
