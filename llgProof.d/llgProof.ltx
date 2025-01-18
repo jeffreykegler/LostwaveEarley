@@ -907,39 +907,19 @@ where
         \end{gathered} \right).
 \end{gather}
 
-If we incorporate \eqref{eq:pr-rt-main-14}
-into \eqref{eq:pr-rt-main-24}, we have
+As one of the sentential forms in \eqref{eq:pr-rt-main-24}, we have
 \begin{equation}
-        \label{eq:pr-rt-main-28}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon ) \implies \\
-                \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                            \qquad \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
-                        \V{postdotA} \cat \V{unseen}
-                \end{gathered} \right).
-                }
-        \end{gathered}
-\end{equation}
-
-From within \eqref{eq:pr-rt-main-28}, we can isolate
-\begin{equation}
-\label{eq:pr-rt-main-30}
-\Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \cat \Velement{w}{\V{originB},\V{current}}.
+        \label{eq:pr-rt-main-30}
+        \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen}
 \end{equation}
 \begin{gather}
 \label{eq:pr-rt-main-32}
-        \V{origin} \le \V{originB} \cuz \eqref{eq:pr-rt-main-30}. \\
+        \V{origin} \le \V{originB} \cuz \eqref{eq:pr-rt-main-14}, \eqref{eq:pr-rt-main-30}. \\
 \label{eq:pr-rt-main-34}
-        \V{origin} < \V{current} \cuz \eqref{eq:pr-rt-main-32}, \eqref{eq:pr-rt-main-16}.
+        \V{origin} < \V{current} \cuz \eqref{eq:pr-rt-main-16}, \eqref{eq:pr-rt-main-32}.
 \end{gather}
-\todo{We can arrive at origin $<$ current more quickly.  Do so.}
 
-We can now use \eqref{eq:pr-rt-main-34} to simplify \eqref{eq:pr-rt-main-24}:
+We use \eqref{eq:pr-rt-main-34} to simplify \eqref{eq:pr-rt-main-24}:
 \begin{equation}
         \label{eq:pr-rt-main-38}
         \begin{gathered}
