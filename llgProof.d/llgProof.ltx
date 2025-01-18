@@ -914,9 +914,10 @@ As one of the sentential forms in \eqref{eq:pr-rt-main-24}, we have
         \label{eq:pr-rt-main-30}
         \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen}
 \end{equation}
+so that
 \begin{gather}
 \label{eq:pr-rt-main-32}
-        \V{origin} \le \V{originB} \cuz \eqref{eq:pr-rt-main-14}, \eqref{eq:pr-rt-main-30}. \\
+        \V{origin} \le \V{originB} \cuz \eqref{eq:pr-rt-main-14}, \eqref{eq:pr-rt-main-30} \text{, and} \\
 \label{eq:pr-rt-main-34}
         \V{origin} < \V{current} \cuz \eqref{eq:pr-rt-main-16}, \eqref{eq:pr-rt-main-32}.
 \end{gather}
@@ -942,9 +943,16 @@ we see that
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \cat \Velement{w}{\V{originB},\V{current}}
-                                \mydot \V{postdotA} \cat \V{unseen}.
+                \destar \;
+                \begin{gathered}
+                        \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
+                        \V{postdotA} \cat \V{unseen} \\
+                \end{gathered} \\
+                \destar \;
+                \begin{gathered}
+                \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
+                \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
                 }
         \end{gathered}
 \end{equation}
