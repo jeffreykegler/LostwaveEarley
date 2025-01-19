@@ -1057,26 +1057,45 @@ Therefore, with
 \end{lemma}
 
 \begin{proof}
-\section{Confirmation lemmas}
 \todo{Finish proof of intangible reduction DI mainstem lemma}
 \myqed
 \end{proof}
 
-\begin{lemma}
-        Let \V{diRed} be a reductive DI in generation $\V{g}+1$ of row \V{current}.
-        If rows 0 through $\V{current} \subtract 1$ are complete,
-        and generations
-        0 through \V{g} in row \V{current} are complete,
-        then \llguidance adds the Earley item corresponding to
-        \V{diRed} to its Earley table.
-        \todo{Reduction DI lemma here}
+\section{Completion lemmas}
+
+\begin{lemma}[Row 0 completion]
+        Row 0 is complete.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
-        \todo{Proof of reduction DI lemma here}
+        Proof is omitted because it is straightforward,
+        and essentially the same
+        as others in the literature.
         \myqed
 \end{proof}
+
+\begin{lemma}[Scansion completion]
+        Scansion is complete in row $\V{i}+1$ if
+        row \V{i} is complete.
+        and row $\V{i}$ is complete as far as generation \V{g}.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        Proof is omitted because it is straightforward,
+        and essentially the same
+        as others in the literature.
+        \myqed
+\end{proof}
+
+\begin{lemma}[Scansion completion]
+        Intangible reductions are complete in generation $\V{g}+1$
+        of row $\V{i}$ if
+        the rows before \V{i} are complete,
+        and row $\V{i}$ is complete as far as generation \V{g}.
+        \lmEnd
+\end{lemma}
 
 \FloatBarrier
 
