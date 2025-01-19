@@ -515,16 +515,24 @@ The DI \eqref{eq:invariant-di} is said to
 \begin{definition}[Tangible reduction DI]
         \label{df:rt}
         A \textbf{tangible reduction}
-        is a reduction DI whose predot symbol derives,
-        in every derivation,
+        is a reduction DI all of whose derivations
+        have a predot symbol instance that produces
         at least one terminal.
+        \dfEnd
 \end{definition}
 
 \begin{definition}[Intangible reduction DI]
         A \textbf{intangible reduction},
-        or \textbf{nulling reduction},
-        is a reduction DI which is not a tangible
-        reduction DI.
+        is a reduction DI none of whose derivations
+        have a predot symbol instance that produces
+        a terminal.
+        \dfEnd
+\end{definition}
+
+\begin{definition}[Nulling reduction DI]
+        A \textbf{nulling reduction},
+        is a reduction DI none of whose derivations
+        have a LHS symbol instance that produces a terminal.
         \dfEnd
 \end{definition}
 
@@ -1043,7 +1051,7 @@ Therefore, with
 \begin{lemma}[Intangible reduction mainstem]
         \label{lm:ri-main}
         Every intangible reduction DI \Dfref{rt}
-        is either a nulling completion,
+        is either a completion,
         or has a mainstem \Dfref{tangible-inflows}.
         \lmEnd
 \end{lemma}
