@@ -522,6 +522,7 @@ The DI \eqref{eq:invariant-di} is said to
 \end{definition}
 
 \begin{definition}[Intangible reduction DI]
+        \label{df:ri}
         A \textbf{intangible reduction},
         is a reduction DI none of whose derivations
         have a predot symbol instance that produces
@@ -529,9 +530,10 @@ The DI \eqref{eq:invariant-di} is said to
         \dfEnd
 \end{definition}
 
-\begin{definition}[Nulling reduction DI]
-        A \textbf{nulling reduction},
-        is a reduction DI none of whose derivations
+\begin{definition}[Nulling DI]
+        \label{df:nulling-di}
+        A \textbf{nulling DI},
+        is a DI none of whose derivations
         have a LHS symbol instance that produces a terminal.
         \dfEnd
 \end{definition}
@@ -1051,12 +1053,74 @@ Therefore, with
 \begin{lemma}[Intangible reduction mainstem]
         \label{lm:ri-main}
         Every intangible reduction DI \Dfref{rt}
-        is either a completion,
+        is either a nulling completion,
         or has a mainstem \Dfref{tangible-inflows}.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
+        We assumed for the lemma that we have a tangible reduction DI.
+        Without loss of generality, let this be
+\begin{equation}
+        \label{eq:pr-rm-main-5}
+        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
+\end{equation}
+where
+\begin{gather}
+        \label{eq:pr-ri-main-10}
+\V{antepredotA} \in(\V{N}\cup\V{T})^\ast, \\
+        \label{eq:pr-ri-main-12}
+\text{the predot symbol is $\V{B} \in \V{N}$,} \\
+        \label{eq:pr-ri-main-14}
+\text{the predot symbol instance produces $\epsilon$, and} \\
+        \label{eq:pr-ri-main-16}
+\text{\V{down} is not a nulling completion.}
+\end{gather}
+
+        We can expand the DI \V{down} in \ref{eq:pr-rm-di} to
+\begin{gather}
+        \label{eq:pr-ri-main-20}
+        \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast \\
+        \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
+        \label{eq:pr-ri-main-22}
+        \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \text{, and} \\
+        \label{eq:pr-ri-main-24}
+        \left( \begin{gathered}
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                ( \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon ) \implies \\
+                \left( \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
+                \end{gathered} \right)
+                }
+        \end{gathered} \right).
+\end{gather}
+We know from \eqref{eq:pr-ri-main-16} that
+\begin{equation}
+\label{eq:pr-ri-main-30}
+        \text{\V{down} is not nulling or \V{down} is not a completion}
+\end{equation}
+It is helpful to switch \eqref{eq:pr-ri-main-30} into notation
+so we will write \VFA{Nulling}{down} to say that
+``\V{down} is nulling''.
+\begin{equation}
+\label{eq:pr-ri-main-32}
+        \neg\VFA{Nulling}{\V{down}} \lor \V{postdotA} \neq \epsilon \bcuz \eqref{eq:pr-ri-main-30}.
+\end{equation}
+Recalling the definition of ``nulling DI'' \Dfref{nulling-di},
+we see that,
+within the derivation set of \eqref{eq:pr-ri-main-24},
+\begin{equation}
+\label{eq:pr-ri-main-34}
+        \begin{gathered}
+                \VFA{Nulling}{\V{down}} \equiv \\
+                \V{A} \destar \V{antepredotA} \cat \V{B} \cat \V{postdotA} \\
+                \destar \Velement{w}{\V{origin},\V{current}} \cat \V{B} \cat \V{postdotA} \\
+                \destar \epsilon.
+        \end{gathered}
+\end{equation}
+
 \todo{Finish proof of intangible reduction DI mainstem lemma}
 \myqed
 \end{proof}
@@ -1089,7 +1153,8 @@ Therefore, with
 \end{proof}
 
 \begin{lemma}[Tangible reduction completion]
-        Tangible reductions are complete in generation $\V{g}+1$
+        Tangible reductions are either nulling completion DIs
+        or are complete in generation $\V{g}+1$
         of row $\V{i}+1$ if
         the rows as far as \V{i} are complete,
         and row $\V{i}+1$ is complete as far as generation \V{g}.
