@@ -1078,7 +1078,6 @@ Therefore, with
 \begin{lemma}[Scansion completion]
         Scansion is complete in row $\V{i}+1$ if
         row \V{i} is complete.
-        and row $\V{i}$ is complete as far as generation \V{g}.
         \lmEnd
 \end{lemma}
 
@@ -1089,13 +1088,76 @@ Therefore, with
         \myqed
 \end{proof}
 
-\begin{lemma}[Scansion completion]
-        Intangible reductions are complete in generation $\V{g}+1$
-        of row $\V{i}$ if
-        the rows before \V{i} are complete,
-        and row $\V{i}$ is complete as far as generation \V{g}.
+\begin{lemma}[Tangible reduction completion]
+        Tangible reductions are complete in generation $\V{g}+1$
+        of row $\V{i}+1$ if
+        the rows as far as \V{i} are complete,
+        and row $\V{i}+1$ is complete as far as generation \V{g}.
         \lmEnd
 \end{lemma}
+
+\begin{proof}
+        \todo{Write this proof}
+        \myqed
+\end{proof}
+
+\begin{lemma}[Intangible reduction completion]
+        Intangible reductions are complete in generation $\V{g}+1$
+        of row $\V{i}+1$ if
+        the rows as far as \V{i} are complete,
+        and row $\V{i}+1$ is complete as far as generation \V{g}.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \todo{Write this proof}
+        \myqed
+\end{proof}
+
+\begin{lemma}[Reduction completion]
+        Reductions are complete in generation $\V{g}+1$
+        of row $\V{i}+1$ if
+        the rows as far as \V{i} are complete,
+        and row $\V{i+1}$ is complete as far as generation \V{g}.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \todo{Write this proof}
+        \myqed
+\end{proof}
+
+\begin{lemma}[Prediction completion]
+        Prediction is complete in row $\V{i}+1$ if
+        the rows as far as row \V{i} are complete
+        and row $\V{i}+1$ is complete for all confirmations.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        Predictions in a row
+        may be computed from the confirmation.
+        One method is to
+        first scan the confirmations to produce ``phase 0''
+        predictions,
+        and then using the phase 0 predictions as the initial
+        state of a worklist to recursively compute the other
+        predictions.
+        (More efficient methods are possible using
+        precomputation and bitmasks.)
+        \myqed
+\end{proof}
+
+\begin{lemma}[Row completion]
+        Row $\V{i}+1$ is complete
+        the rows as far as row \V{i} are complete.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \todo{Write this proof}
+        \myqed
+\end{proof}
 
 \FloatBarrier
 
