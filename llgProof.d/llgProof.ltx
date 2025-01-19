@@ -353,6 +353,8 @@ for Earley's algorithm.\footnote{%
 \begin{itemize}
 \item ``Iff'' (or ``iff'') abbreviates
     ``if and only if''.
+\item ``Wrt'' (or ``wrt'') abbreviates
+    ``with respect to''.
 \item Ranges are inclusive start,
     exclusive end, so that, for example,
         \begin{gather*}
@@ -436,6 +438,8 @@ if it is a reduction whose predot symbol is nullable.
 We say that an Earley item is a \textbf{non-nullable reduction}
 if it is a reduction whose predot symbol is non-nullable. \dfEnd
 \end{definition}
+
+\todo{Define derivation set (DS)}.
 
 \begin{definition}[Derivation set instances]
 \label{df:di}
@@ -1110,19 +1114,21 @@ so we will write \VFA{Nulling}{down} to say that
 \label{eq:pr-ri-main-32}
         \neg\VFA{Nulling}{\V{down}} \lor \V{postdotA} \neq \epsilon \bcuz \eqref{eq:pr-ri-main-30}.
 \end{equation}
+For the next few deductions, we will stay within the context
+        of derivation set \eqref{eq:pr-ri-main-24}.
 Recalling the definition of ``nulling DI'' \Dfref{nulling-di},
 we see that,
-within the derivation set of \eqref{eq:pr-ri-main-24},
 \begin{equation}
 \label{eq:pr-ri-main-34}
         \begin{gathered}
                 \VFA{Nulling}{\V{down}} \equiv \\
                 \V{A} \destar \V{antepredotA} \cat \V{B} \cat \V{postdotA} \\
                 \destar \Velement{w}{\V{origin},\V{current}} \cat \V{B} \cat \V{postdotA} \\
-                \destar \epsilon.
+                \destar \epsilon \\
+                \bcuz \text{definition of ``nulling DI'' \Dfref{nulling-di},
+                        wrt DS \eqref{eq:pr-ri-main-24}.}
         \end{gathered}
 \end{equation}
-Still within the derivation set of \eqref{eq:pr-ri-main-24},
 \begin{equation}
 \label{eq:pr-ri-main-36}
         \begin{gathered}
@@ -1132,7 +1138,7 @@ Still within the derivation set of \eqref{eq:pr-ri-main-24},
                 \land \; \V{B} \destar \epsilon \\
                 \land \; \V{postdotA} \destar \epsilon
                 \end{gathered} \right)
-                \bcuz \eqref{eq:pr-ri-main-24}, \eqref{eq:pr-ri-main-34}.
+                \bcuz \text{\eqref{eq:pr-ri-main-34}, wrt DS \eqref{eq:pr-ri-main-24}.}
         \end{gathered}
 \end{equation}
 
