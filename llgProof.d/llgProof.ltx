@@ -1065,7 +1065,7 @@ Therefore, with
 \end{lemma}
 
 \begin{proof}
-        We assumed for the lemma that we have a tangible reduction DI.
+        We assumed for the lemma that we have an intangible reduction DI.
         Without loss of generality, let this be
 \begin{equation}
         \label{eq:pr-rm-main-5}
@@ -1131,6 +1131,7 @@ we see that,
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-main-36}
+\begin{gathered}
         \begin{gathered}
                 \VFA{Nulling}{\V{down}} \equiv
                 \left( \begin{gathered}
@@ -1138,8 +1139,27 @@ we see that,
                 \land \; \V{B} \destar \epsilon \\
                 \land \; \V{postdotA} \destar \epsilon
                 \end{gathered} \right)
-                \bcuz \text{\eqref{eq:pr-ri-main-34}, wrt DS \eqref{eq:pr-ri-main-24}.}
-        \end{gathered}
+        \end{gathered} \\
+        \bcuz \text{\eqref{eq:pr-ri-main-34}, wrt DS \eqref{eq:pr-ri-main-24}.}
+\end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-main-38}
+        \text{$\V{B} \destar \epsilon$
+                \bcuz \eqref{eq:pr-ri-main-14}, wrt DS \eqref{eq:pr-ri-main-24}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-main-40}
+\begin{gathered}
+        \begin{gathered}
+                \VFA{Nulling}{\V{down}} \equiv
+                \left( \begin{gathered}
+                \Velement{w}{\V{origin},\V{current}} \destar \epsilon \\
+                \land \; \V{postdotA} \destar \epsilon
+                \end{gathered} \right)
+        \end{gathered} \\
+        \bcuz \text{\eqref{eq:pr-ri-main-36}, \eqref{eq:pr-ri-main-38}.}
+\end{gathered}
 \end{equation}
 \todo{Note distinction between postdotA produces epsilion and postdotA *is* epsilon}
 
