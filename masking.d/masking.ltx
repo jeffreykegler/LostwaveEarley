@@ -274,8 +274,27 @@ no new costs.\footnote{%
         which requires us sometimes to use the token-consistent lexemes,
         a subset of the allowed lexemes.
         See Section \ref{sec:-token-consistent lexemes}
-        on \pageref{sec:-token-consistent lexemes}.
+        on page \pageref{sec:-token-consistent lexemes}.
 }
+
+The byte pairs guide traversal of the token trie.
+There is a GO-bit which, if true tells us to continue
+trie traversal below the current node and,
+if false, tells us to not traverse more deeply into
+the token trie.
+In addition, there is an EOL-bit, which tells us if
+we are at the end of a lexeme (aka EOL).
+We use the GO-bit to avoid most trie traversal,
+without incurring the cost of a \tpb call.
+We use the EOL-bit to limit calls to \tpb to
+situations where we are at the end of a lexeme.
+
+Calls to \tpb
+need only be made at end of lexeme,
+and for tough lexemes.
+\todo{Where will tough lexemes be discussed?}
+Tough lexemes should be sparse and will be defined
+and discussed later\footnote{Where?}.
 
 \section{The basic ideas}
 \subsection{Location independence}
