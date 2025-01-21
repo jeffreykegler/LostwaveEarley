@@ -1149,7 +1149,7 @@ we see that,
                 \bcuz \eqref{eq:pr-ri-main-14}, wrt DS \eqref{eq:pr-ri-main-24}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-ri-main-40}
+\label{eq:pr-ri-main-40a}
 \begin{gathered}
         \begin{gathered}
                 \VFA{Nulling}{\V{down}} \equiv
@@ -1159,6 +1159,20 @@ we see that,
                 \end{gathered} \right)
         \end{gathered} \\
         \bcuz \text{\eqref{eq:pr-ri-main-36}, \eqref{eq:pr-ri-main-38},
+                wrt DS \eqref{eq:pr-ri-main-24}.}
+\end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-main-40b}
+\begin{gathered}
+        \begin{gathered}
+                \VFA{Nulling}{\V{down}} \equiv
+                \left( \begin{gathered}
+                \V{origin} = \V{current} \\
+                \land \; \V{postdotA} \destar \epsilon
+                \end{gathered} \right)
+        \end{gathered} \\
+        \bcuz \text{\eqref{eq:pr-ri-main-40a},
                 wrt DS \eqref{eq:pr-ri-main-24}.}
 \end{gathered}
 \end{equation}
@@ -1178,7 +1192,31 @@ we see that,
                 \end{gathered} \right)
         \end{gathered} \\
         \bcuz \text{\eqref{eq:pr-ri-main-36},
-                \eqref{eq:pr-ri-main-40}, \eqref{eq:pr-ri-main-41},
+                \eqref{eq:pr-ri-main-40a}, \eqref{eq:pr-ri-main-41},
+                wrt DS \eqref{eq:pr-ri-main-24}.}
+\end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-main-44}
+\begin{gathered}
+        \begin{gathered}
+                \neg \VFA{Nulling}{\V{down}} \equiv
+                \left( \begin{gathered}
+                \V{origin} < \V{current} \\
+                        \lor \; \neg(\V{postdotA} \destar \epsilon)
+                \end{gathered} \right)
+        \end{gathered} \\
+        \bcuz \text{\eqref{eq:pr-ri-main-32},
+                wrt DS \eqref{eq:pr-ri-main-24}.}
+\end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-main-46}
+\begin{gathered}
+                (\V{origin} < \V{current}
+                        \lor \; \neg(\V{postdotA} \destar \epsilon))
+        \lor \V{postdotA} \neq \epsilon \\
+        \text{\bcuz \eqref{eq:pr-ri-main-32}, \eqref{eq:pr-ri-main-44},
                 wrt DS \eqref{eq:pr-ri-main-24}.}
 \end{gathered}
 \end{equation}
@@ -1187,7 +1225,7 @@ the distinction between $\V{postdotA} \destar \epsilon$
         and $\V{postdotA} = \epsilon$.
         The two are not equivalent but it it true that
 \begin{equation}
-\label{eq:pr-ri-main-44}
+\label{eq:pr-ri-main-50}
         \V{postdotA} = \epsilon \implies \V{postdotA} \destar \epsilon.
 \end{equation}
 
