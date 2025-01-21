@@ -219,7 +219,66 @@ It assumes some familiarity with the code in
 		\end{gather*}
 \end{itemize}
 
-\section{The first basic idea}
+\section{Summary}
+
+\FloatBarrier
+
+The optimization suggested here works by reducing the number of calls
+of \tpb
+and use this to eliminate calls to
+\tpb.\footnote{%
+See Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte},
+    which contains a code snippet that is similar to, and taken from,
+    \url{https://github.com/microsoft/llguidance/blob/0ca091a701a50134e0503fa03c5c12b206e182a3/toktrie/src/toktree.rs\#L945}.
+}
+\begin{figure}
+\begin{lstlisting}
+    while p < endp {
+        r.pop_bytes(next_pop);
+        let n = &self.nodes[p];
+        let b = n.byte();
+        // Click ruby slipper heels here
+        if r.try_push_byte(b) {
+            toks.allow_token(n.token_id().
+                unwrap_or(defl_tok)
+            );
+            // ... stuff here ...
+        } else {
+            // ... other stuff here ...
+        }
+    }
+\end{lstlisting}
+\caption{Ruby Slippers Click Point%
+    \label{fig:try-push-byte}%
+}
+\end{figure}
+The optimization prefaces
+(and hopefully usually replaces)
+the call to \tpb with a small
+set of calls (one for each of a subset of the allowed
+lexemes) to a cache containing
+byte pairs.
+The set, and the byte pairs,
+are free of per-location charge (FOPC).
+
+The byte pairs are FOPC
+because they do not vary by location,
+and therefore may be calculated once
+and cached.
+The allowed lexemes set is FOPC
+because it will have already been calculated for each location
+for other purposes, and therefore impose
+no new costs.\footnote{%
+        We ignore for the moment a slight complication
+        of little cost,
+        which requires us sometimes to use the token-consistent lexemes,
+        a subset of the allowed lexemes.
+        See Section \ref{sec:-token-consistent lexemes}
+        on \pageref{sec:-token-consistent lexemes}.
+}
+
+\section{The basic ideas}
+\subsection{Location independence}
 
 The first basic idea behind the suggestions in this document is
 the well-known one of taking invariant code called repeatedly,
@@ -237,7 +296,7 @@ regardless of the parse location at which it is called.
 Logic which is not location-independent is
 called ``location-dependent''.
 
-\section{The second basic idea}
+\subsection{The Ruby Slippers}
 
 The second basic idea behind this document is more
 aggressive use of the Ruby Slippers.
@@ -767,6 +826,7 @@ then
 \FloatBarrier
 
 \section{Token-consistent lexemes}
+\label{sec:-token-consistent lexemes}
 
 At the start of parse, and after every lexeme,
 there is a set of ``allowed lexemes''.
@@ -819,35 +879,7 @@ It is not (at last not necessarily)
 a suggestion for gradual implementation.
 
 In Stage 1, we go from the token-consistent lexemes
-to the allowed bytes of tokens,
-and use this to eliminate calls to
-\tpb.
-We refer to the code snippet\footnote{%
-    This code snippet is similar to, and taken from,
-    \url{https://github.com/microsoft/llguidance/blob/0ca091a701a50134e0503fa03c5c12b206e182a3/toktrie/src/toktree.rs\#L945}.
-}
-in Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
-\begin{figure}
-\begin{lstlisting}
-    while p < endp {
-        r.pop_bytes(next_pop);
-        let n = &self.nodes[p];
-        let b = n.byte();
-        // Click ruby slipper heels here
-        if r.try_push_byte(b) {
-            toks.allow_token(n.token_id().
-                unwrap_or(defl_tok)
-            );
-            // ... stuff here ...
-        } else {
-            // ... other stuff here ...
-        }
-    }
-\end{lstlisting}
-\caption{Ruby Slippers Click Point%
-    \label{fig:try-push-byte}%
-}
-\end{figure}
+to the allowed bytes of tokens.
 
 In what follows we will be interested in the overlap of the lexeme
 and \VFA{toString}{node}, the string implied by \V{node} in the
