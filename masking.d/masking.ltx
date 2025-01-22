@@ -1013,6 +1013,23 @@ when \V{lex} is tough.
 
 The example in the section will follow the recognition
 of a fixed string lexeme, byte by byte.
+The lexeme will be \texttt{/abcdef/}.
+We will assume that we have already committed
+a token which covers its first three bytes:
+\texttt{"abc"},
+so that our trie base (TB)is 3 bytes after the
+allowed lexeme anchor (ALA).
+In other words, our lexeme offset is 3:
+\begin{equation}
+        \label{eq:fixed-string-offset}
+	\V{off} = (\V{TB} \subtract \V{ALA}) = 3.
+\end{equation}
+
+We are trying to sample a token which covers
+the last three bytes:
+\texttt{"def"}.
+We will show our progress until the EOL,
+byte by byte.
 
 \needspace{3in}
 \FloatBarrier
@@ -1044,6 +1061,48 @@ of a fixed string lexeme, byte by byte.
 \label{fig:example-fixed1}
 \end{figure}
 } % group for floatstyle
+
+Figure~\ref{fig:example-fixed1} shows the situation where
+\VFA{toString}{node},
+the string implied by \V{node} of the token trie,
+is \texttt{"d"}.
+We are considering
+the token-consistent lexeme \texttt{/abcdef/}.
+The relevant range is \texttt{[3,4]},
+and there is an LI slice: \texttt{/d/}.
+Recall from \ref{eq:fixed-string-offset} that the lexeme offset is 3,
+which is positive.
+Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+\
+\begin{equation}
+\begin{gathered}
+(\V{lex}, \V{off}) \\
+	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
+	= \Velement{(\texttt{/abcdef/})}{3, (1+3) } \\
+    = \texttt{/d/}.
+\end{gathered}
+\end{equation}
+
+Again, \VFA{toString}{node},
+the string implied by \V{node} of the token trie,
+is \texttt{"d"}.
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-overlap},
+\[
+	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"d"}.
+\]
+Attempting to match the overlap to the slice, we have
+\[
+     \texttt{"d"} \sim \texttt{/d/},
+\]
+which is a match,
+the GO-bit of our boolean pair is true.
+The EOL-bit is false.
+So we cache $(\V{true},\V{false})$
+for the Ruby triple
+\[
+	(\V{node}, \texttt{/abcdef/}, 3).
+\]
+The
 
 \needspace{3in}
 \FloatBarrier
