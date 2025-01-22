@@ -1008,16 +1008,20 @@ We can make \eqref{eq:ruby-function}
 a total function by using the wildcard slice
 when \V{lex} is tough.
 
+\todo{Add section about computation of EOL-bit}
+
 \section{Fixed string example}
 \label{sec:examples}
 
 The example in the section will follow the recognition
 of a fixed string lexeme, byte by byte.
 The lexeme will be \texttt{/abcdef/}.
+
 We will assume that we have already committed
 a token which covers its first three bytes:
 \texttt{"abc"},
-so that our trie base (TB)is 3 bytes after the
+so that our trie base (TB)
+is 3 bytes after the
 allowed lexeme anchor (ALA).
 In other words, our lexeme offset is 3:
 \begin{equation}
@@ -1095,8 +1099,11 @@ Attempting to match the overlap to the slice, we have
      \texttt{"d"} \sim \texttt{/d/},
 \]
 which is a match,
-the GO-bit of our boolean pair is true.
+so the GO-bit of our boolean pair is true.
+
 The EOL-bit is false.
+\todo{Explain this.}
+
 So we cache $(\V{true},\V{false})$
 for the Ruby triple
 \[
