@@ -975,14 +975,12 @@ as we must know how to deal with that.
 \label{fig:input-2}
 \end{figure}
 
-In the context of token trie nodes,
-lexeme slices anchored to either side of the toktrie base (TB)
-are of special interest.
-We call these ``anchored lexeme slices''.
-An anchored lexeme slice can be represented
+A lexeme slice can be represented
 as \FA{Slice}{\V{lex}, \V{off}}.
-In this section we considered slices anchored by TB
-at their left.
+In this section we considered the case
+where the start of the token is after the
+start of the lexeme, so that the TB
+is properly inside the lexeme.
 
 Recall (equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset})
 that we defined the lexeme offset as \V{off}
