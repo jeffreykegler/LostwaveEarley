@@ -982,30 +982,30 @@ where the start of the token is after the
 start of the lexeme, so that the TB
 is properly inside the lexeme.
 
-Recall (equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset})
-that we defined the lexeme offset as \V{off}
-where
+We defined the lexeme offset as \V{off}
+in equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset}:
 \[
 	\V{off} = \V{TB} \subtract \V{ALA}.
 \]
-From \eqref{eq:lexeme-offset}
-and Figure~\ref{fig:input-2},
-it can be seen that a slice with TB at
-its left has a positive offset.
+From \eqref{eq:lexeme-offset},
+and from Figure~\ref{fig:input-2} on page~\pageref{fig:input-1},
+it can be seen that a slice that begins
+after TB has a positive offset.
 
-Recall the definitions of \V{node}, etc.,
-in Definition \Dfref{token-trie}.
-We use these definitions to state the value
+We use the definitions of \V{node}, etc.,
+in Definition \Dfref{token-trie}
+to state the value
 of the anchored lexeme slices.
 If \V{off} is positive,
-as in Figure~\ref{fig:input-1} on page~\pageref{fig:input-1},
-so that $\V{TB} > \V{ALA}$,
+as in Figure~\ref{fig:input-2},
+so that $\V{TB} > \V{ALA}$, then
 \begin{equation}
 \label{eq:positive-offset}
         \FA{Slice}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
 \end{equation}
+\todo{Section revised to here}
 
-In what follows we will be interested in the overlap of the lexeme
+We will be interested in the overlap of the lexeme
 and \VFA{toString}{node}, the string implied by \V{node} in the
 token trie.
 We write this overlap as
