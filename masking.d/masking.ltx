@@ -289,8 +289,8 @@
 \newenvironment{MYsloppyC}[3]{\par\tolerance#3 \emergencystretch#1 \hbadness#2\relax}{\par}
 
 \title
-  [Masking Thoughts]
-  {Thoughts on optimizing the computation of masks}
+  [Masking Scheme]
+  {A scheme for optimizing mask computation}
 
 \author{Jeffrey Kegler}
 \ifdraft{
@@ -646,49 +646,6 @@ lexeme that ends {\bf before} the working token,
 Figure \ref{fig:input-2} shows a working
 lexeme that ends {\bf after} the working token.
 
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
-\rule{30pt}{0pt} &
-\rule{30pt}{0pt} &
-\multicolumn{2}{c}{TB} &
-\rule{30pt}{0pt} &
-\rule{30pt}{0pt} &
-        \rule{30pt}{0pt} \\
-\rule{30pt}{0pt} &
-\multicolumn{2}{c|}{ALA} &
-\multicolumn{2}{c}{Current} &
-\rule{30pt}{0pt} &
-        \rule{30pt}{0pt} \\
-\multicolumn{2}{c|}{} &
-\multicolumn{1}{c|}{} &
-\multicolumn{1}{c|}{} &
-        \rule{30pt}{0pt} &
-        \rule{30pt}{0pt} &
-        \rule{30pt}{0pt} \\
-\cline{1-4}\cdashline{5-7}
-	\multicolumn{2}{|p{72pt}|}{\centering \hyphenpenalty=10000 accepted lexeme} &
-	% 30pt * 5 + 12pt * 4 = 198pt
-	\multicolumn{5}{|p{198pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
-\cline{1-4}\cdashline{5-7}
-\rule{30pt}{0pt} &
-	\multicolumn{2}{|p{72pt}|}{\centering committed token} &
-	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token} &
-        \rule{30pt}{0pt} \\
-\cline{1-4}\cdashline{5-7}
-	\multicolumn{4}{|p{156pt}|}{\centering seen input} &
-	\multicolumn{3}{|p{114pt}}{\centering unseen input} \\
-\cline{1-4}\cdashline{5-7}
-\end{tabular}
-\vspace{6pt}
-\caption{Input structure with long working lexeme}
-\label{fig:input-2}
-\end{figure}
-
-\needspace{100pt}
 The \V{ALA} may occur before or after the \V{TB}.
 Where
 \begin{equation}
@@ -976,13 +933,56 @@ as we must know how to deal with that.
 
 \section{LIVE- and EOL-bit for positive offsets}
 
-\section{Lexeme slices and token trie nodes}
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+\multicolumn{2}{c}{TB} &
+\rule{30pt}{0pt} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\rule{30pt}{0pt} &
+\multicolumn{2}{c|}{ALA} &
+\multicolumn{2}{c}{Current} &
+\rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\multicolumn{2}{c|}{} &
+\multicolumn{1}{c|}{} &
+\multicolumn{1}{c|}{} &
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} &
+        \rule{30pt}{0pt} \\
+\cline{1-4}\cdashline{5-7}
+	\multicolumn{2}{|p{72pt}|}{\centering \hyphenpenalty=10000 accepted lexeme} &
+	% 30pt * 5 + 12pt * 4 = 198pt
+	\multicolumn{5}{|p{198pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
+\cline{1-4}\cdashline{5-7}
+\rule{30pt}{0pt} &
+	\multicolumn{2}{|p{72pt}|}{\centering committed token} &
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token} &
+        \rule{30pt}{0pt} \\
+\cline{1-4}\cdashline{5-7}
+	\multicolumn{4}{|p{156pt}|}{\centering seen input} &
+	\multicolumn{3}{|p{114pt}}{\centering unseen input} \\
+\cline{1-4}\cdashline{5-7}
+\end{tabular}
+\vspace{6pt}
+\caption{Input structure with long working lexeme}
+\label{fig:input-2}
+\end{figure}
 
 In the context of token trie nodes,
 lexeme slices anchored to either side of the toktrie base (TB)
 are of special interest.
 We call these ``anchored lexeme slices''.
-Anchored lexeme slices can be conveniently represented as a duple.
+An anchored lexeme slice can be represented
+as \FA{Slice}{\V{lex}, \V{off}}.
+In this section we considered slices anchored by TB
+at their left.
 
 Recall (equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset})
 that we defined the lexeme offset as \V{off}
@@ -990,22 +990,21 @@ where
 \[
 	\V{off} = \V{TB} \subtract \V{ALA}.
 \]
-An anchored lexeme slice can be represented
-as $(\V{lex}, \V{off})$.
-
-\needspace{3in}
-\FloatBarrier
+From \eqref{eq:lexeme-offset}
+and Figure~\ref{fig:input-2},
+it can be seen that a slice with TB at
+its left has a positive offset.
 
 Recall the definitions of \V{node}, etc.,
 in Definition \Dfref{token-trie}.
-With these definitions, we are in a position to state the value
-of the anchored lexeme slice duples.
+We use these definitions to state the value
+of the anchored lexeme slices.
 If \V{off} is positive,
 as in Figure~\ref{fig:input-1} on page~\pageref{fig:input-1},
 so that $\V{TB} > \V{ALA}$,
 \begin{equation}
 \label{eq:positive-offset}
-	(\V{lex}, \V{off}) = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
+        \FA{Slice}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
 \end{equation}
 
 In what follows we will be interested in the overlap of the lexeme
