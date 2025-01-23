@@ -703,6 +703,7 @@ we call \V{off} the
 \noindent
 Let \V{node} be a token trie node.
 Then the following are true:
+\begin{MYsloppy}
 \begin{itemize}
 \item \VFA{path}{node} is the path from the trie root
 to \V{node}, treated as a vector of nodes.
@@ -722,6 +723,7 @@ and abbreviate \FA{toString}{\VFA{path}{node}}
 as \VFA{toString}{node}.
 \dfEnd
 \end{itemize}
+\end{MYsloppy}
 \end{definition}
 
 \section{Lexeme slices}
@@ -882,81 +884,6 @@ and an implementation is likely to find it most convenient
 to treat all lexemes as if they were sliceable.
 The wildcard approximation allows this.
 
-\section{Lexeme slices and token trie nodes}
-
-In the context of token trie nodes,
-lexeme slices anchored to either side of the toktrie base (TB)
-are of special interest.
-We call these ``anchored lexeme slices''.
-Anchored lexeme slices can be conveniently represented as a duple.
-
-Recall (equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset})
-that we defined the lexeme offset as \V{off}
-where
-\[
-	\V{off} = \V{TB} \subtract \V{ALA}.
-\]
-An anchored lexeme slice can be represented
-as $(\V{lex}, \V{off})$.
-
-\needspace{3in}
-\FloatBarrier
-
-If \V{off} is negative,
-as in Figure~\ref{fig:input-3} on page~\pageref{fig:input-3},
-so that $\V{ALA} > \V{TB}$,
-then
-\begin{equation}
-\label{eq:negative-offset}
-	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}+\V{off}}.
-\end{equation}
-
-\noindent
-\begin{figure}[ht]
-\vspace{6pt}
-% note: default tabcolsep is 6pt
-% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
-\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c}{ALA} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} \\
-	% ===
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c|}{TB} &
-        \multicolumn{2}{c}{Current} \\
-	% ===
-	\rule{30pt}{0pt} &
-        \multicolumn{2}{c|}{} &
-	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
-	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
-	\rule{30pt}{0pt} &
-	\rule{30pt}{0pt} \\
-	% ===
-\cline{1-5}\cdashline{6-7}
-\multicolumn{4}{|c|}{accepted lexeme} &
-	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
-\cline{1-5}\cdashline{6-7}
-        \rule{30pt}{0pt} &
-        \multicolumn{2}{|p{6em}|}{\centering committed token} &
-        \multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token}
-        \\
-	% ===
-\cline{1-5}\cdashline{6-7}
-\multicolumn{5}{|c|}{seen input} &
-        \multicolumn{2}{|c}{unseen input} \\
-\cline{1-5}\cdashline{6-7}
-\end{tabular}
-\vspace{6pt}
-\caption{Input structure with token split between lexemes}
-\label{fig:input-3}
-\end{figure}
-
-\FloatBarrier
-
 \section{Token-consistent lexemes}
 \label{sec:-token-consistent lexemes}
 
@@ -1049,6 +976,26 @@ as we must know how to deal with that.
 
 \section{LIVE- and EOL-bit for positive offsets}
 
+\section{Lexeme slices and token trie nodes}
+
+In the context of token trie nodes,
+lexeme slices anchored to either side of the toktrie base (TB)
+are of special interest.
+We call these ``anchored lexeme slices''.
+Anchored lexeme slices can be conveniently represented as a duple.
+
+Recall (equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset})
+that we defined the lexeme offset as \V{off}
+where
+\[
+	\V{off} = \V{TB} \subtract \V{ALA}.
+\]
+An anchored lexeme slice can be represented
+as $(\V{lex}, \V{off})$.
+
+\needspace{3in}
+\FloatBarrier
+
 Recall the definitions of \V{node}, etc.,
 in Definition \Dfref{token-trie}.
 With these definitions, we are in a position to state the value
@@ -1077,7 +1024,65 @@ so that \VFA{toString}{node} is identical to the overlap:
 	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node}
 \end{equation}
 
+\FloatBarrier
 \section{LIVE- and EOL-bit for negative offsets}
+
+\todo{This section is now scrambled.  Fix it.}
+
+\noindent
+\begin{figure}[ht]
+\vspace{6pt}
+% note: default tabcolsep is 6pt
+% \rule{30pt}{0pt} needed to trigger use of minimum p cell width
+\begin{tabular}{p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}p{30pt}}
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c}{ALA} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+	% ===
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{TB} &
+        \multicolumn{2}{c}{Current} \\
+	% ===
+	\rule{30pt}{0pt} &
+        \multicolumn{2}{c|}{} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\multicolumn{1}{c|}{\rule{30pt}{0pt}} &
+	\rule{30pt}{0pt} &
+	\rule{30pt}{0pt} \\
+	% ===
+\cline{1-5}\cdashline{6-7}
+\multicolumn{4}{|c|}{accepted lexeme} &
+	\multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working lexeme} \\
+\cline{1-5}\cdashline{6-7}
+        \rule{30pt}{0pt} &
+        \multicolumn{2}{|p{6em}|}{\centering committed token} &
+        \multicolumn{3}{|p{114pt};{2pt/2pt}}{\centering\vspace{-1pt}working token}
+        \\
+	% ===
+\cline{1-5}\cdashline{6-7}
+\multicolumn{5}{|c|}{seen input} &
+        \multicolumn{2}{|c}{unseen input} \\
+\cline{1-5}\cdashline{6-7}
+\end{tabular}
+\vspace{6pt}
+\caption{Input structure with token split between lexemes}
+\label{fig:input-3}
+\end{figure}
+
+\FloatBarrier
+
+If \V{off} is negative,
+as in Figure~\ref{fig:input-3} on page~\pageref{fig:input-3},
+so that $\V{ALA} > \V{TB}$,
+then
+\begin{equation}
+\label{eq:negative-offset}
+	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}+\V{off}}.
+\end{equation}
 
 If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
 the beginning of the lexeme overlaps the last bytes
@@ -1091,7 +1096,7 @@ so that
 
 \section{[Material to be moved or deleted]}
 
-\todo{Some of the material in this section should be moved earlier.}
+\todo{Most of the material in this section should be moved to other places.}
 Let \V{TClexes} be the set of token-consistent lexemes at
 the ``click point'' in
 Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
