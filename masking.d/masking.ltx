@@ -700,6 +700,7 @@ For example, the application could specify explicitly
 how they can be sliced.
 But many of these will be tough lexemes.
 \end{itemize}
+\todo{Discuss open-ended lexeme slices}
 
 \section{Overapproximation}
 \label{sec:overapproximation}
@@ -888,17 +889,53 @@ When $\V{TB} \le \V{ALA}$, this will always be
 the case.
 A token-consistent lexeme is always an allowed lexeme.
 
-\section{Stage 1: Calculating the allowed bytes}
+Allowed lexemes should be sparse,
+and token-consistent lexemes will be even more sparse.\footnote{%
+	For \cite{XGrammar2024}
+	the nearest approximation to ``token-consistent lexemes'' is
+	their ``context-dependent tokens''.
+	In one experiment, with a JSON parser,
+	they put ``context-dependent tokens'' at "less than 1\%
+	(1134 out of 128k)"
+	(Section 3.1, ``Adaptive Token Mask Cache'').
+	Our Earley engine has more information about the parse
+	than the PDA of \cite{XGrammar2024}, so we would expect
+	``token-consistent lexemes'' to be even sparser
+	than ``context-dependent tokens''.
+	Comparing statistics from the two approaches, however,
+	is a risky business.
+	We also should keep in mind that JSON is, by design,
+	a very easy to parse language,
+	so should naturally yield a low count of
+	both ``token-consistent lexemes'' and
+	``context-dependent tokens''.},
 
-We set out our algorithm in two stages.
-While each stage does result in an optimization,
-our separation of the algorithm into stages
-is primarily to simplify the presentation.
-It is not (at last not necessarily)
-a suggestion for gradual implementation.
+\section{Calculating LIVE and EOL at each byte location}
 
-In Stage 1, we go from the token-consistent lexemes
-to the allowed bytes of tokens.
+We must calculate a per-byte-location value for LIVE and
+EOL.
+Let only one lexeme, call it \V{lex},
+be token-consistent
+at $\ell$, a particular byte location.
+Then the following are true:
+\begin{itemize}
+        \item The value of LIVE for $\ell$ is the value
+of the LIVE-bit for \V{lex}.
+        \item If the LIVE-bit for \V{lex} is true,
+the value of EOL for $\ell$ is the value
+of the EOL-bit for \V{lex}.
+If the LIVE-bit for \V{lex} is false,
+the value of EOL for $\ell$ is undefined.
+\end{itemize}
+
+The most common count of token-consistent lexemes
+per byte location will be one.
+But it will by no means be rare for
+mulitple lexemes to be token-consistent
+at a single byte location,
+as we must know how to deal with that.
+
+\section{LIVE- and EOL-bit for positive offsets}
 
 In what follows we will be interested in the overlap of the lexeme
 and \VFA{toString}{node}, the string implied by \V{node} in the
@@ -915,6 +952,9 @@ so that \VFA{toString}{node} is identical to the overlap:
 \label{eq:positive-overlap}
 	\FA{overlap}{\V{node},\V{off}} = \VFA{toString}{node}
 \end{equation}
+
+\section{LIVE- and EOL-bit for negative offsets}
+
 If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
 the beginning of the lexeme overlaps the last bytes
 of \VFA{toString}{node},
@@ -925,6 +965,9 @@ so that
 		\element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.
 \end{equation}
 
+\section{[Material to be moved or deleted]}
+
+\todo{Some of the material in this section should be moved earlier.}
 Let \V{TClexes} be the set of token-consistent lexemes at
 the ``click point'' in
 Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte}.
@@ -946,50 +989,30 @@ For a tough lexeme \V{tuff}, the recognizer $(\V{tuff}, \V{off})$
 might overapproximate, so that an unnecessary call
 to \tpb might be made.
 In practice,
-allowed and token-consistent lexemes are sparse\footnote{%
-	For \cite{XGrammar2024}
-	the nearest approximation to ``token-consistent lexemes'' is
-	their ``context-dependent tokens''.
-	In one experiment, with a JSON parser,
-	they put ``context-dependent tokens'' at "less than 1\%
-	(1134 out of 128k)"
-	(Section 3.1, ``Adaptive Token Mask Cache'').
-	Our Earley engine has more information about the parse
-	than the PDA of \cite{XGrammar2024}, so we would expect
-	``token-consistent lexemes'' to be even sparser
-	than ``context-dependent tokens''.
-	Comparing statistics from the two approaches, however,
-	is a risky business.
-	We also should keep in mind that JSON is, by design,
-	a very easy to parse language,
-	so should naturally yield a low count of
-	both ``token-consistent lexemes'' and
-	``context-dependent tokens''.},
+allowed and token-consistent lexemes are sparse
 most lexemes are sliceable,
 and most tough lexemes have good overapproximations.
-So even at Stage 1,
-this optimization should be significant.
-But a more substantial payoff should be realized in Stage 2.
 
 \needspace{3in}
 \section{Caching}
 \label{sec:caching}
 
-Stage 1,
-for every node \V{node},
+For every node \V{node},
 every lexeme \V{lex},
 and every offset \V{off},
-must access the value of
-\begin{equation}
-\label{eq:ruby-triple-test}
-	\VFA{overlap}{\V{node},\V{off}} \, \sim \, (\V{lex}, \V{off}).
-\end{equation}
+our optimization code must access the value of the GO-bit and
+the EOL-bit.
 We call
 \begin{equation}
 \label{eq:ruby-triple}
 	(\V{node}, \V{lex}, \V{off})
 \end{equation}
 a ``Ruby triple'',
+
+\begin{equation}
+\label{eq:ruby-triple-test}
+	\VFA{overlap}{\V{node},\V{off}} \, \sim \, (\V{lex}, \V{off}).
+\end{equation}
 To really achieve optimization,
 the  results of \eqref{eq:ruby-triple-test}
 for \eqref{eq:ruby-triple}
