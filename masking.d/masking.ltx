@@ -800,7 +800,17 @@ For example, the application could specify explicitly
 how they can be sliced.
 But many of these will be tough lexemes.
 \end{itemize}
-\todo{Discuss open-ended lexeme slices}
+
+For caculating when we are at the end of a lexeme,
+we will be interested in \VFA{Rem}{\V{lex},\V{pos}},
+the slice which, starting at position \V{pos} in \V{lex},
+is the ``remainder'' of \V{lex}.
+This can be calculated as
+\begin{equation}
+        \label{eq:lex-rem}
+        \VFA{Rem}{\V{lex},\V{pos}} = \Velement{lex}{ \, \V{pos},
+        (\Vsize{lex}\subtract\V{pos}) \, }.
+\end{equation}
 
 \section{Overapproximation}
 \label{sec:overapproximation}
@@ -1003,23 +1013,22 @@ so that $\V{TB} > \V{ALA}$, then
 \label{eq:positive-offset}
         \FA{Slice}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
 \end{equation}
-\todo{Section revised to here}
 
-We will be interested in the overlap of the lexeme
-and \VFA{toString}{node}, the string implied by \V{node} in the
-token trie.
-We write this overlap as
-\[
-        \FA{Overlap}{\V{node},\V{off}}
-\]
+We recall that \VFA{toString}{node} is
+the string implied by \V{node} in the token trie.
+We will be interested in $\FA{Overlap}{\V{node},\V{off}}$,
+the overlap of the lexeme
+and \VFA{toString}{node}.
 If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 the entire token trie overlaps
 a segment of the lexeme,
 so that \VFA{toString}{node} is identical to the overlap:
 \begin{equation}
 \label{eq:positive-overlap}
-        \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node}
+        \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node}.
 \end{equation}
+
+\todo{Recheck this section.}
 
 \FloatBarrier
 \section{LIVE- and EOL-bit for negative offsets}
@@ -1138,7 +1147,7 @@ Allowing false positives means allowing lexemes that overapproximate.
 Overapproximation is useful for tough lexemes.
 In the face of overapproximation, unnecessary calls
 to \tpb might be made.
-But the number of unnecessary call is expected to
+But the number of unnecessary calls is expected to
 be manageable.
 In practice,
 token-consistent lexemes are sparse,
@@ -1803,7 +1812,7 @@ We need not cache values of
 the \Fname{Ruby} function~\eqref{eq:ruby-function}
 is false.
 Also,
-whenever 
+whenever
 the \Fname{Ruby} function~\eqref{eq:ruby-function}
 is true due to an overapproximation,
 \eqref{eq:eol-function} should be set to true.
