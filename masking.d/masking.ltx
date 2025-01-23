@@ -701,21 +701,24 @@ we call \V{off} the
 \begin{definition}[Token trie variables]
         \label{df:token-trie}
 \noindent
+Let \V{node} be a token trie node.
+Then the following are true:
 \begin{itemize}
-\item Let \V{node} be the token trie node that is the context
-        of the discussions in this article.
-\item Let \VFA{path}{node} be the path from the trie root
+\item \VFA{path}{node} is the path from the trie root
 to \V{node}, treated as a vector of nodes.
-\item We represent the length of \VFA{path}{node}
-as \size{\VFA{path}{node}}.
+\item
+\size{\VFA{path}{node}}
+is the length of \VFA{path}{node}.
 Abusing notation a bit, we also write
 \size{\VFA{path}{node}} as \Vsize{node}.
 \Vsize{node} is also called the ``depth''
 of \V{node}.
-\item The node vector \VFA{path}{node}, mapped to
-a string of bytes, is \FA{toString}{\VFA{path}{node}}.
+\item
+\FA{toString}{\VFA{path}{node}} is
+the node vector \VFA{path}{node}, mapped to
+a sequence (aka string) of bytes.
 We usually overload the notation
-and write \FA{toString}{\VFA{path}{node}}
+and abbreviate \FA{toString}{\VFA{path}{node}}
 as \VFA{toString}{node}.
 \dfEnd
 \end{itemize}
