@@ -1015,13 +1015,10 @@ as we must know how to deal with that.
 \label{fig:input-2}
 \end{figure}
 
-A lexeme slice can be represented
-as \FA{Slice}{\V{lex}, \V{off}}.
 In this section we considered the case
 where the start of the token is after the
-start of the lexeme, so that the TB
+start of the lexeme, so that TB
 is properly inside the lexeme.
-
 We defined the lexeme offset as \V{off}
 in equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset}:
 \[
@@ -1048,13 +1045,14 @@ so that $\V{TB} > \V{ALA}$, then
 \end{equation}
 is value of the framed lexeme.
 
-Next, we want the value of the framed token.
+Next, we want the value of the framed token,
 which we will call $\FA{FrameTok}{\V{node},\V{off}}$.
 We recall that \VFA{toString}{node} is
 the string implied by \V{node} in the token trie.
 If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
 the entire token trie is inside the frame,
-so that \VFA{toString}{node} is identical to the overlap:
+so that \VFA{toString}{node} is identical
+to the framed token:
 \begin{equation}
 \label{eq:positive-overlap}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node}.
@@ -1064,7 +1062,6 @@ so that \VFA{toString}{node} is identical to the overlap:
 \section{Frames with negative offsets}
 
 \todo{This section is now scrambled.  Fix it.}
-\todo{Rewrite paper from here.}
 
 \noindent
 \begin{figure}[ht]
@@ -1112,22 +1109,37 @@ so that \VFA{toString}{node} is identical to the overlap:
 
 \FloatBarrier
 
-If \V{off} is negative,
-as in Figure~\ref{fig:input-3} on page~\pageref{fig:input-3},
-so that $\V{ALA} > \V{TB}$,
-then
+We now consider the case
+where the start of the token is before the
+start of the lexeme, so that ALA
+is properly inside the token.
+Recalling our definition of the offset
+$\V{off} = \V{TB} \subtract \V{ALA}$
+(see equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset}),
+and looking at Figure~\ref{fig:input-3}
+on page~\pageref{fig:input-3},
+we see that when $\V{TB} < \V{ALA}$
+the offset, \V{off},
+will be negative.
+
+When the offset is negative,
+the frame then includes the entire lexeme up to
+the current location, so that
+the framed lexeme is
 \begin{equation}
 \label{eq:negative-offset}
-	(\V{lex}, \V{off}) = \Velement{lex}{0, \Vsize{node}+\V{off}}.
+        \FA{FrameLex}{\V{lex}, \V{off}} = \Velement{lex}{0, \Vsize{node}+\V{off}}.
 \end{equation}
 
-If \V{off} is negative, so that $\V{ALA} > \V{TB}$,
-the beginning of the lexeme overlaps the last bytes
-of \VFA{toString}{node},
+\todo{Rewrite paper from here.}
+
+When \V{off} is negative, the frame only includes
+a string of length $-\V{off}$
+in the lower portion of the token trie,
 so that
 \begin{equation}
 \label{eq:negative-overlap}
-        \FA{Overlap}{\V{node},\V{off}} =
+        \FA{FrameTok}{\V{node},\V{off}} =
 		\element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.
 \end{equation}
 
@@ -1738,9 +1750,7 @@ but our match would be a false positive.
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{%
-                \makesamewidth[c]{[ALA,Current]}{[TB,ALA]}%
-            }
+		Range of locations & \multicolumn{1}{|c|}{[TB,ALA]}
 			& \multicolumn{1}{|c|}{[ALA,Current]}
 			\\
 		\hline
@@ -1749,7 +1759,7 @@ but our match would be a false positive.
 		\hline
 		Framed token & & \texttt{"abb"} \\
 		\hline
-		Lexeme	& \multicolumn{2}{|c|}{\texttt{/ab*/}} \\
+            Lexeme	& & \texttt{/ab*/} \\
 		\hline
 		Framed lexeme & & \texttt{/abb/} \\
 		\hline
