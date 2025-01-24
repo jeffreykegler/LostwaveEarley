@@ -393,13 +393,13 @@ no new costs.\footnote{%
 }
 
 The byte pairs guide traversal of the token trie.
-There is a GO-bit which, if true tells us to continue
+There is a LIVE-bit which, if true tells us to continue
 trie traversal below the current node and,
 if false, tells us to not traverse more deeply into
 the token trie.
 In addition, there is an EOL-bit, which tells us if
 we are at the end of a lexeme (aka EOL).
-We use the GO-bit to avoid most trie traversal,
+We use the LIVE-bit to avoid most trie traversal,
 without incurring the cost of a \tpb call.
 We use the EOL-bit to limit calls to \tpb to
 situations where we are at the end of a lexeme.
@@ -572,7 +572,8 @@ and \tpb will be used as a fallback.
 \FloatBarrier
 
 We assume some knowledge of the codebase of \llguidance.
-As a reminder, in performing the mask computation we simulate byte streams
+We recall that, to perform the mask computation,
+we simulate byte streams
 which are divided into tokens,
 and check them for acceptability against a parser which divides that same byte stream into lexemes.
 From the parser
@@ -625,6 +626,25 @@ is at or after the ALA:
 \label{eq:invariant-2}
 \V{ALA} \le \V{Current}.
 \end{equation}
+
+Of special interest to us will be the frame:
+\begin{definition}
+        \label{df:frame}
+        The \textbf{frame} is the set of locations
+        before the current location,
+        and including portions of both the working lexeme,
+        and the working token.
+        The portion of the working lexeme in the frame
+        is called the \textbf{framed lexeme slice}\footnote{%
+                        Slices are defined in
+                        Section~\ref{sec:lexeme-slices}
+                        on page~\pageref{sec:lexeme-slices}.
+                }
+        or \textbf{framed lexeme}.
+        The portion of the working token in the frame is
+        called the \textbf{framed token string}
+        or \textbf{framed token}.
+\end{definition}
 
 For ease of drawing,
 and without loss of generality,
@@ -1162,7 +1182,7 @@ and most tough lexemes have good overapproximations.
 For every node \V{node},
 every lexeme \V{lex},
 and every offset \V{off},
-our optimization code must access the value of the GO-bit and
+our optimization code must access the value of the LIVE-bit and
 the EOL-bit.
 We call
 \begin{equation}
@@ -1286,7 +1306,7 @@ Attempting to match the overlap to the slice, we have
      \texttt{"d"} \sim \texttt{/d/},
 \]
 which is a match,
-so the GO-bit of our boolean pair is true.
+so the LIVE-bit of our boolean pair is true.
 
 The EOL-bit is false.
 \todo{Explain this.}
