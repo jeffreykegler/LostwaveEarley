@@ -288,6 +288,12 @@
 % less than 9999 may produce a better looking paragraph and reduce the "badness".
 \newenvironment{MYsloppyC}[3]{\par\tolerance#3 \emergencystretch#1 \hbadness#2\relax}{\par}
 
+\newlength\stextwidth
+\newcommand\makesamewidth[3][c]{%
+  \settowidth{\stextwidth}{#2}%
+  \makebox[\stextwidth][#1]{#3}%
+}
+
 \title
   [Masking Scheme]
   {A scheme for optimizing mask computation}
@@ -1259,7 +1265,9 @@ byte by byte.
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+            Range of locations & \multicolumn{1}{|c|}{%
+                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+             }
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
