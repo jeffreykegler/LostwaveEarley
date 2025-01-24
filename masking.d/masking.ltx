@@ -1346,7 +1346,9 @@ The
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+		Range of locations & \multicolumn{1}{|c|}{%
+                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+            }
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
@@ -1380,7 +1382,9 @@ The
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+		Range of locations & \multicolumn{1}{|c|}{%
+                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+            }
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
@@ -1457,7 +1461,9 @@ for the Ruby triple
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+		Range of locations & \multicolumn{1}{|c|}{%
+                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+            }
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
@@ -1543,7 +1549,9 @@ $(\V{node}, \texttt{/aa*/}, 3)$.
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+		Range of locations & \multicolumn{1}{|c|}{%
+                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+            }
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
@@ -1598,7 +1606,9 @@ overapproximation.
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+		Range of locations & \multicolumn{1}{|c|}{%
+                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+            }
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
@@ -1665,7 +1675,9 @@ $(\V{node}, \texttt{/bbbbbb/}, 3)$.
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[ALA,TB]}
+		Range of locations & \multicolumn{1}{|c|}{%
+                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+            }
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
@@ -1726,7 +1738,9 @@ but our match would be a false positive.
 % \rule{30pt}{0pt} needed to trigger use of minimum p cell width
 	\begin{tabular}{|c|r|l|}
 		\hline
-		Range of locations & \multicolumn{1}{|c|}{[TB,ALA]}
+		Range of locations & \multicolumn{1}{|c|}{%
+                \makesamewidth[c]{[ALA,Current]}{[TB,ALA]}%
+            }
 			& \multicolumn{1}{|c|}{[ALA,Current]}
 			\\
 		\hline
