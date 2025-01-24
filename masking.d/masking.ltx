@@ -496,9 +496,9 @@ to be found in the token trie.
 
 The results of the LI logic are booleans,
 which are cached and used to avoid
-calls to \tpbb.
+calls to \tpb.
 Using this optimization,
-\tpbb typically will only be called
+\tpb typically will only be called
 when a new lexeme is ready to be accepted.
 The exception is a minority of instances,
 where the logic necessary to determine when
@@ -506,7 +506,7 @@ a new lexeme is ready to be accepted
 cannot be made LI.
 In those cases,
 the cached booleans will be overapproximations,
-and \tpbb will be used as a fallback.
+and \tpb will be used as a fallback.
 
 \FloatBarrier
 
@@ -1792,7 +1792,7 @@ lexeme.
 We call a location where a lexeme can end,
 an ``end of lexeme'', or EOL.
 In Stage 2, we build on Stage 1 by tracking EOLs.
-In cases where \tpbb
+In cases where \tpb
 is called when we are not at an EOL,
 \tpbb simply stores byte \V{b}.
 If we skip the call to \tpbb,
@@ -1819,14 +1819,14 @@ the \Fname{Ruby} function~\eqref{eq:ruby-function}
 is true due to an overapproximation,
 \eqref{eq:eol-function} should be set to true.
 
-In Stage 2, calls to \tpbb
+In Stage 2, calls to \tpb
 need only be made at end of lexeme,
 and for tough lexemes.
 As noted previously,
 token-consistent lexemes in general,
 and tough lexemes in particular,
 should be sparse,
-and calls to \tpbb
+and calls to \tpb
 should be reduced greatly.
 
 \section{Forcing}
