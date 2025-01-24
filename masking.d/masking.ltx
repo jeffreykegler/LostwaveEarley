@@ -374,19 +374,20 @@ set of calls (one for each of a subset of the allowed
 lexemes) to a cache containing
 byte pairs.
 The set, and the byte pairs,
-are free of per-location charge (FOPC).
+are location-free ---
+free of per-location cost in time.
 
-The byte pairs are FOPC
+The byte pairs are location-free
 because they do not vary by location,
 and therefore may be calculated once
 and cached.
-The allowed lexemes set is FOPC
+The allowed lexemes set is location-free
 because it will have already been calculated for each location
-for other purposes, and therefore impose
+for other purposes, and therefore imposes
 no new costs.\footnote{%
-        We ignore for the moment a slight complication
-        of little cost,
-        which requires us sometimes to use the token-consistent lexemes,
+        We ignore for the moment the slight complication
+        and insignificant additional cost
+        of computing the token-consistent lexemes,
         a subset of the allowed lexemes.
         See Section \ref{sec:-token-consistent lexemes}
         on page \pageref{sec:-token-consistent lexemes}.
@@ -942,9 +943,10 @@ and token-consistent lexemes will be even more sparse.\footnote{%
 
 We must calculate a per-byte-location value for LIVE and
 EOL.
-Let only one lexeme, call it \V{lex},
+Let only one lexeme,
 be token-consistent
 at $\ell$, a particular byte location.
+Call that one lexeme, \V{lex}.
 Then the following are true:
 \begin{itemize}
         \item The value of LIVE for $\ell$ is the value
@@ -1024,17 +1026,19 @@ and from Figure~\ref{fig:input-2} on page~\pageref{fig:input-1},
 it can be seen that a slice that begins
 after TB has a positive offset.
 
-We use the definitions of \V{node}, etc.,
+We recall now the definitions
+of framed lexeme and framed token \Dfref{frame}.
+We will use the definitions of \V{node}, etc.,
 in Definition \Dfref{token-trie}
-to state the value
-of the anchored lexeme slices.
-\todo{Not "anchored lexeme slice".  "Visible" slice?}
+to state the
+framed lexeme and framed token values.
+
 If \V{off} is positive,
 as in Figure~\ref{fig:input-2},
 so that $\V{TB} > \V{ALA}$, then
 \begin{equation}
 \label{eq:positive-offset}
-        \FA{Slice}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
+        \FA{FrameLex}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
 \end{equation}
 
 We recall that \VFA{toString}{node} is
@@ -1124,11 +1128,11 @@ so that
 
 \section{Computing the bits}
 
-If \FA{Slice}{\V{lex}, \V{off}} exists, then the value
+If \FA{FrameLex}{\V{lex}, \V{off}} exists, then the value
 of the LIVE-bit is
 \begin{equation}
 	\label{eq:live-bit}
-        \V{LIVE-bit} = \FA{Overlap}{\V{node},\V{off}} \, \sim \, \FA{Slice}{\V{lex}, \V{off}},
+        \V{LIVE-bit} = \FA{Overlap}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}},
 \end{equation}
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s}
 matches the recognizer \V{recce}.
@@ -1136,7 +1140,7 @@ If the LIVE-bit is true, then the value
 of the EOL-bit is
 \begin{equation}
 	\label{eq:eol-bit}
-        \V{EOL-bit} = \FA{Rem}{\V{node},\V{off}} \, \sim \, \FA{Slice}{\V{lex}, \V{off}}.
+        \V{EOL-bit} = \FA{Rem}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}}.
 \end{equation}
 
 It is important that it be the case that \tpb is true
@@ -1260,11 +1264,14 @@ byte by byte.
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Token segments & ...\texttt{"abc"} & \texttt{"d"} \\
+            Pre-frame & \multirow{2}{*}{...\texttt{"abc"}} & \\
+		token string & & \\
+		\hline
+		Framed token & & \texttt{"d"} \\
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/abcdef/}} \\
 		\hline
-		LI Slice & & \texttt{/d/} \\
+		Framed lexeme & & \texttt{/d/} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1340,7 +1347,7 @@ The
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/abcdef/}} \\
 		\hline
-		LI Slice & & \texttt{/de/} \\
+		Framed lexeme & & \texttt{/de/} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1371,7 +1378,7 @@ The
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/abcdef/}} \\
 		\hline
-		LI Slice & & \texttt{/def/} \\
+		Framed lexeme & & \texttt{/def/} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1445,7 +1452,7 @@ for the Ruby triple
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/aa*/}} \\
 		\hline
-		LI Slice & & \texttt{/aaa/} \\
+		Framed lexeme & & \texttt{/aaa/} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1528,7 +1535,7 @@ $(\V{node}, \texttt{/aa*/}, 3)$.
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
 		\hline
-		LI Slice	& & none \\
+		Framed lexeme	& & none \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1582,7 +1589,7 @@ overapproximation.
 			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
 			 & \multicolumn{2}{|c|}{\texttt{/bbbbbb/}} \\
 		\hline
-		\multirow{2}{*}{LI Slices} & & \texttt{/aaa/} \\
+		\multirow{2}{*}{Framed lexemes} & & \texttt{/aaa/} \\
 		 & & \texttt{/bbb/} \\
 		\hline
 \end{tabular}
@@ -1644,7 +1651,9 @@ $(\V{node}, \texttt{/bbbbbb/}, 3)$.
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
 		\hline
-		Overapproximated LI Slice & & \texttt{/[ab][ab][ab]/} \\
+            Overapproximated & & \multirow{3}{*}{\texttt{/[ab][ab][ab]/}} \\
+            Framed & & \\
+            Lexeme Slice & & \\
 		\hline
 \end{tabular}
 \vspace{6pt}
@@ -1700,7 +1709,7 @@ but our match would be a false positive.
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/ab*/}} \\
 		\hline
-		LI Slice & & \texttt{/abb/} \\
+		Framed lexeme & & \texttt{/abb/} \\
 		\hline
 \end{tabular}
 \vspace{6pt}
