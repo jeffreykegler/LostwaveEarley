@@ -965,7 +965,7 @@ multiple lexemes to be token-consistent
 at a single byte location,
 as we must know how to deal with that.
 
-\section{Slices and overlaps with positive offsets}
+\section{Frames with positive offsets}
 
 \noindent
 \begin{figure}[ht]
@@ -1038,25 +1038,24 @@ as in Figure~\ref{fig:input-2},
 so that $\V{TB} > \V{ALA}$, then
 \begin{equation}
 \label{eq:positive-offset}
-        \FA{FrameLex}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}.
+        \FA{FrameLex}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}
 \end{equation}
+is value of the framed lexeme.
 
+Next, we want the value of the framed token.
+which we will call $\FA{FrameTok}{\V{node},\V{off}}$.
 We recall that \VFA{toString}{node} is
 the string implied by \V{node} in the token trie.
-We will be interested in $\FA{Overlap}{\V{node},\V{off}}$,
-the overlap of the lexeme
-and \VFA{toString}{node}.
 If \V{off} is positive, so that $\V{TB} > \V{ALA}$,
-the entire token trie overlaps
-a segment of the lexeme,
+the entire token trie is inside the frame,
 so that \VFA{toString}{node} is identical to the overlap:
 \begin{equation}
 \label{eq:positive-overlap}
-        \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node}.
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node}.
 \end{equation}
 
 \FloatBarrier
-\section{Slices and overlaps with negative offsets}
+\section{Frames with negative offsets}
 
 \todo{This section is now scrambled.  Fix it.}
 \todo{Rewrite paper from here.}
@@ -1377,7 +1376,10 @@ The
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Token segments & ...\texttt{"abc"} & \texttt{"def"} \\
+            Pre-frame & \multirow{2}{*}{...\texttt{"abc"}} & \\
+            token string & & \\
+		\hline
+		Framed token & & \texttt{"def"} \\
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/abcdef/}} \\
 		\hline
@@ -1451,7 +1453,10 @@ for the Ruby triple
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Token segments & ...\texttt{"aaa"} & \texttt{"aaa"} \\
+            Pre-frame & \multirow{2}{*}{...\texttt{"aaa"}} & \\
+            token string & & \\
+		\hline
+		Framed token & & \texttt{"aaa"} \\
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/aa*/}} \\
 		\hline
@@ -1534,7 +1539,10 @@ $(\V{node}, \texttt{/aa*/}, 3)$.
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Token segments & \texttt{..."aaa"} & \texttt{"bbb"} \\
+            Pre-frame & \multirow{2}{*}{\texttt{..."aaa"}} & \\
+            token string & & \\
+		\hline
+		Framed token & & \texttt{"bbb"} \\
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
 		\hline
@@ -1586,7 +1594,10 @@ overapproximation.
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Token segments & \texttt{..."aaa"} & \texttt{"aaa"} \\
+            Pre-frame & \multirow{2}{*}{\texttt{..."aaa"}} & \\
+            token string & & \\
+		\hline
+		Framed token & & \texttt{"aaa"} \\
 		\hline
 		\multirow{2}{*}{Lexemes}
 			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
@@ -1650,7 +1661,10 @@ $(\V{node}, \texttt{/bbbbbb/}, 3)$.
 			& \multicolumn{1}{|c|}{[TB,Current]}
 			\\
 		\hline
-		Token segments & ...\texttt{"aaa"} & \texttt{"abc"} \\
+            Pre-frame & \multirow{2}{*}{...\texttt{"aaa"}} & \\
+            token string & & \\
+		\hline
+		Framed token & & \texttt{"abc"} \\
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
 		\hline
@@ -1708,7 +1722,10 @@ but our match would be a false positive.
 			& \multicolumn{1}{|c|}{[ALA,Current]}
 			\\
 		\hline
-		Token segments & ...\texttt{"xyz"} & \texttt{"abb"} \\
+            Pre-frame & \multirow{2}{*}{...\texttt{"xyz"}} & \\
+            token string & & \\
+		\hline
+		Framed token & & \texttt{"abb"} \\
 		\hline
 		Lexeme	& \multicolumn{2}{|c|}{\texttt{/ab*/}} \\
 		\hline
