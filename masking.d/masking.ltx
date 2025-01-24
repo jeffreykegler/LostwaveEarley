@@ -981,7 +981,7 @@ as we must know how to deal with that.
 \cline{1-4}\cdashline{5-7}
 \end{tabular}
 \vspace{6pt}
-\caption{Input structure with long working lexeme}
+\caption{Working lexeme with positive offset}
 \label{fig:input-2}
 \end{figure}
 
@@ -1006,6 +1006,7 @@ We use the definitions of \V{node}, etc.,
 in Definition \Dfref{token-trie}
 to state the value
 of the anchored lexeme slices.
+\todo{Not "anchored lexeme slice".  "Visible" slice?}
 If \V{off} is positive,
 as in Figure~\ref{fig:input-2},
 so that $\V{TB} > \V{ALA}$, then
@@ -1027,8 +1028,6 @@ so that \VFA{toString}{node} is identical to the overlap:
 \label{eq:positive-overlap}
         \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node}.
 \end{equation}
-
-\todo{Recheck this section.}
 
 \FloatBarrier
 \section{Slices and overlaps with negative offsets}
@@ -1075,7 +1074,7 @@ so that \VFA{toString}{node} is identical to the overlap:
 \cline{1-5}\cdashline{6-7}
 \end{tabular}
 \vspace{6pt}
-\caption{Input structure with token split between lexemes}
+\caption{Working lexeme with negative offset}
 \label{fig:input-3}
 \end{figure}
 
