@@ -407,9 +407,10 @@ situations where we are at the end of a lexeme.
 Calls to \tpb
 need only be made at end of lexeme,
 and for tough lexemes.
-\todo{Where will tough lexemes be discussed?}
 Tough lexemes should be sparse and will be defined
-and discussed later\footnote{Where?}.
+and discussed later
+in Section~\ref{sec:lexeme-slices}
+on page~\ref{sec:lexeme-slices}.
 
 \section{The basic ideas}
 \subsection{Location independence}
@@ -684,6 +685,7 @@ as \VFA{toString}{node}.
 \end{definition}
 
 \section{Lexeme slices}
+\label{sec:lexeme-slices}
 
 Lexeme slices are like string slices, and are represented similarly,
 so that $\Velement{lex}{0,2}$ is a lexeme which matches the first two
@@ -1033,6 +1035,7 @@ so that \VFA{toString}{node} is identical to the overlap:
 \section{Slices and overlaps with negative offsets}
 
 \todo{This section is now scrambled.  Fix it.}
+\todo{Rewrite paper from here.}
 
 \noindent
 \begin{figure}[ht]
