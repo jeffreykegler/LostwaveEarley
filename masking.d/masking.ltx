@@ -1124,7 +1124,7 @@ We now consider the case
 where the start of the token is before the
 start of the lexeme, so that ALA
 is properly inside the token.
-Recalling our definition of the offset
+Recalling our definition of the offset,
 $\V{off} = \V{TB} \subtract \V{ALA}$
 (see equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset}),
 and looking at Figure~\ref{fig:input-3}
@@ -1145,9 +1145,10 @@ the framed lexeme is
 \todo{Rewrite paper from here.}
 
 When \V{off} is negative, the frame only includes
-a string of length $-\V{off}$
-in the lower portion of the token trie,
-so that
+a lower portion of the token trie,
+whose length is the absolute value of the offset,
+$\VFA{abs}{off}$.
+Accordingly,
 \begin{equation}
 \label{eq:negative-overlap}
         \FA{FrameTok}{\V{node},\V{off}} =
