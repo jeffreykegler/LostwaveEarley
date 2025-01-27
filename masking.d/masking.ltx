@@ -1153,6 +1153,16 @@ Accordingly,
 		\element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.
 \end{equation}
 
+The remaining lexeme, again,
+is the framed lexeme plus the portion of it extending beyond the
+frame.
+Since the ALA is properly inside the frame,
+the remaining lexeme is the entire lexeme:
+\begin{equation}
+\label{eq:negative-remlex}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, 0} = \V{lex}.
+\end{equation}
+
 \todo{Rewrite paper from here.}
 
 \section{Computing the bits}
