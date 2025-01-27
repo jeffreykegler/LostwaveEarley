@@ -1072,8 +1072,6 @@ so we have
 \FloatBarrier
 \section{Frames with negative offsets}
 
-\todo{This section is now scrambled.  Fix it.}
-
 \noindent
 \begin{figure}[ht]
 \vspace{6pt}
@@ -1171,7 +1169,7 @@ If \FA{FrameLex}{\V{lex}, \V{off}} exists, then the value
 of the LIVE-bit is
 \begin{equation}
 	\label{eq:live-bit}
-        \V{LIVE-bit} = \FA{Overlap}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}},
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}},
 \end{equation}
 where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s}
 matches the recognizer \V{recce}.
@@ -1179,7 +1177,7 @@ If the LIVE-bit is true, then the value
 of the EOL-bit is
 \begin{equation}
 	\label{eq:eol-bit}
-        \V{EOL-bit} = \FA{Rem}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}}.
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}}.
 \end{equation}
 
 It is important that it be the case that \tpb is true
