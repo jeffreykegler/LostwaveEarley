@@ -1015,7 +1015,7 @@ as we must know how to deal with that.
 \label{fig:input-2}
 \end{figure}
 
-In this section we considered the case
+In this section we consider the case
 where the start of the token is after the
 start of the lexeme, so that TB
 is properly inside the lexeme.
@@ -1040,7 +1040,7 @@ If \V{off} is positive,
 as in Figure~\ref{fig:input-2},
 so that $\V{TB} > \V{ALA}$, then
 \begin{equation}
-\label{eq:positive-offset}
+\label{eq:positive-framelex}
         \FA{FrameLex}{\V{lex}, \V{off}} = \Velement{lex}{\V{off}, \Vsize{node}+\V{off}}
 \end{equation}
 is value of the framed lexeme.
@@ -1056,6 +1056,17 @@ to the framed token:
 \begin{equation}
 \label{eq:positive-overlap}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node}.
+\end{equation}
+
+Finally, in order determine if we are at EOL,
+we want the value of the remaining lexeme,
+the framed lexeme plus the portion of it extending beyond the
+frame.
+The framed lexeme starts at \V{off},
+so we have
+\begin{equation}
+\label{eq:positive-remlex}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}}.
 \end{equation}
 
 \FloatBarrier
@@ -1309,7 +1320,7 @@ The relevant range is \texttt{[3,4]},
 and there is an LI slice: \texttt{/d/}.
 Recall from \ref{eq:fixed-string-offset} that the lexeme offset is 3,
 which is positive.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
 \
 \begin{equation}
 \begin{gathered}
@@ -1430,7 +1441,7 @@ The lexeme offset is
 	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
 \]
 which is positive.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
 \
 \begin{equation}
 \begin{gathered}
@@ -1519,7 +1530,7 @@ The lexeme offset is
 	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
 \]
 which is positive.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
 \
 \begin{equation}
 \begin{gathered}
@@ -1659,7 +1670,7 @@ can be factored into the two lexemes
 \texttt{/aaaaaa/} and \texttt{/bbbbbb/}.
 As in the previous examples, the offset is 3,
 and the range is \texttt{[3,6]}.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-offset},
+Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
 their slices are easily found to be, respectively,
 \texttt{/aaa/} and \texttt{/bbb/}.
 \VFA{toString}{node} is \texttt{"aaa"},
