@@ -1054,7 +1054,7 @@ the entire token trie is inside the frame,
 so that \VFA{toString}{node} is identical
 to the framed token:
 \begin{equation}
-\label{eq:positive-overlap}
+\label{eq:positive-frametok}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node}.
 \end{equation}
 
@@ -1138,11 +1138,9 @@ the frame then includes the entire lexeme up to
 the current location, so that
 the framed lexeme is
 \begin{equation}
-\label{eq:negative-offset}
+\label{eq:negative-framelex}
         \FA{FrameLex}{\V{lex}, \V{off}} = \Velement{lex}{0, \Vsize{node}+\V{off}}.
 \end{equation}
-
-\todo{Rewrite paper from here.}
 
 When \V{off} is negative, the frame only includes
 a lower portion of the token trie,
@@ -1150,10 +1148,12 @@ whose length is the absolute value of the offset,
 $\VFA{abs}{off}$.
 Accordingly,
 \begin{equation}
-\label{eq:negative-overlap}
+\label{eq:negative-frametok}
         \FA{FrameTok}{\V{node},\V{off}} =
 		\element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.
 \end{equation}
+
+\todo{Rewrite paper from here.}
 
 \section{Computing the bits}
 
@@ -1335,7 +1335,7 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex}
 Again, \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
 is \texttt{"d"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-overlap},
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-frametok},
 \[
         \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"d"}.
 \]
@@ -1456,7 +1456,7 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex}
 Again, \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
 is \texttt{"def"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-overlap},
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-frametok},
 \[
         \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"def"}.
 \]
@@ -1544,7 +1544,7 @@ Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex}
 
 Again, \VFA{toString}{node}
 is \texttt{"aaa"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-overlap},
+Applying the formula for the overlap of positive offsets~\eqref{eq:positive-frametok},
 \[
         \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"aaa"}.
 \]
@@ -1792,7 +1792,7 @@ The lexeme offset is
 	\V{off} = (\V{TB} \subtract \V{ALA}) = {-3},
 \]
 which is negative.
-Applying the formula for slices of negative offsets~\eqref{eq:negative-offset},
+Applying the formula for slices of negative offsets~\eqref{eq:negative-framelex},
 \
 \begin{equation}
 \begin{gathered}
@@ -1812,8 +1812,8 @@ are always sliceable.
 Determining the overlap for a negative offset is slightly more
 complicated that it has been for the positive values of \V{off}.
 Applying the formula for overlaps of negative offsets,
-~\eqref{eq:negative-overlap}
-on page ~\pageref{eq:negative-overlap},
+~\eqref{eq:negative-frametok}
+on page ~\pageref{eq:negative-frametok},
 \begin{equation}
 \begin{gathered}
         \FA{Overlap}{\V{node},\V{off}} \\
