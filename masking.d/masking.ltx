@@ -1264,6 +1264,43 @@ when \V{lex} is tough.
 
 \todo{Use of LIVE false, EOL true as ``undefined'' in cache.}
 
+It may be best to vary the caching strategy.
+For small absolute values of \V{off}, the cache
+will be dense,
+and the likelihood of hits in a fully pre-populated
+cache will be high.
+In this case,
+pre-computation at grammar compile time makes sense.
+Computing many of these values in a single token trie
+traversal would allow for optimizations.
+
+Lexemes may be of arbitrary length,
+so that, in practice,
+pre-computation of all Ruby triple values
+is not just costly, but impossible.
+Further,
+in practical applications,
+the lexemes of
+very large absolute values of \V{off}
+will usually be very long strings or here-documents.
+Long strings and here-documents
+are unlikely to be repeated exactly,
+so that the likelihood of cache hits would
+be very low.
+Therefore, for absolute values of \V{off}
+above a certain threshold,
+it is likely to make sense to not cache the
+value of Ruby triples.
+
+So far in this section
+we have discussed varying the caching strategy
+only for different absolute values of \V{off}.
+Further investigation
+may show that it makes sense to
+take into account the sign of \V{off},
+or to vary the caching strategy by
+lexeme.
+
 \section{Fixed string example}
 \label{sec:examples}
 
@@ -1850,48 +1887,6 @@ for the Ruby triple
 \]
 
 \FloatBarrier
-
-\section{Caching strategy}
-\label{sec:caching-strategy}
-
-It may be best to vary the caching strategy.
-For small absolute values of \V{off}, the cache
-will be dense,
-and the likelihood of hits in a fully pre-populated
-cache will be high.
-In this case,
-pre-computation at grammar compile time makes sense.
-Computing many of these values in a single token trie
-traversal would allow for optimizations.
-
-\begin{MYsloppy}
-Lexemes may be of arbitrary length,
-so that, in practice,
-pre-computation of all Ruby triple values
-is not just costly, but impossible.
-Further,
-in practical applications,
-the lexemes of
-very large absolute values of \V{off}
-will usually be very long strings or here-documents.
-Long strings and here-documents
-are unlikely to be repeated exactly,
-so that the likelihood of cache hits would
-be very low.
-Therefore, for absolute values of \V{off}
-above a certain threshold,
-it is likely to make sense to not cache the
-value of Ruby triples.
-\end{MYsloppy}
-
-So far in this section
-we have discussed varying the caching strategy
-only for different absolute values of \V{off}.
-Further investigation
-may show that it makes sense to
-take into account the sign of \V{off},
-or to vary the caching strategy by
-lexeme.
 
 \section{Stage 2: Track ends of lexeme}
 \label{sec:stage2}
