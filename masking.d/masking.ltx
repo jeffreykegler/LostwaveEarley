@@ -1206,6 +1206,14 @@ when a call to \tpb would return true,
 a correct parse might be missed,
 and the algorithm might fail.
 
+For the EOL-bit, the requirement to avoid false negatives is
+the same.
+A spuriously true EOL-bit, that is a ``false positive'', results
+in an unnecessary call to \tpb.
+The unnecessary call to \tpb has a cost in time, but is
+otherwise harmless.
+A ``false negative'' for the EOL-bit may result in a missed parse.
+
 Allowing false positives means allowing lexemes that overapproximate.
 Overapproximation is useful for tough lexemes.
 In the face of overapproximation, unnecessary calls
