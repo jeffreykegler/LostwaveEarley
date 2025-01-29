@@ -53,6 +53,22 @@
 % For a type name, when it occurs in text
 \newcommand{\type}[1]{\ensuremath{\texttt{#1}}}
 
+\newcommand{\True}{\mbox{\sf T}\xspace}
+\newcommand{\False}{\mbox{\sf F}\xspace}
+\newcommand{\Trueword}{\sf true}
+\newcommand{\Falseword}{\sf false}
+\newcommand{\Neg}{\neg}
+\newcommand{\Implies}{\supset}
+\newcommand{\ImpliesAlt}{\Rightarrow}
+\newcommand{\NEquiv}{\not\equiv}
+\newcommand{\NEquivRel}{\mathrel{\not\equiv}}
+
+\newcommand{\qeq}{\simeq}
+\newcommand{\nqeq}{\not\simeq}
+\newcommand{\unicorn}{\ensuremath{\bot}\xspace}
+\newcommand{\TRUE}{\ensuremath{\mathbb T}\xspace}
+\newcommand{\FALSE}{\ensuremath{\mathbb F}\xspace}
+
 \newcommand{\mult}{\mathbin{\ast}}
 \newcommand{\dfn}[1]{{\bf #1}}
 \newcommand{\sep}{\,\mid\,}
@@ -274,6 +290,10 @@
   \fi%
 }
 \newcommand{\lmEnd}{\thEnd}
+
+\newcommand{\cuz}{\ensuremath{\mathrel{\because}}\xspace}
+\newcommand{\bcuz}{\linebreak[1]\cuz}
+
 \hyphenation{oper-and oper-ands}
 \hyphenation{look-ahead}
 \hyphenation{memo-ization}
@@ -295,8 +315,8 @@
 }
 
 \title
-  [Masking Scheme]
-  {A scheme for optimizing mask computation}
+  [Lexing and AI Tokens]
+  {Lexical Analysis with AI Tokenization: An Approach}
 
 \author{Jeffrey Kegler}
 \ifdraft{
@@ -1322,7 +1342,7 @@ of a fixed string lexeme, byte by byte.
 The token-consistent lexeme will be \texttt{/abcdef/}.
 
 We will assume that we have already committed
-a token which covers its first three bytes:
+a token which covers the lexeme's first three bytes:
 \texttt{"abc"},
 so that our trie base (TB)
 is 3 bytes after the
@@ -1396,19 +1416,21 @@ of positive offsets~\eqref{eq:positive-framelex},
 \end{gathered}
 \end{equation}
 
-Again, \VFA{toString}{node},
-the string implied by \V{node} of the token trie,
-is \texttt{"d"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-frametok},
-\[
-        \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"d"}.
-\]
-Attempting to match the overlap to the slice, we have
-\[
-     \texttt{"d"} \sim \texttt{/d/},
-\]
-which is a match,
-so the LIVE-bit of our boolean pair is true.
+Applying the formula for the framed token of positive offsets~\eqref{eq:positive-frametok},
+\begin{equation}
+        \label{eq:fixed-byte-1-frametok}
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"d"}.
+\end{equation}
+From these facts we can compute the LIVE-bit:
+\begin{equation}
+        \label{eq:fixed-byte-1-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"d"}  \, \sim \, \texttt{/d/} \\
+                = \TRUE  \\
+            \cuz \eqref{eq:live-bit}, \eqref{eq:fixed-byte-1-framelex}, \eqref{eq:fixed-byte-1-frametok}.
+        \end{gathered}
+\end{equation}
 
 The EOL-bit is false.
 \todo{Explain this.}
