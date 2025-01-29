@@ -28,6 +28,10 @@ eq
 factorings
 FOPC
 foreach
+framelex
+FrameLex
+frametok
+FrameTok
 iff
 Iff
 invariants
@@ -61,6 +65,7 @@ PDA
 pos
 pre
 precompute
+RemLex
 Rr
 Ruan
 Ruihang
@@ -78,6 +83,7 @@ Toktrie
 toString
 trie
 tuff
+uncomputed
 unsliceable
 wh
 XGrammar
