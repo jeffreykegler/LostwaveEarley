@@ -365,9 +365,7 @@ It assumes some familiarity with the code in
 \FloatBarrier
 
 The optimization suggested here works by reducing the number of calls
-of \tpb
-and use this to eliminate calls to
-\tpb.\footnote{%
+of \tpb.\footnote{%
 See Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte},
     which contains a code snippet that is similar to, and taken from,
     \url{https://github.com/microsoft/llguidance/blob/0ca091a701a50134e0503fa03c5c12b206e182a3/toktrie/src/toktree.rs\#L945}.
@@ -396,14 +394,14 @@ See Figure \ref{fig:try-push-byte} on page~\pageref{fig:try-push-byte},
 The optimization prefaces
 (and hopefully usually replaces)
 the call to \tpb with a small
-set of calls (one for each of a subset of the allowed
+set of references (one for each of a subset of the allowed
 lexemes) to a cache containing
-byte pairs.
-The set, and the byte pairs,
+optional-boolean duples.
+The set, and the optional-boolean duples,
 are location-free ---
 free of per-location cost in time.
 
-The byte pairs are location-free
+The optional-boolean duples are location-free
 because they do not vary by location,
 and therefore may be calculated once
 and cached.
@@ -419,25 +417,30 @@ no new costs.\footnote{%
         on page \pageref{sec:-token-consistent lexemes}.
 }
 
-The byte pairs guide traversal of the token trie.
-There is a LIVE-bit which, if true tells us to continue
-trie traversal below the current node and,
-if false, tells us to not traverse more deeply into
+The optional-boolean duples guide traversal of the token trie.
+The first optional boolean of the duple is the LIVE-bit.
+The LIVE-bit, when true, tells us to continue
+trie traversal below the current node.
+When false,
+the LIVE-bit tells us not to traverse more deeply into
 the token trie.
 In addition, there is an EOL-bit, which tells us if
-we are at the end of a lexeme (aka EOL).
+we are at the end of a lexeme (EOL).
+
+Some lexemes will be resistant to the approach
+outlined in this paper.
+We will call these ``tough'' lexemes.
+Tough lexemes should be sparse and will be defined
+and discussed later\footnote{%
+        Section~\ref{sec:lexeme-slices}
+        on page~\ref{sec:lexeme-slices}%
+}.
+
 We use the LIVE-bit to avoid most trie traversal,
 without incurring the cost of a \tpb call.
-We use the EOL-bit to limit calls to \tpb to
-situations where we are at the end of a lexeme.
-
 Calls to \tpb
 need only be made at end of lexeme,
 and for tough lexemes.
-Tough lexemes should be sparse and will be defined
-and discussed later
-in Section~\ref{sec:lexeme-slices}
-on page~\ref{sec:lexeme-slices}.
 
 \section{The basic ideas}
 \subsection{Location independence}
