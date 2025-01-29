@@ -1223,8 +1223,6 @@ token-consistent lexemes are sparse,
 most lexemes are sliceable,
 and most tough lexemes have good overapproximations.
 
-\todo{Rewrite paper from here.}
-
 \section{Caching}
 \label{sec:caching}
 
@@ -1314,12 +1312,14 @@ It may make sense to vary the caching strategy by lexeme,
 or to take into account, not just the absolute value \V{off},
 but its sign.
 
+\todo{Rewrite paper from here.}
+
 \section{Fixed string example}
 \label{sec:examples}
 
 The example in the section will follow the recognition
 of a fixed string lexeme, byte by byte.
-The lexeme will be \texttt{/abcdef/}.
+The token-consistent lexeme will be \texttt{/abcdef/}.
 
 We will assume that we have already committed
 a token which covers its first three bytes:
@@ -1379,17 +1379,17 @@ Figure~\ref{fig:example-fixed1} shows the situation where
 \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
 is \texttt{"d"}.
-We are considering
-the token-consistent lexeme \texttt{/abcdef/}.
 The relevant range is \texttt{[3,4]},
 and there is an LI slice: \texttt{/d/}.
 Recall from \ref{eq:fixed-string-offset} that the lexeme offset is 3,
 which is positive.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
+Applying the formula for framed slices
+of positive offsets~\eqref{eq:positive-framelex},
 \
 \begin{equation}
+        \label{eq:fixed-byte-1-framelex}
 \begin{gathered}
-(\V{lex}, \V{off}) \\
+\FA{FrameLex}{\V{lex}, \V{off}} \\
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
 	= \Velement{(\texttt{/abcdef/})}{3, (1+3) } \\
     = \texttt{/d/}.
