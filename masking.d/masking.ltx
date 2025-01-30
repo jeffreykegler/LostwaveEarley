@@ -358,6 +358,8 @@ It assumes some familiarity with the code in
 			\element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
 			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
 		\end{gather*}
+\item \TRUE is a boolean (or optional boolean) true; and
+        \FALSE is a boolean (or optional boolean) false.
 \end{itemize}
 
 \section{Summary}
@@ -1335,14 +1337,12 @@ It may make sense to vary the caching strategy by lexeme,
 or to take into account, not just the absolute value \V{off},
 but its sign.
 
-\todo{Rewrite paper from here.}
-
 \section{Fixed string example}
 \label{sec:examples}
 
 The example in the section will follow the recognition
-of a fixed string lexeme, byte by byte.
-The token-consistent lexeme will be \texttt{/abcdef/}.
+of a token-consistent fixed string lexeme, byte by byte.
+The lexeme will be \texttt{/abcdef/}.
 
 We will assume that we have already committed
 a token which covers the lexeme's first three bytes:
@@ -1359,8 +1359,11 @@ In other words, our lexeme offset is 3:
 We are trying to sample a token which covers
 the last three bytes:
 \texttt{"def"}.
-We will show our progress until the EOL,
-byte by byte.
+We will show our progress
+byte by byte
+until the EOL.
+
+\todo{Rewrite paper from here.}
 
 \needspace{3in}
 \FloatBarrier
@@ -1419,31 +1422,54 @@ of positive offsets~\eqref{eq:positive-framelex},
 \end{gathered}
 \end{equation}
 
-Applying the formula for the framed token of positive offsets~\eqref{eq:positive-frametok},
+Applying the formula for the framed token of positive offsets,
 \begin{equation}
         \label{eq:fixed-byte-1-frametok}
-        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"d"}.
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"d"}
+                \cuz \eqref{eq:positive-frametok},
 \end{equation}
-From these facts we can compute the LIVE-bit:
+and the formula for the remaining lexeme of positive offsets,
+\begin{equation}
+        \label{eq:fixed-byte-1-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} = \\
+                \FA{Rem}{\V{lex}, \V{off}} = \\
+                    = \FA{Rem}{\texttt{/abcdef/}, 3} \\
+                    = \texttt{/def/} \\
+                \cuz \eqref{eq:positive-remlex}.
+        \end{gathered}
+\end{equation}
+
+From these facts we can compute the LIVE-bit,
 \begin{equation}
         \label{eq:fixed-byte-1-livebit}
         \begin{gathered}
         \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
                 = \texttt{"d"}  \, \sim \, \texttt{/d/} \\
                 = \TRUE  \\
-            \cuz \eqref{eq:live-bit}, \eqref{eq:fixed-byte-1-framelex}, \eqref{eq:fixed-byte-1-frametok}.
+            \cuz \eqref{eq:live-bit}, \eqref{eq:fixed-byte-1-framelex}, \eqref{eq:fixed-byte-1-frametok},
+        \end{gathered}
+\end{equation}
+and the EOL-bit,
+\begin{equation}
+        \label{eq:fixed-byte-1-eolbit}
+        \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+        = \texttt{"d"} \,\sim\, \texttt{/def/} \\
+        = \FALSE \\
+                \cuz \eqref{eq:fixed-byte-1-frametok}, \eqref{eq:fixed-byte-1-remlex}, \eqref{eq:eol-bit}.
         \end{gathered}
 \end{equation}
 
-The EOL-bit is false.
-\todo{Explain this.}
 
-So we cache $(\V{true},\V{false})$
-for the Ruby triple
+From the above, we know we can add the following to the cache:
 \[
-	(\V{node}, \texttt{/abcdef/}, 3).
+        \begin{gathered}
+        \FA{Ruby}{\V{node}, \texttt{/abcdef/}, 3} = \\
+                (\V{LIVE-bit}, \V{EOL-bit}) = \\
+                (\TRUE, \FALSE).
+        \end{gathered}
 \]
-The
 
 \needspace{3in}
 \FloatBarrier
