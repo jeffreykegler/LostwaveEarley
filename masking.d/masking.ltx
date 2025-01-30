@@ -1982,30 +1982,34 @@ rather than by special-casing.
 \label{sec:medial-bit}
 
 We note that, for presentation purposes,
-we use an EOL-bit which is true if the Ruby triple is at EOL.
+we use an EOL-bit which is \TRUE if the Ruby triple is at EOL.
 In implementation, it may be helpful to replace it with a
-MEDIAL-bit, which is false if the Ruby triple is not at EOL.
+MEDIAL-bit, which is \FALSE if the Ruby triple is not at EOL.
 
 The reason this may be desirable is that
 when LIVE-bit and EOL-bit are implemented as binary-valued booleans,
 only three of the four possible values of the LIVE-bit, EOL-bit duple
 are possible:
 \begin{itemize}
-        \item LIVE-bit true, EOL-bit true;
-        \item LIVE-bit true, EOL-bit false; and
-        \item LIVE-bit false, EOL-bit false.
+        \item (\TRUE, \TRUE);
+        \item (\TRUE, \FALSE); and
+        \item (\FALSE, \FALSE).
 \end{itemize}
-The LIVE-bit false, EOL-bit true duple value in this case is ``wasted''.
+The $(\FALSE, \TRUE)$ duple value in this case is ``wasted''.
 
 Instead of wasting
-the LIVE-bit false, EOL-bit true, it can be used to indicate that
-the LIVE-bit value and EOL-bit bit values in the cache are ``uncomputed''
-that they have yet to be computed.
+the $(\FALSE, \TRUE)$ value of the duple,
+it can be treated as an ``uncomputed'' value.
+That is,
+a $(\FALSE, \TRUE)$ duple can be taken to mean
+that the LIVE-bit value and EOL-bit bit values in the cache
+have yet to be computed.
+
 In this case, it a MEDIAL-bit is used instead of an EOL-bit, the
 ``uncomputed'' value will be
-\[ \text{LIVE-bit false, MEDIAL-bit false}. \]
+\[ (\FALSE, \FALSE). \]
 If the caching uses, for example, a bit vector with all bits initialized to
-false then, by default, a new bit vector will be initialized to ``uncomputed''
+\FALSE then, by default, a new bit vector will be initialized to ``uncomputed''
 values, which can be convenient.
 
 {
