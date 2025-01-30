@@ -1425,15 +1425,17 @@ of positive offsets~\eqref{eq:positive-framelex},
 Applying the formula for the framed token of positive offsets,
 \begin{equation}
         \label{eq:fixed-byte-1-frametok}
-        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"d"}
+        \begin{gathered}
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
+                = \texttt{"d"} \\
                 \cuz \eqref{eq:positive-frametok},
+        \end{gathered}
 \end{equation}
 and the formula for the remaining lexeme of positive offsets,
 \begin{equation}
         \label{eq:fixed-byte-1-remlex}
         \begin{gathered}
-        \FA{RemLex}{\V{lex}, \V{off}} = \\
-                \FA{Rem}{\V{lex}, \V{off}} = \\
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/abcdef/}, 3} \\
                     = \texttt{/def/} \\
                 \cuz \eqref{eq:positive-remlex}.
@@ -1457,7 +1459,8 @@ and the EOL-bit,
         \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
         = \texttt{"d"} \,\sim\, \texttt{/def/} \\
         = \FALSE \\
-                \cuz \eqref{eq:fixed-byte-1-frametok}, \eqref{eq:fixed-byte-1-remlex}, \eqref{eq:eol-bit}.
+                \cuz \eqref{eq:eol-bit},
+                        \eqref{eq:fixed-byte-1-frametok}, \eqref{eq:fixed-byte-1-remlex}.
         \end{gathered}
 \end{equation}
 
@@ -1467,7 +1470,8 @@ From the above, we know we can add the following to the cache:
         \begin{gathered}
         \FA{Ruby}{\V{node}, \texttt{/abcdef/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
-                (\TRUE, \FALSE).
+                (\TRUE, \FALSE) \\
+                \cuz \eqref{eq:fixed-byte-1-livebit}, \eqref{eq:fixed-byte-1-eolbit}.
         \end{gathered}
 \]
 
