@@ -1821,7 +1821,7 @@ We have now reached EOL:
 \needspace{3in}
 \FloatBarrier
 \section {Examples with no framed lexeme}
-\label{sec:example-wo-framelex}
+\label{sec:example-unsliceable}
 
 {%
 \floatstyle{plain}
@@ -1877,8 +1877,11 @@ which is positive.
 But we have a problem:
 \texttt{/(aaaaaa|bbbbbb)/} is unsliceable.
 The subsections below show two solutions to this problem.
-Section~\ref{sec:example-factored}
-on page~\pageref{fig:example-factored}
+Section~\ref{sec:example-factoreda}
+on page~\pageref{sec:example-factoreda}
+and
+Section~\ref{sec:example-factoredb}
+on page~\pageref{sec:example-factoredb}
 shows a solution that involves factoring
 \texttt{/(aaaaaa|bbbbbb)/}
 into two lexemes,
@@ -1892,8 +1895,8 @@ overapproximation.
 
 \needspace{3in}
 \FloatBarrier
-\subsection{Example of factored alternatives}
-\label{sec:example-factored}
+\subsection{Example of factored alternatives, part 2}
+\label{sec:example-factoreda}
 
 {%
 \floatstyle{plain}
@@ -1931,8 +1934,8 @@ overapproximation.
 } % group for floatstyle
 
 One solution to the problem presented in
-Section~\ref{sec:example-factored}
-on page~\pageref{sec:example-factored}
+Section~\ref{sec:example-unsliceable}
+on page~\pageref{sec:example-unsliceable}
 is ``factoring''.
 Any regular expression which does not use the Kleene star
 can be factored into fixed string lexemes.
@@ -1951,7 +1954,7 @@ starting with
         \V{lex} = \texttt{/aaaaaa/}.
 \end{equation}
 \begin{equation}
-        \label{eq:factored-framelex}
+        \label{eq:factoreda-framelex}
 \begin{gathered}
 \FA{FrameLex}{\V{lex}, \V{off}} \\
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
@@ -1971,44 +1974,33 @@ starting with
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:factored-remlex}
-        \begin{gathered}
-        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
-                    = \FA{Rem}{\texttt{/aaaaaa/}, 3} \\
-                    = \texttt{/aaa/} \\
-                \cuz \Eqref{positive-remlex}, \Eqref{unsliceable-offset}, \Figref{example-factored},
-                \eqref{eq:factoreda-lexeme}.
-\end{gathered}
-\end{equation}
-\begin{equation}
-        \label{eq:factored-livebit}
+        \label{eq:factoreda-livebit}
         \begin{gathered}
         \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
-                = \texttt{"aaa"}  \, \sim \, \texttt{/aaa/} \\
-                = \TRUE  \\
-            \cuz \Eqref{live-bit}, \eqref{eq:factored-framelex}, \eqref{eq:factored-frametok}.
+                = \texttt{"bbb"}  \, \sim \, \texttt{/aaa/} \\
+                = \FALSE  \\
+            \cuz \Eqref{live-bit}, \eqref{eq:factoreda-framelex}, \eqref{eq:factored-frametok}.
         \end{gathered}
 \end{equation}
-We have now reached EOL:
+Since \V{LIVE-bit} is \FALSE, we also set
 \begin{equation}
-        \label{eq:factored-eolbit}
+        \label{eq:factoreda-eolbit}
         \begin{gathered}
-        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
-        = \texttt{"aaa"} \,\sim\, \texttt{/aaa/} \\
-        = \TRUE \\
-                \cuz \Eqref{eol-bit},
-                        \eqref{eq:factored-frametok}, \eqref{eq:factored-remlex}.
+        \V{EOL-bit} = \FALSE \cuz \eqref{eq:factoreda-livebit}.
         \end{gathered}
 \end{equation}
 \begin{equation}
         \begin{gathered}
         \FA{Ruby}{\V{node}, \texttt{/aaaaaa/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
-                (\TRUE, \TRUE) \\
-                \cuz \eqref{eq:factoreda-lexeme},
-                        \eqref{eq:factored-livebit}, \eqref{eq:factored-eolbit}.
+                (\FALSE, \FALSE) \\
+                \cuz \Eqref{unsliceable-offset}, \eqref{eq:factoreda-lexeme},
+                        \eqref{eq:factoreda-livebit}, \eqref{eq:factoreda-eolbit}.
         \end{gathered}
 \end{equation}
+
+\subsection{Example of factored alternatives, part 1}
+\label{sec:example-factoredb}
 
 \subsection {Example of overapproximation}
 \label{sec:example-overapproximation}
