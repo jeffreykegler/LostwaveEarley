@@ -1819,12 +1819,10 @@ We have now reached EOL:
         \end{gathered}
 \end{equation}
 
-\todo{Rewrite paper from here.}
-
 \needspace{3in}
 \FloatBarrier
-\section {Examples without LI slice}
-\label{sec:example-no-li-slice}
+\section {Examples with no framed lexeme}
+\label{sec:example-wo-framelex}
 
 {%
 \floatstyle{plain}
@@ -1853,20 +1851,33 @@ We have now reached EOL:
 		\hline
 \end{tabular}
 \vspace{6pt}
-\caption{No LI slice example}
-\label{fig:example-no-li-slice}
+\caption{An unsliceable example}
+\label{fig:example-unsliceable}
 \end{figure}
 } % group for floatstyle
 
-In the case of
-Figure~\ref{fig:example-no-li-slice},
+In \Figref{example-unsliceable},
 we are considering the lexeme
-\texttt{/(aaaaaa|bbbbbb)/} for which
-there is no LI slice.
-We must \mbox{remedy} this in order
-to determine a boolean true
-for the Ruby triple
-$(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
+\texttt{/(aaaaaa|bbbbbb)/}.
+The lexeme offset is
+\begin{equation}
+        \label{eq:unsliceable-offset}
+	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
+\end{equation}
+which is positive.
+
+\begin{equation}
+        \label{eq:unsliceable-tostring}
+        \VFA{toString}{node} = \texttt{"bbb"} \cuz \Figref{example-unsliceable}.
+\end{equation}
+\begin{equation}
+        \label{eq:unsliceable-nodesize}
+        \Vsize{node} = 3 \cuz \eqref{eq:unsliceable-tostring}, \Figref{example-unsliceable}.
+\end{equation}
+
+But we have a problem:
+\texttt{/(aaaaaa|bbbbbb)/} is unsliceable.
+The subsections below show two solutions to this problem.
 Section~\ref{sec:example-factored}
 on page~\pageref{fig:example-factored}
 shows a solution that involves factoring
@@ -1877,6 +1888,8 @@ Section~\ref{sec:example-overapproximation}
 on page~\pageref{fig:example-overapproximation}
 shows a solution that uses
 overapproximation.
+
+\todo{Rewrite paper from here.}
 
 \needspace{3in}
 \FloatBarrier
@@ -1919,8 +1932,8 @@ overapproximation.
 } % group for floatstyle
 
 One solution to the problem presented in
-Section~\ref{sec:example-no-li-slice}
-on page~\pageref{sec:example-no-li-slice}
+Section~\ref{sec:example-factored}
+on page~\pageref{sec:example-factored}
 is ``factoring''.
 Any regular expression which does not use the Kleene star
 can be factored into fixed string lexemes.
@@ -1987,8 +2000,8 @@ $(\V{node}, \texttt{/bbbbbb/}, 3)$.
 } % group for floatstyle
 
 A second solution to the problem presented in
-Section~\ref{sec:example-no-li-slice}
-on page~\pageref{sec:example-no-li-slice}
+Section~\ref{sec:example-overapproximation}
+on page~\pageref{sec:example-overapproximation}
 is overapproximation.
 Again, our lexeme is
 \texttt{/(aaaaaa|bbbbbb)/}.
@@ -2099,49 +2112,6 @@ for the Ruby triple
 \]
 
 \FloatBarrier
-
-\section{Stage 2: Track ends of lexeme}
-\label{sec:stage2}
-
-We call a location where a lexeme can end,
-an ``end of lexeme'', or EOL.
-In Stage 2, we build on Stage 1 by tracking EOLs.
-In cases where \tpb
-is called when we are not at an EOL,
-\tpbb simply stores byte \V{b}.
-If we skip the call to \tpbb,
-but turn out to need the value of byte \V{b}
-later, we can find it from context.
-Even more than Stage 1,
-Stage 2 is likely to require modifications
-to \tpb.
-
-To implement Stage 2,
-we will want to cache a boolean that indicates
-whether every Ruby triple is at an end of lexeme.
-\begin{equation}
-\label{eq:eol-function}
-	\FA{EOL}{\V{node}, \V{lex}, \V{off}}
-\end{equation}
-We need not cache values of
-\eqref{eq:eol-function} when
-the \Fname{Ruby} function~\eqref{eq:ruby-function}
-is false.
-Also,
-whenever
-the \Fname{Ruby} function~\eqref{eq:ruby-function}
-is true due to an overapproximation,
-\eqref{eq:eol-function} should be set to true.
-
-In Stage 2, calls to \tpb
-need only be made at end of lexeme,
-and for tough lexemes.
-As noted previously,
-token-consistent lexemes in general,
-and tough lexemes in particular,
-should be sparse,
-and calls to \tpb
-should be reduced greatly.
 
 \section{Afterthought: Forcing}
 
