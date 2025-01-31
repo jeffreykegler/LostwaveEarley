@@ -2074,9 +2074,11 @@ considering the lexeme
 	\begin{tabular}{|c|r|l|}
 		\hline
 		Range of locations & \multicolumn{1}{|c|}{%
-                     \makesamewidth[c]{[TB,Current]}{[ALA,TB]}%
+                \makesamewidth[c]{X0XXXX0XXXX}{[ALA,TB]}%
             }
-			& \multicolumn{1}{|c|}{[TB,Current]}
+			& \multicolumn{1}{|c|}{%
+                \makesamewidth[c]{X0XXXX0XXXX}{[TB,Current]}%
+            }
 			\\
 		\hline
             Pre-frame & \multirow{2}{*}{...\texttt{"aaa"}} & \\
@@ -2084,7 +2086,11 @@ considering the lexeme
 		\hline
 		Framed token & & \texttt{"abc"} \\
 		\hline
-		Lexeme	& \multicolumn{2}{|c|}{\texttt{/(aaaaaa|bbbbbb)/}} \\
+            Original	& \multicolumn{2}{|c|}{ \multirow{2}{*}{\texttt{/(aaaaaa|bbbbbb)/}}} \\
+            Lexeme	& \multicolumn{2}{|c|}{} \\
+		\hline
+            Overapproximated & \multicolumn{2}{|c|}{ \multirow{2}{*}{\texttt{/[ab][ab][ab][ab][ab][ab]/}}} \\
+            Lexeme	& \multicolumn{2}{|c|}{} \\
 		\hline
             Overapproximated & & \multirow{3}{*}{\texttt{/[ab][ab][ab]/}} \\
             Framed & & \\
