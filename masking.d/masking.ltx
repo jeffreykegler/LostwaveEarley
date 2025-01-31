@@ -2002,7 +2002,7 @@ Since \V{LIVE-bit} is \FALSE, we also set
 \subsection{Example of factored alternatives, part 2}
 \label{sec:example-factoredb}
 
-In this section we look continue the ``factoring'' described
+In this section we continue the ``factoring'' described
 in Section~\ref{sec:example-factoreda}
 on page~\pageref{sec:example-factoreda},
 considering the lexeme
@@ -2022,20 +2022,33 @@ considering the lexeme
                 \Figref{example-factored}.
 \end{gathered}
 \end{equation}
-\todo{Add RemLex}
 \begin{equation}
         \label{eq:factoredb-livebit}
         \begin{gathered}
         \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
                 = \texttt{"bbb"}  \, \sim \, \texttt{/bbb/} \\
                 = \TRUE  \\
-            \cuz \Eqref{live-bit}, \eqref{eq:factoredb-framelex}, \eqref{eq:factored-frametok}.
+            \cuz \Eqref{live-bit}, \eqref{eq:factored-frametok}, \eqref{eq:factoredb-framelex}.
         \end{gathered}
 \end{equation}
 \todo{Fix below}
 \begin{equation}
+        \label{eq:factoredb-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
+                    = \FA{Rem}{\texttt{/bbbbbb/}, 3} \\
+                    = \texttt{/bbb/} \\
+                \cuz \Eqref{positive-remlex}, \Eqref{unsliceable-offset}, \Figref{example-factored}.
+\end{gathered}
+\end{equation}
+\begin{equation}
         \label{eq:factoredb-eolbit}
         \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+        = \texttt{"bbb"} \,\sim\, \texttt{/bbb/} \\
+        = \TRUE \\
+                \cuz \Eqref{eol-bit},
+                        \eqref{eq:factored-frametok}, \eqref{eq:factoredb-remlex}.
         \end{gathered}
 \end{equation}
 \begin{equation}
