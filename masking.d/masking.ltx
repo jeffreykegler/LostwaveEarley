@@ -1486,8 +1486,6 @@ From the above, we see that we can add the following to the cache:
         \end{gathered}
 \]
 
-\todo{Rewrite paper from here.}
-
 \needspace{3in}
 \FloatBarrier
 
@@ -1630,48 +1628,75 @@ has been extended to \texttt{"de"},
 \end{figure}
 } % group for floatstyle
 
-Figure~\ref{fig:example-fixed3} shows the situation if
-we have committed a token ending in \texttt{"abc"},
-and \VFA{toString}{node},
+\VFA{toString}{node},
 the string implied by \V{node} of the token trie,
-is \texttt{"def"}.
-We are considering
-the token-consistent lexeme \texttt{/abcdef/}.
-The relevant range is \texttt{[3,6]},
-and there is an LI slice: \texttt{/def/}.
-The lexeme offset is
-\[
-	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
-\]
-which is positive.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
-\
+is completed as \texttt{"def"},
 \begin{equation}
+        \label{eq:fixed-byte-3-tostring}
+        \VFA{toString}{node} = \texttt{"def"} \cuz \Figref{example-fixed3}.
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-3-nodesize}
+        \Vsize{node} = 3 \cuz \eqref{eq:fixed-byte-3-tostring}, \Figref{example-fixed3}.
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-3-framelex}
 \begin{gathered}
-(\V{lex}, \V{off}) \\
+\FA{FrameLex}{\V{lex}, \V{off}} \\
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
 	= \Velement{(\texttt{/abcdef/})}{3, (3+3) } \\
-    = \texttt{/def/}.
+    = \texttt{/def/} \\
+        \cuz \Eqref{positive-framelex}, \Eqref{fixed-string-offset},
+                \eqref{eq:fixed-byte-3-nodesize}, \Figref{example-fixed3}.
 \end{gathered}
 \end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-3-frametok}
+        \begin{gathered}
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
+                = \texttt{"def"} \\
+                \cuz \Eqref{positive-frametok}, \eqref{eq:fixed-byte-3-tostring}, \Figref{example-fixed3}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-3-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
+                    = \FA{Rem}{\texttt{/abcdef/}, 3} \\
+                    = \texttt{/def/} \\
+                \cuz \Eqref{positive-remlex}, \Eqref{fixed-string-offset}, \Figref{example-fixed3}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-3-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"def"}  \, \sim \, \texttt{/def/} \\
+                = \TRUE  \\
+            \cuz \Eqref{live-bit}, \eqref{eq:fixed-byte-3-framelex}, \eqref{eq:fixed-byte-3-frametok}.
+        \end{gathered}
+\end{equation}
+We have now reached EOL:
+\begin{equation}
+        \label{eq:fixed-byte-3-eolbit}
+        \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+        = \texttt{"def"} \,\sim\, \texttt{/def/} \\
+        = \TRUE \\
+                \cuz \Eqref{eol-bit},
+                        \eqref{eq:fixed-byte-3-frametok}, \eqref{eq:fixed-byte-3-remlex}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \begin{gathered}
+        \FA{Ruby}{\V{node}, \texttt{/abcdef/}, 3} = \\
+                (\V{LIVE-bit}, \V{EOL-bit}) = \\
+                (\TRUE, \TRUE) \\
+                \cuz \eqref{eq:fixed-byte-3-livebit}, \eqref{eq:fixed-byte-3-eolbit}.
+        \end{gathered}
+\end{equation}
 
-Again, \VFA{toString}{node},
-the string implied by \V{node} of the token trie,
-is \texttt{"def"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-frametok},
-\[
-        \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"def"}.
-\]
-Attempting to match the overlap to the slice, we have
-\[
-     \texttt{"def"} \sim \texttt{/def/},
-\]
-which is a match,
-so we would cache a boolean true
-for the Ruby triple
-\[
-	(\V{node}, \texttt{/abcdef/}, 3).
-\]
+\todo{Rewrite paper from here.}
 
 \needspace{3in}
 \FloatBarrier
