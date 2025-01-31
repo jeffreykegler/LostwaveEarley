@@ -1523,6 +1523,76 @@ From the above, we see that we can add the following to the cache:
 \end{figure}
 } % group for floatstyle
 
+In \Figref{example-fixed2}
+\VFA{toString}{node},
+the string implied by \V{node} of the token trie,
+has been extended to \texttt{"de"},
+\begin{equation}
+        \label{eq:fixed-byte-2-tostring}
+        \VFA{toString}{node} = \texttt{"de"} \cuz \Figref{example-fixed1}.
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-2-nodesize}
+        \Vsize{node} = 2 \cuz \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed1}.
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-2-framelex}
+\begin{gathered}
+\FA{FrameLex}{\V{lex}, \V{off}} \\
+	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
+	= \Velement{(\texttt{/abcdef/})}{3, (2+3) } \\
+    = \texttt{/de/} \\
+        \cuz \eqref{eq:positive-framelex}, \eqref{eq:fixed-string-offset},
+                \eqref{eq:fixed-byte-2-nodesize}, \Figref{example-fixed1}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-2-frametok}
+        \begin{gathered}
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
+                = \texttt{"de"} \\
+                \cuz \eqref{eq:positive-frametok}, \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed1}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-2-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
+                    = \FA{Rem}{\texttt{/abcdef/}, 3} \\
+                    = \texttt{/def/} \\
+                \cuz \eqref{eq:positive-remlex}, \eqref{eq:fixed-string-offset}, \Figref{example-fixed1}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-2-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"de"}  \, \sim \, \texttt{/de/} \\
+                = \TRUE  \\
+            \cuz \eqref{eq:live-bit}, \eqref{eq:fixed-byte-2-framelex}, \eqref{eq:fixed-byte-2-frametok}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:fixed-byte-2-eolbit}
+        \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+        = \texttt{"de"} \,\sim\, \texttt{/def/} \\
+        = \FALSE \\
+                \cuz \eqref{eq:eol-bit},
+                        \eqref{eq:fixed-byte-2-frametok}, \eqref{eq:fixed-byte-2-remlex}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \begin{gathered}
+        \FA{Ruby}{\V{node}, \texttt{/abcdef/}, 3} = \\
+                (\V{LIVE-bit}, \V{EOL-bit}) = \\
+                (\TRUE, \FALSE) \\
+                \cuz \eqref{eq:fixed-byte-2-livebit}, \eqref{eq:fixed-byte-2-eolbit}.
+        \end{gathered}
+\end{equation}
+
+\todo{Rewrite paper from here.}
+
 \needspace{3in}
 \FloatBarrier
 
