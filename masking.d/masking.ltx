@@ -2002,6 +2002,52 @@ Since \V{LIVE-bit} is \FALSE, we also set
 \subsection{Example of factored alternatives, part 2}
 \label{sec:example-factoredb}
 
+In this section we look continue the ``factoring'' described
+in Section~\ref{sec:example-factoreda}
+on page~\pageref{sec:example-factoreda},
+considering the lexeme
+\begin{equation}
+        \label{eq:factoredb-lexeme}
+        \V{lex} = \texttt{/bbbbbb/}.
+\end{equation}
+\begin{equation}
+        \label{eq:factoredb-framelex}
+\begin{gathered}
+\FA{FrameLex}{\V{lex}, \V{off}} \\
+	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
+	= \Velement{(\texttt{/bbbbbb/})}{3, (3+3) } \\
+    = \texttt{/bbb/} \\
+        \cuz \Eqref{positive-framelex}, \Eqref{unsliceable-offset},
+                \eqref{eq:unsliceable-nodesize}, \eqref{eq:factoredb-lexeme},
+                \Figref{example-factored}.
+\end{gathered}
+\end{equation}
+\todo{Add RemLex}
+\begin{equation}
+        \label{eq:factoredb-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"bbb"}  \, \sim \, \texttt{/bbb/} \\
+                = \TRUE  \\
+            \cuz \Eqref{live-bit}, \eqref{eq:factoredb-framelex}, \eqref{eq:factored-frametok}.
+        \end{gathered}
+\end{equation}
+\todo{Fix below}
+\begin{equation}
+        \label{eq:factoredb-eolbit}
+        \begin{gathered}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \begin{gathered}
+        \FA{Ruby}{\V{node}, \texttt{/bbbbbb/}, 3} = \\
+                (\V{LIVE-bit}, \V{EOL-bit}) = \\
+                (\TRUE, \TRUE) \\
+                \cuz \Eqref{unsliceable-offset}, \eqref{eq:factoredb-lexeme},
+                        \eqref{eq:factoredb-livebit}, \eqref{eq:factoredb-eolbit}.
+        \end{gathered}
+\end{equation}
+
 \subsection {Example of overapproximation}
 \label{sec:example-overapproximation}
 
