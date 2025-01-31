@@ -1755,8 +1755,8 @@ There is an framed lexeme\footnote{%
 	For Kleene star regular expressions there will not necessarily
 	be a framed lexeme.
 	In that case we use overapproximation.
-	See Section~\ref{sec:example-overapproximation}
-	on page~\pageref{sec:example-overapproximation}
+	See Section~\ref{sec:example-overapproximate}
+	on page~\pageref{sec:example-overapproximate}
 	for an
 	example of overapproximation, in that case for regular
 	expressions using alternatives.
@@ -2059,7 +2059,7 @@ considering the lexeme
 \end{equation}
 
 \subsection {Example of overapproximation}
-\label{sec:example-overapproximation}
+\label{sec:example-overapproximate}
 
 {%
 \floatstyle{plain}
@@ -2082,7 +2082,7 @@ considering the lexeme
             Pre-frame & \multirow{2}{*}{...\texttt{"aaa"}} & \\
             token string & & \\
 		\hline
-		Framed token & & \texttt{"abc"} \\
+		Framed token & & \texttt{"aaa"} \\
 		\hline
             Original	& \multicolumn{2}{|c|}{ \multirow{2}{*}{\texttt{/(aaaaaa|bbbbbb)/}}} \\
             Lexeme	& \multicolumn{2}{|c|}{} \\
@@ -2097,7 +2097,7 @@ considering the lexeme
 \end{tabular}
 \vspace{6pt}
 \caption{Overapproximated slice example}
-\label{fig:example-overapproximation}
+\label{fig:example-overapproximate}
 \end{figure}
 } % group for floatstyle
 
@@ -2111,22 +2111,86 @@ An excellent overapproximation for
 \begin{equation}
         \label{eq:overapproximate-lexeme}
         \V{lex} = \texttt{/[ab][ab][ab][ab][ab][ab]/}
-                \, \cuz \,\Figref{example-overapproximation}.
-\end{equation}
-\begin{equation}
-        \label{eq:overapproximate-tostring}
-        \VFA{toString}{node} = \texttt{"abc"}
-                \, \cuz \, \Figref{example-overapproximation}.
+                \, \cuz \,\Figref{example-overapproximate}.
 \end{equation}
 
 \todo{Rewrite paper from here.}
-
+The lexeme offset is
+\begin{equation}
+        \label{eq:overapproximate-offset}
+	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
+\end{equation}
+which is positive.
+\begin{equation}
+        \label{eq:overapproximate-tostring}
+        \VFA{toString}{node} = \texttt{"aaa"}
+                \, \cuz \, \Figref{example-overapproximate}.
+\end{equation}
+\begin{equation}
+        \label{eq:overapproximate-nodesize}
+        \Vsize{node} = 3 \, \cuz \, \eqref{eq:overapproximate-tostring}, \Figref{example-overapproximate}.
+\end{equation}
+\begin{equation}
+        \label{eq:overapproximate-framelex}
+\begin{gathered}
+\FA{FrameLex}{\V{lex}, \V{off}} \\
+	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
+        = \Velement{(\texttt{/[ab][ab][ab][ab][ab][ab]/})}{3, (3+3) } \\
+        = \texttt{/[ab][ab][ab]/} \\
+        \cuz \Eqref{positive-framelex}, \Eqref{overapproximate-offset},
+                \eqref{eq:overapproximate-nodesize}, \Figref{example-overapproximate}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:overapproximate-frametok}
+        \begin{gathered}
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
+                = \texttt{"aaa"} \\
+                \cuz \Eqref{positive-frametok}, \eqref{eq:overapproximate-tostring}, \Figref{example-overapproximate}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:overapproximate-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
+                    = \FA{Rem}{\texttt{/[ab][ab][ab][ab][ab][ab]/}, 3} \\
+                    = \texttt{/[ab][ab][ab]/} \\
+                \cuz \Eqref{positive-remlex}, \Eqref{overapproximate-offset}, \Figref{example-overapproximate}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:overapproximate-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"aaa"}  \, \sim \, \texttt{/[ab][ab][ab]/} \\
+                = \TRUE  \\
+            \cuz \Eqref{live-bit}, \eqref{eq:overapproximate-framelex}, \eqref{eq:overapproximate-frametok}.
+        \end{gathered}
+\end{equation}
+We have now reached EOL:
+\begin{equation}
+        \label{eq:overapproximate-eolbit}
+        \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+                = \texttt{"aaa"} \,\sim\, \texttt{/[ab][ab][ab]/} \\
+        = \TRUE \\
+                \cuz \Eqref{eol-bit},
+                        \eqref{eq:overapproximate-frametok}, \eqref{eq:overapproximate-remlex}.
+        \end{gathered}
+\end{equation}
 We therefore cache a boolean false
 for the Ruby triple
-$(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
+\begin{equation}
+        \begin{gathered}
+                \FA{Ruby}{\V{node}, \texttt{/[ab][ab][ab][ab][ab][ab]/}, 3} = \\
+                (\V{LIVE-bit}, \V{EOL-bit}) = \\
+                (\TRUE, \TRUE) \\
+                \cuz \eqref{eq:overapproximate-livebit}, \eqref{eq:overapproximate-eolbit}.
+        \end{gathered}
+\end{equation}
 We note that,
-if \VFA{toString}{node} was \texttt{"aaa"},
-we would match,
+if \VFA{toString}{node} was \texttt{"bbb"},
+we would also match,
 but our match would be a false positive.
 
 \FloatBarrier
