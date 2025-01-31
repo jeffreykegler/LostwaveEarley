@@ -1590,8 +1590,6 @@ has been extended to \texttt{"de"},
         \end{gathered}
 \end{equation}
 
-\todo{Rewrite paper from here.}
-
 \needspace{3in}
 \FloatBarrier
 
@@ -1696,8 +1694,6 @@ We have now reached EOL:
         \end{gathered}
 \end{equation}
 
-\todo{Rewrite paper from here.}
-
 \needspace{3in}
 \FloatBarrier
 \section {Kleene star example}
@@ -1736,54 +1732,94 @@ We have now reached EOL:
 
 Figure~\ref{fig:example-kleene} illustrates the handling of Kleene star
 regular expressions.
-In Figure~\ref{fig:example-kleene}
-we have committed a token ending in \texttt{"aaa"},
-and \VFA{toString}{node}
-is also \texttt{"aaa"}.
 We are considering
 the token-consistent lexeme \texttt{/aa*/}.
-The relevant range is \texttt{[3,6]}
-and there is an LI slice: \texttt{/aaa/}.\footnote{%
+In Figure~\ref{fig:example-kleene}
+we have committed a token ending in \texttt{"aaa"}.
+The lexeme offset is
+\begin{equation}
+        \label{eq:kleene-offset}
+	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
+\end{equation}
+which is positive.
+
+\begin{equation}
+        \label{eq:kleene-tostring}
+        \VFA{toString}{node} = \texttt{"aaa"} \cuz \Figref{example-kleene}.
+\end{equation}
+\begin{equation}
+        \label{eq:kleene-nodesize}
+        \Vsize{node} = 3 \cuz \eqref{eq:kleene-tostring}, \Figref{example-kleene}.
+\end{equation}
+
+There is an framed lexeme\footnote{%
 	For Kleene star regular expressions there will not necessarily
-	be an LI slice.
+	be a framed lexeme.
 	In that case we use overapproximation.
 	See Section~\ref{sec:example-overapproximation}
 	on page~\pageref{sec:example-overapproximation}
 	for an
 	example of overapproximation, in that case for regular
 	expressions using alternatives.
-}
-The lexeme offset is
-\[
-	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
-\]
-which is positive.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
-\
+}:
 \begin{equation}
+        \label{eq:kleene-framelex}
 \begin{gathered}
-(\V{lex}, \V{off}) \\
+\FA{FrameLex}{\V{lex}, \V{off}} \\
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
 	= \Velement{(\texttt{/aa*/})}{3, (3+3) } \\
-    = \texttt{/aaa/}.
+    = \texttt{/aaa/} \\
+        \cuz \Eqref{positive-framelex}, \Eqref{kleene-offset},
+                \eqref{eq:kleene-nodesize}, \Figref{example-kleene}.
 \end{gathered}
 \end{equation}
-
-Again, \VFA{toString}{node}
-is \texttt{"aaa"}.
-Applying the formula for the overlap of positive offsets~\eqref{eq:positive-frametok},
-\[
-        \FA{Overlap}{\V{node},\V{off}} = \VFA{toString}{node} = \texttt{"aaa"}.
-\]
-and matching the overlap against the slice,
 \begin{equation}
-\label{eq:aaa-match}
-     \texttt{"aaa"} \sim \texttt{/aaa/}.
+        \label{eq:kleene-frametok}
+        \begin{gathered}
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
+                = \texttt{"aaa"} \\
+                \cuz \Eqref{positive-frametok}, \eqref{eq:kleene-tostring}, \Figref{example-kleene}.
+        \end{gathered}
 \end{equation}
-\eqref{eq:aaa-match} is a match,
-so we would cache a boolean true
-for the Ruby triple
-$(\V{node}, \texttt{/aa*/}, 3)$.
+\begin{equation}
+        \label{eq:kleene-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
+                    = \FA{Rem}{\texttt{/aa*/}, 3} \\
+                    = \texttt{/aaa/} \\
+                \cuz \Eqref{positive-remlex}, \Eqref{kleene-offset}, \Figref{example-kleene}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:kleene-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"aaa"}  \, \sim \, \texttt{/aaa/} \\
+                = \TRUE  \\
+            \cuz \Eqref{live-bit}, \eqref{eq:kleene-framelex}, \eqref{eq:kleene-frametok}.
+        \end{gathered}
+\end{equation}
+We have now reached EOL:
+\begin{equation}
+        \label{eq:kleene-eolbit}
+        \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+        = \texttt{"aaa"} \,\sim\, \texttt{/aaa/} \\
+        = \TRUE \\
+                \cuz \Eqref{eol-bit},
+                        \eqref{eq:kleene-frametok}, \eqref{eq:kleene-remlex}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \begin{gathered}
+        \FA{Ruby}{\V{node}, \texttt{/aa*/}, 3} = \\
+                (\V{LIVE-bit}, \V{EOL-bit}) = \\
+                (\TRUE, \TRUE) \\
+                \cuz \eqref{eq:kleene-livebit}, \eqref{eq:kleene-eolbit}.
+        \end{gathered}
+\end{equation}
+
+\todo{Rewrite paper from here.}
 
 \needspace{3in}
 \FloatBarrier
