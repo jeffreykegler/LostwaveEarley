@@ -1674,7 +1674,6 @@ is completed as \texttt{"def"},
             \cuz \Eqref{live-bit}, \eqref{eq:fixed-byte-3-framelex}, \eqref{eq:fixed-byte-3-frametok}.
         \end{gathered}
 \end{equation}
-We have now reached EOL:
 \begin{equation}
         \label{eq:fixed-byte-3-eolbit}
         \begin{gathered}
@@ -1687,7 +1686,7 @@ We have now reached EOL:
 \end{equation}
 \begin{equation}
         \begin{gathered}
-        \FA{Ruby}{\V{node}, \texttt{/abcdef/}, 3} = \\
+        \FA{Ruby}{\V{node}, \texttt{/aaaaaa/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
                 (\TRUE, \TRUE) \\
                 \cuz \eqref{eq:fixed-byte-3-livebit}, \eqref{eq:fixed-byte-3-eolbit}.
@@ -1915,7 +1914,7 @@ overapproximation.
             Pre-frame & \multirow{2}{*}{\texttt{..."aaa"}} & \\
             token string & & \\
 		\hline
-		Framed token & & \texttt{"aaa"} \\
+		Framed token & & \texttt{"bbb"} \\
 		\hline
 		\multirow{2}{*}{Lexemes}
 			& \multicolumn{2}{|c|}{\texttt{/aaaaaa/}} \\
@@ -1937,7 +1936,7 @@ on page~\pageref{sec:example-factored}
 is ``factoring''.
 Any regular expression which does not use the Kleene star
 can be factored into fixed string lexemes.
-We do note that such regular expressions might still be tough:
+We note that such regular expressions might still be tough:
 the number of factored strings can be large enough to make
 a factoring solution impractical.
 
@@ -1945,22 +1944,71 @@ In this example, factoring is quite practical.
 \texttt{/(aaaaaa|bbbbbb)/}
 can be factored into the two lexemes
 \texttt{/aaaaaa/} and \texttt{/bbbbbb/}.
-As in the previous examples, the offset is 3,
-and the range is \texttt{[3,6]}.
-Applying the formula for slices of positive offsets~\eqref{eq:positive-framelex},
-their slices are easily found to be, respectively,
-\texttt{/aaa/} and \texttt{/bbb/}.
-\VFA{toString}{node} is \texttt{"aaa"},
-and \FA{Overlap}{\V{node},3} is \texttt{"aaa"}.
-Therefore
-\texttt{/aaa/} matches
-and \texttt{/bbb/} does not.
-We cache a boolean true
-for the Ruby triple
-$(\V{node}, \texttt{/aaaaaa/}, 3)$
-and a boolean false
-for the Ruby triple
-$(\V{node}, \texttt{/bbbbbb/}, 3)$.
+We will look at each in turn,
+starting with
+\begin{equation}
+        \label{eq:factoreda-lexeme}
+        \V{lex} = \texttt{/aaaaaa/}.
+\end{equation}
+\begin{equation}
+        \label{eq:factored-framelex}
+\begin{gathered}
+\FA{FrameLex}{\V{lex}, \V{off}} \\
+	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
+	= \Velement{(\texttt{/aaaaaa/})}{3, (3+3) } \\
+    = \texttt{/aaa/} \\
+        \cuz \Eqref{positive-framelex}, \Eqref{unsliceable-offset},
+                \eqref{eq:unsliceable-nodesize}, \Figref{example-factored},
+                \eqref{eq:factoreda-lexeme}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:factored-frametok}
+        \begin{gathered}
+        \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
+                = \texttt{"bbb"} \\
+                \cuz \Eqref{positive-frametok}, \eqref{eq:unsliceable-tostring}, \Figref{example-factored}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:factored-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
+                    = \FA{Rem}{\texttt{/aaaaaa/}, 3} \\
+                    = \texttt{/aaa/} \\
+                \cuz \Eqref{positive-remlex}, \Eqref{unsliceable-offset}, \Figref{example-factored},
+                \eqref{eq:factoreda-lexeme}.
+\end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:factored-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"aaa"}  \, \sim \, \texttt{/aaa/} \\
+                = \TRUE  \\
+            \cuz \Eqref{live-bit}, \eqref{eq:factored-framelex}, \eqref{eq:factored-frametok}.
+        \end{gathered}
+\end{equation}
+We have now reached EOL:
+\begin{equation}
+        \label{eq:factored-eolbit}
+        \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+        = \texttt{"aaa"} \,\sim\, \texttt{/aaa/} \\
+        = \TRUE \\
+                \cuz \Eqref{eol-bit},
+                        \eqref{eq:factored-frametok}, \eqref{eq:factored-remlex}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \begin{gathered}
+        \FA{Ruby}{\V{node}, \texttt{/aaaaaa/}, 3} = \\
+                (\V{LIVE-bit}, \V{EOL-bit}) = \\
+                (\TRUE, \TRUE) \\
+                \cuz \eqref{eq:factoreda-lexeme},
+                        \eqref{eq:factored-livebit}, \eqref{eq:factored-eolbit}.
+        \end{gathered}
+\end{equation}
 
 \subsection {Example of overapproximation}
 \label{sec:example-overapproximation}
