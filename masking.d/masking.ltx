@@ -267,6 +267,8 @@
 \newcommand{\Exref}[1]{\genref{ex:#1}{Ex}}
 \newcommand{\exEnd}{\Circle}
 
+\newcommand{\Figref}[1]{\genref{fig:#1}{Fig}}
+
 % theoremoids: Ob
 
 \newtheorem{observation}[theorem]{Observation}
@@ -1401,24 +1403,28 @@ until the EOL.
 \end{figure}
 } % group for floatstyle
 
-Figure~\ref{fig:example-fixed1} shows the situation where
+\Figref{example-fixed1} shows the case where
 \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
 is \texttt{"d"}.
-The relevant range is \texttt{[3,4]},
+\begin{equation}
+        \label{eq:fixed-byte-1-tostring}
+        \VFA{toString}{node} = \texttt{"d"} \cuz \Figref{example-fixed1}.
+\end{equation}
+The frame is \texttt{[3,4]},
 and there is an LI slice: \texttt{/d/}.
 Recall from \ref{eq:fixed-string-offset} that the lexeme offset is 3,
 which is positive.
 Applying the formula for framed slices
-of positive offsets~\eqref{eq:positive-framelex},
-\
+of positive offsets,
 \begin{equation}
         \label{eq:fixed-byte-1-framelex}
 \begin{gathered}
 \FA{FrameLex}{\V{lex}, \V{off}} \\
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
 	= \Velement{(\texttt{/abcdef/})}{3, (1+3) } \\
-    = \texttt{/d/}.
+    = \texttt{/d/} \\
+        \cuz \eqref{eq:positive-framelex}, \eqref{eq:fixed-string-offset}, \Figref{example-fixed1}.
 \end{gathered}
 \end{equation}
 
