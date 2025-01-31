@@ -267,6 +267,7 @@
 \newcommand{\Exref}[1]{\genref{ex:#1}{Ex}}
 \newcommand{\exEnd}{\Circle}
 
+\newcommand{\Eqref}[1]{\genref{eq:#1}{Eq}}
 \newcommand{\Figref}[1]{\genref{fig:#1}{Fig}}
 
 % theoremoids: Ob
@@ -1529,11 +1530,11 @@ the string implied by \V{node} of the token trie,
 has been extended to \texttt{"de"},
 \begin{equation}
         \label{eq:fixed-byte-2-tostring}
-        \VFA{toString}{node} = \texttt{"de"} \cuz \Figref{example-fixed1}.
+        \VFA{toString}{node} = \texttt{"de"} \cuz \Figref{example-fixed2}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-2-nodesize}
-        \Vsize{node} = 2 \cuz \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed1}.
+        \Vsize{node} = 2 \cuz \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed2}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-2-framelex}
@@ -1542,8 +1543,8 @@ has been extended to \texttt{"de"},
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
 	= \Velement{(\texttt{/abcdef/})}{3, (2+3) } \\
     = \texttt{/de/} \\
-        \cuz \eqref{eq:positive-framelex}, \eqref{eq:fixed-string-offset},
-                \eqref{eq:fixed-byte-2-nodesize}, \Figref{example-fixed1}.
+        \cuz \Eqref{positive-framelex}, \Eqref{fixed-string-offset},
+                \eqref{eq:fixed-byte-2-nodesize}, \Figref{example-fixed2}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1551,7 +1552,7 @@ has been extended to \texttt{"de"},
         \begin{gathered}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
                 = \texttt{"de"} \\
-                \cuz \eqref{eq:positive-frametok}, \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed1}.
+                \cuz \Eqref{positive-frametok}, \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed2}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1560,7 +1561,7 @@ has been extended to \texttt{"de"},
         \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/abcdef/}, 3} \\
                     = \texttt{/def/} \\
-                \cuz \eqref{eq:positive-remlex}, \eqref{eq:fixed-string-offset}, \Figref{example-fixed1}.
+                \cuz \Eqref{positive-remlex}, \Eqref{fixed-string-offset}, \Figref{example-fixed2}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1569,7 +1570,7 @@ has been extended to \texttt{"de"},
         \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
                 = \texttt{"de"}  \, \sim \, \texttt{/de/} \\
                 = \TRUE  \\
-            \cuz \eqref{eq:live-bit}, \eqref{eq:fixed-byte-2-framelex}, \eqref{eq:fixed-byte-2-frametok}.
+            \cuz \Eqref{live-bit}, \eqref{eq:fixed-byte-2-framelex}, \eqref{eq:fixed-byte-2-frametok}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1578,7 +1579,7 @@ has been extended to \texttt{"de"},
         \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
         = \texttt{"de"} \,\sim\, \texttt{/def/} \\
         = \FALSE \\
-                \cuz \eqref{eq:eol-bit},
+                \cuz \Eqref{eol-bit},
                         \eqref{eq:fixed-byte-2-frametok}, \eqref{eq:fixed-byte-2-remlex}.
         \end{gathered}
 \end{equation}
