@@ -2058,8 +2058,6 @@ considering the lexeme
         \end{gathered}
 \end{equation}
 
-\todo{Rewrite paper from here.}
-
 \subsection {Example of overapproximation}
 \label{sec:example-overapproximation}
 
@@ -2103,25 +2101,29 @@ considering the lexeme
 \end{figure}
 } % group for floatstyle
 
+
 A second solution to the problem presented in
-Section~\ref{sec:example-overapproximation}
-on page~\pageref{sec:example-overapproximation}
+Section~\ref{sec:example-unsliceable}
+on page~\pageref{sec:example-unsliceable}
 is overapproximation.
-Again, our lexeme is
-\texttt{/(aaaaaa|bbbbbb)/}.
-Again, the offset is 3,
-and the range is \texttt{[3,6]}.
-An excellent overapproximated slice for
-\element{(\texttt{/(aaaaaa|bbbbbb)/})}{3,6} is
-\texttt{/[ab][ab][ab]/}.
-\VFA{toString}{node} is \texttt{"abc"},
-which means that
-\FA{Overlap}{\V{node},3} is \texttt{"abc"},
-which does not match.
+An excellent overapproximation for
+\texttt{/(aaaaaa|bbbbbb)/} is
+\begin{equation}
+        \label{eq:overapproximate-lexeme}
+        \V{lex} = \texttt{/[ab][ab][ab][ab][ab][ab]/}
+                \, \cuz \,\Figref{example-overapproximation}.
+\end{equation}
+\begin{equation}
+        \label{eq:overapproximate-tostring}
+        \VFA{toString}{node} = \texttt{"abc"}
+                \, \cuz \, \Figref{example-overapproximation}.
+\end{equation}
+
+\todo{Rewrite paper from here.}
+
 We therefore cache a boolean false
 for the Ruby triple
 $(\V{node}, \texttt{/(aaaaaa|bbbbbb)/}, 3)$.
-
 We note that,
 if \VFA{toString}{node} was \texttt{"aaa"},
 we would match,
