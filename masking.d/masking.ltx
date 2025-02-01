@@ -1205,20 +1205,27 @@ the remaining lexeme is the entire lexeme:
 
 \section{Computing the bits}
 
-If \FA{FrameLex}{\V{lex}, \V{off}} exists, then the value
-of the LIVE-bit is
+The value of LIVE-bit is
 \begin{equation}
 	\label{eq:live-bit}
-        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}},
+        \V{LIVE-bit} = \begin{cases}
+                \; \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}}, \\
+                \qquad \qquad \text{if \FA{FrameLex}{\V{lex}, \V{off}} exists.} \\
+                \; \text{\FALSE, otherwise.}
+        \end{cases}
 \end{equation}
-where $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s}
-matches the recognizer \V{recce}.
-If the LIVE-bit is true, then the value
-of the EOL-bit is
+The value of EOL-bit is
 \begin{equation}
 	\label{eq:eol-bit}
-        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}}.
+        \V{EOL-bit} = \begin{cases}
+                \; \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+                \qquad \qquad \text{if $\V{LIVE-bit} = \TRUE$.} \\
+                \; \text{\FALSE, otherwise.}
+        \end{cases}
 \end{equation}
+In \eqref{eq:live-bit} and \eqref{eq:eol-bit},
+we recall that $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s}
+matches the recognizer \V{recce}.
 
 It is important that it be the case that \tpb is true
 only if LIVE-bit in \eqref{eq:live-bit} is true.
