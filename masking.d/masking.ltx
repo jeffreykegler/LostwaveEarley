@@ -2360,7 +2360,43 @@ We can update the cache accordingly:
 
 \FloatBarrier
 
-\section{Afterthought: Forcing}
+\section{Afterthoughts}
+
+\subsection{Strings and other long lexemes}
+
+The optimizations in this document are aimed at inputs
+which consist mostly of short lexemes.
+This in the case in most programming languages.
+
+There are, however, important exceptions.
+It is common for JSON and Lua programs to be essentially
+databases,
+and to consist in large part,
+or almost entirely,
+of long lexemes.
+Most commonly, long lexemes
+are strings of some format,
+and for convenience in the rest of this section
+we will refer to long lexemes as ``strings''.
+
+To aim dedicated optimizations at strings,
+they can be treated as subgrammars.
+The subgrammars can be tackled with special techniques
+aimed at optimizing that type of string.
+Within the sub-grammars these techniques may again
+apply.
+
+A Marpa-driven example of string handling in
+a complex application is \cite{YAHC},
+a Hoon compiler.
+Hoon has a wide variety of formats for string-like
+objects~cite{Hoon-strings},
+including three lexeme types specifically intended for
+long lexemes: strings bounded by triple single quotes,
+strings bounded by triple double quotes,
+and a "Markdown-esque" sublanguage~\cite{Udon}.
+
+\subsection{Forcing}
 
 The optimization described here detects all situations where there is
 only one token-consistent lexeme at a location.
@@ -2369,7 +2405,7 @@ This is done as a natural extension of its usual logic for
 token-consistent lexemes and their tokenization,
 rather than by special-casing.
 
-\section{Afterthought: a MEDIAL bit}
+\subsection{A MEDIAL bit}
 \label{sec:medial-bit}
 
 We note that, for presentation purposes,
@@ -2441,6 +2477,24 @@ values, which can be convenient.
 \newblock{
   \url{https://github.com/microsoft/llguidance}.
   Retrieved 2 December, 2024.}
+
+\bibitem{YAHC}
+\newblock{Jeffrey Kegler.}
+\newblock{``Yet Another Hoon Compiler''.}
+\newblock{\url{https://github.com/jeffreykegler/yahc}.
+        Retrieved 1 February 2025.}
+
+\bibitem{Hoon-strings}
+\newblock{Urbit.org authors.}
+\newblock{``Strings - Language - docs.urbit.org''}
+\newblock{\url{https://docs.urbit.org/language/hoon/guides/strings}.
+        Retrieved 1 February 2025.}
+
+\bibitem{Udon}
+\newblock{Urbit.org authors.}
+\newblock{``Udon (Markdown-esque) - Language - docs.urbit.org''.}
+\newblock{\url{https://docs.urbit.org/language/hoon/guides/udon}.
+        Retrieved 1 February 2025.}
 
 \bibitem{wiki-loop-invariant}
 \newblock{Wikipedia contributors.}
