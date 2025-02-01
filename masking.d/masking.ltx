@@ -2259,34 +2259,36 @@ Our lexeme is
         \Vsize{node} = 6 \cuz \eqref{eq:negoff-tostring}, \Figref{example-negoff}.
 \end{equation}
 
-\todo{Rewrite paper from here.}
 
-Applying the formula for slices of negative offsets~\eqref{eq:negative-framelex},
-\
+Applying the formula for framed slices with negative offsets,
 \begin{equation}
+        \label{eq:negoff-framelex}
 \begin{gathered}
-(\V{lex}, \V{off}) \\
+\FA{FrameLex}{\V{lex}, \V{off}} \\
 	= \Velement{lex}{0, \Vsize{node}+\V{off}} \\
 	= \Velement{(\texttt{/ab*/})}{0, 6+(-3)} \\
 	= \Velement{(\texttt{/ab*/})}{0, 3} \\
-    = \texttt{/abb/}.
+    = \texttt{/abb/} \\
+        \cuz \Eqref{negative-framelex}, \eqref{eq:negoff-offset}, \eqref{eq:negoff-lexeme},
+                \eqref{eq:negoff-nodesize}, \Figref{example-negoff}.
 \end{gathered}
 \end{equation}
-
-Determining the overlap for a negative offset is slightly more
-complicated that it has been for the positive values of \V{off}.
+Determining the framed token for a negative offset is slightly more
+complicated that it has been for the positive offsets.
 Applying the formula for overlaps of negative offsets,
-~\eqref{eq:negative-frametok}
-on page ~\pageref{eq:negative-frametok},
 \begin{equation}
-\begin{gathered}
-        \FA{Overlap}{\V{node},\V{off}} \\
+        \label{eq:negoff-frametok}
+        \begin{gathered}
+        \FA{FrameTok}{\V{node},\V{off}}
 	= \element{(\VFA{toString}{node})}{\Vsize{node}+\V{off}, \Vsize{node}}.\\
-	= \element{(\texttt{"xyzabc"})}{6+(-3), 6} \\
-	= \element{(\texttt{"xyzabc"})}{3, 6} \\
-	= \texttt{"abc"}.
-\end{gathered}
+	= \element{(\texttt{"xyzabb"})}{6+(-3), 6} \\
+	= \element{(\texttt{"xyzabb"})}{3, 6} \\
+	= \texttt{"abb"} \\
+                \cuz \Eqref{negative-frametok}, \eqref{eq:negoff-offset}, \eqref{eq:negoff-tostring},
+                 \eqref{eq:negoff-nodesize}, \Figref{example-negoff}.
+        \end{gathered}
 \end{equation}
+\todo{Rewrite paper from here.}
 
 Comparing the overlap to the slice,
 \[
