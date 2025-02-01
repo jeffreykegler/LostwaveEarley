@@ -2114,11 +2114,11 @@ An excellent overapproximation for
                 \, \cuz \,\Figref{example-overapproximate}.
 \end{equation}
 
-\todo{Rewrite paper from here.}
 The lexeme offset is
 \begin{equation}
         \label{eq:overapproximate-offset}
-	\V{off} = (\V{TB} \subtract \V{ALA}) = 3,
+	\V{off} = (\V{TB} \subtract \V{ALA}) = 3
+                \, \cuz \,\Figref{example-overapproximate},
 \end{equation}
 which is positive.
 \begin{equation}
@@ -2137,7 +2137,7 @@ which is positive.
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
         = \Velement{(\texttt{/[ab][ab][ab][ab][ab][ab]/})}{3, (3+3) } \\
         = \texttt{/[ab][ab][ab]/} \\
-        \cuz \Eqref{positive-framelex}, \Eqref{overapproximate-offset},
+        \cuz \Eqref{positive-framelex}, \eqref{eq:overapproximate-lexeme}, \eqref{eq:overapproximate-offset},
                 \eqref{eq:overapproximate-nodesize}, \Figref{example-overapproximate}.
 \end{gathered}
 \end{equation}
@@ -2155,9 +2155,11 @@ which is positive.
         \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/[ab][ab][ab][ab][ab][ab]/}, 3} \\
                     = \texttt{/[ab][ab][ab]/} \\
-                \cuz \Eqref{positive-remlex}, \Eqref{overapproximate-offset}, \Figref{example-overapproximate}.
+                \cuz \Eqref{positive-remlex}, \eqref{eq:overapproximate-lexeme}, \eqref{eq:overapproximate-offset},
+                        \Figref{example-overapproximate}.
 \end{gathered}
 \end{equation}
+\todo{Rewrite paper from here.}
 \begin{equation}
         \label{eq:overapproximate-livebit}
         \begin{gathered}
