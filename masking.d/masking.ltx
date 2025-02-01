@@ -1352,15 +1352,13 @@ Long strings and here-documents
 typically will not be repeated exactly,
 so that the likelihood of cache hits would
 be very low.\footnote{%
-        Long strings and here-documents lend themselves to parsing in
-        sub-grammars, and within the sub-grammars these techniques may again
-        apply.
+        From more on long lexemes, like strings and here-documents,
+        see Section~\ref{sec:strings} on page~\pageref{sec:strings}.
 }
 Therefore, for absolute values of \V{off}
 above a certain threshold,
 it is likely to make sense to not cache the
 value of Ruby triples.
-\todo{More on techniques for long strings.}
 
 Many caching refinements are possible.
 It may make sense to vary the caching strategy by lexeme,
@@ -2363,6 +2361,7 @@ We can update the cache accordingly:
 \section{Afterthoughts}
 
 \subsection{Strings and other long lexemes}
+\label{sec:strings}
 
 The optimizations in this document are aimed at inputs
 which consist mostly of short lexemes.
