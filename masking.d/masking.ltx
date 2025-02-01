@@ -2288,7 +2288,6 @@ Applying the formula for overlaps of negative offsets,
                  \eqref{eq:negoff-nodesize}, \Figref{example-negoff}.
         \end{gathered}
 \end{equation}
-\todo{Rewrite paper from here.}
 On the other hand, determining the remaining lexeme is simpler in
 the case of a negative offset,
 \begin{equation}
@@ -2302,11 +2301,26 @@ the case of a negative offset,
 \end{gathered}
 \end{equation}
 
-Comparing the overlap to the slice,
-\[
-     \texttt{"abc"} \sim \texttt{/abb/}
-\]
-is not a match.
+\begin{equation}
+        \label{eq:negoff-livebit}
+        \begin{gathered}
+        \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
+                = \texttt{"abb"}  \, \sim \, \texttt{/abb/} \\
+                = \TRUE  \\
+            \cuz \Eqref{live-bit}, \eqref{eq:negoff-framelex}, \eqref{eq:negoff-frametok}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:negoff-eolbit}
+        \begin{gathered}
+        \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
+                = \texttt{"abb"} \,\sim\, \texttt{/ab*/} \\
+        = \TRUE \\
+                \cuz \Eqref{eol-bit}, \eqref{eq:negoff-frametok}, \eqref{eq:negoff-remlex}.
+        \end{gathered}
+\end{equation}
+\todo{Rewrite paper from here.}
+
 We therefore cache a boolean false
 for the Ruby triple
 \[
