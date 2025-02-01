@@ -2321,11 +2321,17 @@ the case of a negative offset,
 \end{equation}
 \todo{Rewrite paper from here.}
 
-We therefore cache a boolean false
-for the Ruby triple
-\[
-	(\V{node}, \texttt{/ab*/}, {-3}).
-\]
+We can update the cache accordingly.
+\begin{equation}
+        \begin{gathered}
+                \FA{Ruby}{\V{node}, \texttt{/ab*/}, {-3}} \\
+                = (\V{LIVE-bit}, \V{EOL-bit}) \\
+                = (\TRUE, \TRUE) \\
+                \cuz \Eqref{ruby-function},
+                        \eqref{eq:negoff-offset}, \eqref{eq:negoff-lexeme},
+                        \eqref{eq:negoff-livebit}, \eqref{eq:negoff-eolbit}.
+        \end{gathered}
+\end{equation}
 
 \FloatBarrier
 
