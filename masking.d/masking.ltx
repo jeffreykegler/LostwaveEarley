@@ -367,6 +367,16 @@ It assumes some familiarity with the code in
         separate the statement of fact from the reasons for it.
         It allows the reader more easily to follow the reasoning
                 behind the statement of fact.
+        \item Parenthesized references, for example ``(Fig5:13)'',
+                are often used.  They are of the form
+                \[ \texttt{`('} \cat \V{tag} \cat \V{refNo} \cat \texttt{`:'} \cat \V{pageNo} \cat \texttt{`)'} \]
+                where \V{tag} is a tag, \V{refNo} is a reference number,
+                and \V{pageNo} is a page number.
+                Allowed tags are ``Eq'' for equation,
+                and ``Fig'' for figure.
+                Page number and its preceding colon separator may be omitted.
+                When the page number is omitted for an equation,
+                the tag may be as well, so that ``(Eq12:10)'' becomes ``(12)''.
 \end{itemize}
 
 \section{Summary}
