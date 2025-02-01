@@ -2289,6 +2289,18 @@ Applying the formula for overlaps of negative offsets,
         \end{gathered}
 \end{equation}
 \todo{Rewrite paper from here.}
+On the other hand, determining the remaining lexeme is simpler in
+the case of a negative offset,
+\begin{equation}
+        \label{eq:negoff-remlex}
+        \begin{gathered}
+        \FA{RemLex}{\V{lex}, \V{off}} \\
+                = \FA{Rem}{\V{lex}, 0} \\
+                        = \V{lex} \\
+                    = \texttt{/ab*/} \\
+                \cuz \Eqref{negative-remlex}, \eqref{eq:negoff-lexeme}, \Figref{example-negoff}.
+\end{gathered}
+\end{equation}
 
 Comparing the overlap to the slice,
 \[
