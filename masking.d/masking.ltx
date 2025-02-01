@@ -2192,12 +2192,11 @@ We note that,
 if \VFA{toString}{node} was \texttt{"bbb"},
 we would also cache $(\TRUE, \TRUE)$,
 but our matches would be false positives.
-\todo{Rewrite paper from here.}
 
 \FloatBarrier
 
 \section {Example of negative offset}
-\label{sec:negative-offset-example}
+\label{sec:negoff-example}
 
 {%
 \floatstyle{plain}
@@ -2213,7 +2212,7 @@ but our matches would be false positives.
 			& \multicolumn{1}{|c|}{[ALA,Current]}
 			\\
 		\hline
-            Pre-frame & \multirow{2}{*}{...\texttt{"xyz"}} & \\
+            Pre-frame & \multirow{2}{*}{\texttt{"xyz"}} & \\
             token string & & \\
 		\hline
 		Framed token & & \texttt{"abb"} \\
@@ -2225,20 +2224,43 @@ but our matches would be false positives.
 \end{tabular}
 \vspace{6pt}
 \caption{Negative offset example}
-\label{fig:example-negative-offset}
+\label{fig:example-negoff}
 \end{figure}
 } % group for floatstyle
 
 All our examples so far have been positive-offset lexemes.
-That is because they present the most difficult cases.
-In this section we look at a negative-offset lexeme
+That is because they present the most difficult cases ---
+all unsliceable lexemes are positive-offset lexemes.
+Regular expression lexemes with negative offsets
+are always sliceable,
+because all slices of the lexemes with
+negative offsets start at 0,
+and the language consisting of the prefixes
+of a regular language is always
+another regular language.
 
-Our lexeme is \texttt{/ab*/}.
-The lexeme offset is
-\[
-	\V{off} = (\V{TB} \subtract \V{ALA}) = {-3},
-\]
+In this section we look at a negative-offset lexeme
+\begin{equation}
+    \label{eq:negoff-offset}
+        \V{off} = (\V{TB} \subtract \V{ALA}) = {-3} \,\cuz\, \Figref{example-negoff},
+\end{equation}
 which is negative.
+Our lexeme is
+\begin{equation}
+        \label{eq:negoff-lexeme}
+        \V{lex} = \texttt{/ab*/}. \,\cuz\, \Figref{example-negoff}.
+\end{equation}
+\begin{equation}
+        \label{eq:negoff-tostring}
+        \VFA{toString}{node} = \texttt{"xyzabb"} \cuz \Figref{example-negoff}.
+\end{equation}
+\begin{equation}
+        \label{eq:negoff-nodesize}
+        \Vsize{node} = 6 \cuz \eqref{eq:negoff-tostring}, \Figref{example-negoff}.
+\end{equation}
+
+\todo{Rewrite paper from here.}
+
 Applying the formula for slices of negative offsets~\eqref{eq:negative-framelex},
 \
 \begin{equation}
@@ -2250,11 +2272,6 @@ Applying the formula for slices of negative offsets~\eqref{eq:negative-framelex}
     = \texttt{/abb/}.
 \end{gathered}
 \end{equation}
-We note that all slices of the lexemes for
-negative offsets start at 0,
-so that
-regular expression lexemes with negative offsets
-are always sliceable.
 
 Determining the overlap for a negative offset is slightly more
 complicated that it has been for the positive values of \V{off}.
