@@ -2159,7 +2159,6 @@ which is positive.
                         \Figref{example-overapproximate}.
 \end{gathered}
 \end{equation}
-\todo{Rewrite paper from here.}
 \begin{equation}
         \label{eq:overapproximate-livebit}
         \begin{gathered}
@@ -2169,7 +2168,6 @@ which is positive.
             \cuz \Eqref{live-bit}, \eqref{eq:overapproximate-framelex}, \eqref{eq:overapproximate-frametok}.
         \end{gathered}
 \end{equation}
-We have now reached EOL:
 \begin{equation}
         \label{eq:overapproximate-eolbit}
         \begin{gathered}
@@ -2180,7 +2178,7 @@ We have now reached EOL:
                         \eqref{eq:overapproximate-frametok}, \eqref{eq:overapproximate-remlex}.
         \end{gathered}
 \end{equation}
-We therefore cache a boolean false
+We therefore can cache a $(\TRUE, \TRUE)$
 for the Ruby triple
 \begin{equation}
         \begin{gathered}
@@ -2192,8 +2190,9 @@ for the Ruby triple
 \end{equation}
 We note that,
 if \VFA{toString}{node} was \texttt{"bbb"},
-we would also match,
-but our match would be a false positive.
+we would also cache $(\TRUE, \TRUE)$,
+but our matches would be false positives.
+\todo{Rewrite paper from here.}
 
 \FloatBarrier
 
