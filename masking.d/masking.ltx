@@ -352,32 +352,38 @@ It assumes some familiarity with the code in
 \llguidance\cite{llguidance}.
 
 \section{Conventions}
-\begin{itemize}
-\item ``Iff'' (or ``iff'') abbreviates
+\noindent $\bullet$ ``Iff'' (or ``iff'') abbreviates
 	``if and only if''.
-\item Ranges are inclusive start,
+
+\noindent $\bullet$ Ranges are inclusive start,
 	exclusive end, so that, for example,
 		\begin{gather*}
 			\element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
 			\element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
 		\end{gather*}
-\item \TRUE is a boolean (or optional boolean) true; and
+
+\noindent $\bullet$ \TRUE is a boolean (or optional boolean) true; and
         \FALSE is a boolean (or optional boolean) false.
-\item The ``because'' symbol ($\cuz$) is used in equations to
+
+\noindent $\bullet$ The ``because'' symbol ($\cuz$) is used in equations to
         separate the statement of fact from the reasons for it.
         It allows the reader more easily to follow the reasoning
-                behind the statement of fact.
-        \item Parenthesized references, for example ``(Fig5:13)'',
-                are often used.  They are of the form
-                \[ \texttt{`('} \cat \V{tag} \cat \V{refNo} \cat \texttt{`:'} \cat \V{pageNo} \cat \texttt{`)'} \]
-                where \V{tag} is a tag, \V{refNo} is a reference number,
-                and \V{pageNo} is a page number.
-                Allowed tags are ``Eq'' for equation,
-                and ``Fig'' for figure.
-                Page number and its preceding colon separator may be omitted.
-                When the page number is omitted for an equation,
-                the tag may be as well, so that ``(Eq12:10)'' becomes ``(12)''.
-\end{itemize}
+        behind the statement of fact.
+
+\noindent $\bullet$ Parenthesized references, for example ``(Fig5:13)'',
+        are often used.  They are of the form
+        \[ \texttt{`('} \cat \V{tag} \cat \V{refNo} \cat \texttt{`:'} \cat \V{pageNo} \cat \texttt{`)'} \]
+        where \V{tag} is a tag, \V{refNo} is a reference number,
+        and \V{pageNo} is a page number.
+        Allowed tags are ``Eq'' for equation,
+        and ``Fig'' for figure.
+        Page number and its preceding colon separator may be omitted.
+        When the page number is omitted for an equation,
+        the tag may be as well, so that ``(Eq12:10)'' becomes ``(12)''.
+
+\noindent $\bullet$ Tilde ($\sim$) is the ``matches'' operator, so that
+        $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s}
+        matches the recognizer \V{recce}.
 
 \section{Summary}
 
