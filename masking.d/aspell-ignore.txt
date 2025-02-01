@@ -23,8 +23,11 @@ Ee
 endp
 eol
 EOL
+eolbit
 EOLs
 eq
+factoreda
+factoredb
 factorings
 FOPC
 foreach
@@ -43,8 +46,11 @@ Lai
 lex
 lexeme
 Lexeme
+lexeme's
 lexemes
 Lexemes
+Lexing
+livebit
 llguidance
 lm
 Lm
@@ -53,6 +59,8 @@ lorem
 Marpa
 Michal
 Moskal
+negoff
+nodesize
 Oo
 overapproximate
 overapproximated
@@ -65,6 +73,7 @@ PDA
 pos
 pre
 precompute
+remlex
 RemLex
 Rr
 Ruan
@@ -80,6 +89,7 @@ tok
 tokenization
 toktrie
 Toktrie
+tostring
 toString
 trie
 tuff
@@ -88,7 +98,9 @@ unsliceable
 wh
 XGrammar
 Xu
+XXXX
 xyz
+xyzabb
 xyzabc
 Yaxing
 Yilong
