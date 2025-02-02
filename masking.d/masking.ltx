@@ -425,8 +425,10 @@ optional-boolean duples.
 The set, and the optional-boolean duples,
 are location-free ---
 free of per-location cost in time.
+(We abbreviate location-free as LF.)
 
-The optional-boolean duples are location-free
+The optional-boolean duples
+are location-free
 because they do not vary by location,
 and therefore may be calculated once
 and cached.
@@ -457,14 +459,14 @@ outlined in this paper.
 We will call these ``tough'' lexemes.
 Tough lexemes should be sparse and will be defined
 and discussed later\footnote{%
-        Section~\ref{sec:lexeme-slices}
+        See Section~\ref{sec:lexeme-slices}
         on page~\ref{sec:lexeme-slices}%
 }.
 
 We use the LIVE-bit to avoid most trie traversal,
 without incurring the cost of a \tpb call.
 Calls to \tpb
-need only be made at end of lexeme,
+need only be made at EOL,
 and for tough lexemes.
 
 \section{The basic ideas}
