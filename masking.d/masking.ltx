@@ -748,8 +748,10 @@ Abusing notation a bit, we also write
 of \V{node}.
 \item
 \FA{toString}{\VFA{path}{node}} is
-the node vector \VFA{path}{node}, mapped to
-a sequence (aka string) of bytes.
+the node vector \VFA{path}{node},
+mapped to the bytes that label the nodes.
+The result is a sequence of bytes,
+and therefore a string.
 We usually overload the notation
 and abbreviate \FA{toString}{\VFA{path}{node}}
 as \VFA{toString}{node}.
@@ -771,43 +773,47 @@ In this document, we refer to a lexeme slice as location-independent (LI)
 if the slice matches correctly regardless of any earlier bytes in the
 string.
 Here are some examples of lexeme slices:
-
+The lexeme
 \begin{equation}
 	\label{eq:ex-fixed}
     \element{(\texttt{/abcd/})}{2,3} = \texttt{/c/}
 \end{equation}
-    is an LI slice, because the string \texttt{"c"}
-    will always match the third character of any string
-    which matches $\texttt{/abcd/}$.
+is an LI slice, because the string \texttt{"c"}
+will always match the third character of any string
+which matches $\texttt{/abcd/}$.
 
+The lexeme
 \begin{equation}
 	\label{eq:ex-no-slice}
     \element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}
 \end{equation}
-\MYsloppy{%
 \noindent
 does not have an LI slice.
 To see why, we first note that
-    the third character of \eqref{eq:ex-no-slice}
-    must be either
-    \texttt{"a"} or \texttt{"b"}.
-    If the third character is \texttt{"a"},
-    \eqref{eq:ex-no-slice}
-    will not match the third character of
-		\texttt{"bbbbbb"} even though
-		\texttt{"bbbbbb"} matches
-    \texttt{/(aaaaaa|bbbbbb)/}.
-    If the third character is \texttt{"b"},
-    \eqref{eq:ex-no-slice} will not match the third character of
-		\texttt{"aaaaaa"} even though
-		\texttt{"aaaaaa"} matches
-    \texttt{/(aaaaaa|bbbbbb)/}.
-    The lexeme $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$
-		can be dealt with by overapproximation
-		(see Section \ref{sec:overapproximation}
-		on page~\pageref{sec:overapproximation}).
-}% MYsloppy
+the third character of \eqref{eq:ex-no-slice}
+must be either
+\texttt{"a"} or \texttt{"b"}.
+If the third character is \texttt{"a"},
+\eqref{eq:ex-no-slice}
+will not match the third character of
+\texttt{"bbbbbb"} even though
+\texttt{"bbbbbb"} matches
+\texttt{/(aaaaaa|bbbbbb)/}.
+If the third character is \texttt{"b"},
+\eqref{eq:ex-no-slice} will not match the third character of
+\texttt{"aaaaaa"} even though
+\texttt{"aaaaaa"} matches
+\texttt{/(aaaaaa|bbbbbb)/}.
+The lexeme $\element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}$
+can be dealt with by overapproximation
+(see Section \ref{sec:overapproximation}
+on page~\pageref{sec:overapproximation}).
 
+Because the set of prefixes of a regular language
+is always a regular language,
+every slice which begins at location
+0 of the lexeme is an LI slice.
+For example,
 \begin{equation}
 	\label{eq:ex-factored}
     \element{(\texttt{/(aaaaaa|bbbbbb)/})}{0,3}
@@ -815,20 +821,14 @@ To see why, we first note that
 \end{equation}
 \noindent%
 is an LI slice.
-In fact,
-because the set of prefixes of a regular language
-is always a regular language,
-every slice which begins at location
-0 of the lexeme is an LI slice.
 
+Kleene star regular expressions often have LI slices.
 \begin{equation}
 	\label{eq:ex-kleene}
     \element{(\texttt{/a*/})}{2,4}
 		= \texttt{/aa/}
 \end{equation}
-\noindent%
 is an LI slice.
-Kleene star regular expressions often have LI slices.
 
 \needspace{3in}
 \begin{equation}
