@@ -1235,7 +1235,7 @@ The value of EOL-bit is
         \end{cases}
 \end{equation}
 In \eqref{eq:live-bit} and \eqref{eq:eol-bit},
-we recall that $\V{s} \, \sim \, \V{recce}$ is true iff the string \V{s}
+we recall that $\V{s} \sim \V{recce}$ is true iff the string \V{s}
 matches the recognizer \V{recce}.
 
 It is important that it be the case that \tpb is true
@@ -1272,7 +1272,7 @@ The unnecessary call to \tpb has a cost in time, but is
 otherwise harmless.
 A ``false negative'' for the EOL-bit may result in a missed parse.
 
-Allowing false positives means allowing lexemes that overapproximate.
+Allowing false positives enables the use of lexemes that overapproximate.
 Overapproximation is useful for tough lexemes.
 In the face of overapproximation, unnecessary calls
 to \tpb might be made.
