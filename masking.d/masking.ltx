@@ -831,17 +831,15 @@ Kleene star regular expressions often have LI slices.
 is an LI slice.
 
 \needspace{3in}
+Case-insensitive lexemes
+are not a problem for slicing.
+Writing case-insensitive \texttt{/lorem/} as
+\texttt{/[Ll][Oo][Rr][Ee][Mm]/},
+we see that
 \begin{equation}
 	\label{eq:ex-case-insensitive}
 	\element{(\texttt{/[Ll][Oo][Rr][Ee][Mm]/})}{2,3} = \texttt{/[Rr]/}
 \end{equation}
-\noindent%
-Case-insensitive lexemes like
-\eqref{eq:ex-case-insensitive}
-are not a problem for slicing.
-Writing case-insensitive \texttt{/lorem/} as
-\texttt{/[Ll][Oo][Rr][Ee][Mm]/},
-we see that \eqref{eq:ex-case-insensitive}
 is an LI slice.
 
 If there is a range for which there is no LI slice
@@ -867,8 +865,7 @@ even without Kleene stars, can be tough.
 \item
 	Not all Kleene star regular expressions
 	are sliceable, but many are,
-	as we saw in \eqref{eq:ex-kleene}
-	on page~\pageref{eq:ex-kleene}.
+	as we saw in \Eqref{ex-kleene}.
 \item Lexemes can be many other things besides regular expressions,
 including subgrammars.
 Some of these problematic lexemes may be sliceable nonetheless.
@@ -884,8 +881,7 @@ is the ``remainder'' of \V{lex}.
 This can be calculated as
 \begin{equation}
         \label{eq:lex-rem}
-        \VFA{Rem}{\V{lex},\V{pos}} = \Velement{lex}{ \, \V{pos},
-        (\Vsize{lex}\subtract\V{pos}) \, }.
+        \VFA{Rem}{\V{lex},\V{pos}} = \Velement{lex}{ \, \V{pos}, \Vsize{lex} \, }.
 \end{equation}
 
 \section{Overapproximation}
@@ -893,12 +889,12 @@ This can be calculated as
 
 Above, we introduced the idea of tough and unsliceable lexemes.
 These can be handled with overapproximation.
-Our overapproximation must not reject any matching lexemes (``false negatives''),
+Our overapproximations
+must not reject any matching lexemes (``false negatives''),
 but they may accept non-matching lexemes (``false positives'').
 
 As an example of overapproximation, we revisit
-\eqref{eq:ex-no-slice} on
-page~\pageref{eq:ex-no-slice}:
+\Eqref{ex-no-slice}:
 \begin{equation}
 	\label{eq:unsliceable}
     \element{(\texttt{/(aaaaaa|bbbbbb)/})}{2,3}
