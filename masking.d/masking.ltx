@@ -549,9 +549,12 @@ is already computed as \al,
 so that it comes at literally zero cost.
 For our purposes, therefore, the only cause of location-dependence will
 be reference to portions of the input too early
-to be found in the token trie.
+to be found in the token trie.\footnote{%
+             Optimization that incorporates the
+             pre-token-trie input is a topic
+             for future research.}
 
-The results of the LI logic are booleans,
+The results of the LF logic are booleans,
 which are cached and used to avoid
 calls to \tpb.
 Using this optimization,
@@ -560,18 +563,15 @@ when a new lexeme is ready to be accepted.
 The exception is a minority of instances,
 where the logic necessary to determine when
 a new lexeme is ready to be accepted
-cannot be made LI.
+cannot be made LF.
 In those cases,
 the cached booleans will be overapproximations,
 and \tpb will be used as a fallback.
 
-\FloatBarrier
-
 \needspace{3in}
-
+\FloatBarrier
 \section{The structure of the byte stream}
 \label{sec:byte-stream}
-
 \noindent
 \begin{figure}[ht]
 \vspace{6pt}
