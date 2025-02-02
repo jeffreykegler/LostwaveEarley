@@ -987,31 +987,49 @@ and token-consistent lexemes will be even more sparse.\footnote{%
 	both ``token-consistent lexemes'' and
 	``context-dependent tokens''.}
 
+\needspace{3in}
 \section{Calculating LIVE and EOL at each byte location}
 
 We must calculate a per-byte-location value for LIVE and
 EOL.
-Let only one lexeme,
+Let only one lexeme
 be token-consistent
 at $\ell$, a particular byte location.
 Call that one lexeme, \V{lex}.
-Then the following are true:
-\begin{itemize}
-        \item The value of LIVE for $\ell$ is the value
-of the LIVE-bit for \V{lex}.
-        \item If the LIVE-bit for \V{lex} is true,
-the value of EOL for $\ell$ is the value
-of the EOL-bit for \V{lex}.
-If the LIVE-bit for \V{lex} is false,
-the value of EOL for $\ell$ is undefined.
-\end{itemize}
+Let \VFA{LIVE-bit}{lex} be the LIVE-bit of \V{lex},
+and let \VFA{EOL-bit}{lex} be the EOL-bit of \V{lex}.
+Then
+the value of LIVE for $\ell$ is
+\begin{equation}
+        \FA{LIVE}{\ell} = \VFA{LIVE-bit}{lex},
+\end{equation}
+and value of EOL for $\ell$ is
+\begin{equation}
+        \FA{EOL}{\ell} = \VFA{EOL-bit}{lex}.
+\end{equation}
 
 The most common count of token-consistent lexemes
 per byte location will be one.
 But it will by no means be rare for
 multiple lexemes to be token-consistent
 at a single byte location,
-as we must know how to deal with that.
+and we must know how to deal with that.
+The LIVE value of a location is the logical-or of
+the location's set of LIVE-bit values,
+and the EOL value of a location is the logical-or of
+the location's set of EOL-bit values.
+
+More precisely,
+let \V{tcls} be the set of token-consistent lexemes
+at the location $\ell$.
+Then the LIVE value at $\ell$ is
+\begin{equation}
+        \FA{LIVE}{\ell} = \bigvee \; \lbrace \VFA{LIVE-bit}{l} \,\mid\, \V{l} \in \V{tcsls} \rbrace,
+\end{equation}
+and the EOL value at $\ell$ is
+\begin{equation}
+        \FA{EOL}{\ell} = \bigvee \; \lbrace \VFA{EOL-bit}{l} \,\mid\, \V{l} \in \V{tcsls} \rbrace.
+\end{equation}
 
 \section{Frames with positive offsets}
 
