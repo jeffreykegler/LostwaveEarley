@@ -935,9 +935,9 @@ according to the parser.
 which it tracks in its \al vector.
 
 Recall the location for which the allowed lexemes
-are calculated is called the ALA.
+are calculated is \V{ALA}.
 The location where the last committed token ends
-is TB.
+is \V{TB}.
 If $\V{TB} > \V{ALA}$, it becomes possible
 that an allowed lexeme might be inconsistent
 with the committed tokens.
@@ -952,8 +952,7 @@ While according to the parser, the lexeme {\tt foreach}, if accepted,
 could result in a valid parse,
 the lexeme {\tt foreach} would be inconsistent with the
 committed tokens
-and would cause the parse to become inconsistent,
-and/or fail.
+and would cause the parse to fail.
 
 We therefore, whenever we commit a token,
 calculate the subset of the allowed lexemes
@@ -973,7 +972,7 @@ and token-consistent lexemes will be even more sparse.\footnote{%
 	the nearest approximation to ``token-consistent lexemes'' is
 	their ``context-dependent tokens''.
 	In one experiment, with a JSON parser,
-	they put ``context-dependent tokens'' at "less than 1\%
+	they put ``context-dependent tokens'' at ``less than 1\%
 	(1134 out of 128k)"
 	(Section 3.1, ``Adaptive Token Mask Cache'').
 	Our Earley engine has more information about the parse
@@ -986,7 +985,7 @@ and token-consistent lexemes will be even more sparse.\footnote{%
 	a very easy to parse language,
 	so should naturally yield a low count of
 	both ``token-consistent lexemes'' and
-	``context-dependent tokens''.},
+	``context-dependent tokens''.}
 
 \section{Calculating LIVE and EOL at each byte location}
 
