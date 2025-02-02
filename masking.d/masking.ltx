@@ -1032,8 +1032,6 @@ and the EOL value at $\ell$ is
 \end{equation}
 
 \section{Frames with positive offsets}
-
-\noindent
 \begin{figure}[ht]
 \vspace{6pt}
 % note: default tabcolsep is 6pt
@@ -1118,7 +1116,7 @@ to the framed token:
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node}.
 \end{equation}
 
-Finally, in order determine if we are at EOL,
+Finally, in order to determine if we are at EOL,
 we want the value of the remaining lexeme,
 the framed lexeme plus the portion of it extending beyond the
 frame.
@@ -1131,8 +1129,6 @@ so we have
 
 \FloatBarrier
 \section{Frames with negative offsets}
-
-\noindent
 \begin{figure}[ht]
 \vspace{6pt}
 % note: default tabcolsep is 6pt
@@ -1182,14 +1178,11 @@ We now consider the case
 where the start of the token is before the
 start of the lexeme, so that ALA
 is properly inside the token.
-Recalling our definition of the offset,
-$\V{off} = \V{TB} \subtract \V{ALA}$
-(see equation \ref{eq:lexeme-offset} on page~\pageref{loc:lexeme-offset}),
-and looking at Figure~\ref{fig:input-3}
-on page~\pageref{fig:input-3},
-we see that when $\V{TB} < \V{ALA}$
-the offset, \V{off},
-will be negative.
+Recalling our definition of the offset \Eqref{lexeme-offset},
+\[ \V{off} = \V{TB} \subtract \V{ALA}, \]
+and looking at \Figref{input-3},
+we see that when $\V{TB} < \V{ALA}$,
+the offset will be negative.
 
 When the offset is negative,
 the frame then includes the entire lexeme up to
