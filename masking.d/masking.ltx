@@ -1620,7 +1620,8 @@ has been extended to \texttt{"de"},
         \FA{Ruby}{\V{node}, \texttt{/abcdef/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
                 (\TRUE, \FALSE) \\
-                \cuz \eqref{eq:fixed-byte-2-livebit}, \eqref{eq:fixed-byte-2-eolbit}.
+                \cuz \Eqref{ruby-function}, \Eqref{fixed-string-lexeme}, \Eqref{fixed-byte-2-nodesize}
+                        \eqref{eq:fixed-byte-2-livebit}, \eqref{eq:fixed-byte-2-eolbit} \Figref{fixed-byte-2}.
         \end{gathered}
 \end{equation}
 
@@ -1665,11 +1666,11 @@ the string implied by \V{node} of the token trie,
 is completed as \texttt{"def"},
 \begin{equation}
         \label{eq:fixed-byte-3-tostring}
-        \VFA{toString}{node} = \texttt{"def"} \cuz \Figref{fixed-byte-3}.
+        \VFA{toString}{node} = \texttt{"def"} \,\cuz\, \Figref{fixed-byte-3}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-3-nodesize}
-        \Vsize{node} = 3 \cuz \eqref{eq:fixed-byte-3-tostring}, \Figref{fixed-byte-3}.
+        \Vsize{node} = 3 \,\cuz\, \eqref{eq:fixed-byte-3-tostring}, \Figref{fixed-byte-3}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-3-framelex}
