@@ -23,7 +23,14 @@
 \usepackage[obeyDraft]{todonotes}
 \usepackage{datetime2}
 \ifdraft{
-    \usepackage{draftwatermark}
+        \usepackage[
+    colorspec=0,
+    text="DRAFT \DTMnow{} DRAFT",
+    angle=0,
+    scale=1.5,
+    fontsize=12pt,
+    vpos=.5in
+        ]{draftwatermark}
 }{}
 
 % Fix conflict between todonotes and amsart packages
@@ -327,7 +334,8 @@
     \SetWatermarkLightness{0}
     \SetWatermarkText{DRAFT \DTMnow{} DRAFT}
     \SetWatermarkAngle{0}
-    % \SetWatermarkScale{1}
+    \SetWatermarkScale{1}
+    \SetWatermarkFontSize{24pt}
     % \SetWatermarkHorCenter{1.5in}
     \SetWatermarkVerCenter{.5in}
 }{}
@@ -2147,7 +2155,8 @@ Section~\ref{sec:example-unsliceable}
 on page~\pageref{sec:example-unsliceable}
 is overapproximation.
 An excellent overapproximation for
-\texttt{/(aaaaaa|bbbbbb)/} is
+\[ \texttt{/(aaaaaa|bbbbbb)/} \]
+is
 \begin{equation}
         \label{eq:overapproximate-lexeme}
         \V{lex} = \texttt{/[ab][ab][ab][ab][ab][ab]/}
@@ -2393,12 +2402,14 @@ are strings of some format,
 and for convenience in the rest of this section
 we will refer to long lexemes as ``strings''.
 
+\begin{MYsloppy}
 To aim dedicated optimizations at strings,
 they can be treated as subgrammars.
 The subgrammars can be tackled with special techniques
 aimed at optimizing that type of string.
 Within the sub-grammars these techniques may again
 apply.
+\end{MYsloppy}
 
 A Marpa-driven example of string handling in
 a complex application is \cite{YAHC},
