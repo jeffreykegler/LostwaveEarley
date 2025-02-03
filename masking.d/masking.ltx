@@ -1375,7 +1375,10 @@ but its sign.
 The example in the section will follow the recognition
 of a token-consistent fixed string lexeme, byte by byte.
 The lexeme will be
-\[ \texttt{/abcdef/}. \]
+\begin{equation}
+\label{eq:fixed-string-lexeme}
+        \V{lex} = \texttt{/abcdef/}.
+\end{equation}
 
 We will assume that we have already committed
 a token which covers the lexeme's first three bytes:
@@ -1428,22 +1431,22 @@ until the EOL.
 \end{tabular}
 \vspace{6pt}
 \caption{Fixed string example}
-\label{fig:example-fixed1}
+\label{fig:fixed-byte-1}
 \end{figure}
 } % group for floatstyle
 
-\Figref{example-fixed1} shows the case where
+\Figref{fixed-byte-1} shows the case where
 \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
 is \texttt{"d"},
 \begin{equation}
         \label{eq:fixed-byte-1-tostring}
-        \VFA{toString}{node} = \texttt{"d"} \cuz \Figref{example-fixed1}.
+        \VFA{toString}{node} = \texttt{"d"} \cuz \Figref{fixed-byte-1}.
 \end{equation}
 so that
 \begin{equation}
         \label{eq:fixed-byte-1-nodesize}
-        \Vsize{node} = 1 \cuz \eqref{eq:fixed-byte-1-tostring}, \Figref{example-fixed1}.
+        \Vsize{node} = 1 \cuz \eqref{eq:fixed-byte-1-tostring}, \Figref{fixed-byte-1}.
 \end{equation}
 Recall from \Eqref{fixed-string-offset} that the lexeme offset is 3,
 which is positive.
@@ -1460,7 +1463,7 @@ of positive offsets,
 	= \Velement{(\texttt{/abcdef/})}{3, (1+3) } \\
     = \texttt{/d/} \\
         \cuz \Eqref{positive-framelex}, \eqref{eq:fixed-string-offset},
-                \eqref{eq:fixed-byte-1-nodesize}, \Figref{example-fixed1}.
+                \eqref{eq:fixed-byte-1-nodesize}, \Figref{fixed-byte-1}.
 \end{gathered}
 \end{equation}
 
@@ -1470,7 +1473,7 @@ Applying the formula for the framed token of positive offsets,
         \begin{gathered}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
                 = \texttt{"d"} \\
-                \cuz \eqref{eq:positive-frametok}, \eqref{eq:fixed-byte-1-tostring}, \Figref{example-fixed1}.
+                \cuz \Eqref{positive-frametok}, \eqref{eq:fixed-byte-1-tostring}, \Figref{fixed-byte-1}.
         \end{gathered}
 \end{equation}
 and the formula for the remaining lexeme of positive offsets,
@@ -1480,7 +1483,7 @@ and the formula for the remaining lexeme of positive offsets,
         \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/abcdef/}, 3} \\
                     = \texttt{/def/} \\
-                \cuz \eqref{eq:positive-remlex}, \eqref{eq:fixed-string-offset}, \Figref{example-fixed1}.
+                \cuz \Eqref{positive-remlex}, \eqref{eq:fixed-string-offset}, \Figref{fixed-byte-1}.
 \end{gathered}
 \end{equation}
 
@@ -1491,7 +1494,7 @@ From these facts we can compute the LIVE-bit,
         \V{LIVE-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{FrameLex}{\V{lex}, \V{off}} \\
                 = \texttt{"d"}  \, \sim \, \texttt{/d/} \\
                 = \TRUE  \\
-            \cuz \eqref{eq:live-bit}, \eqref{eq:fixed-byte-1-framelex}, \eqref{eq:fixed-byte-1-frametok}.
+            \cuz \Eqref{live-bit}, \eqref{eq:fixed-byte-1-framelex}, \eqref{eq:fixed-byte-1-frametok}.
         \end{gathered}
 \end{equation}
 and the EOL-bit,
@@ -1501,7 +1504,7 @@ and the EOL-bit,
         \V{EOL-bit} = \FA{FrameTok}{\V{node},\V{off}} \, \sim \, \FA{RemLex}{\V{lex}, \V{off}} \\
         = \texttt{"d"} \,\sim\, \texttt{/def/} \\
         = \FALSE \\
-                \cuz \eqref{eq:eol-bit},
+                \cuz \Eqref{eol-bit},
                         \eqref{eq:fixed-byte-1-frametok}, \eqref{eq:fixed-byte-1-remlex}.
         \end{gathered}
 \end{equation}
@@ -1512,7 +1515,8 @@ From the above, we see that we can add the following to the cache:
         \FA{Ruby}{\V{node}, \texttt{/abcdef/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
                 (\TRUE, \FALSE) \\
-                \cuz \eqref{eq:fixed-byte-1-livebit}, \eqref{eq:fixed-byte-1-eolbit}.
+                \cuz \Eqref{ruby-function}, \Eqref{fixed-string-lexeme}, \Eqref{fixed-byte-1-nodesize}
+                        \eqref{eq:fixed-byte-1-livebit}, \eqref{eq:fixed-byte-1-eolbit} \Figref{fixed-byte-1}.
         \end{gathered}
 \]
 
@@ -1548,21 +1552,21 @@ From the above, we see that we can add the following to the cache:
 \end{tabular}
 \vspace{6pt}
 \caption{Fixed string example}
-\label{fig:example-fixed2}
+\label{fig:fixed-byte-2}
 \end{figure}
 } % group for floatstyle
 
-In \Figref{example-fixed2}
+In \Figref{fixed-byte-2}
 \VFA{toString}{node},
 the string implied by \V{node} of the token trie,
 has been extended to \texttt{"de"},
 \begin{equation}
         \label{eq:fixed-byte-2-tostring}
-        \VFA{toString}{node} = \texttt{"de"} \cuz \Figref{example-fixed2}.
+        \VFA{toString}{node} = \texttt{"de"} \cuz \Figref{fixed-byte-2}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-2-nodesize}
-        \Vsize{node} = 2 \cuz \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed2}.
+        \Vsize{node} = 2 \cuz \eqref{eq:fixed-byte-2-tostring}, \Figref{fixed-byte-2}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-2-framelex}
@@ -1572,7 +1576,7 @@ has been extended to \texttt{"de"},
 	= \Velement{(\texttt{/abcdef/})}{3, (2+3) } \\
     = \texttt{/de/} \\
         \cuz \Eqref{positive-framelex}, \Eqref{fixed-string-offset},
-                \eqref{eq:fixed-byte-2-nodesize}, \Figref{example-fixed2}.
+                \eqref{eq:fixed-byte-2-nodesize}, \Figref{fixed-byte-2}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1580,7 +1584,7 @@ has been extended to \texttt{"de"},
         \begin{gathered}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
                 = \texttt{"de"} \\
-                \cuz \Eqref{positive-frametok}, \eqref{eq:fixed-byte-2-tostring}, \Figref{example-fixed2}.
+                \cuz \Eqref{positive-frametok}, \eqref{eq:fixed-byte-2-tostring}, \Figref{fixed-byte-2}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1589,7 +1593,7 @@ has been extended to \texttt{"de"},
         \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/abcdef/}, 3} \\
                     = \texttt{/def/} \\
-                \cuz \Eqref{positive-remlex}, \Eqref{fixed-string-offset}, \Figref{example-fixed2}.
+                \cuz \Eqref{positive-remlex}, \Eqref{fixed-string-offset}, \Figref{fixed-byte-2}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1652,7 +1656,7 @@ has been extended to \texttt{"de"},
 \end{tabular}
 \vspace{6pt}
 \caption{Fixed string example}
-\label{fig:example-fixed3}
+\label{fig:fixed-byte-3}
 \end{figure}
 } % group for floatstyle
 
@@ -1661,11 +1665,11 @@ the string implied by \V{node} of the token trie,
 is completed as \texttt{"def"},
 \begin{equation}
         \label{eq:fixed-byte-3-tostring}
-        \VFA{toString}{node} = \texttt{"def"} \cuz \Figref{example-fixed3}.
+        \VFA{toString}{node} = \texttt{"def"} \cuz \Figref{fixed-byte-3}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-3-nodesize}
-        \Vsize{node} = 3 \cuz \eqref{eq:fixed-byte-3-tostring}, \Figref{example-fixed3}.
+        \Vsize{node} = 3 \cuz \eqref{eq:fixed-byte-3-tostring}, \Figref{fixed-byte-3}.
 \end{equation}
 \begin{equation}
         \label{eq:fixed-byte-3-framelex}
@@ -1675,7 +1679,7 @@ is completed as \texttt{"def"},
 	= \Velement{(\texttt{/abcdef/})}{3, (3+3) } \\
     = \texttt{/def/} \\
         \cuz \Eqref{positive-framelex}, \Eqref{fixed-string-offset},
-                \eqref{eq:fixed-byte-3-nodesize}, \Figref{example-fixed3}.
+                \eqref{eq:fixed-byte-3-nodesize}, \Figref{fixed-byte-3}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1683,7 +1687,7 @@ is completed as \texttt{"def"},
         \begin{gathered}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
                 = \texttt{"def"} \\
-                \cuz \Eqref{positive-frametok}, \eqref{eq:fixed-byte-3-tostring}, \Figref{example-fixed3}.
+                \cuz \Eqref{positive-frametok}, \eqref{eq:fixed-byte-3-tostring}, \Figref{fixed-byte-3}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1692,7 +1696,7 @@ is completed as \texttt{"def"},
         \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/abcdef/}, 3} \\
                     = \texttt{/def/} \\
-                \cuz \Eqref{positive-remlex}, \Eqref{fixed-string-offset}, \Figref{example-fixed3}.
+                \cuz \Eqref{positive-remlex}, \Eqref{fixed-string-offset}, \Figref{fixed-byte-3}.
 \end{gathered}
 \end{equation}
 \begin{equation}
