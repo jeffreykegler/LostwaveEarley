@@ -1984,7 +1984,7 @@ a factoring solution impractical.
 
 In this example, factoring is quite practical.
 \texttt{/(aaaaaa|bbbbbb)/}
-can be factored into the two lexemes
+can be factored into the two lexemes:
 \texttt{/aaaaaa/} and \texttt{/bbbbbb/}.
 We will look at each in turn,
 starting with
@@ -2021,11 +2021,10 @@ starting with
             \cuz \Eqref{live-bit}, \eqref{eq:factoreda-framelex}, \eqref{eq:factored-frametok}.
         \end{gathered}
 \end{equation}
-Since \V{LIVE-bit} is \FALSE, we also set
 \begin{equation}
         \label{eq:factoreda-eolbit}
         \begin{gathered}
-        \V{EOL-bit} = \FALSE \cuz \eqref{eq:factoreda-livebit}.
+                \V{EOL-bit} = \FALSE \cuz \Eqref{eol-bit}, \eqref{eq:factoreda-livebit}.
         \end{gathered}
 \end{equation}
 \begin{equation}
