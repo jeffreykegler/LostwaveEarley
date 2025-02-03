@@ -2137,7 +2137,7 @@ considering the lexeme
 \end{tabular}
 \vspace{6pt}
 \caption{Overapproximated slice example}
-\label{fig:example-overapproximate}
+\label{fig:overapproximate}
 \end{figure}
 } % group for floatstyle
 
@@ -2151,24 +2151,24 @@ An excellent overapproximation for
 \begin{equation}
         \label{eq:overapproximate-lexeme}
         \V{lex} = \texttt{/[ab][ab][ab][ab][ab][ab]/}
-                \, \cuz \,\Figref{example-overapproximate}.
+                \, \cuz \,\Figref{overapproximate}.
 \end{equation}
 
 The lexeme offset is
 \begin{equation}
         \label{eq:overapproximate-offset}
 	\V{off} = (\V{TB} \subtract \V{ALA}) = 3
-                \, \cuz \,\Figref{example-overapproximate},
+                \, \cuz \,\Figref{overapproximate},
 \end{equation}
 which is positive.
 \begin{equation}
         \label{eq:overapproximate-tostring}
         \VFA{toString}{node} = \texttt{"aaa"}
-                \, \cuz \, \Figref{example-overapproximate}.
+                \, \cuz \, \Figref{overapproximate}.
 \end{equation}
 \begin{equation}
         \label{eq:overapproximate-nodesize}
-        \Vsize{node} = 3 \, \cuz \, \eqref{eq:overapproximate-tostring}, \Figref{example-overapproximate}.
+        \Vsize{node} = 3 \, \cuz \, \eqref{eq:overapproximate-tostring}, \Figref{overapproximate}.
 \end{equation}
 \begin{equation}
         \label{eq:overapproximate-framelex}
@@ -2178,7 +2178,7 @@ which is positive.
         = \Velement{(\texttt{/[ab][ab][ab][ab][ab][ab]/})}{3, (3+3) } \\
         = \texttt{/[ab][ab][ab]/} \\
         \cuz \Eqref{positive-framelex}, \eqref{eq:overapproximate-lexeme}, \eqref{eq:overapproximate-offset},
-                \eqref{eq:overapproximate-nodesize}, \Figref{example-overapproximate}.
+                \eqref{eq:overapproximate-nodesize}, \Figref{overapproximate}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -2186,7 +2186,7 @@ which is positive.
         \begin{gathered}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
                 = \texttt{"aaa"} \\
-                \cuz \Eqref{positive-frametok}, \eqref{eq:overapproximate-tostring}, \Figref{example-overapproximate}.
+                \cuz \Eqref{positive-frametok}, \eqref{eq:overapproximate-tostring}, \Figref{overapproximate}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -2196,7 +2196,7 @@ which is positive.
                     = \FA{Rem}{\texttt{/[ab][ab][ab][ab][ab][ab]/}, 3} \\
                     = \texttt{/[ab][ab][ab]/} \\
                 \cuz \Eqref{positive-remlex}, \eqref{eq:overapproximate-lexeme}, \eqref{eq:overapproximate-offset},
-                        \Figref{example-overapproximate}.
+                        \Figref{overapproximate}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -2225,10 +2225,11 @@ for the Ruby triple
                 \FA{Ruby}{\V{node}, \texttt{/[ab][ab][ab][ab][ab][ab]/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
                 (\TRUE, \TRUE) \\
-                \cuz \eqref{eq:overapproximate-livebit}, \eqref{eq:overapproximate-eolbit}.
+                \cuz \Eqref{ruby-function}, \Eqref{overapproximate-lexeme}, \Eqref{overapproximate-nodesize},
+                        \eqref{eq:overapproximate-livebit}, \eqref{eq:overapproximate-eolbit}, \Figref{overapproximate}.
         \end{gathered}
 \end{equation}
-We note that,
+We observe that,
 if \VFA{toString}{node} was \texttt{"bbb"},
 we would also cache $(\TRUE, \TRUE)$,
 but our matches would be false positives.
