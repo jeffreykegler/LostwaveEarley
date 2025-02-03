@@ -2265,7 +2265,7 @@ but our matches would be false positives.
 \end{tabular}
 \vspace{6pt}
 \caption{Negative offset example}
-\label{fig:example-negoff}
+\label{fig:negoff}
 \end{figure}
 } % group for floatstyle
 
@@ -2283,21 +2283,21 @@ another regular language.
 In this section we look at a negative-offset lexeme
 \begin{equation}
     \label{eq:negoff-offset}
-        \V{off} = (\V{TB} \subtract \V{ALA}) = {-3} \,\cuz\, \Figref{example-negoff},
+        \V{off} = (\V{TB} \subtract \V{ALA}) = {-3} \,\cuz\, \Figref{negoff},
 \end{equation}
 which is negative.
 Our lexeme is
 \begin{equation}
         \label{eq:negoff-lexeme}
-        \V{lex} = \texttt{/ab*/}. \,\cuz\, \Figref{example-negoff}.
+        \V{lex} = \texttt{/ab*/}. \,\cuz\, \Figref{negoff}.
 \end{equation}
 \begin{equation}
         \label{eq:negoff-tostring}
-        \VFA{toString}{node} = \texttt{"xyzabb"} \cuz \Figref{example-negoff}.
+        \VFA{toString}{node} = \texttt{"xyzabb"} \cuz \Figref{negoff}.
 \end{equation}
 \begin{equation}
         \label{eq:negoff-nodesize}
-        \Vsize{node} = 6 \cuz \eqref{eq:negoff-tostring}, \Figref{example-negoff}.
+        \Vsize{node} = 6 \cuz \eqref{eq:negoff-tostring}, \Figref{negoff}.
 \end{equation}
 
 
@@ -2311,7 +2311,7 @@ Applying the formula for framed slices with negative offsets,
 	= \Velement{(\texttt{/ab*/})}{0, 3} \\
     = \texttt{/abb/} \\
         \cuz \Eqref{negative-framelex}, \eqref{eq:negoff-offset}, \eqref{eq:negoff-lexeme},
-                \eqref{eq:negoff-nodesize}, \Figref{example-negoff}.
+                \eqref{eq:negoff-nodesize}, \Figref{negoff}.
 \end{gathered}
 \end{equation}
 Determining the framed token for a negative offset is slightly more
@@ -2326,7 +2326,7 @@ Applying the formula for overlaps of negative offsets,
 	= \element{(\texttt{"xyzabb"})}{3, 6} \\
 	= \texttt{"abb"} \\
                 \cuz \Eqref{negative-frametok}, \eqref{eq:negoff-offset}, \eqref{eq:negoff-tostring},
-                 \eqref{eq:negoff-nodesize}, \Figref{example-negoff}.
+                 \eqref{eq:negoff-nodesize}, \Figref{negoff}.
         \end{gathered}
 \end{equation}
 On the other hand, determining the remaining lexeme is simpler in
@@ -2338,7 +2338,7 @@ the case of a negative offset,
                 = \FA{Rem}{\V{lex}, 0} \\
                         = \V{lex} \\
                     = \texttt{/ab*/} \\
-                \cuz \Eqref{negative-remlex}, \eqref{eq:negoff-lexeme}, \Figref{example-negoff}.
+                \cuz \Eqref{negative-remlex}, \eqref{eq:negoff-lexeme}, \Figref{negoff}.
 \end{gathered}
 \end{equation}
 
@@ -2366,9 +2366,8 @@ We can update the cache accordingly:
                 \FA{Ruby}{\V{node}, \texttt{/ab*/}, {-3}} \\
                 = (\V{LIVE-bit}, \V{EOL-bit}) \\
                 = (\TRUE, \TRUE) \\
-                \cuz \Eqref{ruby-function},
-                        \eqref{eq:negoff-offset}, \eqref{eq:negoff-lexeme},
-                        \eqref{eq:negoff-livebit}, \eqref{eq:negoff-eolbit}.
+                \cuz \Eqref{ruby-function}, \Eqref{negoff-lexeme}, \Eqref{negoff-nodesize},
+                        \eqref{eq:negoff-livebit}, \eqref{eq:negoff-eolbit}, \Figref{negoff}.
         \end{gathered}
 \end{equation}
 
@@ -2405,7 +2404,7 @@ A Marpa-driven example of string handling in
 a complex application is \cite{YAHC},
 a Hoon compiler.
 Hoon has a wide variety of formats for string-like
-objects~cite{Hoon-strings},
+objects~\cite{Hoon-strings},
 including three lexeme types specifically intended for
 long lexemes: strings bounded by triple single quotes,
 strings bounded by triple double quotes,
