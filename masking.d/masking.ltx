@@ -1761,15 +1761,19 @@ is completed as \texttt{"def"},
 \end{tabular}
 \vspace{6pt}
 \caption{Kleene regex star example}
-\label{fig:example-kleene}
+\label{fig:kleene}
 \end{figure}
 } % group for floatstyle
 
-Figure~\ref{fig:example-kleene} illustrates the handling of Kleene star
+Figure~\ref{fig:kleene} illustrates the handling of Kleene star
 regular expressions.
 We are considering
-the token-consistent lexeme \texttt{/aa*/}.
-In Figure~\ref{fig:example-kleene}
+the token-consistent lexeme
+\begin{equation}
+        \label{eq:kleene-lexeme}
+        \V{lex} = \texttt{/aa*/}.
+\end{equation}
+In Figure~\ref{fig:kleene}
 we have committed a token ending in \texttt{"aaa"}.
 The lexeme offset is
 \begin{equation}
@@ -1780,11 +1784,11 @@ which is positive.
 
 \begin{equation}
         \label{eq:kleene-tostring}
-        \VFA{toString}{node} = \texttt{"aaa"} \,\cuz\, \Figref{example-kleene}.
+        \VFA{toString}{node} = \texttt{"aaa"} \,\cuz\, \Figref{kleene}.
 \end{equation}
 \begin{equation}
         \label{eq:kleene-nodesize}
-        \Vsize{node} = 3 \,\cuz\, \eqref{eq:kleene-tostring}, \Figref{example-kleene}.
+        \Vsize{node} = 3 \,\cuz\, \eqref{eq:kleene-tostring}, \Figref{kleene}.
 \end{equation}
 
 There is an framed lexeme\footnote{%
@@ -1805,7 +1809,7 @@ There is an framed lexeme\footnote{%
 	= \Velement{(\texttt{/aa*/})}{3, (3+3) } \\
     = \texttt{/aaa/} \\
         \cuz \Eqref{positive-framelex}, \Eqref{kleene-offset},
-                \eqref{eq:kleene-nodesize}, \Figref{example-kleene}.
+                \eqref{eq:kleene-nodesize}, \Figref{kleene}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1813,7 +1817,7 @@ There is an framed lexeme\footnote{%
         \begin{gathered}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
                 = \texttt{"aaa"} \\
-                \cuz \Eqref{positive-frametok}, \eqref{eq:kleene-tostring}, \Figref{example-kleene}.
+                \cuz \Eqref{positive-frametok}, \eqref{eq:kleene-tostring}, \Figref{kleene}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1822,7 +1826,7 @@ There is an framed lexeme\footnote{%
         \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/aa*/}, 3} \\
                     = \texttt{/aaa/} \\
-                \cuz \Eqref{positive-remlex}, \Eqref{kleene-offset}, \Figref{example-kleene}.
+                \cuz \Eqref{positive-remlex}, \Eqref{kleene-offset}, \Figref{kleene}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1850,7 +1854,8 @@ We have now reached EOL:
         \FA{Ruby}{\V{node}, \texttt{/aa*/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
                 (\TRUE, \TRUE) \\
-                \cuz \eqref{eq:kleene-livebit}, \eqref{eq:kleene-eolbit}.
+                \cuz \Eqref{ruby-function}, \Eqref{kleene-lexeme}, \Eqref{kleene-nodesize}
+                        \eqref{eq:kleene-livebit}, \eqref{eq:kleene-eolbit} \Figref{kleene}.
         \end{gathered}
 \end{equation}
 
