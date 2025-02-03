@@ -27,7 +27,14 @@
 \usepackage[obeyDraft]{todonotes}
 \usepackage{datetime2}
 \ifdraft{
-    \usepackage{draftwatermark}
+        \usepackage[
+    colorspec=0,
+    text=DRAFT\ \DTMnow{}\ DRAFT,
+    angle=0,
+    scale=1.5,
+    fontsize=12pt,
+    vpos=.5in
+        ]{draftwatermark}
 }{}
 
 % Fix conflict between todonotes and amsart packages
@@ -315,15 +322,6 @@
   {Completeness proof for llguidance Earley variant}
 
 \author{Jeffrey Kegler}
-\ifdraft{
-    % legacy draftwatermark options -- update?
-    \SetWatermarkLightness{0}
-    \SetWatermarkText{DRAFT \DTMnow{} DRAFT}
-    \SetWatermarkAngle{0}
-    \SetWatermarkScale{.4}
-    % \SetWatermarkHorCenter{1.5in}
-    \SetWatermarkVerCenter{.5in}
-}{}
 \ifdraft{ \thanks{DRAFT as of \DTMnow} }{}
 \date{\DTMnow.}
 
