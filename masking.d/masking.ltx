@@ -25,7 +25,7 @@
 \ifdraft{
         \usepackage[
     colorspec=0,
-    text="DRAFT \DTMnow{} DRAFT",
+    text=DRAFT\ \DTMnow{}\ DRAFT,
     angle=0,
     scale=1.5,
     fontsize=12pt,
@@ -329,16 +329,6 @@
   {Lexical Analysis with AI Tokenization: An Approach}
 
 \author{Jeffrey Kegler}
-\ifdraft{
-    % legacy draftwatermark options -- update?
-    \SetWatermarkLightness{0}
-    \SetWatermarkText{DRAFT \DTMnow{} DRAFT}
-    \SetWatermarkAngle{0}
-    \SetWatermarkScale{1}
-    \SetWatermarkFontSize{24pt}
-    % \SetWatermarkHorCenter{1.5in}
-    \SetWatermarkVerCenter{.5in}
-}{}
 \ifdraft{ \thanks{DRAFT as of \DTMnow} }{}
 \date{\DTMnow.}
 
