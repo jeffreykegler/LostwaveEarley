@@ -26,6 +26,7 @@ EOL
 eolbit
 EOLs
 eq
+esque
 factoreda
 factoredb
 factorings
@@ -35,6 +36,7 @@ framelex
 FrameLex
 frametok
 FrameTok
+Hoon
 iff
 Iff
 invariants
@@ -50,12 +52,14 @@ lexeme's
 lexemes
 Lexemes
 Lexing
+LF
 livebit
 llguidance
 lm
 Lm
 loa
 lorem
+Lua
 Marpa
 Michal
 Moskal
@@ -68,11 +72,13 @@ Overapproximated
 overapproximation
 Overapproximation
 overapproximations
+pageNo
 parser's
 PDA
 pos
 pre
 precompute
+refNo
 remlex
 RemLex
 Rr
@@ -80,7 +86,10 @@ Ruan
 Ruihang
 sliceable
 subgrammars
+sublanguage
 TClexes
+tcls
+tcsls
 tdo
 th
 Tianqi
@@ -93,8 +102,10 @@ tostring
 toString
 trie
 tuff
+Udon
 uncomputed
 unsliceable
+Urbit
 wh
 XGrammar
 Xu
