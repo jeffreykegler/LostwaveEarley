@@ -1313,9 +1313,8 @@ where \V{live} is the LIVE-bit for \V{ruby}, and
 for \V{ruby}.
 
 Above we have discussed how to compute
-\FA{Ruby}{\V{node}, \V{lex}, \V{off}}.
-When the value of
-\FA{Ruby}{\V{node}, \V{lex}, \V{off}}
+\eqref{eq:ruby-function}.
+When the value of \eqref{eq:ruby-function}
 is location-free, we will often want to cache it.
 
 When \V{lex} is sliceable,
@@ -1375,7 +1374,8 @@ but its sign.
 
 The example in the section will follow the recognition
 of a token-consistent fixed string lexeme, byte by byte.
-The lexeme will be \texttt{/abcdef/}.
+The lexeme will be
+\[ \texttt{/abcdef/}. \]
 
 We will assume that we have already committed
 a token which covers the lexeme's first three bytes:
@@ -1445,7 +1445,7 @@ so that
         \label{eq:fixed-byte-1-nodesize}
         \Vsize{node} = 1 \cuz \eqref{eq:fixed-byte-1-tostring}, \Figref{example-fixed1}.
 \end{equation}
-Recall from \ref{eq:fixed-string-offset} that the lexeme offset is 3,
+Recall from \Eqref{fixed-string-offset} that the lexeme offset is 3,
 which is positive.
 The frame is \texttt{[3,4]}.
 
@@ -1459,7 +1459,7 @@ of positive offsets,
 	= \Velement{lex}{\V{off}, (\Vsize{node}+\V{off}) } \\
 	= \Velement{(\texttt{/abcdef/})}{3, (1+3) } \\
     = \texttt{/d/} \\
-        \cuz \eqref{eq:positive-framelex}, \eqref{eq:fixed-string-offset},
+        \cuz \Eqref{positive-framelex}, \eqref{eq:fixed-string-offset},
                 \eqref{eq:fixed-byte-1-nodesize}, \Figref{example-fixed1}.
 \end{gathered}
 \end{equation}
