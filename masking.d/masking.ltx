@@ -1968,7 +1968,7 @@ overapproximation.
 \end{tabular}
 \vspace{6pt}
 \caption{Factored regular expression example}
-\label{fig:example-factored}
+\label{fig:factored}
 \end{figure}
 } % group for floatstyle
 
@@ -2001,7 +2001,7 @@ starting with
     = \texttt{/aaa/} \\
         \cuz \Eqref{positive-framelex}, \Eqref{unsliceable-offset},
                 \eqref{eq:unsliceable-nodesize}, \eqref{eq:factoreda-lexeme},
-                \Figref{example-factored}.
+                \Figref{factored}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -2009,7 +2009,7 @@ starting with
         \begin{gathered}
         \FA{FrameTok}{\V{node},\V{off}} = \VFA{toString}{node} \\
                 = \texttt{"bbb"} \\
-                \cuz \Eqref{positive-frametok}, \eqref{eq:unsliceable-tostring}, \Figref{example-factored}.
+                \cuz \Eqref{positive-frametok}, \eqref{eq:unsliceable-tostring}, \Figref{factored}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -2032,8 +2032,8 @@ starting with
         \FA{Ruby}{\V{node}, \texttt{/aaaaaa/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
                 (\FALSE, \FALSE) \\
-                \cuz \Eqref{unsliceable-offset}, \eqref{eq:factoreda-lexeme},
-                        \eqref{eq:factoreda-livebit}, \eqref{eq:factoreda-eolbit}.
+                \cuz \Eqref{ruby-function}, \Eqref{unsliceable-nodesize}, \Eqref{factoreda-lexeme},
+                        \eqref{eq:factoreda-livebit}, \eqref{eq:factoreda-eolbit} \Figref{factored}.
         \end{gathered}
 \end{equation}
 
@@ -2057,7 +2057,7 @@ considering the lexeme
     = \texttt{/bbb/} \\
         \cuz \Eqref{positive-framelex}, \Eqref{unsliceable-offset},
                 \eqref{eq:unsliceable-nodesize}, \eqref{eq:factoredb-lexeme},
-                \Figref{example-factored}.
+                \Figref{factored}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -2075,7 +2075,7 @@ considering the lexeme
         \FA{RemLex}{\V{lex}, \V{off}} = \FA{Rem}{\V{lex}, \V{off}} \\
                     = \FA{Rem}{\texttt{/bbbbbb/}, 3} \\
                     = \texttt{/bbb/} \\
-                \cuz \Eqref{positive-remlex}, \Eqref{unsliceable-offset}, \Figref{example-factored}.
+                \cuz \Eqref{positive-remlex}, \Eqref{unsliceable-offset}, \Figref{factored}.
 \end{gathered}
 \end{equation}
 \begin{equation}
@@ -2093,8 +2093,8 @@ considering the lexeme
         \FA{Ruby}{\V{node}, \texttt{/bbbbbb/}, 3} = \\
                 (\V{LIVE-bit}, \V{EOL-bit}) = \\
                 (\TRUE, \TRUE) \\
-                \cuz \Eqref{unsliceable-offset}, \eqref{eq:factoredb-lexeme},
-                        \eqref{eq:factoredb-livebit}, \eqref{eq:factoredb-eolbit}.
+                \cuz \Eqref{ruby-function}, \Eqref{unsliceable-nodesize}, \Eqref{factoredb-lexeme},
+                        \eqref{eq:factoredb-livebit}, \eqref{eq:factoredb-eolbit} \Figref{factored}.
         \end{gathered}
 \end{equation}
 
