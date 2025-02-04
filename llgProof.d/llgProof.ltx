@@ -122,6 +122,8 @@
 \newcommand{\derives}{\Rightarrow}
 \newcommand{\destar}
     {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
+\newcommand{\destarW}[1]
+    {\mathrel{\mbox{$\:\underset{#1}{\overset{\ast}{\Rightarrow}\:}$}}}
 \newcommand{\deplus}
     {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
 \newcommand{\derivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
@@ -134,6 +136,8 @@
 \newcommand{\set}[1]{{\left\lbrace #1 \right\rbrace} }
 \newcommand{\bigset}[1]{{\bigl\lbrace #1 \bigr\rbrace} }
 \newcommand{\Bigset}[1]{{\Bigl\lbrace #1 \Bigr\rbrace} }
+
+\DeclareMathOperator{\wrt}{wrt}
 
 % use internal counter of algorithmicx
 \newcommand{\algnested}{ %
@@ -482,6 +486,12 @@ in DI's is not formally part of the derivation in which
 it occurs,
 but is used as a reading aid,
 for convenience in locating the dot position.
+
+\begin{observation}
+        \label{obs:derivation-set-negation}
+        \todo{Add observation on negation and derivation sets}
+        \obEnd
+\end{observation}
 
 \todo{define completeness}
 
@@ -1066,7 +1076,7 @@ Therefore, with
         If
         \begin{equation}
                 \label{eq:di-ante-help-020}
-                \neg ( \V{A} \destar \epsilon \land \V{postdotA} = \epsilon )
+                \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon)
         \end{equation}
         then
         \begin{equation}
@@ -1079,7 +1089,7 @@ Therefore, with
         We are assuming for the theorem
         \begin{equation}
                 \label{eq:di-ante-help-040}
-                \neg ( \V{A} \destar \epsilon ) \lor \V{postdotA} \neq \epsilon \,\cuz\, \eqref{eq:di-ante-help-020}.
+                \neg ( \V{A} \destarW{\V{di}} \epsilon \lor \V{postdotA} \neq \epsilon \,\cuz\, \eqref{eq:di-ante-help-020}.
         \end{equation}
         Let us assume for a deduction that \V{di} is a completion,
         \begin{equation}
@@ -1089,7 +1099,7 @@ Therefore, with
         \end{equation}
         \begin{equation}
                 \label{eq:di-ante-help-060}
-                \neg ( \V{A} \destar \epsilon )
+                \neg ( \V{A} \destarW{\V{di}} \epsilon )
                 \,\cuz\, \eqref{eq:di-ante-help-040}, \eqref{eq:di-ante-help-050}.
         \end{equation}
         \begin{equation}
@@ -1097,9 +1107,9 @@ Therefore, with
                 \begin{gathered}
                 \neg
                 \left( \begin{gathered}
-                \V{A} \destar \V{predotA} \cat \V{postdotA} \\
-                \destar \Velement{w}{\V{origin},\V{current}} \cat \V{postdotA} \\
-                \destar \epsilon. \\
+                        \V{A} \destarW{\V{di}} \V{predotA} \cat \V{postdotA} \\
+                        \destarW{\V{di}} \Velement{w}{\V{origin},\V{current}} \cat \V{postdotA} \\
+                        \destarW{\V{di}} \epsilon. \\
                 \end{gathered} \right) \\
                 \cuz \eqref{eq:di-ante-help-010}, \Dfref{di}.
                 \end{gathered}
@@ -1107,14 +1117,13 @@ Therefore, with
         \begin{equation}
                 \label{eq:di-ante-help-080}
                 \begin{gathered}
-                \neg
-                \left( \begin{gathered}
-                \V{A} \destar \Velement{w}{\V{origin},\V{current}} \\
-                \destar \epsilon. \\
-                \end{gathered} \right) \\
+                \neg ( \Velement{w}{\V{origin},\V{current}} \destarW{\V{di}} \epsilon ) \\
                 \cuz \eqref{eq:di-ante-help-050}, \eqref{eq:di-ante-help-070}.
                 \end{gathered}
         \end{equation}
+        We have been careful in our notation in this proof to include the
+        context DS of our derivations because this proof uses negation
+        of derivation sets, whose consequences can be non-obvious \Obref{derivation-set-negation}.
         \todo{Finish this proof}
         \myqed
 \end{proof}
