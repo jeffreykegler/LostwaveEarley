@@ -1229,6 +1229,49 @@ we simplify \eqref{eq:pr-ri-main-24} to
         \cuz \eqref{eq:pr-ri-main-24}, \eqref{eq:pr-ri-main-040}.
         \end{gathered}
 \end{equation}
+\begin{equation}
+        \label{eq:pr-ri-main-060}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \;
+                \begin{gathered}
+                        \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \cat \V{B} \mydot \\
+                \V{postdotA} \cat \V{unseen}
+                \end{gathered} \\
+                \destar \;
+                \begin{gathered}
+                \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \cat \Velement{w}{\V{originB},\V{current}} \mydot \\
+                \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
+                } \\
+                \cuz \eqref{eq:pr-ri-main-050}, \Dfref{di}.
+        \end{gathered}
+\end{equation}
+We now move the dot from after \V{B} to before it.
+\begin{equation}
+        \label{eq:pr-ri-main-070}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
+                \destar \;
+                \begin{gathered}
+                        \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \mydot \V{B} \cat \\
+                \V{postdotA} \cat \V{unseen}
+                \end{gathered} \\
+                \destar \;
+                \begin{gathered}
+                \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{originB}} \mydot \Velement{w}{\V{originB},\V{current}} \cat \\
+                \V{postdotA} \cat \V{unseen}.
+                \end{gathered}
+                } \\
+                \cuz \eqref{eq:pr-ri-main-060}.
+        \end{gathered}
+\end{equation}
+Moving the dot did not affect the derivations, so that the derivation sets of
+\eqref{eq:pr-ri-main-060} and \eqref{eq:pr-ri-main-070} are identical.
 \todo{Finish proof of intangible reduction DI mainstem lemma}
 \myqed
 \end{proof}
