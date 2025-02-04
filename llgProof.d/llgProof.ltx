@@ -273,6 +273,10 @@
 }
 \newcommand{\dfEnd}{\Circle}
 
+% theoremoids: Eq
+
+\newcommand{\Eqref}[1]{\genref{eq:#1}{Eq}}
+
 % theoremoids: Ex
 
 \newtheorem{example}[theorem]{Example}
@@ -1065,6 +1069,7 @@ Therefore, with
 \end{proof}
 
 \begin{lemma}[DI antecedant helper]
+\label{lm:di-ante-help}
         Unless a DI is a nulling completion,
         either its origin is properly before the current location,
         or it is a completion.
@@ -1089,7 +1094,7 @@ Therefore, with
         We are assuming for the theorem
         \begin{equation}
                 \label{eq:di-ante-help-040}
-                \neg ( \V{A} \destarW{\V{di}} \epsilon \lor \V{postdotA} \neq \epsilon \,\cuz\, \eqref{eq:di-ante-help-020}.
+                \neg ( \V{A} \destarW{\V{di}} \epsilon \lor \V{postdotA} \neq \epsilon ) \,\cuz\, \eqref{eq:di-ante-help-020}.
         \end{equation}
         Let us assume for a deduction that \V{di} is a completion,
         \begin{equation}
@@ -1124,7 +1129,34 @@ Therefore, with
         We have been careful in our notation in this proof to include the
         context DS of our derivations because this proof uses negation
         of derivation sets, whose consequences can be non-obvious \Obref{derivation-set-negation}.
-        \todo{Finish this proof}
+        \begin{equation}
+                \label{eq:di-ante-help-090}
+                \begin{gathered}
+                        \exists \; \alpha, \beta \in (\V{N} \cup \V{T})^\ast, \V{term} \in \V{T} \mid \\
+                        \Velement{w}{\V{origin},\V{current}} \destarW{\V{di}} \alpha \cat \V{t} \cat \beta \\
+                \cuz \Obref{derivation-set-negation}, \eqref{eq:di-ante-help-080}.
+                \end{gathered}
+        \end{equation}
+        \begin{equation}
+                \label{eq:di-ante-help-100}
+                \begin{gathered}
+                        \V{origin} < \V{current} \,\cuz\, \eqref{eq:di-ante-help-090}.
+                \end{gathered}
+        \end{equation}
+        \begin{equation}
+                \label{eq:di-ante-help-110}
+                \begin{gathered}
+                        \V{postdotA} = \epsilon \implies \V{origin} < \V{current} \\
+                        \text{ \cuz deduction of \eqref{eq:di-ante-help-100} from \eqref{eq:di-ante-help-010}.}
+                \end{gathered}
+        \end{equation}
+        \begin{equation}
+                \label{eq:di-ante-help-120}
+                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon \,\cuz\, \eqref{eq:di-ante-help-110}.
+        \end{equation}
+        Equation \eqref{eq:di-ante-help-120} is equivalent to \Eqref{di-ante-help-030}, which
+        is what we needed to show for the lemma.
+        \todo{Check this proof}
         \myqed
 \end{proof}
 
@@ -1150,7 +1182,7 @@ where
         \label{eq:pr-ri-main-12}
 \text{the predot symbol is $\V{B} \in \V{N}$,} \\
         \label{eq:pr-ri-main-14}
-\text{the predot symbol instance produces $\epsilon$, and} \\
+\text{the predot symbol instance is nulling, and} \\
         \label{eq:pr-ri-main-16}
 \text{\V{down} is not a nulling completion.}
 \end{gather}
@@ -1174,133 +1206,29 @@ where
                 }
         \end{gathered} \right).
 \end{gather}
-We know from \eqref{eq:pr-ri-main-16} that
+We know by assumption for the lemma that
+        \begin{equation}
+                \label{eq:pr-ri-main-030}
+                \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon) \,\cuz\, \eqref{eq:pr-ri-main-16}.
+        \end{equation}
+Using the helper lemma,
 \begin{equation}
-\label{eq:pr-ri-main-30}
-        \text{\V{down} is not nulling or \V{down} is not a completion}
+                \label{eq:pr-ri-main-040}
+                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon
+                        \,\cuz\, \eqref{eq:pr-ri-main-030}, \Lmref{di-ante-help},
 \end{equation}
-It is helpful to switch \eqref{eq:pr-ri-main-30} into notation
-so we will write \VFA{Nulling}{down} to say that
-``\V{down} is nulling''.
+we simplify \eqref{eq:pr-ri-main-24} to
 \begin{equation}
-\label{eq:pr-ri-main-32}
-        \neg\VFA{Nulling}{\V{down}} \lor \V{postdotA} \neq \epsilon \bcuz \eqref{eq:pr-ri-main-30}.
-\end{equation}
-For the next few deductions, we will stay within the context
-        of derivation set \eqref{eq:pr-ri-main-24}.
-Recalling the definition of ``nulling DI'' \Dfref{nulling-di},
-we see that,
-\begin{equation}
-\label{eq:pr-ri-main-34}
+        \label{eq:pr-ri-main-050}
         \begin{gathered}
-                \VFA{Nulling}{\V{down}} \equiv \\
-                \V{A} \destar \V{antepredotA} \cat \V{B} \cat \V{postdotA} \\
-                \destar \Velement{w}{\V{origin},\V{current}} \cat \V{B} \cat \V{postdotA} \\
-                \destar \epsilon \\
-                \bcuz \text{definition of ``nulling DI'' \Dfref{nulling-di},
-                        wrt DS \eqref{eq:pr-ri-main-24}.}
+        \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA}\cat\V{B} \mydot \V{postdotA} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
+        } \\
+        \cuz \eqref{eq:pr-ri-main-24}, \eqref{eq:pr-ri-main-040}.
         \end{gathered}
 \end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-36}
-\begin{gathered}
-        \begin{gathered}
-                \VFA{Nulling}{\V{down}} \equiv
-                \left( \begin{gathered}
-                \Velement{w}{\V{origin},\V{current}} \destar \epsilon \\
-                \land \; \V{B} \destar \epsilon \\
-                \land \; \V{postdotA} \destar \epsilon
-                \end{gathered} \right)
-        \end{gathered} \\
-        \bcuz \text{\eqref{eq:pr-ri-main-34}, wrt DS \eqref{eq:pr-ri-main-24}.}
-\end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-38}
-        \text{$\V{B} \destar \epsilon$
-                \bcuz \eqref{eq:pr-ri-main-14}, wrt DS \eqref{eq:pr-ri-main-24}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-40a}
-\begin{gathered}
-        \begin{gathered}
-                \VFA{Nulling}{\V{down}} \equiv
-                \left( \begin{gathered}
-                \Velement{w}{\V{origin},\V{current}} \destar \epsilon \\
-                \land \; \V{postdotA} \destar \epsilon
-                \end{gathered} \right)
-        \end{gathered} \\
-        \bcuz \text{\eqref{eq:pr-ri-main-36}, \eqref{eq:pr-ri-main-38},
-                wrt DS \eqref{eq:pr-ri-main-24}.}
-\end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-40b}
-\begin{gathered}
-        \begin{gathered}
-                \VFA{Nulling}{\V{down}} \equiv
-                \left( \begin{gathered}
-                \V{origin} = \V{current} \\
-                \land \; \V{postdotA} \destar \epsilon
-                \end{gathered} \right)
-        \end{gathered} \\
-        \bcuz \text{\eqref{eq:pr-ri-main-40a},
-                wrt DS \eqref{eq:pr-ri-main-24}.}
-\end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-41}
-        \V{origin} \neq \V{current} \equiv \V{origin} < \V{current}
-                \bcuz \text{ wrt DS \eqref{eq:pr-ri-main-24}}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-42}
-\begin{gathered}
-        \begin{gathered}
-                \VFA{Nulling}{\V{down}} \equiv
-                \left( \begin{gathered}
-                \neg(\V{origin} < \V{current}) \\
-                \land \; \V{postdotA} \destar \epsilon
-                \end{gathered} \right)
-        \end{gathered} \\
-        \bcuz \text{\eqref{eq:pr-ri-main-36},
-                \eqref{eq:pr-ri-main-40a}, \eqref{eq:pr-ri-main-41},
-                wrt DS \eqref{eq:pr-ri-main-24}.}
-\end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-44}
-\begin{gathered}
-        \begin{gathered}
-                \neg \VFA{Nulling}{\V{down}} \equiv
-                \left( \begin{gathered}
-                \V{origin} < \V{current} \\
-                        \lor \; \neg(\V{postdotA} \destar \epsilon)
-                \end{gathered} \right)
-        \end{gathered} \\
-        \bcuz \text{\eqref{eq:pr-ri-main-32},
-                wrt DS \eqref{eq:pr-ri-main-24}.}
-\end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-main-46}
-\begin{gathered}
-                (\V{origin} < \V{current}
-                        \lor \; \neg(\V{postdotA} \destar \epsilon))
-        \lor \V{postdotA} \neq \epsilon \\
-        \text{\bcuz \eqref{eq:pr-ri-main-32}, \eqref{eq:pr-ri-main-44},
-                wrt DS \eqref{eq:pr-ri-main-24}.}
-\end{gathered}
-\end{equation}
-We need to be careful of
-the distinction between $\V{postdotA} \destar \epsilon$
-        and $\V{postdotA} = \epsilon$.
-        The two are not equivalent but it it true that
-\begin{equation}
-\label{eq:pr-ri-main-50}
-        \V{postdotA} = \epsilon \implies \V{postdotA} \destar \epsilon.
-\end{equation}
-
 \todo{Finish proof of intangible reduction DI mainstem lemma}
 \myqed
 \end{proof}
