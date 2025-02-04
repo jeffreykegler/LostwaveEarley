@@ -1062,7 +1062,7 @@ Equations \eqref{eq:pr-rt-main-22}, \eqref{eq:pr-rt-main-48}, \eqref{eq:pr-rt-ma
         \FA{DI}{\V{antepredotA}, \V{B}\cat\V{postdotA},\V{A},\V{origin},\V{originB}}. \\
 \end{equation}
 From \Dfref{tangible-inflows}, we see that
-\eqref{eq:pr-rt-main-54} is the tributary of \eqref{eq:df-rt-di}.
+\eqref{eq:pr-rt-main-54} is the mainstem of \eqref{eq:df-rt-di}.
 Therefore, with
 \eqref{eq:pr-rt-main-54}, we have what we needed to show for the lemma.
 \myqed
@@ -1272,6 +1272,24 @@ We now move the dot from after \V{B} to before it.
 \end{equation}
 Moving the dot did not affect the derivations, so that the derivation sets of
 \eqref{eq:pr-ri-main-060} and \eqref{eq:pr-ri-main-070} are identical.
+\begin{equation}
+        \label{eq:pr-ri-main-080}
+        \V{originB} = \V{current} \,\cuz\, \eqref{eq:pr-ri-main-12}, \eqref{eq:pr-ri-main-14}.
+\end{equation}
+\begin{equation}
+        \label{eq:pr-ri-main-090}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
+                \destar \;
+                \begin{gathered}
+                        \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
+                \end{gathered}
+                } \\
+                \cuz \eqref{eq:pr-ri-main-070}, \eqref{eq:pr-ri-main-080}.
+        \end{gathered}
+\end{equation}
 \todo{Finish proof of intangible reduction DI mainstem lemma}
 \myqed
 \end{proof}
