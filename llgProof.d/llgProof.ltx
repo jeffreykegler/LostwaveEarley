@@ -1,4 +1,5 @@
 \documentclass[draft,12pt]{amsart}
+\usepackage{float}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
@@ -648,7 +649,9 @@ a DI of the form
 
 \todo{Prove generations are coherently defined -- will require soundness}
 
+\needspace{3in}
 \section{Algorithm}
+\FloatBarrier
 
 \begin{algorithm}[ht]
 \caption{Do Earley Parse}
@@ -711,6 +714,34 @@ a DI of the form
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\begin{algorithm}[ht]
+        \caption{Add Tangible Reductions}
+\label{alg:tangible-reductions}
+\begin{algorithmic}[1]
+        \Procedure{AddTangibleReductions}{\V{tributary}}
+        \State $\V{tribOrigin} \gets \text{origin of \V{tributary}}$
+        \State $\V{tribCurrent} \gets \text{current location of \V{tributary}}$
+        \State $\V{tribLHS} \gets \text{LHS of \V{tributary}`s rule}$
+        \State $\V{originRow} \gets \VVelement{rows}{tribOrigin}$
+        \Statex\Comment Find the row where \V{tributary} starts
+        \State $\V{mainstems} \gets$
+        \Statex $\qquad \qquad \lbrace \V{item} \in \V{originRow} \mid \VFA{Postdot}{item} =  \V{tribLHS} \rbrace$
+        \Statex \Comment {Set \V{mainstems} to the set of Earley items in \V{originRow} whose postdot
+                item is \V{tribLHS}.}
+     \For {$\V{mainstem} \in \V{mainstems}$}
+          \State \V{dotted} = dotted rule of \V{mainstem}
+          \State \V{newDotted} = \Call{AdvanceDot}{\V{dotted}}
+          \State \V{newOrigin} =  origin of \V{mainstem}
+          \State \V{reduction} = ( \V{newDotted}, \V{newOrigin}, \V{tribCurrent} )
+          \Statex \Comment Create a new Earley item
+          \State If \V{reduction} is new, add it to \V{rows}, at the end
+     \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\FloatBarrier
 
 \section{Inflow lemmas}
 
