@@ -1,4 +1,6 @@
 \documentclass[draft,12pt]{amsart}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \usepackage[final]{listings}
 \usepackage{float}
@@ -646,6 +648,70 @@ a DI of the form
 
 \todo{Prove generations are coherently defined -- will require soundness}
 
+\section{Algorithm}
+
+\begin{algorithm}[ht]
+\caption{Do Earley Parse}
+\label{alg:earley}
+\begin{algorithmic}[1]
+        \Procedure{DoEarleyParse}{}
+        \State \Call {AddRow0}{}
+        \For{$\V{i} \gets 1, \Vsize{\V{w}}$}
+                \State \Call {AddRow}{\V{i}}
+        \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+\caption{Add Row 0}
+\label{alg:add-row-0}
+\begin{algorithmic}[1]
+        \Procedure{AddRow0}{}
+        \State \Call {AddStartStates}{}
+        \State \Call {FinishRow}{0}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+        \caption{Add Row \V{n}}
+\label{alg:add-row-n}
+\begin{algorithmic}[1]
+        \Procedure{AddRow}{\V{n}}
+        \State \Call {AddScansions}{\V{n}}
+        \State \Call {FinishRow}{\V{n}}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+        \caption{Finish Row \V{n}}
+\label{alg:finish-row}
+\begin{algorithmic}[1]
+        \Procedure{FinishRow}{\V{n}}
+        \State $\V{i} \gets 0$ \Comment {Initialize \V{i}}
+        \While {$\V{i} < \Vsize{row}$} \Comment {This loop adds items at the end of \V{row},
+            so that \Vsize{row} will increase in the course of running this loop}
+        \State $\V{current} \gets \Velement{row}{\V{i}}$
+                \Comment {\VVelement{row}{i} is \V{i}'th Earley item in row}
+        \If {\V{current} is complete}
+             \State $\V{origin} \gets$ origin of \V{current}
+             \If {$\V{origin} < \V{n}$}
+                  \State \Call{AddTangibleReductions}{\V{current}}
+             \EndIf
+        \Else \Comment {... else if \V{current} is an incompletion}
+             \State $\V{postdot} \gets$ postdot symbol of \V{current}
+             \If {\V{postdot} is nullable}
+                  \State \Call{AddIntangibleReduction}{\V{current}}
+             \EndIf
+             \State \Call{AddPredictions}{\V{postdot},\V{n}}
+        \EndIf
+        \EndWhile
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
 \section{Inflow lemmas}
 
 \begin{lemma}[Reduction tributary]
@@ -653,8 +719,8 @@ a DI of the form
         Every tangible reduction DI
         (Definition~\ref{df:rt} on page~\pageref{df:rt})
         has a tributary
-        (Definition~\ref{df:tangible-inflows} on page~\pageref{df:tangible-inflows})
-        .  \lmEnd
+        (Definition~\ref{df:tangible-inflows} on page~\pageref{df:tangible-inflows}).
+        \lmEnd
 \end{lemma}
 
 \begin{proof}
