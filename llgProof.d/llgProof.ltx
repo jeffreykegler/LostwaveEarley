@@ -632,16 +632,16 @@ a DI of the form
 \end{itemize}
 \end{definition}
 
-\begin{definition}{Generations}
+\begin{definition}[Generations]
         \todo{Which one, DIs or Earley items?}
         Every confirmed Earley item belongs to a \textbf{generation}
         within its row.
         Scansions belong to generation 0.
         Let \V{trib} be the tributary of the Earley item \V{it}
-        with the lowest generation number within its row,
+        with the lowest generation number
         and let the generation number of \V{trib} be \V{i}.
         Then \V{it} belongs to generation $\V{i}+1$ within its row.
-        \defEnd
+        \dfEnd
 \end{definition}
 
 \todo{Prove generations are coherently defined -- will require soundness}
