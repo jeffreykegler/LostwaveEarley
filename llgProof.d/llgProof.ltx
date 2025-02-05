@@ -1172,7 +1172,7 @@ Therefore, with
         We assumed for the lemma that we have an intangible reduction DI.
         Without loss of generality, let this be
 \begin{equation}
-        \label{eq:pr-rm-main-5}
+        \label{eq:pr-ri-main-5}
         \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}}, \\
 \end{equation}
 where
@@ -1290,8 +1290,42 @@ Moving the dot did not affect the derivations, so that the derivation sets of
                 \cuz \eqref{eq:pr-ri-main-070}, \eqref{eq:pr-ri-main-080}.
         \end{gathered}
 \end{equation}
-\todo{Finish proof of intangible reduction DI mainstem lemma}
+To obtain the DI for the mainstem,
+we convert \eqref{eq:pr-ri-main-080} back into the form for a DI
+by adding an antecedant:
+\begin{equation}
+        \label{eq:pr-ri-main-100}
+        \begin{gathered}
+                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
+                ( \V{origin} < \V{current} \lor \V{B} \cat \V{postdotA} \neq \epsilon ) \implies \\
+                \left( \begin{gathered}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
+                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
+                \destar \; \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
+                }
+                \end{gathered} \right) \\
+                \cuz \eqref{eq:pr-ri-main-090}.
+        \end{gathered}
+\end{equation}
+The DI will also require two new assumptions:
+\begin{gather}
+        \label{eq:pr-ri-main-110}
+        \V{antepredotA} \cat \V{B} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-ri-main-20} \text{, and} \\
+        \label{eq:pr-ri-main-120}
+        \V{postdotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-ri-main-20}.
+\end{gather}
+Equations \eqref{eq:pr-ri-main-22}, \eqref{eq:pr-ri-main-100}, \eqref{eq:pr-ri-main-110} and
+\eqref{eq:pr-ri-main-120} are the expansion of the DI
+\begin{equation}
+\label{eq:pr-ri-main-130}
+        \FA{DI}{\V{antepredotA}, \V{B}\cat\V{postdotA},\V{A},\V{origin},\V{current}}. \\
+\end{equation}
+From \Dfref{tangible-inflows}, we see that
+\eqref{eq:pr-ri-main-130} is the mainstem of \eqref{eq:pr-ri-main-5}.
+Therefore, with
+\eqref{eq:pr-ri-main-130}, we have what we needed to show for the lemma.
 \myqed
+\todo{Check proof of intangible reduction DI mainstem lemma}
 \end{proof}
 
 \section{Completion lemmas}
