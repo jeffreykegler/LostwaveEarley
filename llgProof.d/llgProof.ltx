@@ -632,14 +632,19 @@ a DI of the form
 \end{itemize}
 \end{definition}
 
-We will divide the confirmed DIs at each current location
-into \textbf{generations}.
-Scanned DIs are in generation 0.
-If \V{diAfter} is in generation \V{z} and
-\[ \V{diBefore} \derives \V{diAfter} \]
-is a step instance,
-then
-\V{diBefore} is in generation $\V{z}+1$.
+\begin{definition}{Generations}
+        \todo{Which one, DIs or Earley items?}
+        Every confirmed Earley item belongs to a \textbf{generation}
+        within its row.
+        Scansions belong to generation 0.
+        Let \V{trib} be the tributary of the Earley item \V{it}
+        with the lowest generation number within its row,
+        and let the generation number of \V{trib} be \V{i}.
+        Then \V{it} belongs to generation $\V{i}+1$ within its row.
+        \defEnd
+\end{definition}
+
+\todo{Prove generations are coherently defined -- will require soundness}
 
 \section{Inflow lemmas}
 
