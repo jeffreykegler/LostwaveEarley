@@ -606,15 +606,12 @@ a DI of the form
 
 \begin{definition}[Intangible reduction inflows]
 \label{df:intangible-inflows}
-        \todo{Clean this up}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
 \end{equation}
 is an intangible reduction DI.
 Then we say that
-\begin{itemize}
-\item
 a DI of the form
 \begin{equation*}
         \V{mainstem} =
@@ -626,13 +623,11 @@ a DI of the form
 }
 \end{equation*}
         is a \textbf{mainstem} of
-        \V{down}:
-\item
-        \V{down} is the \textbf{downstream channel}
-        (or simply \textbf{downstream})
-        of \V{mainstem}.
-        \dfEnd
-\end{itemize}
+        \V{down}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{mainstem}.
+\dfEnd
 \end{definition}
 
 \begin{definition}[Generations]
@@ -641,8 +636,8 @@ a DI of the form
         The generation of all other Earley items is that of their
         first generation candidate.
 
-        \V{i}+1 is a \textbf{generation candidate} of an Earley item if
-        if has a \textbf{generation inflow} whose generation is \V{i}.
+        If an Earley item \V{down} has a \textbf{generation inflow} whose generation is \V{i},
+        $\V{i}+1$ is a \textbf{generation candidate} of \V{down}.
         The generation inflow of predictions is its mainstem.
         The generation inflow of an intangible reduction is its mainstem.
         The generation inflow of an tangible reduction is its tributary.
