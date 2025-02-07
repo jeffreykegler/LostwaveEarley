@@ -453,20 +453,28 @@ When $\size{\alpha} = 0$, there is no predot symbol. \dfEnd
 \end{definition}
 
 \begin{definition}[Types of Earley items]
-We say that an Earley item is predicted, or a \textbf{prediction}
-if it has no predot symbol.
-We say that an Earley item is \textbf{confirmed}, or a confirmation,
-if it is not a prediction.
-We say that an Earley item is \textbf{scanned}, or a \textbf{scansion},
-if its predot symbol is a terminal,
-                 $\element{\alpha}{\lastix{\alpha}} \in \V{T}$.
-We say that an Earley item is reduced, or a \textbf{reduction},
-if its predot symbol is a non-terminal,
-$\element{\alpha}{\lastix{\alpha}} \in \V{N}$.
-We say that an Earley item is a \textbf{nullable reduction}
-if it is a reduction whose predot symbol is nullable.
-We say that an Earley item is a \textbf{non-nullable reduction}
-if it is a reduction whose predot symbol is non-nullable. \dfEnd
+We say that
+\begin{itemize}
+\item an Earley item is a \textbf{start item}
+        if its LHS is the start symbol and
+        it has no predot symbol;
+\item an Earley item is \textbf{predicted}, or a \textbf{prediction}
+        if its LHS is not the start symbol and
+        it has no predot symbol;
+\item an Earley item is \textbf{confirmed}, or a \textbf{confirmation},
+        if it has a predot symbol;
+\item an Earley item is \textbf{scanned}, or a \textbf{scansion},
+        if its predot symbol is a terminal,
+         $\element{\alpha}{\lastix{\alpha}} \in \V{T}$;
+\item an Earley item is \textbf{reduced}, or a \textbf{reduction},
+        if its predot symbol is a non-terminal;
+        $\element{\alpha}{\lastix{\alpha}} \in \V{N}$;
+\item an Earley item is a \textbf{nullable reduction}
+        if it is a reduction whose predot symbol is nullable; and
+\item an Earley item is a \textbf{non-nullable reduction}
+        if it is a reduction whose predot symbol is non-nullable.
+                \dfEnd
+\end{itemize}
 \end{definition}
 
 \todo{Define derivation set (DS)}.
