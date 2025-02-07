@@ -516,13 +516,12 @@ for convenience in locating the dot position.
 \begin{observation}
         \label{obs:derivation-set-negation}
         \todo{This is confused.  Rewrite it.}
-        When combining negation with derivation
-        set and focused derivation sets, the consequences
+        When combining negation with sets,
+        the consequences
         can be non-obvious.
         Caution must be exercised.
         Specifically,
-        let \V{diSet} be a derivation set,
-        or a focused derivation set.
+        let \V{diSet} be a derivation set.
         From
         \begin{equation}
                 \label{eq:ob-ds-neg-020}
@@ -550,13 +549,12 @@ for convenience in locating the dot position.
                 \existQ{\alpha \in \V{T}^\ast}{
                         \V{A} \destarW{\V{di2}} \alpha \land \alpha \neq \epsilon.}
         \end{equation}
-        \todo{This is confused.  Rewrite it.}
         From \eqref{eq:ob-ds-neg-030}, all we can assert is that
         \begin{equation}
                 \label{eq:ob-ds-neg-050}
                 \begin{gathered}
-                        \existQ{ \; \alpha, \beta \in (\V{N} \cup \V{T})^\ast, \V{term} \in \V{T} }{ \\
-                        \V{A} \destarW{\V{di2}} \alpha \cat \V{t} \cat \beta} \\
+                        \existQ{\V{drv} \in \V{diSet}, \alpha \in \V{T}^\ast}{
+                        \V{A} \destarW{\V{drv}} \alpha \land \alpha \neq \epsilon.}
                         \cuz \eqref{eq:ob-ds-neg-030}.  \qquad \obEnd
                 \end{gathered}
         \end{equation}
