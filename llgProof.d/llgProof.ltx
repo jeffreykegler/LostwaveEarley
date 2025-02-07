@@ -636,18 +636,24 @@ a DI of the form
 \end{definition}
 
 \begin{definition}[Generations]
-        \todo{Which one, DIs or Earley items?}
-        Every confirmed Earley item belongs to a \textbf{generation}
-        within its row.
-        Scansions belong to generation 0.
-        Let \V{trib} be the tributary of the Earley item \V{it}
-        with the lowest generation number
-        and let the generation number of \V{trib} be \V{i}.
-        Then \V{it} belongs to generation $\V{i}+1$ within its row.
+        \label{df:generation}
+        Scansions and start Earley items belong to generation 0.
+        The generation of all other Earley items is that of their
+        first generation candidate.
+
+        \V{i}+1 is a \textbf{generation candidate} of an Earley item if
+        if has a \textbf{generation inflow} whose generation is \V{i}.
+        The generation inflow of predictions is its mainstem.
+        The generation inflow of an intangible reduction is its mainstem.
+        The generation inflow of an tangible reduction is its tributary.
         \dfEnd
 \end{definition}
 
-\todo{Prove generations are coherently defined -- will require soundness}
+Note that \Dfref{generation} implies that every generation inflow
+has the same current location as its downstream.
+
+\todo{Prove that every confirmed Earley item belongs to a generation
+        within its row -- this will require soundness}
 
 \needspace{3in}
 \section{Algorithm}
