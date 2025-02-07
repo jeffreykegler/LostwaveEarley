@@ -630,6 +630,32 @@ of \V{mainstem}.
 \dfEnd
 \end{definition}
 
+\begin{definition}[Prediction inflows]
+\label{df:prediction-inflows}
+        Suppose, without loss of generality, that
+\begin{equation}
+        \V{down} = \FA{DI}{\epsilon,\V{rhsA},\V{A},\V{current},\V{current}} \\
+\end{equation}
+is an prediction DI.
+Then we say that
+any DI of the form
+\begin{equation*}
+        \V{mainstem} =
+        \FA{DI}{
+        \begin{gathered}
+        \; \V{predotB}, \; \V{A} \cat\V{afterPostdotB}, \; \\
+                \V{B},\; \V{originB},\; \V{current}
+        \end{gathered}
+}
+\end{equation*}
+        is a \textbf{mainstem} of
+        \V{down}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{mainstem}.
+\dfEnd
+\end{definition}
+
 \begin{definition}[Generations]
         \label{df:generation}
         Scansions and start Earley items belong to generation 0.
