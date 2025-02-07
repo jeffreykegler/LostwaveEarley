@@ -67,6 +67,22 @@
 % For a type name, when it occurs in text
 \newcommand{\type}[1]{\ensuremath{\texttt{#1}}}
 
+\newcommand{\True}{\mbox{\sf T}\xspace}
+\newcommand{\False}{\mbox{\sf F}\xspace}
+\newcommand{\Trueword}{\sf true}
+\newcommand{\Falseword}{\sf false}
+\newcommand{\Neg}{\neg}
+\newcommand{\Implies}{\supset}
+\newcommand{\ImpliesAlt}{\Rightarrow}
+\newcommand{\NEquiv}{\not\equiv}
+\newcommand{\NEquivRel}{\mathrel{\not\equiv}}
+
+\newcommand{\qeq}{\simeq}
+\newcommand{\nqeq}{\not\simeq}
+\newcommand{\unicorn}{\ensuremath{\bot}\xspace}
+\newcommand{\TRUE}{\ensuremath{\mathbb T}\xspace}
+\newcommand{\FALSE}{\ensuremath{\mathbb F}\xspace}
+
 \newcommand{\mult}{\mathbin{\ast}}
 \newcommand{\dfn}[1]{{\bf #1}}
 \newcommand{\sep}{\,\mid\,}
@@ -359,18 +375,21 @@ for Earley's algorithm.\footnote{%
     }
 
 \section{Conventions}
-\begin{itemize}
-\item ``Iff'' (or ``iff'') abbreviates
+\noindent $\bullet$
+``Iff'' (or ``iff'') abbreviates
     ``if and only if''.
-\item ``Wrt'' (or ``wrt'') abbreviates
+\noindent $\bullet$
+``Wrt'' (or ``wrt'') abbreviates
     ``with respect to''.
-\item Ranges are inclusive start,
+\noindent $\bullet$
+Ranges are inclusive start,
     exclusive end, so that, for example,
         \begin{gather*}
             \element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
             \element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
         \end{gather*}
-\end{itemize}
+\noindent $\bullet$ \TRUE is a boolean (or optional boolean) true; and
+        \FALSE is a boolean (or optional boolean) false.
 
 \section{Definitions}
 
@@ -496,8 +515,51 @@ for convenience in locating the dot position.
 
 \begin{observation}
         \label{obs:derivation-set-negation}
-        \todo{Add observation on negation and derivation sets}
-        \obEnd
+        \todo{This is confused.  Rewrite it.}
+        When combining negation with derivation
+        set and focused derivation sets, the consequences
+        can be non-obvious.
+        Caution must be exercised.
+        Specifically,
+        let \V{diSet} be a derivation set,
+        or a focused derivation set.
+        From
+        \begin{equation}
+                \label{eq:ob-ds-neg-020}
+                        \neg ( \V{A} \destarW{\V{diSet}} \epsilon )
+        \end{equation}
+        it does \textbf{not} follow that
+        \begin{equation}
+                \label{eq:ob-ds-neg-025}
+        \begin{gathered}
+                \univQ{\alpha \in \V{T}^\ast}{ \V{A} \destarW{\V{diSet}} \alpha \implies \alpha \neq \epsilon}
+        \end{gathered}
+        \end{equation}
+        To see the reason that \eqref{eq:ob-ds-neg-025}
+        does not follow from \eqref{eq:ob-ds-neg-020}, consider
+        two derivations, $\V{di1} \in \V{diSet}$
+        and $\V{di2} \in \V{diSet}$.
+        It is quite possible to have both
+        \begin{equation}
+                \label{eq:ob-ds-neg-030}
+                \V{A} \destarW{\V{di1}} \epsilon
+        \end{equation}
+        and
+        \begin{equation}
+                \label{eq:ob-ds-neg-040}
+                \existQ{\alpha \in \V{T}^\ast}{
+                        \V{A} \destarW{\V{di2}} \alpha \land \alpha \neq \epsilon.}
+        \end{equation}
+        \todo{This is confused.  Rewrite it.}
+        From \eqref{eq:ob-ds-neg-030}, all we can assert is that
+        \begin{equation}
+                \label{eq:ob-ds-neg-050}
+                \begin{gathered}
+                        \existQ{ \; \alpha, \beta \in (\V{N} \cup \V{T})^\ast, \V{term} \in \V{T} }{ \\
+                        \V{A} \destarW{\V{di2}} \alpha \cat \V{t} \cat \beta} \\
+                        \cuz \eqref{eq:ob-ds-neg-030}.  \qquad \obEnd
+                \end{gathered}
+        \end{equation}
 \end{observation}
 
 \todo{define completeness}
@@ -1264,11 +1326,7 @@ Therefore, with
 \end{lemma}
 
 \begin{proof}
-        We are assuming for the theorem
-        \begin{equation}
-                \label{eq:di-ante-help-040}
-                \neg ( \V{A} \destarW{\V{di}} \epsilon \lor \V{postdotA} \neq \epsilon ) \,\cuz\, \eqref{eq:di-ante-help-020}.
-        \end{equation}
+        We are assuming \eqref{eq:di-ante-help-020} for the theorem.
         Let us assume for a deduction that \V{di} is a completion,
         \begin{equation}
                 \label{eq:di-ante-help-050}
@@ -1278,7 +1336,7 @@ Therefore, with
         \begin{equation}
                 \label{eq:di-ante-help-060}
                 \neg ( \V{A} \destarW{\V{di}} \epsilon )
-                \,\cuz\, \eqref{eq:di-ante-help-040}, \eqref{eq:di-ante-help-050}.
+                \,\cuz\, \eqref{eq:di-ante-help-020}, \eqref{eq:di-ante-help-050}.
         \end{equation}
         \begin{equation}
                 \label{eq:di-ante-help-070}
@@ -1329,7 +1387,6 @@ Therefore, with
         \end{equation}
         Equation \eqref{eq:di-ante-help-120} is equivalent to \Eqref{di-ante-help-030}, which
         is what we needed to show for the lemma.
-        \todo{Check this proof}
         \myqed
 \end{proof}
 
