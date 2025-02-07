@@ -604,6 +604,7 @@ The DI \eqref{eq:invariant-di} is said to
 
 \begin{definition}[Tangible reduction DI]
         \label{df:rt}
+        \todo{Clarify tangible vs intangible reduction}
         A \textbf{tangible reduction}
         is a reduction DI all of whose derivations
         have a predot symbol instance that produces
@@ -1628,104 +1629,10 @@ we simplify \eqref{eq:pr-pred-main-24} to
         \cuz \eqref{eq:pr-pred-main-24}, \eqref{eq:pr-pred-main-040}.
         \end{gathered}
 \end{equation}
-\todo{Rewrite proof from here}
-\begin{equation}
-        \label{eq:pr-pred-main-060}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{current}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{current}} \cat \V{antepredotA} \cat \V{B} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \;
-                \begin{gathered}
-                        \Velement{w}{0,\V{current}} \cat \Velement{w}{\V{current},\V{currentB}} \cat \V{B} \mydot \\
-                \V{postdotA} \cat \V{unseen}
-                \end{gathered} \\
-                \destar \;
-                \begin{gathered}
-                \Velement{w}{0,\V{current}} \cat \Velement{w}{\V{current},\V{currentB}} \cat \Velement{w}{\V{currentB},\V{current}} \mydot \\
-                \V{postdotA} \cat \V{unseen}.
-                \end{gathered}
-                } \\
-                \cuz \eqref{eq:pr-pred-main-050}, \Dfref{di}.
-        \end{gathered}
-\end{equation}
-We now move the dot from after \V{B} to before it.
-\begin{equation}
-        \label{eq:pr-pred-main-070}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{current}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{current}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
-                \destar \;
-                \begin{gathered}
-                        \Velement{w}{0,\V{current}} \cat \Velement{w}{\V{current},\V{currentB}} \mydot \V{B} \cat \\
-                \V{postdotA} \cat \V{unseen}
-                \end{gathered} \\
-                \destar \;
-                \begin{gathered}
-                \Velement{w}{0,\V{current}} \cat \Velement{w}{\V{current},\V{currentB}} \mydot \Velement{w}{\V{currentB},\V{current}} \cat \\
-                \V{postdotA} \cat \V{unseen}.
-                \end{gathered}
-                } \\
-                \cuz \eqref{eq:pr-pred-main-060}.
-        \end{gathered}
-\end{equation}
-Moving the dot did not affect the derivations, so that the derivation sets of
-\eqref{eq:pr-pred-main-060} and \eqref{eq:pr-pred-main-070} are identical.
-\begin{equation}
-        \label{eq:pr-pred-main-080}
-        \V{currentB} = \V{current} \,\cuz\, \eqref{eq:pr-pred-main-12}, \eqref{eq:pr-pred-main-14}.
-\end{equation}
-\begin{equation}
-        \label{eq:pr-pred-main-090}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{current}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{current}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
-                \destar \;
-                \begin{gathered}
-                        \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
-                \end{gathered}
-                } \\
-                \cuz \eqref{eq:pr-pred-main-070}, \eqref{eq:pr-pred-main-080}.
-        \end{gathered}
-\end{equation}
-To obtain the DI for the mainstem,
-we convert \eqref{eq:pr-pred-main-080} back into the form for a DI
-by adding an antecedant:
-\begin{equation}
-        \label{eq:pr-pred-main-100}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{current} < \V{current} \lor \V{B} \cat \V{postdotA} \neq \epsilon ) \implies \\
-                \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{current}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{current}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
-                \destar \; \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
-                }
-                \end{gathered} \right) \\
-                \cuz \eqref{eq:pr-pred-main-090}.
-        \end{gathered}
-\end{equation}
-The DI will also require two new assumptions:
-\begin{gather}
-        \label{eq:pr-pred-main-110}
-        \V{antepredotA} \cat \V{B} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-pred-main-20} \text{, and} \\
-        \label{eq:pr-pred-main-120}
-        \V{postdotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-pred-main-20}.
-\end{gather}
-Equations \eqref{eq:pr-pred-main-22}, \eqref{eq:pr-pred-main-100}, \eqref{eq:pr-pred-main-110} and
-\eqref{eq:pr-pred-main-120} are the expansion of the DI
-\begin{equation}
-\label{eq:pr-pred-main-130}
-        \FA{DI}{\V{antepredotA}, \V{B}\cat\V{postdotA},\V{A},\V{current},\V{current}}. \\
-\end{equation}
-From \Dfref{tangible-inflows}, we see that
-\eqref{eq:pr-pred-main-130} is the mainstem of \eqref{eq:pr-pred-main-5}.
-Therefore, with
-\eqref{eq:pr-pred-main-130}, we have what we needed to show for the lemma.
+\todo{Finish proof}
 \myqed
 \end{proof}
+
 \section{Completion lemmas}
 
 \begin{lemma}[Row 0 completion]
