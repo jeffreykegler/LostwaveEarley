@@ -1674,8 +1674,11 @@ we simplify \eqref{eq:pr-pred-main-24} to
         We consider, without loss of generality, a generation
         DI \V{di}, focused in a derivation \V{drv}.
         We need to show for the lemma that, if
+                \todo{Refer to definition of completeness?}
         \begin{gather}
                 \label{eq:row-step-050}
+                \text{\V{di} is not a nulling completion;} \\
+                \label{eq:row-step-055}
                 \text{\V{di} is in generation $\V{g}+1$ of row \V{i};} \\
                 \label{eq:row-step-060}
                 \text{rows 0 through \V{i} are complete; and} \\
@@ -1690,11 +1693,20 @@ we simplify \eqref{eq:pr-pred-main-24} to
 
         \begin{equation}
         \label{eq:row-step-080}
-                \text{\V{di} is not in generation 0 \cuz \eqref{eq:row-step-050}.}
+                \text{\V{di} is not in generation 0 \cuz \eqref{eq:row-step-055}.}
         \end{equation}
         \begin{equation}
         \label{eq:row-step-090}
                 \text{\V{di} is a prediction or a reduction \cuz \eqref{eq:row-step-080}.}
+        \end{equation}
+        We proceed by cases.
+        \begin{equation}
+        \label{eq:row-step-090}
+                \text{\V{di} is a prediction \cuz Assumption for the case.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:row-step-100}
+                \text{\V{di} has a mainstem, call it \V{stem} \cuz \Lmref{prediction-main}.}
         \end{equation}
         \todo{Finish this proof}
         \myqed
