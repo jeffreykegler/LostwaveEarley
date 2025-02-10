@@ -296,6 +296,7 @@
 
 % theoremoids: Eq
 
+\newcommand{\Algref}[1]{\genref{alg:#1}{Alg}}
 \newcommand{\Eqref}[1]{\genref{eq:#1}{Eq}}
 
 % theoremoids: Ex
@@ -1701,12 +1702,24 @@ we simplify \eqref{eq:pr-pred-main-24} to
         \end{equation}
         We proceed by cases.
         \begin{equation}
-        \label{eq:row-step-090}
+        \label{eq:row-step-095}
                 \text{\V{di} is a prediction \cuz Assumption for the case.}
         \end{equation}
         \begin{equation}
         \label{eq:row-step-100}
-                \text{\V{di} has a mainstem, call it \V{stem} \cuz \Lmref{prediction-main}.}
+                \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem} \cuz \Lmref{prediction-main}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:row-step-110}
+                \text{\V{stem} is in generation \V{g} \cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-100}, \Dfref{generation}.}
+        \end{equation}
+                Looking at the code, we see that an Earley item for \V{stem} is created:
+        \begin{equation}
+        \label{eq:row-step-120}
+                \begin{gathered}
+                        \text{The Earley item corresponding to \V{stem} exists in \V{rows}} \\
+                        \text{\cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-110}, \Algref{predictions}.}
+                \end{gathered}
         \end{equation}
         \todo{Finish this proof}
         \myqed
