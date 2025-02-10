@@ -748,6 +748,7 @@ has the same current location as its downstream.
 
 \needspace{3in}
 \section{Algorithm}
+\label{sec:algorithm}
 \FloatBarrier
 
 \begin{algorithm}[ht]
@@ -1660,34 +1661,8 @@ we simplify \eqref{eq:pr-pred-main-24} to
         \myqed
 \end{proof}
 
-\begin{lemma}[Tangible reduction completion]
-        Tangible reductions are either nulling completion DIs
-        or are complete in generation $\V{g}+1$
-        of row $\V{i}+1$ if
-        the rows as far as \V{i} are complete,
-        and row $\V{i}+1$ is complete as far as generation \V{g}.
-        \lmEnd
-\end{lemma}
-
-\begin{proof}
-        \todo{Write this proof}
-        \myqed
-\end{proof}
-
-\begin{lemma}[Intangible reduction completion]
-        Intangible reductions are complete in generation $\V{g}+1$
-        of row $\V{i}+1$ if
-        the rows as far as \V{i} are complete,
-        and row $\V{i}+1$ is complete as far as generation \V{g}.
-        \lmEnd
-\end{lemma}
-
-\begin{proof}
-        \todo{Write this proof}
-        \myqed
-\end{proof}
-
-\begin{lemma}[Reduction completion]
+\begin{lemma}[Row completion step]
+        \label{lm:row-step}
         Reductions are complete in generation $\V{g}+1$
         of row $\V{i}+1$ if
         the rows as far as \V{i} are complete,
@@ -1696,28 +1671,32 @@ we simplify \eqref{eq:pr-pred-main-24} to
 \end{lemma}
 
 \begin{proof}
-        \todo{Write this proof}
-        \myqed
-\end{proof}
+        We consider, without loss of generality, a generation
+        DI \V{di}, focused in a derivation \V{drv}.
+        We need to show for the lemma that, if
+        \begin{gather}
+                \label{eq:row-step-050}
+                \text{\V{di} is in generation $\V{g}+1$ of row \V{i};} \\
+                \label{eq:row-step-060}
+                \text{rows 0 through \V{i} are complete; and} \\
+                \label{eq:row-step-070}
+                \text{generations 0 through \V{g} are complete in row $\V{i}+1$;}
+        \end{gather}
+        then the code in
+        Section~\ref{sec:algorithm}
+        on page~\ref{sec:algorithm}
+        adds the Earley item 
+        \V{di} to \V{rows}.
 
-\begin{lemma}[Prediction completion]
-        Prediction is complete in row $\V{i}+1$ if
-        the rows as far as row \V{i} are complete
-        and row $\V{i}+1$ is complete for all confirmations.
-        \lmEnd
-\end{lemma}
-
-\begin{proof}
-        Predictions in a row
-        may be computed from the confirmation.
-        One method is to
-        first scan the confirmations to produce ``phase 0''
-        predictions,
-        and then using the phase 0 predictions as the initial
-        state of a worklist to recursively compute the other
-        predictions.
-        (More efficient methods are possible using
-        precomputation and bitmasks.)
+        \begin{equation}
+        \label{eq:row-step-080}
+                \text{\V{di} is not in generation 0 \cuz \eqref{eq:row-step-050}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:row-step-090}
+                \text{\V{di} is a prediction or a reduction \cuz \eqref{eq:row-step-080}.}
+        \end{equation}
+        \todo{Finish this proof}
         \myqed
 \end{proof}
 
