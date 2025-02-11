@@ -167,7 +167,14 @@
 
 \newcommand{\algstrut}{\rule{0pt}{.85\baselineskip}}
 
-\newcommand{\myparbox}[2][\algparwidth]{%
+
+
+% I use parboxes in equations.  This sets a useful width for them.
+\newlength{\mathparwidth}
+\newlength{\longtagwidth}
+\settowidth{\longtagwidth}{(99999)\quad}
+\setlength{\mathparwidth}{\dimexpr\textwidth-\longtagwidth}
+\newcommand{\myparbox}[2][\mathparwidth]{%
   \parbox[t]{#1}{%
   % \linespread{1.15}\selectfont
   \ignorespaces#2\par%
@@ -1698,7 +1705,9 @@ we simplify \eqref{eq:pr-pred-main-24} to
         \end{equation}
         \begin{equation}
         \label{eq:row-step-090}
-                \text{\V{di} is a prediction or a reduction \cuz \eqref{eq:row-step-080}.}
+                \myparbox{\V{di} is a prediction; a reduction with a tangible predot symbol;
+                or a a reduction with an intangible predot symbol
+                \cuz \eqref{eq:row-step-080}.}
         \end{equation}
         We proceed by cases.
         \begin{equation}
