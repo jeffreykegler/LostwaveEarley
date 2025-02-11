@@ -1718,7 +1718,10 @@ we simplify \eqref{eq:pr-pred-main-24} to
         \end{equation}
         \begin{equation}
         \label{eq:row-step-105}
-                \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem} \cuz \eqref{eq:row-step-050}, \Lmref{prediction-stem}.}
+                \begin{gathered}
+                        \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem}} \\
+                        \text{\cuz \eqref{eq:row-step-050}, \eqref{eq:row-step-100}, \Lmref{prediction-stem}.}
+                \end{gathered}
         \end{equation}
         \begin{equation}
         \label{eq:row-step-110}
@@ -1731,19 +1734,20 @@ we simplify \eqref{eq:pr-pred-main-24} to
         \label{eq:row-step-120}
                 \begin{gathered}
                         \text{The Earley item corresponding to \V{stem} exists in \V{rows}} \\
-                        \text{\cuz \eqref{eq:row-step-050}, \eqref{eq:row-step-070}, \eqref{eq:row-step-100}, \eqref{eq:row-step-110},
-                        \Lmref{prediction-stem}.}
+                        \text{\cuz \eqref{eq:row-step-070}, \eqref{eq:row-step-110}.}
                 \end{gathered}
         \end{equation}
-        Looking at the code, we see that an Earley item for \V{di} is created:
+        Looking at the code, we see that
         \begin{equation}
         \label{eq:row-step-130}
                 \begin{gathered}
-                \text{The Earley item corresponding to \V{di} is created in \V{rows}} \\
-                        \text{\cuz \eqref{eq:row-step-070}, \eqref{eq:row-step-120}, \Algref{predictions}.}
+                \text{the Earley item corresponding to \V{di} is created in \V{rows}} \\
+                        \text{\cuz \eqref{eq:row-step-100}, \eqref{eq:row-step-120},
+                                \Algref{finish-row}, \Algref{predictions}.}
                 \end{gathered}
         \end{equation}
-        Equation \eqref{eq:row-step-130} shows the case.
+        Equation \eqref{eq:row-step-130} shows the case for predictions,
+        which started at \eqref{eq:row-step-100}.
         \par
         \vspace{2ex}\noindent\textbf{Case 2: Reduction with intangible predot symbol.}
         \begin{equation}
