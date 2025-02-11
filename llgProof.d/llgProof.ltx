@@ -1576,7 +1576,7 @@ Therefore, with
 \end{proof}
 
 \begin{lemma}[Prediction mainstem]
-        \label{lm:prediction-main}
+        \label{lm:prediction-stem}
         Every prediction DI \Dfref{rt}
         is either a nulling completion,
         or has a mainstem \Dfref{tangible-inflows}.
@@ -1710,26 +1710,55 @@ we simplify \eqref{eq:pr-pred-main-24} to
                 \cuz \eqref{eq:row-step-080}.}
         \end{equation}
         We proceed by cases.
+        \par
+        \vspace{2ex}\noindent\textbf{Case 1: Prediction.}
         \begin{equation}
-        \label{eq:row-step-095}
+        \label{eq:row-step-100}
                 \text{\V{di} is a prediction \cuz Assumption for the case.}
         \end{equation}
         \begin{equation}
-        \label{eq:row-step-100}
-                \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem} \cuz \Lmref{prediction-main}.}
+        \label{eq:row-step-105}
+                \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem} \cuz \eqref{eq:row-step-050}, \Lmref{prediction-stem}.}
         \end{equation}
         \begin{equation}
         \label{eq:row-step-110}
-                \text{\V{stem} is in generation \V{g} \cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-100}, \Dfref{generation}.}
+                \begin{gathered}
+                \text{\V{stem} is in generation \V{g} or earlier} \\
+                \text{\cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-105}, \Dfref{generation}.}
+                \end{gathered}
         \end{equation}
-                Looking at the code, we see that an Earley item for \V{stem} is created:
         \begin{equation}
         \label{eq:row-step-120}
                 \begin{gathered}
                         \text{The Earley item corresponding to \V{stem} exists in \V{rows}} \\
-                        \text{\cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-110}, \Algref{predictions}.}
+                        \text{\cuz \eqref{eq:row-step-050}, \eqref{eq:row-step-070}, \eqref{eq:row-step-100}, \eqref{eq:row-step-110},
+                        \Lmref{prediction-stem}.}
                 \end{gathered}
         \end{equation}
+        Looking at the code, we see that an Earley item for \V{di} is created:
+        \begin{equation}
+        \label{eq:row-step-130}
+                \begin{gathered}
+                \text{The Earley item corresponding to \V{di} is created in \V{rows}} \\
+                        \text{\cuz \eqref{eq:row-step-070}, \eqref{eq:row-step-120}, \Algref{predictions}.}
+                \end{gathered}
+        \end{equation}
+        Equation \eqref{eq:row-step-130} shows the case.
+        \par
+        \vspace{2ex}\noindent\textbf{Case 2: Reduction with intangible predot symbol.}
+        \begin{equation}
+        \label{eq:row-step-200}
+                \myparbox{\V{di} is a reduction with an intangible predot symbol \cuz Assumption for the case.}
+        \end{equation}
+        \todo{Finish this case}
+        \par
+        \vspace{2ex}\noindent\textbf{Case 3: Reduction with tangible predot symbol.}
+        \begin{equation}
+        \label{eq:row-step-400}
+                \myparbox{\V{di} is a reduction with a tangible predot symbol \cuz Assumption for the case.}
+        \end{equation}
+        \par
+        \todo{Finish this case}
         \todo{Finish this proof}
         \myqed
 \end{proof}
