@@ -145,10 +145,12 @@
     {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
 \newcommand{\destarW}[1]
     {\mathrel{\mbox{$\:\underset{#1}{\overset{\ast\:}{\Rightarrow}}$}}}
+\newcommand{\destarV}[1]{\destarW{\V{#1}}}
 \newcommand{\deplus}
     {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
 \newcommand{\deplusW}[1]
     {\mathrel{\mbox{$\:\underset{#1}{\overset{{+}\:}{\Rightarrow}}$}}}
+\newcommand{\deplusV}[1]{\deplusW{\V{#1}}}
 \newcommand{\derivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
 \newcommand{\derivrg}[2]{\mathrel{\mbox{$\:\stackrel{\!{#1}}%
         {\Rightarrow\!}\:$}}}
@@ -1430,27 +1432,25 @@ Therefore, with
 Let our intangible reduction FD be, without loss of generality,
 \begin{equation}
         \label{eq:pr-ri-main-003}
-        \V{fd} = (\V{down}, \V{drv}) \text{ \cuz Assumption for theorem.}
-\end{equation}
-where
-\begin{equation}
-        \label{eq:pr-ri-main-005}
-        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B:f},\V{postdotA},\V{A:f},\V{origin},\V{current}} \text{ \cuz Assumption for theorem.}
+        \V{fd} = (\V{down}, \V{drv})
 \end{equation}
 where
 \begin{gather}
+        \label{eq:pr-ri-main-005}
+        \V{down} = \Fname{Focus}
+                \left( \begin{gathered}
+                        \V{antepredotA}\cat\V{B:f},\; \V{postdotA},\; \V{A:f}, \\
+                        \V{origin},\; \V{current}
+                \end{gathered} \right ) \\
         \label{eq:pr-ri-main-012}
 \text{$\V{B} \in \V{N}$,} \\
         \label{eq:pr-ri-main-014}
-\V{B:f} \deplusW{drv} \epsilon \\
+\V{B:f} \deplusV{drv} \epsilon, \\
         \label{eq:pr-ri-main-016}
-\text{\V{down} is not a nulling completion.}
-\end{gather}
-and
-\begin{gather}
+\text{\V{down} is not a nulling completion,} \\
         \label{eq:pr-ri-main-020}
-        \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast \\
-        \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast \\
+        \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast, \\
+        \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast, \\
         \label{eq:pr-ri-main-022}
         \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \text{, and} \\
         \label{eq:pr-ri-main-024}
@@ -1458,14 +1458,14 @@ and
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 ( \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon ) \implies \\
                 \left( \begin{gathered}
-                        \V{S} \destarW{drv} \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
+                        \V{S} \destarV{drv} \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:f} \mydot \V{postdotA} \cat \V{unseen} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
                 \end{gathered} \right)
                 }
         \end{gathered} \right).
 \end{gather}
-We know by assumption for the lemma that
+We know, also by assumption for the lemma, that
         \begin{equation}
                 \label{eq:pr-ri-main-030}
                 \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon) \,\cuz\, \eqref{eq:pr-ri-main-016}.
