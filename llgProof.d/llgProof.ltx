@@ -415,11 +415,11 @@ Ranges are inclusive start,
         \dfEnd
 \end{definition}
 
-\begin{definition}[The grammar \V{g}]
-\label{df:g}
-We will consider the proper grammar
+\begin{definition}[The grammar]
+\label{df:grammar}
+A grammar is a 4-tuple
 \[
-        \V{g} = \tuple{\V{N},\V{T},\V{P},\V{S}},
+        \tuple{\V{N},\V{T},\V{P},\V{S}},
 \]
 where \V{N} (the non-terminals)
 and \V{T} (the terminals) are disjoint sets of symbols.
@@ -434,12 +434,15 @@ $\V{rhs} \in (\V{N}\cup\V{T})^\ast$.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Proper grammar]
+\begin{definition}[The grammar \V{g}]
+\label{df:g}
 When we say that \V{g} is \textbf{proper} we mean that it has
 no unreachable symbols, no unproductive symbol,
 and no cycles.
-All grammars in this document are proper.
-        \dfEnd
+Every grammar in this document is the proper grammar
+\[
+        \V{g} = \tuple{\V{N},\V{T},\V{P},\V{S}}. \qquad \dfEnd
+\]
 \end{definition}
 
 \begin{definition}[Earley item]
@@ -488,16 +491,80 @@ We say that
          $\element{\alpha}{\lastix{\alpha}} \in \V{T}$;
 \item an Earley item is \textbf{reduced}, or a \textbf{reduction},
         if its predot symbol is a non-terminal;
-        $\element{\alpha}{\lastix{\alpha}} \in \V{N}$;
-\item an Earley item is a \textbf{nullable reduction}
-        if it is a reduction whose predot symbol is nullable; and
-\item an Earley item is a \textbf{non-nullable reduction}
-        if it is a reduction whose predot symbol is non-nullable.
-                \dfEnd
+        $\element{\alpha}{\lastix{\alpha}} \in \V{N}$; \qquad \dfEnd
 \end{itemize}
 \end{definition}
 
-\todo{Define derivation set (DS)}.
+\begin{definition}[Strings]
+\label{df:string}
+        A \textbf{string} is a sequence whose members are
+        elements of the set $(\V{N}\cup\V{T})$.
+        In this document, we will use the symbol \V{STR} for set of finite
+        strings,
+        and $\V{STR}^+$ for set of non-empty finite strings:
+        \[ \V{STR}^+ = \V{STR} \subtract \epsilon. \]
+        A \textbf{terminal string} is a sequence whose members are
+        elements of the set \V{T}.
+        In this document, we will use the symbol \V{TSTR} for set of finite
+        terminal strings,
+        and $\V{TSTR}^+$ for set of non-empty finite terminal strings:
+        \[ \V{TSTR}^+ = \V{TSTR} \subtract \epsilon.  \dfEnd \]
+\end{definition}
+
+\begin{definition}[String transition]
+        \todo{Fix this}
+        An \textbf{string transition}
+        is a duple of two sentential forms,
+        such that a non-terminal member in the first element of the pair
+        is expanded, according to a rule of \V{g}, in the second element of the pair.
+        More precisely, let $\V{tr} = (\V{Lstr}, \V{Rstr})$ be an SF transition.
+        Then, without loss of generality,
+        \begin{gather}
+                \V{Lstr} = \alpha \cat \V{A} \cat \beta \\
+                \land \; \V{Rstr} = \alpha \cat \V{rhsA} \cat \beta \\
+                \land \; \V{A} \de \V{rhsA} \in \V{P}
+        \end{gather}
+        where $\alpha$ and $\beta$ are strings.
+        Overloading terminology a bit,
+        \V{Lstr} is called the \textbf{LHS} string of \V{tr},
+        and \V{Rstr} is called the \textbf{RHS} string of \V{tr}.
+        
+        Note that, in \V{tr}, the symbols in 
+        $\alpha$ and $\beta$ are simply copied --- they can
+        be said to be derived from themselves.
+        We say that the 
+        $\alpha$ and $\beta$ in \V{Rstr}
+        are \textbf{trivially derived} from
+        $\alpha$ and $\beta$ in \V{Lstr}.
+        We also that that
+        the substrings of $\alpha$ and $\beta$ in \V{Lstr}
+        are \textbf{trivially derived} from
+        the corresponding substrings of $\alpha$ and $\beta$ in \V{Lstr};
+        and that
+        the symbol instances of $\alpha$ and $\beta$ in \V{Lstr}
+        are \textbf{trivially derived} from
+        the corresponding symbol instances in $\alpha$ and $\beta$ in \V{Lstr};
+\dfEnd
+\end{definition}
+
+\begin{definition}[Derivation]
+        \todo{Finish this}
+        A derivation, call it \V{drv}, is a sequence of strings
+        such that every consecutive pair of the sequence is a string transition.
+        The individual members of a derivation are strings,
+        and in the context of the derivation are called \V{steps}.
+        \dfEnd
+\end{definition}
+
+\begin{definition}[Sentences and Sentential forms]
+        \todo{Fix this}
+        If the first step of a derivation is $\V{S}$,
+        the string consisting only of the start symbol,
+every step in the derivation is a \textbf{sentential form}.
+If a sentential form consists entirely of terminals,
+it is a \textbf{sentence}.
+\dfEnd
+\end{definition}
 
 \begin{definition}[Derivation set instances]
 \label{df:di}
