@@ -431,7 +431,18 @@ $\V{A} \de \V{rhs}$,
 where $\V{A} \in \V{N}$
 and
 $\V{rhs} \in (\V{N}\cup\V{T})^\ast$.
+\dfEnd
+\end{definition}
 
+\begin{definition}[Proper grammar]
+When we say that \V{g} is \textbf{proper} we mean that it has
+no unreachable symbols, no unproductive symbol,
+and no cycles.
+All grammars in this document are proper.
+        \dfEnd
+\end{definition}
+
+\begin{definition}[Earley item]
 We will write an Earley item as
 \[
         \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
@@ -448,10 +459,7 @@ A large raised dot ($\mydot$) indicates the dot location in the rule.
 \V{origin} is the origin location of the item in the input, and
 \V{current} is the location of the dot in the input,
 or dot location.
-
-When we say that \V{g} is proper we mean that it has
-no unreachable symbols, no unproductive symbol,
-and no cycles. \dfEnd
+\dfEnd
 \end{definition}
 
 \begin{definition}[Predot symbol]
