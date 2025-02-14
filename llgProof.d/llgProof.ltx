@@ -568,9 +568,12 @@ We say that
         More practically, we will tag symbols with an instance identifier,
         separated from the symbol name by a colon, so that \V{A:f} represents
         the instance of symbol \V{A} with the tag ``\texttt{f}''.
-        For convenience in reading derivations,
-        trivial derivatives of a symbol instance often carry the same tag
-        as their LHS instance.
+        Technically, the trivial productions of a tagged symbol instance
+        are different instances of the symbol but,
+        when it is convenient for reading,
+        and does not lend itself to confusion,
+        trivial productions of a symbol instance may inherit
+        the instance tag from the original symbol.
         \dfEnd
 \end{definition}
 
@@ -583,31 +586,37 @@ it is a \textbf{sentence}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Focused derivation]
-\label{df:fd}
-A \textbf{focused derivation} (FD)
-is a derivation with a matching focus.
-We can write the focus of a focused derivation as a 5-tuple.
-For example, the focus of \eqref{eq:def-FD-010}-\eqref{eq:def-FD-040}
-can be written as
+\begin{definition}[Focus]
+\label{df:focus}
+A focus is a 5-tuple
 \[
         \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
 \]
+where \V{predot} and \V{postdot} are strings, \V{origin} and \V{current} are positions
+in the input, and \V{A:f} (sometimes written just \V{A})
+is a non-terminal symbol instance.
+\[ \V{A} \de \V{predot} \cat \V{postdot} \]
+must be a rule in \V{P} and is called the \text{focus rule}.
+Further overloading the terms LHS and RHS,
+\V{A} is the \textbf{LHS symbol instance}, or simply \textbf{LHS} of the focus and
+$\V{predot}\cat\V{predot}$ is the \textbf{RHS string instance}, or simply \textbf{RHS}.
+\end{definition}
+
+\begin{definition}[Focused derivation]
+\label{df:fd}
+A \textbf{focused derivation} (FD)
+is a focus with a matching derivation.
+For example, the focus of \eqref{eq:def-FD-010}-\eqref{eq:def-FD-040}
+can be written as
+\begin{equation}
+        \label{eq:df-fd-focus}
+        \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
+\end{equation}
 The LHS symbol of the focus is identified with the instance tag ``\texttt{f}''.
-The LHS symbol instance is tagged because
-otherwise a focus can appear at multiple points
+because a focus can appear at multiple points
 in a derivation.
 
-A focused derivation can be written in ``expanded'' form as
-\begin{gather}
-        \label{eq:def-FD-010}
-        \V{predot} \in \V{STR} \\
-        \label{eq:def-FD-020}
-        \land \; \V{postdot} \in \V{STR} \\
-        \label{eq:def-FD-030}
-        \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}
-\end{gather}
-and
+Without loss of generality, a derivation matching the focus \eqref{eq:df-fd-focus} is
 \begin{equation}
         \label{eq:def-FD-040}
         \begin{gathered}
@@ -622,17 +631,23 @@ and
                 }
         \end{gathered}
 \end{equation}
+where
+\begin{gather}
+        \label{eq:def-FD-010}
+        \V{predot} \in \V{STR} \\
+        \label{eq:def-FD-020}
+        \land \; \V{postdot} \in \V{STR} \\
+        \label{eq:def-FD-030}
+        \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}.
+\end{gather}
 
 We note that the focus, by dividing the RHS of the transition into two pieces,
-also distinguishes a ``dot position'' in the RHS step.
+implies a ``dot position'' in the RHS step.
 In the expanded form of a focused derivation,
 the dot position could be found by the diligent reader,
 but for convenience it is shown with a raised dot,
 and that raised dot is usually carried through into the later
 derivation steps in the expanded form.
-Similarly, the
-the trivial derivatives of a tagged symbol is often shown with the
-same tag as their LHS symbol.
 \dfEnd
 \end{definition}
 
@@ -707,6 +722,7 @@ to be both sound and complete.
         \dfEnd
 \end{definition}
 
+\todo{Define predot symbol instance}
 \begin{definition}[Tangible reduction FD]
         \label{df:rt}
         A \textbf{tangible reduction}
@@ -724,10 +740,9 @@ to be both sound and complete.
 
 \begin{definition}[Tangible reduction inflows]
 \label{df:tangible-inflows}
-        \todo{Rewrite this}|
         Suppose, without loss of generality, that
 \begin{equation}
-        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
+        \V{down} = \FA{FOCUS}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
 \end{equation}
 is a tangible reduction FD
         where
@@ -736,51 +751,30 @@ is a tangible reduction FD
         \land \; \V{B} \deplus \Velement{w}{\V{originB},\V{current}}.
 \end{gather*}
 Then we say that
-\begin{itemize}
-\item a DI of the form
+a FD of the form
 \[
-        \V{tributary} = \FA{DI}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
+        \V{tributary} = \FA{FOCUS}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
 \]
-        is a \textbf{tributary} of
-        \V{down};
-\item
-a DI of the form
-\begin{equation*}
-        \V{mainstem} =
-        \FA{DI}{
-        \begin{gathered}
-        \; \V{antepredotA}, \; \V{B}\cat\V{postdotA}, \; \\
-                \V{A},\; \V{origin},\; \V{originB}
-        \end{gathered}
-}
-\end{equation*}
-        is a \textbf{mainstem} of
-        \V{down}:
-\item
-        \V{down} is the \textbf{downstream channel}
-        (or simply \textbf{downstream})
-        of \V{tributary}; and
-\item
-        \V{down} is the \textbf{downstream channel}
-        (or simply \textbf{downstream})
-        of \V{mainstem}.
-        \dfEnd
-\end{itemize}
+is a \textbf{tributary} of \V{down}.
+We also say that
+\V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{tributary}.
 \end{definition}
 
-\begin{definition}[Intangible reduction inflows]
-\label{df:intangible-inflows}
+\begin{definition}[Confirmation inflows]
+\label{df:confirmatin-inflows}
         \todo{Rewrite this}
         Suppose, without loss of generality, that
 \begin{equation}
-        \V{down} = \FA{DI}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
+        \V{down} = \FA{FOCUS}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
 \end{equation}
-is an intangible reduction DI.
+is an confirmed focus
 Then we say that
 a DI of the form
 \begin{equation*}
         \V{mainstem} =
-        \FA{DI}{
+        \FA{FOCUS}{
         \begin{gathered}
         \; \V{antepredotA}, \; \V{B}\cat\V{postdotA}, \; \\
                 \V{A},\; \V{origin},\; \V{current}
