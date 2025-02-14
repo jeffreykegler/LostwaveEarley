@@ -567,7 +567,7 @@ We say that
         a symbol instance.
         More practically, we will tag symbols with an instance identifier,
         separated from the symbol name by a colon, so that \V{A:f} represents
-        the instance of symbol \V{A} with the tag ''\texttt{f}''.
+        the instance of symbol \V{A} with the tag ``\texttt{f}''.
         For convenience in reading derivations,
         trivial derivatives of a symbol instance often carry the same tag
         as their LHS instance.
@@ -666,6 +666,7 @@ matches a derivation with input \V{w}.
 \end{definition}
 
 \begin{definition}[Completeness]
+\label{df:completeness}
 A set of Earley items is \textbf{complete} for an input \V{w} with
 respect to a set of focuses iff
 for every focus in that set,
@@ -678,15 +679,13 @@ the usual definition of completeness in Earley parsing,
 in excepting nulling completions from the definition.
 
 \begin{definition}[Fundamental invariant]
+\label{df:invariant}
 The \textbf{fundamental invariant}\footnote{
 This fundamental invariant is similar to the traditional
 one, as found in~\cite[Theorem 4.9, p. 323]{AH1972v1}
 }
 requires the set of Earley items in a Earley stack
 to be both sound and complete.
-
-The focus \eqref{eq:invariant-di} is said to
-\textbf{correspond} to the Earley item, and vice versa.
 \dfEnd
 \end{definition}
 
@@ -1027,7 +1026,7 @@ has the same current location as its downstream.
                         \destarW{\V{di}} \Velement{w}{\V{origin},\V{current}} \cat \V{postdotA} \\
                         \destarW{\V{di}} \epsilon. \\
                 \end{gathered} \right) \\
-                \cuz \eqref{eq:di-ante-help-010}, \Dfref{di}.
+                        \cuz \eqref{eq:di-ante-help-010}, \Dfref{fd}.
                 \end{gathered}
         \end{equation}
         \begin{equation}
@@ -1581,7 +1580,7 @@ we simplify \eqref{eq:pr-ri-main-024} to
                 \V{postdotA} \cat \V{unseen}.
                 \end{gathered}
                 } \\
-                \cuz \eqref{eq:pr-ri-main-014}, \eqref{eq:pr-ri-main-050}, \Dfref{di}.
+                \cuz \eqref{eq:pr-ri-main-014}, \eqref{eq:pr-ri-main-050}, \Dfref{fd}.
         \end{gathered}
 \end{equation}
 We now move the dot from after \V{B} to before it.
