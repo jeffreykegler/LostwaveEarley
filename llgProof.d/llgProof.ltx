@@ -512,27 +512,30 @@ We say that
 \end{definition}
 
 \begin{definition}[String transition]
-        \todo{Fix this}
+        \label{df:transition}
         An \textbf{string transition}
         is a duple of two sentential forms,
         such that a non-terminal member in the first element of the pair
         is expanded, according to a rule of \V{g}, in the second element of the pair.
         More precisely, let $\V{tr} = (\V{Lstr}, \V{Rstr})$ be an SF transition.
         Then, without loss of generality,
-        \begin{gather}
+        \begin{equation}
                 \V{Lstr} = \alpha \cat \V{A} \cat \beta \\
                 \land \; \V{Rstr} = \alpha \cat \V{rhsA} \cat \beta \\
                 \land \; \V{A} \de \V{rhsA} \in \V{P}
-        \end{gather}
+        \end{equation}
         where $\alpha$ and $\beta$ are strings.
         Overloading terminology a bit,
         \V{Lstr} is called the \textbf{LHS} string of \V{tr},
         and \V{Rstr} is called the \textbf{RHS} string of \V{tr}.
-        
-        Note that, in \V{tr}, the symbols in 
+        \dfEnd
+\end{definition}
+
+\begin{definition}[Trivial derivation]
+        In \Dfref{transition} the symbols in
         $\alpha$ and $\beta$ are simply copied --- they can
         be said to be derived from themselves.
-        We say that the 
+        We say that the
         $\alpha$ and $\beta$ in \V{Rstr}
         are \textbf{trivially derived} from
         $\alpha$ and $\beta$ in \V{Lstr}.
@@ -548,7 +551,6 @@ We say that
 \end{definition}
 
 \begin{definition}[Derivation]
-        \todo{Finish this}
         A derivation, call it \V{drv}, is a sequence of strings
         such that every consecutive pair of the sequence is a string transition.
         The individual members of a derivation are strings,
@@ -556,8 +558,23 @@ We say that
         \dfEnd
 \end{definition}
 
+\begin{definition}[Symbol instance]
+        A symbol may occur many times in a derivation.
+        Each occurrence can be identified by the index of the step (\V{stepIX}),
+        within the derivation (\V{drv}),
+        and the index (\V{pos}) of the symbol occurrence within the string,
+        so that the triple $(\V{stepIX}, \V{pos}, \V{drv})$ represents
+        a symbol instance.
+        More practically, we will tag symbols with an instance identifier,
+        separated from the symbol name by a colon, so that \V{A:f} represents
+        the instance of symbol \V{A} with the tag ''\texttt{f}''.
+        For convenience in reading derivations,
+        trivial derivatives of a symbol instance often carry the same tag
+        as their LHS instance.
+        \dfEnd
+\end{definition}
+
 \begin{definition}[Sentences and Sentential forms]
-        \todo{Fix this}
         If the first step of a derivation is $\V{S}$,
         the string consisting only of the start symbol,
 every step in the derivation is a \textbf{sentential form}.
@@ -566,117 +583,106 @@ it is a \textbf{sentence}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Derivation set instances]
+\begin{definition}[Focused derivation]
 \label{df:di}
-A \textbf{derivation set instance} (DI)
-is of the form
+A \textbf{focused derivation} (FD)
+is a derivation with a matching focus.
+We can write the focus of a focused derivation as a 5-tuple.
+For example, the focus of \eqref{eq:def-DI-010}-\eqref{eq:def-DI-040}
+can be written as
 \[
-        \FA{DI}{\V{predot},\V{postdot},\V{A},\V{origin},\V{current}}
+        \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
 \]
-and is defined as
-\begin{equation}
-        \label{eq:def-DI-1}
-        \begin{gathered}
-        \V{predot} \in (\V{N} \cup \V{T})^\ast \land \V{postdot} \in (\V{N} \cup \V{T})^\ast \\
-                \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}
-        \end{gathered}
-\end{equation}
-\todo{Explicate this equation in text?}
+The LHS symbol of the focus is identified with the instance tag ``\texttt{f}''.
+The LHS symbol instance is tagged because
+otherwise a focus can appear at multiple points
+in a derivation.
+
+A focused derivation can be written in ``expanded'' form as
+\begin{gather}
+        \label{eq:def-DI-010}
+        \V{predot} \in \V{STR} \\
+        \label{eq:def-DI-020}
+        \land \; \V{postdot} \in \V{STR} \\
+        \label{eq:def-DI-030}
+        \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}
+\end{gather}
 and
 \begin{equation}
-        \label{eq:def-DI-2}
+        \label{eq:def-DI-040}
         \begin{gathered}
-                \existQ{ \V{unseen2} \in (\V{N}\cup\V{T})^\ast }{ \\
+                \existQ{ \V{unseen} \in \V{STR} }{ \\
                 ( \V{origin} < \V{current} \lor \V{postdot} \neq \epsilon ) \\
                 \implies \;
                 \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen2} \\
-                \destar \Velement{w}{0,\V{origin}} \cat \V{predot} \mydot \V{postdot} \cat \V{unseen2} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen2}
+                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
+                \derives \Velement{w}{0,\V{origin}} \cat \V{predot} \mydot \V{postdot} \cat \V{unseen} \\
+                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen}
                 \end{gathered} \right)
                 }
         \end{gathered}
 \end{equation}
+
+We note that the focus, by dividing the RHS of the transition into two pieces,
+also distinguishes a ``dot position'' in the RHS step.
+In the expanded form of a focused derivation,
+the dot position could be found by the diligent reader,
+but for convenience it is shown with a raised dot,
+and that raised dot is usually carried through into the later
+derivation steps in the expanded form.
+Similarly, the
+the trivial derivatives of a tagged symbol is often shown with the
+same tag as their LHS symbol.
 \dfEnd
 \end{definition}
 
-\todo{Explicate this equation in text?}
-In \Dfref{di},
-$\V{origin} < \V{current} \lor \size{\V{postdot}} \neq \epsilon$
-indicates that we do not create zero length completed Earley items.
-Note our use of the raised dot ($\mydot$)
-in DI's is not formally part of the derivation in which
-it occurs,
-but is used as a reading aid,
-for convenience in locating the dot position.
+\begin{definition}[Focus to derivation match]
+        A derivation which is consistent with the expanded form of
+        a focus, as in \Dfref{fd}, is said to \textbf{match} the focus,
+        and vice versa.
+        We note that more than one derivation may match a focus.
+        We also note that, when instance tags are not used,
+        more than one focus may match a derivation.
+\dfEnd
+\end{definition}
 
-\begin{observation}
-        \label{obs:derivation-set-negation}
-        \todo{This is confused.  Rewrite it.}
-        When combining negation with sets,
-        the consequences
-        can be non-obvious.
-        Caution must be exercised.
-        Specifically,
-        let \V{diSet} be a derivation set.
-        From
-        \begin{equation}
-                \label{eq:ob-ds-neg-020}
-                        \neg ( \V{A} \destarW{\V{diSet}} \epsilon )
-        \end{equation}
-        it does \textbf{not} follow that
-        \begin{equation}
-                \label{eq:ob-ds-neg-025}
-        \begin{gathered}
-                \univQ{\alpha \in \V{T}^\ast}{ \V{A} \destarW{\V{diSet}} \alpha \implies \alpha \neq \epsilon}
-        \end{gathered}
-        \end{equation}
-        To see the reason that \eqref{eq:ob-ds-neg-025}
-        does not follow from \eqref{eq:ob-ds-neg-020}, consider
-        two derivations, $\V{di1} \in \V{diSet}$
-        and $\V{di2} \in \V{diSet}$.
-        It is quite possible to have both
-        \begin{equation}
-                \label{eq:ob-ds-neg-030}
-                \V{A} \destarW{\V{di1}} \epsilon
-        \end{equation}
-        and
-        \begin{equation}
-                \label{eq:ob-ds-neg-040}
-                \existQ{\alpha \in \V{T}^\ast}{
-                        \V{A} \destarW{\V{di2}} \alpha \land \alpha \neq \epsilon.}
-        \end{equation}
-        From \eqref{eq:ob-ds-neg-030}, we can safely assert that
-        \begin{equation}
-                \label{eq:ob-ds-neg-050}
-                \begin{gathered}
-                        \existQ{\V{drv} \in \V{diSet},\; \alpha \in \V{T}^\ast}{ \\
-                        \V{A} \destarW{\V{drv}} \alpha \land \alpha \neq \epsilon.} \qquad \obEnd
-                \end{gathered}
-        \end{equation}
-\end{observation}
+\begin{definition}[Earley item to focus correspondence]
+The Earley item 
+\[
+        \tuple{\V{A} \de \V{predotA} \mydot \V{postdotA}, \V{origin}, \V{current}}
+\]
+\textbf{corresponds} to the focus
+\[
+        \FA{FOCUS}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}
+\]
+and vice versa.  \dfEnd
+\end{definition}
 
-\todo{define completeness}
+\begin{definition}[Soundness]
+A set of Earley items is \textbf{sound} for an input \V{w} iff
+every Earley item
+has a corresponding focus matches a derivation with input \V{w}.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Completeness]
+A set of Earley items is \textbf{complete} for an input \V{w} with
+respect to a set of focuses iff
+for every focus in that set,
+either that focus is a nulling completion,
+or its Earley item is in \V{Rows}.  \dfEnd
+\end{definition}
 
 \begin{definition}[Fundamental invariant]
-The fundamental invariant\footnote{
-        This fundamental invariant is similar to the traditional
-        one, as found in~\cite[Slide 12/39]{Kallmeyer2018}
-        and~\cite[Theorem 4.9, p. 323]{AH1972v1}
+The \textbf{fundamental invariant}\footnote{
+This fundamental invariant is similar to the traditional
+one, as found in~\cite[Theorem 4.9, p. 323]{AH1972v1}
 }
-for the \llguidance
-Earley parser is
-\begin{gather}
-        \label{eq:invariant-eim}
-        \tuple{\V{A} \de \V{predotA} \mydot \V{postdotA}, \V{origin}, \V{current}}
-                \text{ in \V{Rows}} \\
-        \label{eq:invariant-di}
-                \equiv \; \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
-\end{gather}
+requires the set of Earley items in a Earley stack
+to be both sound and complete.
 
-The DI \eqref{eq:invariant-di} is said to
-\textbf{correspond} to the Earley item
-\eqref{eq:invariant-eim}.
+The focus \eqref{eq:invariant-di} is said to
+\textbf{correspond} to the Earley item, and vice versa.
 \dfEnd
 \end{definition}
 
@@ -686,15 +692,6 @@ The DI \eqref{eq:invariant-di} is said to
         corresponding Earley item of the DI.
         For example, an Earley item is a reduction
         iff its corresponding DI is a reduction.
-        \dfEnd
-\end{definition}
-
-\begin{definition}[Focused derivation]
-        \todo{A concept of coherence or matching between the two?}
-        A \textbf{focused derivation} is a pair
-        of $(\V{f}, \V{drv})$,
-        where \V{f} is a focus and \V{drv}
-        is a derivation.
         \dfEnd
 \end{definition}
 
@@ -1929,13 +1926,6 @@ with intangible predcot symbols.
 \newblock{Aho, Alfred V., and Jeffrey D. Ullman.}
 \newblock{\em The theory of parsing, translation, and compiling. Vol. 1.}
 \newblock{Prentice-Hall, 1972.}
-
-\bibitem{Kallmeyer2018}
-\newblock{Laura Kallmeyer.}
-\newblock{``Parsing: Earley parsing''.}
-\newblock{Winter 2017/2018, Heinrich Heine Universitaet, Dusseldorf.}
-\newblock{\url{https://user.phil-fak.uni-duesseldorf.de/~kallmeyer/Parsing/earley.pdf}.
-        Retrieved 18 Sep 2024.}
 
 \bibitem{Kegler2023}
 \newblock{Jeffrey Kegler.}
