@@ -415,7 +415,7 @@ Ranges are inclusive start,
         \dfEnd
 \end{definition}
 
-\begin{definition}[The grammar]
+\begin{definition}[Grammar]
 \label{df:grammar}
 A grammar is a 4-tuple
 \[
@@ -584,11 +584,11 @@ it is a \textbf{sentence}.
 \end{definition}
 
 \begin{definition}[Focused derivation]
-\label{df:di}
+\label{df:fd}
 A \textbf{focused derivation} (FD)
 is a derivation with a matching focus.
 We can write the focus of a focused derivation as a 5-tuple.
-For example, the focus of \eqref{eq:def-DI-010}-\eqref{eq:def-DI-040}
+For example, the focus of \eqref{eq:def-FD-010}-\eqref{eq:def-FD-040}
 can be written as
 \[
         \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
@@ -600,16 +600,16 @@ in a derivation.
 
 A focused derivation can be written in ``expanded'' form as
 \begin{gather}
-        \label{eq:def-DI-010}
+        \label{eq:def-FD-010}
         \V{predot} \in \V{STR} \\
-        \label{eq:def-DI-020}
+        \label{eq:def-FD-020}
         \land \; \V{postdot} \in \V{STR} \\
-        \label{eq:def-DI-030}
+        \label{eq:def-FD-030}
         \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}
 \end{gather}
 and
 \begin{equation}
-        \label{eq:def-DI-040}
+        \label{eq:def-FD-040}
         \begin{gathered}
                 \existQ{ \V{unseen} \in \V{STR} }{ \\
                 ( \V{origin} < \V{current} \lor \V{postdot} \neq \epsilon ) \\
@@ -1039,13 +1039,13 @@ has the same current location as its downstream.
         \end{equation}
         We have been careful in our notation in this proof to include the
         context DS of our derivations because this proof uses negation
-        of derivation sets, whose consequences can be non-obvious \Obref{derivation-set-negation}.
+        of derivation sets, whose consequences can be non-obvious.
         \begin{equation}
                 \label{eq:di-ante-help-090}
                 \begin{gathered}
                         \exists \; \alpha, \beta \in (\V{N} \cup \V{T})^\ast, \V{term} \in \V{T} \mid \\
                         \Velement{w}{\V{origin},\V{current}} \destarW{\V{di}} \alpha \cat \V{t} \cat \beta \\
-                \cuz \Obref{derivation-set-negation}, \eqref{eq:di-ante-help-080}.
+                \cuz \eqref{eq:di-ante-help-080}.
                 \end{gathered}
         \end{equation}
         \begin{equation}
