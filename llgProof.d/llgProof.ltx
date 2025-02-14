@@ -597,24 +597,30 @@ in the input, and \V{A:f} (sometimes written just \V{A})
 is a non-terminal symbol instance.
 \[ \V{A} \de \V{predot} \cat \V{postdot} \]
 must be a rule in \V{P} and is called the \text{focus rule}.
+
 Further overloading the terms LHS and RHS,
 \V{A} is the \textbf{LHS symbol instance}, or simply \textbf{LHS} of the focus and
-$\V{predot}\cat\V{predot}$ is the \textbf{RHS string instance}, or simply \textbf{RHS}.
+$\V{predot}\cat\V{postdot}$ is the \textbf{RHS string instance}, or simply \textbf{RHS}.
+The last symbol of the RHS string instance, if it exists, is the \textbf{predot symbol instance}
+of the focus.
+The LHS symbol of the focus is tracked as an instance because a focus can appear at multiple points
+in a derivation.
 \end{definition}
 
 \begin{definition}[Focused derivation]
 \label{df:fd}
 A \textbf{focused derivation} (FD)
-is a focus with a matching derivation.
-For example, the focus of \eqref{eq:def-FD-010}-\eqref{eq:def-FD-040}
-can be written as
+is a duple of focus and matching derivation:
+\[ \V{f}, \V{drv}. \]
+Let
 \begin{equation}
         \label{eq:df-fd-focus}
-        \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
+        \V{f} = \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
 \end{equation}
-The LHS symbol of the focus is identified with the instance tag ``\texttt{f}''.
-because a focus can appear at multiple points
-in a derivation.
+
+\V{A:f}, by the definition of a symbol instance, will occur in a specific step of \V{drv}.
+Call that step \V{s}.  The \textbf{transition} of the FD will be the steps $(\V{s}, (\V{s}+1))$
+in \V{drv}.
 
 Without loss of generality, a derivation matching the focus \eqref{eq:df-fd-focus} is
 \begin{equation}
