@@ -660,8 +660,8 @@ and vice versa.  \dfEnd
 
 \begin{definition}[Soundness]
 A set of Earley items is \textbf{sound} for an input \V{w} iff
-every Earley item
-has a corresponding focus matches a derivation with input \V{w}.
+the corresponding focus of every Earley item
+matches a derivation with input \V{w}.
 \dfEnd
 \end{definition}
 
@@ -672,6 +672,10 @@ for every focus in that set,
 either that focus is a nulling completion,
 or its Earley item is in \V{Rows}.  \dfEnd
 \end{definition}
+
+We note carefully that \Dfref{completeness} differs from
+the usual definition of completeness in Earley parsing,
+in excepting nulling completions from the definition.
 
 \begin{definition}[Fundamental invariant]
 The \textbf{fundamental invariant}\footnote{
