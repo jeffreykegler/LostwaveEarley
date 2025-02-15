@@ -615,45 +615,39 @@ is a duple of focus and matching derivation:
 Let
 \begin{equation}
         \label{eq:df-fd-focus}
-        \V{f} = \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
+        \V{f} = (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).
 \end{equation}
 
 \V{A:f}, by the definition of a symbol instance, will occur in a specific step of \V{drv}.
-Call that step \V{s}.  The \textbf{transition} of the FD will be the steps $(\V{s}, (\V{s}+1))$
-in \V{drv}.
+Let the index of that step be \V{s}.
+Then the \textbf{transition} of the FD will be the step pair
+\[ (\VVelement{drv}{s}, (\Velement{drv}{\V{s}+1})). \]
 
-Without loss of generality, a derivation matching the focus \eqref{eq:df-fd-focus} is
+A derivation matching \eqref{eq:df-fd-focus} will be of the form
 \begin{equation}
-        \label{eq:def-FD-040}
+        \label{eq:def-fd-050}
         \begin{gathered}
-                \existQ{ \V{unseen} \in \V{STR} }{ \\
-                ( \V{origin} < \V{current} \lor \V{postdot} \neq \epsilon ) \\
-                \implies \;
-                \left( \begin{gathered}
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
                 \derives \Velement{w}{0,\V{origin}} \cat \V{predot} \mydot \V{postdot} \cat \V{unseen} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen}
-                \end{gathered} \right)
-                }
         \end{gathered}
 \end{equation}
 where
 \begin{gather}
-        \label{eq:def-FD-010}
-        \V{predot} \in \V{STR} \\
-        \label{eq:def-FD-020}
+        \label{eq:def-fd-070}
+        \V{unseen} \in \V{STR} \\
+        \label{eq:def-fd-070}
+        \land \; \V{predot} \in \V{STR} \\
+        \label{eq:def-fd-080}
         \land \; \V{postdot} \in \V{STR} \\
-        \label{eq:def-FD-030}
+        \label{eq:def-fd-090}
         \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}.
 \end{gather}
 
-We note that the focus, by dividing the RHS of the transition into two pieces,
-implies a ``dot position'' in the RHS step.
-In the expanded form of a focused derivation,
-the dot position could be found by the diligent reader,
-but for convenience it is shown with a raised dot,
-and that raised dot is usually carried through into the later
-derivation steps in the expanded form.
+If a dervation \textbf{matches} a focus,
+then the focus is also said to \textbf{match} the derivation.
+Multiple derivations may match a focus,
+but only one focus will match a tagged and dotted derivation.
 \dfEnd
 \end{definition}
 
@@ -981,42 +975,42 @@ has the same current location as its downstream.
 \section{Inflow lemmas}
 
 \begin{lemma}[Antecedent helper]
-\label{lm:di-ante-help}
+\label{lm:ante-help}
         Unless a DI is a nulling completion,
         either its origin is properly before the current location,
         or it is a completion.
         That is, let
         \begin{equation}
-                \label{eq:di-ante-help-010}
+                \label{eq:ante-help-010}
                 \V{di} = \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
         \end{equation}
         If
         \begin{equation}
-                \label{eq:di-ante-help-020}
+                \label{eq:ante-help-020}
                 \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon)
         \end{equation}
         then
         \begin{equation}
-                \label{eq:di-ante-help-030}
+                \label{eq:ante-help-030}
                 \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon.
         \end{equation}
 \end{lemma}
 
 \begin{proof}
-        We are assuming \eqref{eq:di-ante-help-020} for the theorem.
+        We are assuming \eqref{eq:ante-help-020} for the theorem.
         Let us assume for a deduction that \V{di} is a completion,
         \begin{equation}
-                \label{eq:di-ante-help-050}
+                \label{eq:ante-help-050}
                 \V{postdotA} = \epsilon
                 \text{ \cuz assumed for a deduction.}
         \end{equation}
         \begin{equation}
-                \label{eq:di-ante-help-060}
+                \label{eq:ante-help-060}
                 \neg ( \V{A} \destarW{\V{di}} \epsilon )
-                \,\cuz\, \eqref{eq:di-ante-help-020}, \eqref{eq:di-ante-help-050}.
+                \,\cuz\, \eqref{eq:ante-help-020}, \eqref{eq:ante-help-050}.
         \end{equation}
         \begin{equation}
-                \label{eq:di-ante-help-070}
+                \label{eq:ante-help-070}
                 \begin{gathered}
                 \neg
                 \left( \begin{gathered}
@@ -1024,45 +1018,45 @@ has the same current location as its downstream.
                         \destarW{\V{di}} \Velement{w}{\V{origin},\V{current}} \cat \V{postdotA} \\
                         \destarW{\V{di}} \epsilon. \\
                 \end{gathered} \right) \\
-                        \cuz \eqref{eq:di-ante-help-010}, \Dfref{fd}.
+                        \cuz \eqref{eq:ante-help-010}, \Dfref{fd}.
                 \end{gathered}
         \end{equation}
         \begin{equation}
-                \label{eq:di-ante-help-080}
+                \label{eq:ante-help-080}
                 \begin{gathered}
                 \neg ( \Velement{w}{\V{origin},\V{current}} \destarW{\V{di}} \epsilon ) \\
-                \cuz \eqref{eq:di-ante-help-050}, \eqref{eq:di-ante-help-070}.
+                \cuz \eqref{eq:ante-help-050}, \eqref{eq:ante-help-070}.
                 \end{gathered}
         \end{equation}
         We have been careful in our notation in this proof to include the
         context DS of our derivations because this proof uses negation
         of derivation sets, whose consequences can be non-obvious.
         \begin{equation}
-                \label{eq:di-ante-help-090}
+                \label{eq:ante-help-090}
                 \begin{gathered}
                         \exists \; \alpha, \beta \in (\V{N} \cup \V{T})^\ast, \V{term} \in \V{T} \mid \\
                         \Velement{w}{\V{origin},\V{current}} \destarW{\V{di}} \alpha \cat \V{t} \cat \beta \\
-                \cuz \eqref{eq:di-ante-help-080}.
+                \cuz \eqref{eq:ante-help-080}.
                 \end{gathered}
         \end{equation}
         \begin{equation}
-                \label{eq:di-ante-help-100}
+                \label{eq:ante-help-100}
                 \begin{gathered}
-                        \V{origin} < \V{current} \,\cuz\, \eqref{eq:di-ante-help-090}.
+                        \V{origin} < \V{current} \,\cuz\, \eqref{eq:ante-help-090}.
                 \end{gathered}
         \end{equation}
         \begin{equation}
-                \label{eq:di-ante-help-110}
+                \label{eq:ante-help-110}
                 \begin{gathered}
                         \V{postdotA} = \epsilon \implies \V{origin} < \V{current} \\
-                        \text{ \cuz deduction of \eqref{eq:di-ante-help-100} from \eqref{eq:di-ante-help-010}.}
+                        \text{ \cuz deduction of \eqref{eq:ante-help-100} from \eqref{eq:ante-help-010}.}
                 \end{gathered}
         \end{equation}
         \begin{equation}
-                \label{eq:di-ante-help-120}
-                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon \,\cuz\, \eqref{eq:di-ante-help-110}.
+                \label{eq:ante-help-120}
+                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon \,\cuz\, \eqref{eq:ante-help-110}.
         \end{equation}
-        Equation \eqref{eq:di-ante-help-120} is equivalent to \Eqref{di-ante-help-030}, which
+        Equation \eqref{eq:ante-help-120} is equivalent to \Eqref{ante-help-030}, which
         is what we needed to show for the lemma.
         \myqed
 \end{proof}
@@ -1489,77 +1483,81 @@ Therefore, with
 \myqed
 \end{proof}
 
-\begin{lemma}[Intangible reduction mainstem]
-        \label{lm:ri-main}
-        Every intangible reduction FD \Dfref{rt}
-        is either a nulling completion,
+\begin{lemma}[Confirmation mainstem]
+        \label{lm:conf-stem}
+        Let \V{fd} be a confirmed FD.
+        \V{fd} is either a nulling completion,
         or has a mainstem \Dfref{tangible-inflows}
-        at the current location of the FD's focus.
+        whose location is the current location of \V{fd}
+        less the length of the sentence produced by the predot symbol.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
-Let our intangible reduction FD be, without loss of generality,
+Let our confirmed FD be, without loss of generality,
 \begin{equation}
-        \label{eq:pr-ri-main-003}
-        \V{fd} = (\V{down}, \V{drv})
+        \label{eq:pr-conf-stem-003}
+        \V{fd} = (\V{f}, \V{drv})
 \end{equation}
 where
-\begin{gather}
-        \label{eq:pr-ri-main-005}
-        \V{down} = \Fname{Focus}
-                \left( \begin{gathered}
-                        \V{antepredotA}\cat\V{B:f},\; \V{postdotA},\; \V{A:f}, \\
+        \todo{Revised to here}
+\begin{equation}
+        \label{eq:pr-conf-stem-005}
+        \begin{gathered}
+        \V{f} = \left( \begin{gathered}
+                        \V{antepredotA}\cat\V{B:pre},\; \V{postdotA},\; \V{A:f}, \\
                         \V{origin},\; \V{current}
                 \end{gathered} \right ) \\
-        \label{eq:pr-ri-main-012}
-\text{$\V{B} \in \V{N}$,} \\
-        \label{eq:pr-ri-main-014}
-\V{B:f} \deplusV{drv} \epsilon, \\
-        \label{eq:pr-ri-main-016}
-\text{\V{down} is not a nulling completion,} \\
-        \label{eq:pr-ri-main-020}
-        \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast, \\
-        \land \; \V{postdotA} \in (\V{N} \cup \V{T})^\ast, \\
-        \label{eq:pr-ri-main-022}
-        \land \; (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P} \text{, and} \\
-        \label{eq:pr-ri-main-024}
+                \cuz \eqref{eq:pr-conf-stem-003}, \Dfref{focus}
+        \end{gathered}
+\end{equation}
+and
+\begin{equation}
+        \label{eq:pr-conf-stem-024}
         \left( \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 ( \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon ) \implies \\
                 \left( \begin{gathered}
-                        \V{S} \destarV{drv} \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:f} \mydot \V{postdotA} \cat \V{unseen} \\
+                        \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
+                        \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:pre} \mydot \\
+                        \qquad \qquad \V{postdotA} \cat \V{unseen} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
                 \end{gathered} \right)
                 }
-        \end{gathered} \right).
-\end{gather}
-We know, also by assumption for the lemma, that
-        \begin{equation}
-                \label{eq:pr-ri-main-030}
-                \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon) \,\cuz\, \eqref{eq:pr-ri-main-016}.
-        \end{equation}
-Using the helper lemma,
-\begin{equation}
-                \label{eq:pr-ri-main-040}
-                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon
-                        \,\cuz\, \eqref{eq:pr-ri-main-030}, \Lmref{di-ante-help},
+        \end{gathered} \right)
 \end{equation}
-we simplify \eqref{eq:pr-ri-main-024} to
+where
+\begin{gather}
+        \label{eq:pr-conf-stem-020}
+        \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast, \\
+        \V{postdotA} \in (\V{N} \cup \V{T})^\ast \text{, and} \\
+        \label{eq:pr-conf-stem-022}
+        (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P}. \\
+\end{gather}
+In \eqref{eq:pr-conf-stem-024}, for convenience, we have tagged the predot symbol instance: \V{B:pre}.
+\begin{gather}
+        \label{eq:pr-conf-stem-050}
+        \text{\V{downFD} is not a nulling completion \cuz Assumption for the lemma.} \\
+        \label{eq:pr-conf-stem-060}
+                \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon) \,\cuz\, \eqref{eq:pr-conf-stem-050}. \\
+        \label{eq:pr-conf-stem-070}
+                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon
+                        \,\cuz\, \eqref{eq:pr-conf-stem-060}, \Lmref{ante-help},
+\end{gather}
+we simplify \eqref{eq:pr-conf-stem-024} to
 \begin{equation}
-        \label{eq:pr-ri-main-050}
+        \label{eq:pr-conf-stem-050}
         \begin{gathered}
         \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
                         \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:f} \mydot \V{postdotA} \cat \V{unseen} \\
                 \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
         } \\
-        \cuz \eqref{eq:pr-ri-main-024}, \eqref{eq:pr-ri-main-040}.
+        \cuz \eqref{eq:pr-conf-stem-024}, \eqref{eq:pr-conf-stem-040}.
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-ri-main-060}
+        \label{eq:pr-conf-stem-060}
         \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
@@ -1575,12 +1573,12 @@ we simplify \eqref{eq:pr-ri-main-024} to
                 \V{postdotA} \cat \V{unseen}.
                 \end{gathered}
                 } \\
-                \cuz \eqref{eq:pr-ri-main-014}, \eqref{eq:pr-ri-main-050}, \Dfref{fd}.
+                \cuz \eqref{eq:pr-conf-stem-014}, \eqref{eq:pr-conf-stem-050}, \Dfref{fd}.
         \end{gathered}
 \end{equation}
 We now move the dot from after \V{B} to before it.
 \begin{equation}
-        \label{eq:pr-ri-main-070}
+        \label{eq:pr-conf-stem-070}
         \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
@@ -1596,12 +1594,11 @@ We now move the dot from after \V{B} to before it.
                         \V{postdotA} \cat \V{unseen}.
                 \end{gathered}
                 } \\
-                \cuz \eqref{eq:pr-ri-main-060}.
+                \cuz \eqref{eq:pr-conf-stem-060}.
         \end{gathered}
 \end{equation}
-        \todo{Revised to here}
 \begin{equation}
-        \label{eq:pr-ri-main-090}
+        \label{eq:pr-conf-stem-090}
         \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
@@ -1611,14 +1608,14 @@ We now move the dot from after \V{B} to before it.
                         \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
                 \end{gathered}
                 } \\
-                \cuz \eqref{eq:pr-ri-main-070}, \eqref{eq:pr-ri-main-080}.
+                \cuz \eqref{eq:pr-conf-stem-070}, \eqref{eq:pr-conf-stem-080}.
         \end{gathered}
 \end{equation}
 To obtain the DI for the mainstem,
-we convert \eqref{eq:pr-ri-main-080} back into the form for a DI
+we convert \eqref{eq:pr-conf-stem-080} back into the form for a DI
 by adding an antecedant:
 \begin{equation}
-        \label{eq:pr-ri-main-100}
+        \label{eq:pr-conf-stem-100}
         \begin{gathered}
                 \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
                 ( \V{origin} < \V{current} \lor \V{B} \cat \V{postdotA} \neq \epsilon ) \implies \\
@@ -1628,26 +1625,26 @@ by adding an antecedant:
                 \destar \; \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
                 }
                 \end{gathered} \right) \\
-                \cuz \eqref{eq:pr-ri-main-090}.
+                \cuz \eqref{eq:pr-conf-stem-090}.
         \end{gathered}
 \end{equation}
 The DI will also require two new assumptions:
 \begin{gather}
-        \label{eq:pr-ri-main-110}
-        \V{antepredotA} \cat \V{B} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-ri-main-20} \text{, and} \\
-        \label{eq:pr-ri-main-120}
-        \V{postdotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-ri-main-20}.
+        \label{eq:pr-conf-stem-110}
+        \V{antepredotA} \cat \V{B} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-conf-stem-20} \text{, and} \\
+        \label{eq:pr-conf-stem-120}
+        \V{postdotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-conf-stem-20}.
 \end{gather}
-Equations \eqref{eq:pr-ri-main-22}, \eqref{eq:pr-ri-main-100}, \eqref{eq:pr-ri-main-110} and
-\eqref{eq:pr-ri-main-120} are the expansion of the DI
+Equations \eqref{eq:pr-conf-stem-22}, \eqref{eq:pr-conf-stem-100}, \eqref{eq:pr-conf-stem-110} and
+\eqref{eq:pr-conf-stem-120} are the expansion of the DI
 \begin{equation}
-\label{eq:pr-ri-main-130}
+\label{eq:pr-conf-stem-130}
         \FA{DI}{\V{antepredotA}, \V{B}\cat\V{postdotA},\V{A},\V{origin},\V{current}}. \\
 \end{equation}
 From \Dfref{tangible-inflows}, we see that
-\eqref{eq:pr-ri-main-130} is the mainstem of \eqref{eq:pr-ri-main-5}.
+\eqref{eq:pr-conf-stem-130} is the mainstem of \eqref{eq:pr-conf-stem-5}.
 Therefore, with
-\eqref{eq:pr-ri-main-130}, we have what we needed to show for the lemma.
+\eqref{eq:pr-conf-stem-130}, we have what we needed to show for the lemma.
 \myqed
 \todo{Check proof of intangible reduction DI mainstem lemma}
 \end{proof}
@@ -1702,7 +1699,7 @@ Using the helper lemma,
 \begin{equation}
                 \label{eq:pr-pred-main-040}
                 \V{current} < \V{current} \lor \V{rhsA} \neq \epsilon
-                        \,\cuz\, \eqref{eq:pr-pred-main-030}, \Lmref{di-ante-help},
+                        \,\cuz\, \eqref{eq:pr-pred-main-030}, \Lmref{ante-help},
 \end{equation}
 we simplify \eqref{eq:pr-pred-main-24} to
 \begin{equation}
