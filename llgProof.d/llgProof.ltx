@@ -566,14 +566,26 @@ We say that
         so that the triple $(\V{stepIX}, \V{pos}, \V{drv})$ represents
         a symbol instance.
         More practically, we will tag symbols with an instance identifier,
-        separated from the symbol name by a colon, so that \V{A:f} represents
-        the instance of symbol \V{A} with the tag ``\texttt{f}''.
-        Technically, the trivial productions of a tagged symbol instance
-        are different instances of the symbol but,
-        when it is convenient for reading,
-        and does not lend itself to confusion,
-        trivial productions of a symbol instance may inherit
-        the instance tag from the original symbol.
+        separated from the symbol name by a colon, for example,
+        \begin{equation}
+                \label{eq:df-instance-010}
+                \V{A:f,0}.
+        \end{equation}
+        The instance tag consists of a major and minor identifier,
+        separated by a comma.
+        For example in \eqref{eq:df-instance-010},
+        ``\texttt{A}'' is the symbol name,
+        ``\texttt{f,0}'' is the instance tag,
+        ``\texttt{f}'' is the major identifier, and
+        ``\texttt{0}'' is the minor identifier.
+
+        The major identifier of the tag is inherited by its trivial productions.
+        The minor identifier of the tag is used to disinguish symbol instances
+        with the same major identifier.
+
+        The minor identifier is rarely necessary and is almost always omitted.
+        For example, \eqref{eq:df-instance-010}
+        would almost always be written \V{A:f}.
         \dfEnd
 \end{definition}
 
@@ -590,7 +602,7 @@ it is a \textbf{sentence}.
 \label{df:focus}
 A focus is a 5-tuple
 \[
-        \FA{FOCUS}{\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}}.
+        (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).
 \]
 where \V{predot} and \V{postdot} are strings, \V{origin} and \V{current} are positions
 in the input, and \V{A:f} (sometimes written just \V{A})
@@ -601,10 +613,20 @@ must be a rule in \V{P} and is called the \text{focus rule}.
 Further overloading the terms LHS and RHS,
 \V{A} is the \textbf{LHS symbol instance}, or simply \textbf{LHS} of the focus and
 $\V{predot}\cat\V{postdot}$ is the \textbf{RHS string instance}, or simply \textbf{RHS}.
-The last symbol of the RHS string instance, if it exists, is the \textbf{predot symbol instance}
-of the focus.
 The LHS symbol of the focus is tracked as an instance because a focus can appear at multiple points
 in a derivation.
+The LHS symbol instance is often called the \textbf{focus symbol instance}
+or \textbf{focus instance}.
+
+The \textbf{dot position} of a focus is the position in the RHS string instance
+between \V{predot} and \V{postdot}.
+The last symbol of \V{predot} is the \textbf{predot symbol instance}
+of the focus.
+We note that it may be $\V{predot} = \epsilon$, in which case there is
+no predot symbol instance.
+If $\V{predot}\cat\V{postdot} = \epsilon$, there is only one position
+in the RHS string instance, and that position is the dot position.
+\dfEnd
 \end{definition}
 
 \begin{definition}[Focused derivation]
@@ -643,6 +665,10 @@ where
         \label{eq:def-fd-090}
         \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}.
 \end{gather}
+Note that the focus symbol instance in \eqref{eq:def-fd-050} is tagged,
+and the dot position within the RHS symbol instance is indicated.
+Where possible and helpful, dot positions equivalent to the dot position
+of the focus may be indicated in the steps after the focus transition.
 
 If a dervation \textbf{matches} a focus,
 then the focus is also said to \textbf{match} the derivation.
