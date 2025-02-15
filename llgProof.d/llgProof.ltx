@@ -88,6 +88,7 @@
 \newcommand{\sep}{\,\mid\,}
 \newcommand{\mydot}{\raisebox{.05em}{$\,\bullet\,$}}
 \newcommand{\cat}{\,.\,}
+\newcommand{\wcat}{\,\,.\,\,}
 \newcommand{\size}[1]{\ensuremath{\left | {#1} \right |}}
 \newcommand{\Vsize}[1]{\ensuremath{\size{\var{#1}}}}
 \newcommand{\bigsize}[1]{\ensuremath{\bigl| {#1} \bigr|}}
@@ -612,6 +613,7 @@ it is a \textbf{sentence}.
 
 \begin{definition}[Focus]
 \label{df:focus}
+\begin{MYsloppy}
 A focus is a 5-tuple
 \[
         (\V{predot:f},\V{postdot:f},\V{A:f},\V{origin},\V{current}).
@@ -621,15 +623,17 @@ in the input, and \V{A:f} (sometimes written just \V{A})
 is a non-terminal symbol instance.
 \[ \V{A} \de \V{predot} \cat \V{postdot} \]
 must be a rule in \V{P} and is called the \text{focus rule}.
+\end{MYsloppy}
 
 The focus represents a transition in a deriviation,
 which is called the \textbf{transition} of the focus.
-Without loss of generality, we can write the focus transition as the pair
-of SF instances
+        Without loss of generality, we can let our derivation be \V{drv}
+        and write the focus transition as the following pair of steps
+        in \V{drv}:
 \begin{equation}
         \left( \; \begin{gathered}
-           \V{before:f} \cat \V{A:f} \cat \V{after:f}, \\
-                \V{before:f} \cat \V{predot:f} \cat \V{postdot:f} \cat \V{after:f}
+           \V{before:f} \wcat \V{A:f} \wcat \V{after:f}, \\
+                \V{before:f} \wcat \V{predot:f} \wcat \V{postdot:f} \wcat \V{after:f}
         \end{gathered} \; \right).
 \end{equation}
 
@@ -656,13 +660,11 @@ in the RHS string instance, and that position is the dot position.
 \V{current} is the location in the input of the dot position,
         and \V{origin} is the location in the input where the
         RHS string instance starts,
-        so that, where \V{drv} is the derivation of the focus,
-        \[
-                \V{before:f} \cat \V{predot:f} \destarV{drv} \Velement{w}{0,\V{origin}},
-        \] and
-        \[
+        so that
+        \begin{gather}
+                \V{before:f} \cat \V{predot:f} \destarV{drv} \Velement{w}{0,\V{current}} \text{, and} \\
                 \V{predot:f} \destarV{drv} \Velement{w}{\V{current},\V{origin}}.
-        \]
+        \end{gather}
 \dfEnd
 \end{definition}
 
