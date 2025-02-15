@@ -511,9 +511,9 @@ We say that
         \[ \V{TSTR}^+ = \V{TSTR} \subtract \epsilon.  \dfEnd \]
 \end{definition}
 
-\begin{definition}[String transition]
+\begin{definition}[SF transition]
         \label{df:transition}
-        An \textbf{string transition}
+        An \textbf{SF transition}
         is a duple of two sentential forms,
         such that a non-terminal member in the first element of the pair
         is expanded, according to a rule of \V{g}, in the second element of the pair.
@@ -586,6 +586,18 @@ We say that
         The minor identifier is rarely necessary and is almost always omitted.
         For example, \eqref{eq:df-instance-010}
         would almost always be written \V{A:f}.
+
+        Instance tags are also used after strings,
+        to indicate that every symbol instance in the string instance has that
+        instance tag.
+        For example, if
+        \[
+        \V{predot} = \V{A}\cat\V{B}\cat\V{C},
+        \]
+        then
+        \[
+        \V{predot:f} = \V{A:f}\cat\V{B:f}\cat\V{C:f}.
+        \]
         \dfEnd
 \end{definition}
 
@@ -602,30 +614,55 @@ it is a \textbf{sentence}.
 \label{df:focus}
 A focus is a 5-tuple
 \[
-        (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).
+        (\V{predot:f},\V{postdot:f},\V{A:f},\V{origin},\V{current}).
 \]
-where \V{predot} and \V{postdot} are strings, \V{origin} and \V{current} are positions
+where \V{predot:f} and \V{postdot:f} are string instances, \V{origin} and \V{current} are positions
 in the input, and \V{A:f} (sometimes written just \V{A})
 is a non-terminal symbol instance.
 \[ \V{A} \de \V{predot} \cat \V{postdot} \]
 must be a rule in \V{P} and is called the \text{focus rule}.
 
-Further overloading the terms LHS and RHS,
-\V{A} is the \textbf{LHS symbol instance}, or simply \textbf{LHS} of the focus and
-$\V{predot}\cat\V{postdot}$ is the \textbf{RHS string instance}, or simply \textbf{RHS}.
-The LHS symbol of the focus is tracked as an instance because a focus can appear at multiple points
-in a derivation.
-The LHS symbol instance is often called the \textbf{focus symbol instance}
-or \textbf{focus instance}.
+The focus represents a transition in a deriviation,
+which is called the \textbf{transition} of the focus.
+Without loss of generality, we can write the focus transition as the pair
+of SF instances
+\begin{equation}
+        \left( \; \begin{gathered}
+           \V{before:f} \cat \V{A:f} \cat \V{after:f}, \\
+                \V{before:f} \cat \V{predot:f} \cat \V{postdot:f} \cat \V{after:f}
+        \end{gathered} \; \right).
+\end{equation}
 
+Further overloading the term LHS,
+\V{A:f} is the \textbf{LHS symbol instance}, or simply \textbf{LHS} of the focus.
+The LHS symbol instance is also called the \textbf{focus symbol instance}
+or \textbf{focus instance}.
+The LHS symbol of the focus is tracked as an instance
+in order to place the transition at a specific pairs of steps
+in a derivation
+-- an expansion of the focus rule
+can appear at many points in a derivation.
+
+$\V{predot:f}\cat\V{postdot:f}$ is the \textbf{RHS string instance}, or simply \textbf{RHS}.
 The \textbf{dot position} of a focus is the position in the RHS string instance
 between \V{predot} and \V{postdot}.
 The last symbol of \V{predot} is the \textbf{predot symbol instance}
 of the focus.
-We note that it may be $\V{predot} = \epsilon$, in which case there is
-no predot symbol instance.
-If $\V{predot}\cat\V{postdot} = \epsilon$, there is only one position
+We note that it may happen that $\V{predot:f} = \epsilon$,
+in which case there is no predot symbol instance.
+If $\V{predot:f}\cat\V{postdot:f} = \epsilon$, there is only one position
 in the RHS string instance, and that position is the dot position.
+
+\V{current} is the location in the input of the dot position,
+        and \V{origin} is the location in the input where the
+        RHS string instance starts,
+        so that, where \V{drv} is the derivation of the focus,
+        \[
+                \V{before:f} \cat \V{predot:f} \destarV{drv} \Velement{w}{0,\V{origin}},
+        \] and
+        \[
+                \V{predot:f} \destarV{drv} \Velement{w}{\V{current},\V{origin}}.
+        \]
 \dfEnd
 \end{definition}
 
