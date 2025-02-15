@@ -625,7 +625,7 @@ is a non-terminal symbol instance.
 must be a rule in \V{P} and is called the \text{focus rule}.
 \end{MYsloppy}
 
-The focus represents a transition in a deriviation,
+The focus represents a transition in a derivation,
 which is called the \textbf{transition} of the focus.
         Without loss of generality, we can let our derivation be \V{drv}
         and write the focus transition as the following pair of steps
@@ -666,6 +666,10 @@ in the RHS string instance, and that position is the dot position.
                 \V{predot:f} \destarV{drv} \Velement{w}{\V{current},\V{origin}}.
         \end{gather}
 \dfEnd
+
+A derivation which obeys the requirements of a focus is
+        said to \textbf{match} that focus.
+More than one derivation may match a focus.
 \end{definition}
 
 \begin{definition}[Focused derivation]
