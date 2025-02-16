@@ -142,6 +142,9 @@
 
 \newcommand{\de}{\mathrel{::=}}
 \newcommand{\derives}{\Rightarrow}
+\newcommand{\derivesW}[1]
+    {\mathrel{\mbox{$\:\underset{#1}{\Rightarrow}$}}}
+\newcommand{\derivesV}[1]{\derivesW{\V{#1}}}
 \newcommand{\destar}
     {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
 \newcommand{\destarW}[1]
@@ -674,49 +677,66 @@ More than one derivation may match a focus.
 
 \begin{definition}[Focused derivation]
 \label{df:fd}
-A \textbf{focused derivation} (FD)
-is a duple of focus and matching derivation:
-\[ \V{f}, \V{drv}. \]
-Let
-\begin{equation}
-        \label{eq:df-fd-focus}
-        \V{f} = (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).
-\end{equation}
+A derivation is \textbf{focused} is
+if one of its transitions is distinguished,
+and a dot position, an origin, and a current
+location are specified for it.
+The origin and current location must be locations
+in the input.
 
-\V{A:f}, by the definition of a symbol instance, will occur in a specific step of \V{drv}.
-Let the index of that step be \V{s}.
-Then the \textbf{transition} of the FD will be the step pair
-\[ (\VVelement{drv}{s}, (\Velement{drv}{\V{s}+1})). \]
+The dot position pedantically is an index in the RHS of
+the transition rule, but it more intuitively shown
+by separating the transition rule into predot and
+postdot strings.
+For example, in
+\[ \V{A} \de \V{predot} \mydot \V{postdot}. \]
+the dot position is after \V{predot}.
 
-A derivation matching \eqref{eq:df-fd-focus} will be of the form
+The focused derivation is well-defined if the following are true:
+First, the derivation is well-formed.
+Second, if $\alpha$, $\beta$, \V{predot}, and \V{postdot}
+are strings, and, without loss of generality,
+the transition is
 \begin{equation}
-        \label{eq:def-fd-050}
+        \label{eq:df-fd-010}
         \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
-                \derives \Velement{w}{0,\V{origin}} \cat \V{predot} \mydot \V{postdot} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdot} \cat \V{unseen}
+        \alpha \wcat \V{A:f} \wcat \beta \\
+        \derivesV{drv} \alpha \wcat \V{predot:f} \wcat \V{postdot:f} \wcat \beta,
         \end{gathered}
 \end{equation}
-where
+then there are input locations \V{current} and \V{origin} such that
 \begin{gather}
-        \label{eq:def-fd-070}
-        \V{unseen} \in \V{STR} \\
-        \label{eq:def-fd-070}
-        \land \; \V{predot} \in \V{STR} \\
-        \label{eq:def-fd-080}
-        \land \; \V{postdot} \in \V{STR} \\
-        \label{eq:def-fd-090}
-        \land \; (\V{A} \de \V{predot} \cat \V{postdot}) \in \V{P}.
+        \label{eq:df-fd-020}
+        \V{predot:f} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
+        \label{eq:df-fd-030}
+        \land \; \alpha \destarV{drv} \Velement{w}{0,\V{origin}}.
 \end{gather}
-Note that the focus symbol instance in \eqref{eq:def-fd-050} is tagged,
-and the dot position within the RHS symbol instance is indicated.
-Where possible and helpful, dot positions equivalent to the dot position
-of the focus may be indicated in the steps after the focus transition.
 
-If a dervation \textbf{matches} a focus,
-then the focus is also said to \textbf{match} the derivation.
-Multiple derivations may match a focus,
-but only one focus will match a tagged and dotted derivation.
+We note that
+in \eqref{eq:df-fd-010}
+the dot position can be inferred
+from \eqref{eq:df-fd-010} and
+\eqref{eq:df-fd-020}.
+In \eqref{eq:df-fd-040} we make the dot position explicit:
+\begin{equation}
+        \label{eq:df-fd-040}
+        \begin{gathered}
+        \alpha \wcat \V{A:f} \wcat \beta \\
+        \destarV{drv} \alpha \wcat \V{predot:f} \mydot \V{postdot:f} \wcat \beta
+        \end{gathered}
+\end{equation}
+        
+We usually use the tag ``\texttt{f}'' to indicate the focus symbol instance.
+We say a derivation with dot position indicated and the focus symbol tagged
+is \textbf{decorated}.
+
+Given a well-defined focused derivation
+there is at most one focus.
+The focus matching \eqref{eq:df-fd-010}-\eqref{eq:df-fd-030}
+is
+\begin{equation}
+        (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).
+\end{equation}
 \dfEnd
 \end{definition}
 
