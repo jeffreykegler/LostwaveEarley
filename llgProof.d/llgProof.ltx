@@ -1627,7 +1627,7 @@ Therefore, with
 \end{lemma}
 
 \begin{proof}
-Let the focus dotted rule be a confirmed dotted rule:
+Let the focus dotted rule be an arbitrary confirmed dotted rule.
 \begin{equation}
         \begin{gathered}
         \label{eq:pr-conf-stem-010}
@@ -1635,156 +1635,46 @@ Let the focus dotted rule be a confirmed dotted rule:
         \text{\cuz AF theorem, WLOG.}
         \end{gathered}
 \end{equation}
+We assume an FD, consistent with \eqref{eq:pr-conf-stem-010},
+and otherwise arbitrary:
+\begin{equation}
+        \label{eq:pr-conf-stem-030}
+        \begin{gathered}
+        \V{anteFocus:1} \wcat \V{A:f} \wcat \V{postFocus:1} \\
+        \derivesV{drv}
+                \left( \begin{gathered} \;
+                \V{anteFocus:1} \wcat \V{antepredot:2} \wcat \V{B:2} \wmydot \\
+                \qquad \qquad \V{postdot:2} \wcat \V{postFocus:2}
+                \; \end{gathered} \right) \\
+                \text{\cuz AF theorem, \eqref{eq:pr-conf-stem-010}, WLOG.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-035}
+        \begin{gathered}
+        \text{The initial segment of the input, \Velement{w}{0,\V{current}}, is known} \\
+        \text{\cuz AF theorem, WLOG.}
+        \end{gathered}
+\end{equation}
+\par
+\begin{equation}
+        \label{eq:pr-conf-stem-040}
+        \begin{gathered}
+        \V{anteFocus:1} \wcat \V{antepredot:2} \wcat \V{B:2} \destarV{drv} \Velement{w}{0,\V{current}} \\
+        \text{\cuz AF theorem, WLOG.}
+        \end{gathered}
+\end{equation}
+\par
+\begin{equation}
+        \label{eq:pr-conf-stem-050}
+        \begin{gathered}
+        \V{anteFocus:2} \destarV{drv} \Velement{w}{0,\V{origin}} \\
+        \text{\cuz AF theorem, WLOG.}
+        \end{gathered}
+\end{equation}
 
-        without
-Let our confirmed FD be, without loss of generality,
 \todo{Revised to here}
-\begin{equation}
-        \label{eq:pr-conf-stem-005}
-        \begin{gathered}
-        \V{f} = \left( \begin{gathered}
-                        \V{antepredotA}\cat\V{B:pre},\; \V{postdotA},\; \V{A:f}, \\
-                        \V{origin},\; \V{current}
-                \end{gathered} \right ) \\
-                \cuz \eqref{eq:pr-conf-stem-003}, \Dfref{focus}
-        \end{gathered}
-\end{equation}
-and
-\begin{equation}
-        \label{eq:pr-conf-stem-024}
-        \left( \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon ) \implies \\
-                \left( \begin{gathered}
-                        \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
-                        \derives \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:pre} \mydot \\
-                        \qquad \qquad \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
-                \end{gathered} \right)
-                }
-        \end{gathered} \right)
-\end{equation}
-where
-\begin{gather}
-        \label{eq:pr-conf-stem-020}
-        \V{antepredotA}\cat\V{B} \in (\V{N} \cup \V{T})^\ast, \\
-        \V{postdotA} \in (\V{N} \cup \V{T})^\ast \text{, and} \\
-        \label{eq:pr-conf-stem-022}
-        (\V{A} \de \V{antepredotA} \cat \V{B} \cat \V{postdotA}) \in \V{P}. \\
-\end{gather}
-In \eqref{eq:pr-conf-stem-024}, for convenience, we have tagged the predot symbol instance: \V{B:pre}.
-\begin{gather}
-        \label{eq:pr-conf-stem-050}
-        \text{\V{downFD} is not a nulling completion \cuz Assumption for the lemma.} \\
-        \label{eq:pr-conf-stem-060}
-                \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon) \,\cuz\, \eqref{eq:pr-conf-stem-050}. \\
-        \label{eq:pr-conf-stem-070}
-                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon
-                        \,\cuz\, \eqref{eq:pr-conf-stem-060}, \Lmref{ante-help},
-\end{gather}
-we simplify \eqref{eq:pr-conf-stem-024} to
-\begin{equation}
-        \label{eq:pr-conf-stem-050}
-        \begin{gathered}
-        \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:f} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{postdotA} \cat \V{unseen}
-        } \\
-        \cuz \eqref{eq:pr-conf-stem-024}, \eqref{eq:pr-conf-stem-040}.
-        \end{gathered}
-\end{equation}
-\begin{equation}
-        \label{eq:pr-conf-stem-060}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:f} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \;
-                \begin{gathered}
-                        \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{current}} \cat \V{B:f} \mydot \\
-                \V{postdotA} \cat \V{unseen}
-                \end{gathered} \\
-                \destar \;
-                \begin{gathered}
-                \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{current}} \cat \epsilon \mydot \\
-                \V{postdotA} \cat \V{unseen}.
-                \end{gathered}
-                } \\
-                \cuz \eqref{eq:pr-conf-stem-014}, \eqref{eq:pr-conf-stem-050}, \Dfref{fd}.
-        \end{gathered}
-\end{equation}
-We now move the dot from after \V{B} to before it.
-\begin{equation}
-        \label{eq:pr-conf-stem-070}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A:f} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \cat \V{B:f} \mydot \V{postdotA} \cat \V{unseen} \\
-                \destar \;
-                \begin{gathered}
-                        \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{current}} \mydot \\
-                                \V{B:f} \cat \V{postdotA} \cat \V{unseen}
-                \end{gathered} \\
-                \destar \;
-                \begin{gathered}
-                \Velement{w}{0,\V{origin}} \cat \Velement{w}{\V{origin},\V{current}} \mydot \\
-                        \V{postdotA} \cat \V{unseen}.
-                \end{gathered}
-                } \\
-                \cuz \eqref{eq:pr-conf-stem-060}.
-        \end{gathered}
-\end{equation}
-\begin{equation}
-        \label{eq:pr-conf-stem-090}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
-                \destar \;
-                \begin{gathered}
-                        \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
-                \end{gathered}
-                } \\
-                \cuz \eqref{eq:pr-conf-stem-070}, \eqref{eq:pr-conf-stem-080}.
-        \end{gathered}
-\end{equation}
-To obtain the DI for the mainstem,
-we convert \eqref{eq:pr-conf-stem-080} back into the form for a DI
-by adding an antecedant:
-\begin{equation}
-        \label{eq:pr-conf-stem-100}
-        \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{origin} < \V{current} \lor \V{B} \cat \V{postdotA} \neq \epsilon ) \implies \\
-                \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{origin}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{origin}} \cat \V{antepredotA} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen} \\
-                \destar \; \Velement{w}{0,\V{current}} \mydot \V{B} \cat \V{postdotA} \cat \V{unseen}
-                }
-                \end{gathered} \right) \\
-                \cuz \eqref{eq:pr-conf-stem-090}.
-        \end{gathered}
-\end{equation}
-The DI will also require two new assumptions:
-\begin{gather}
-        \label{eq:pr-conf-stem-110}
-        \V{antepredotA} \cat \V{B} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-conf-stem-20} \text{, and} \\
-        \label{eq:pr-conf-stem-120}
-        \V{postdotA} \in (\V{N} \cup \V{T})^\ast \cuz \eqref{eq:pr-conf-stem-20}.
-\end{gather}
-Equations \eqref{eq:pr-conf-stem-22}, \eqref{eq:pr-conf-stem-100}, \eqref{eq:pr-conf-stem-110} and
-\eqref{eq:pr-conf-stem-120} are the expansion of the DI
-\begin{equation}
-\label{eq:pr-conf-stem-130}
-        \FA{DI}{\V{antepredotA}, \V{B}\cat\V{postdotA},\V{A},\V{origin},\V{current}}. \\
-\end{equation}
-From \Dfref{tangible-inflows}, we see that
-\eqref{eq:pr-conf-stem-130} is the mainstem of \eqref{eq:pr-conf-stem-5}.
-Therefore, with
-\eqref{eq:pr-conf-stem-130}, we have what we needed to show for the lemma.
 \myqed
-\todo{Check proof of intangible reduction DI mainstem lemma}
 \end{proof}
 
 \begin{lemma}[Prediction mainstem]
