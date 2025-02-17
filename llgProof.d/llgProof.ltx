@@ -682,59 +682,87 @@ Intuitively, a \textbf{focused} derivation
 is a tuple including the derivation
 as well as additional information
 sufficient is specify a focus.
-
-The focused derivation is well-defined if,
-where $\alpha$, $\beta$, \V{predot}, and \V{postdot}
-are strings
-and \V{origin} and \V{current} are input locations,
-all three of the following are true:
-First, the derivation is well-formed.
-Second, the input range \Velement{w}{0,\V{current}} is
-known.
-Third, without loss of generality,
-there is a distinguished transition of the form
+More formally,
+a focused derivation is a 6-tuple
 \begin{equation}
         \label{eq:df-fd-010}
-        \begin{gathered}
-        \alpha \wcat \V{A:f} \wcat \beta \\
-        \derivesV{drv} \alpha \wcat \V{predot:g} \wcat \V{postdot:g} \wcat \beta,
-        \end{gathered}
+        \V{df} = (\V{drv}, \V{current}, \V{stepIX}, \V{focusPos}, \V{dotPos}, \V{origin})
 \end{equation}
-there is a distingushed dot position in the transition rule,
+where the following are true:
+\begin{MYsloppy}
+\par \noindent $\bullet$ \V{drv} is a derivation.
+\par \noindent $\bullet$ The initial segment of the input, \Velement{w}{0,\V{current}},
+is known.
+\par \noindent $\bullet$ \V{stepIX} is the index of the first step of the
+\textbf{focal transition}, or simply \textbf{transition},
+of \V{fd}.
+That is, the focal transition is
+$\Velement{drv}{\V{stepIX},(\V{stepIX}+1)}$.
+\par \noindent $\bullet$ The focal symbol instance is
+the \V{focusPos}'th symbol of the first step
+of the focal transition, that is,
+        \[ \element{(\VVelement{drv}{\V{stepIX}})}{\V{focusPos}}. \]
+The rule of the focal transition is the \textbf{focal rule}.
+
+The focal transition may, more intuitively, be written,
+without loss of generality, as
 \begin{equation}
-        \label{eq:df-fd-015}
-        \V{A} \de \V{predot} \mydot \V{postdot}
-\end{equation}
-and there are input locations \V{current} and \V{origin} such that
-\begin{gather}
         \label{eq:df-fd-020}
-        \V{predot:g} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
-        \label{eq:df-fd-030}
-        \land \; \alpha \destarV{drv} \Velement{w}{0,\V{origin}}.
-\end{gather}
-
-We usually use the tag ``\texttt{f}'' to indicate the focus symbol instance.
-We say a derivation with dot position indicated and the focus symbol tagged
-is \textbf{decorated}.
-For example,
-\begin{equation}
-        \label{eq:df-fd-040}
-        \begin{gathered}
-        \alpha \wcat \V{A:f} \wcat \beta \\
-        \derivesV{drv} \alpha \wcat \V{predot:g} \wmydot \V{postdot:g} \wcat \beta,
-        \end{gathered}
+        \alpha \cat \V{A:f} \cat \beta
+                \derivesV{drv} \alpha \cat \V{rhs} \cat \beta,
 \end{equation}
-is the decorated version of \eqref{eq:df-fd-010}.
-
-Given a well-defined focused derivation
-there is at most one focus.
-The focus matching
-the focused derivation specified
-in~\eqref{eq:df-fd-010}-\eqref{eq:df-fd-030} is
+where \size{\alpha} = \V{focusPos},
+and \V{A:f} is the focal symbol instance.
+We typically indicate the focal symbol instance with the tag ``\texttt{f}''.
+$\V{A} \de \V{rhs}$ is the focal rule.
+\par \noindent $\bullet$ The non-negative integer \V{dotPos} is the dot position
+in the focal rule, so that the \textbf{focal dotted rule} may
+be written $\V{A} \de \V{predot} \mydot \V{postdot}$.
+Incorporating the dotted rule and the dot,
+the focal transition can be written
+\begin{equation}
+        \label{eq:df-fd-030}
+        \alpha \cat \V{A:f} \cat \beta
+        \derivesV{drv} \alpha \wcat \V{predot:2} \wmydot \V{postdot:2} \wcat \beta.
+\end{equation}
+\noindent $\bullet$ The second step of the focal transition, up to the dot position,
+        produces the input as far as the current location.
+        That is,
 \begin{equation}
         \label{eq:df-fd-040}
+        \alpha \cat \V{predot:2} \destarV{drv} \Velement{w}{0,\V{current}} \\
+\end{equation}
+\noindent $\bullet$ The second step of the focal transition, up to the start
+        of the RHS string instance produces the input as far as \V{origin}:
+\begin{equation}
+        \label{eq:df-fd-050}
+        \alpha \destarV{drv} \Velement{w}{0,\V{origin}}.
+\end{equation}
+\end{MYsloppy}
+
+We call the form in \eqref{eq:df-fd-030}
+(a transition with the derivation,
+the focal symbol instance,
+and the dot position indicated)
+a \textbf{decorated transition}.
+To specify a focused derivation,
+it suffices to specify a decorated transition;
+an equation like \eqref{eq:df-fd-040}
+to name the
+variable used for the current location; and
+an equation like \eqref{eq:df-fd-050}
+to name the
+variable used for the origin location.
+
+The focus matching
+the focused derivation described
+in \eqref{eq:df-fd-030}, \eqref{eq:df-fd-040}, and \eqref{eq:df-fd-050} is
+\begin{equation}
+        \label{eq:df-fd-060}
         (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).  \qquad \dfEnd
 \end{equation}
+A well-defined focused derivation has exactly one focus.
+\qquad \dfEnd
 \end{definition}
 
 \begin{definition}[Earley item to focus correspondence]
