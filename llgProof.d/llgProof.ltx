@@ -87,6 +87,7 @@
 \newcommand{\dfn}[1]{{\bf #1}}
 \newcommand{\sep}{\,\mid\,}
 \newcommand{\mydot}{\raisebox{.05em}{$\,\bullet\,$}}
+\newcommand{\wmydot}{\raisebox{.05em}{$\,\,\bullet\,\,$}}
 \newcommand{\cat}{\,.\,}
 \newcommand{\wcat}{\,\,.\,\,}
 \newcommand{\size}[1]{\ensuremath{\left | {#1} \right |}}
@@ -677,89 +678,79 @@ More than one derivation may match a focus.
 
 \begin{definition}[Focused derivation]
 \label{df:fd}
-A derivation is \textbf{focused} is
-if one of its transitions is distinguished,
-and a dot position, an origin, and a current
-location are specified for it.
-The origin and current location must be locations
-in the input.
+Intuitively, a \textbf{focused} derivation
+is a tuple including the derivation
+as well as additional information
+sufficient is specify a focus.
 
-The dot position pedantically is an index in the RHS of
-the transition rule, but it more intuitively shown
-by separating the transition rule into predot and
-postdot strings.
-For example, in
-\[ \V{A} \de \V{predot} \mydot \V{postdot}. \]
-the dot position is after \V{predot}.
-
-The focused derivation is well-defined if
-both of the following are true:
+The focused derivation is well-defined if,
+where $\alpha$, $\beta$, \V{predot}, and \V{postdot}
+are strings
+and \V{origin} and \V{current} are input locations,
+all three of the following are true:
 First, the derivation is well-formed.
-Second, if $\alpha$, $\beta$, \V{predot}, and \V{postdot}
-are strings, and, without loss of generality,
-the transition is
+Second, the input range \Velement{w}{0,\V{current}} is
+known.
+Third, without loss of generality,
+there is a distinguished transition of the form
 \begin{equation}
         \label{eq:df-fd-010}
         \begin{gathered}
         \alpha \wcat \V{A:f} \wcat \beta \\
-        \derivesV{drv} \alpha \wcat \V{predot:f} \wcat \V{postdot:f} \wcat \beta,
+        \derivesV{drv} \alpha \wcat \V{predot:g} \wcat \V{postdot:g} \wcat \beta,
         \end{gathered}
 \end{equation}
-then there are input locations \V{current} and \V{origin} such that
+there is a distingushed dot position in the transition rule,
+\begin{equation}
+        \label{eq:df-fd-015}
+        \V{A} \de \V{predot} \mydot \V{postdot}
+\end{equation}
+and there are input locations \V{current} and \V{origin} such that
 \begin{gather}
         \label{eq:df-fd-020}
-        \V{predot:f} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
+        \V{predot:g} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
         \label{eq:df-fd-030}
         \land \; \alpha \destarV{drv} \Velement{w}{0,\V{origin}}.
 \end{gather}
 
-We note that
-in \eqref{eq:df-fd-010}
-the dot position can be inferred
-from~\eqref{eq:df-fd-010}
-and~\eqref{eq:df-fd-020}.
-In~\eqref{eq:df-fd-040} we make the dot position explicit:
+We usually use the tag ``\texttt{f}'' to indicate the focus symbol instance.
+We say a derivation with dot position indicated and the focus symbol tagged
+is \textbf{decorated}.
+For example,
 \begin{equation}
         \label{eq:df-fd-040}
         \begin{gathered}
         \alpha \wcat \V{A:f} \wcat \beta \\
-        \destarV{drv} \alpha \wcat \V{predot:f} \mydot \V{postdot:f} \wcat \beta
+        \derivesV{drv} \alpha \wcat \V{predot:g} \wmydot \V{postdot:g} \wcat \beta,
         \end{gathered}
 \end{equation}
-
-We usually use the tag ``\texttt{f}'' to indicate the focus symbol instance.
-We say a derivation with dot position indicated and the focus symbol tagged
-is \textbf{decorated}.
+is the decorated version of \eqref{eq:df-fd-010}.
 
 Given a well-defined focused derivation
 there is at most one focus.
-The focus matching \eqref{eq:df-fd-010}-\eqref{eq:df-fd-030}
-is
+The focus matching
+the focused derivation specified
+in~\eqref{eq:df-fd-010}-\eqref{eq:df-fd-030} is
 \begin{equation}
+        \label{eq:df-fd-040}
         (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).  \qquad \dfEnd
 \end{equation}
-\end{definition}
-
-\begin{definition}[Focus to derivation match]
-        A derivation which is consistent with the expanded form of
-        a focus, as in \Dfref{fd}, is said to \textbf{match} the focus,
-        and vice versa.
-        We note that more than one derivation may match a focus.
-        We also note that, when instance tags are not used,
-        more than one focus may match a derivation.
-\dfEnd
 \end{definition}
 
 \begin{definition}[Earley item to focus correspondence]
 The Earley item
 \[
-        \tuple{\V{A} \de \V{predotA} \mydot \V{postdotA}, \V{origin}, \V{current}}
+        \tuple{\V{A} \de \V{predot} \mydot \V{postdot}, \V{origin}, \V{current}}
 \]
 \textbf{corresponds} to the focus
 \[
-        \FA{FOCUS}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}
+        (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current})
 \]
-and vice versa.  \dfEnd
+and vice versa.
+We note that, while the focus specifies the focus symbol instance \V{A:f},
+the Earley item only specifies the LHS symbol \V{A}.
+Thus focus to Earley item correspondence is a many-to-one relationship.
+\dfEnd
 \end{definition}
 
 \begin{definition}[Soundness]
