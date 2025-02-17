@@ -395,11 +395,23 @@ for Earley's algorithm.\footnote{%
 
 \section{Conventions}
 \noindent $\bullet$
-``Iff'' (or ``iff'') abbreviates
-    ``if and only if''.
+``AF'' and its capitalization variants abbreviates
+``assumption for''.
+For example ``AF theorem'' abbreviates
+``assumption for the theorem''.
+\par
 \noindent $\bullet$
-``Wrt'' (or ``wrt'') abbreviates
+``Iff'' and its capitalization variants abbreviates
+``if and only if''.
+\par
+\noindent $\bullet$
+``Wlog'' and its capitialization variants abbreviates
+``without log of generality''.
+\par
+\noindent $\bullet$
+``Wrt'' and its capitalization variants abbreviates
     ``with respect to''.
+    \par
 \noindent $\bullet$
 Ranges are inclusive start,
     exclusive end, so that, for example,
@@ -407,6 +419,7 @@ Ranges are inclusive start,
             \element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
             \element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
         \end{gather*}
+\par
 \noindent $\bullet$ \TRUE is a boolean (or optional boolean) true; and
         \FALSE is a boolean (or optional boolean) false.
 
@@ -686,14 +699,14 @@ More formally,
 a focused derivation is a 6-tuple
 \begin{equation}
         \label{eq:df-fd-010}
-        \V{df} = (\V{drv}, \V{current}, \V{stepIX}, \V{focusPos}, \V{dotPos}, \V{origin})
+        \V{df} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPos}, \V{current}, \V{origin})
 \end{equation}
 where the following are true:
 \begin{MYsloppy}
-\par \noindent $\bullet$ \V{drv} is a derivation.
-\par \noindent $\bullet$ The initial segment of the input, \Velement{w}{0,\V{current}},
-is known.
-\par \noindent $\bullet$ \V{stepIX} is the index of the first step of the
+\par
+\noindent $\bullet$ \V{drv} is a derivation.
+\par
+\noindent $\bullet$ \V{stepIX} is the index of the first step of the
 \textbf{focal transition}, or simply \textbf{transition},
 of \V{fd}.
 That is, the focal transition is
@@ -715,7 +728,8 @@ where \size{\alpha} = \V{focusPos},
 and \V{A:f} is the focal symbol instance.
 We typically indicate the focal symbol instance with the tag ``\texttt{f}''.
 $\V{A} \de \V{rhs}$ is the focal rule.
-\par \noindent $\bullet$ The non-negative integer \V{dotPos} is the dot position
+\par
+\noindent $\bullet$ The non-negative integer \V{dotPos} is the dot position
 in the focal rule, so that the \textbf{focal dotted rule} may
 be written $\V{A} \de \V{predot} \mydot \V{postdot}$.
 Incorporating the dotted rule and the dot,
@@ -725,6 +739,13 @@ the focal transition can be written
         \alpha \cat \V{A:f} \cat \beta
         \derivesV{drv} \alpha \wcat \V{predot:2} \wmydot \V{postdot:2} \wcat \beta.
 \end{equation}
+\par
+\noindent $\bullet$
+\begin{equation}
+        \label{eq:df-fd-035}
+        \text{The initial segment of the input, \Velement{w}{0,\V{current}}, is known.}
+\end{equation}
+\par
 \noindent $\bullet$ The second step of the focal transition, up to the dot position,
         produces the input as far as the current location.
         That is,
@@ -732,6 +753,7 @@ the focal transition can be written
         \label{eq:df-fd-040}
         \alpha \cat \V{predot:2} \destarV{drv} \Velement{w}{0,\V{current}} \\
 \end{equation}
+\par
 \noindent $\bullet$ The second step of the focal transition, up to the start
         of the RHS string instance produces the input as far as \V{origin}:
 \begin{equation}
@@ -747,12 +769,13 @@ and the dot position indicated)
 a \textbf{decorated transition}.
 To specify a focused derivation,
 it suffices to specify a decorated transition;
+an assertion like \eqref{eq:df-fd-035}
+that the input is known up to
+the current location;
 an equation like \eqref{eq:df-fd-040}
-to name the
-variable used for the current location; and
+to describe the current location; and
 an equation like \eqref{eq:df-fd-050}
-to name the
-variable used for the origin location.
+to describe the origin location.
 
 The focus matching
 the focused derivation described
@@ -871,6 +894,7 @@ of \V{tributary}.
 
 \begin{definition}[Confirmation inflows]
 \label{df:confirmatin-inflows}
+\todo{Fix the inflow definitions}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = \FA{FOCUS}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
@@ -1084,6 +1108,7 @@ has the same current location as its downstream.
 
 \begin{lemma}[Antecedent helper]
 \label{lm:ante-help}
+        \todo{Delete this?}
         Unless a DI is a nulling completion,
         either its origin is properly before the current location,
         or it is a completion.
@@ -1594,21 +1619,26 @@ Therefore, with
 \begin{lemma}[Confirmation mainstem]
         \label{lm:conf-stem}
         Let \V{fd} be a confirmed FD.
-        \V{fd} is either a nulling completion,
-        or has a mainstem \Dfref{tangible-inflows}
-        whose location is the current location of \V{fd}
+        \V{fd} has a mainstem \Dfref{tangible-inflows}
+        which is not a nulling completion,
+        and whose location is the current location of \V{fd}
         less the length of the sentence produced by the predot symbol.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
-Let our confirmed FD be, without loss of generality,
+Let the focus dotted rule be a confirmed dotted rule:
 \begin{equation}
-        \label{eq:pr-conf-stem-003}
-        \V{fd} = (\V{f}, \V{drv})
+        \begin{gathered}
+        \label{eq:pr-conf-stem-010}
+        \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
+        \text{\cuz AF theorem, WLOG.}
+        \end{gathered}
 \end{equation}
-where
-        \todo{Revised to here}
+
+        without
+Let our confirmed FD be, without loss of generality,
+\todo{Revised to here}
 \begin{equation}
         \label{eq:pr-conf-stem-005}
         \begin{gathered}
