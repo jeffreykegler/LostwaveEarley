@@ -1635,11 +1635,12 @@ Therefore, with
 
 \begin{lemma}[Confirmation mainstem]
         \label{lm:conf-stem}
-        Let \V{fd} be a confirmed FD.
-        \V{fd} has a mainstem \Dfref{tangible-inflows}
-        which is not a nulling completion,
-        and whose location is the current location of \V{fd}
-        less the length of the sentence produced by the predot symbol.
+        Let \V{fdConf} be a confirmed FD.
+        \V{fdConf} has a mainstem \V{fdM}
+        at \V{joint}, where
+        \V{fdM} is not a nulling completion, and
+        \V{joint} is the current location of \V{fdConf}
+        less the length of the terminal string produced by the predot symbol.
         \lmEnd
 \end{lemma}
 
@@ -1649,17 +1650,17 @@ For the the focus dotted rule, we consider an arbitrary confirmed dotted rule,
         \begin{gathered}
         \label{eq:pr-conf-stem-005}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
-                \land \; \size{\V{antepredot} \cat \V{B}} = \V{dotPosTC}
+                \land \; \size{\V{antepredot} \cat \V{B}} = \V{dotPosConf}
         \text{\cuz AF theorem, WLOG.}
         \end{gathered}
 \end{equation}
-We assume for the theorem the FD \V{fdTC},
+We assume for the theorem the FD \V{fdConf},
 which is consistent with \eqref{eq:pr-conf-stem-005},
 and otherwise arbitrary:
 \begin{equation}
         \label{eq:pr-conf-stem-010}
         \begin{gathered}
-        \V{fdTC} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPosTC}, \V{currentTC}, \V{origin}) \\
+        \V{fdConf} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPosConf}, \V{currentConf}, \V{origin}) \\
                 \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-conf-stem-005}, WLOG.}
         \end{gathered}
 \end{equation}
@@ -1691,14 +1692,14 @@ the predot symbol instance.
 \begin{equation}
         \label{eq:pr-conf-stem-035}
         \begin{gathered}
-        \text{The initial segment of the input, \Velement{w}{0,\V{currentTC}}, is known} \\
+        \text{The initial segment of the input, \Velement{w}{0,\V{currentConf}}, is known} \\
         \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
         \label{eq:pr-conf-stem-040}
         \begin{gathered}
-        \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \destarV{drv} \Velement{w}{0,\V{currentTC}} \\
+        \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \destarV{drv} \Velement{w}{0,\V{currentConf}} \\
         \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
@@ -1711,7 +1712,7 @@ the predot symbol instance.
 \end{equation}
 \begin{equation}
         \label{eq:pr-conf-stem-070}
-        \V{B:pd} \destarV{drv} \Velement{w}{\V{currentM},\V{currentTC}}
+        \V{B:pd} \destarV{drv} \Velement{w}{\V{currentM},\V{currentConf}}
                 \cuz \eqref{eq:pr-conf-stem-040}.
 \end{equation}
 In \eqref{eq:pr-conf-stem-070} we label the origin location of \V{B},
@@ -1719,7 +1720,7 @@ In \eqref{eq:pr-conf-stem-070} we label the origin location of \V{B},
 \begin{equation}
         \label{eq:pr-conf-stem-080}
         \begin{gathered}
-        \V{origin} \le \V{currentM} \le \V{currentTC} \\
+        \V{origin} \le \V{currentM} \le \V{currentConf} \\
         \text{\cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-050}, \eqref{eq:pr-conf-stem-070}.}
         \end{gathered}
 \end{equation}
@@ -1742,7 +1743,7 @@ We know from \eqref{eq:pr-conf-stem-005} that
         \begin{gathered}
         \label{eq:pr-conf-stem-110}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
-                \land \; \size{\V{antepredot}} = (\V{dotPosTC} \subtract 1) \\
+                \land \; \size{\V{antepredot}} = (\V{dotPosConf} \subtract 1) \\
         \text{\cuz AF theorem, \eqref{eq:pr-conf-stem-005}, WLOG.}
         \end{gathered}
 \end{equation}
@@ -1768,7 +1769,7 @@ From the foregoing, we know we have the focused derivation,
         \label{eq:pr-conf-stem-200}
         \begin{gathered}
         \V{fdM} = \left( \; \begin{gathered}
-                \V{drv}, \V{stepIX}, \V{focusPos}, (\V{dotPosTC} \subtract 1), \\
+                \V{drv}, \V{stepIX}, \V{focusPos}, (\V{dotPosConf} \subtract 1), \\
                         \V{currentM}, \V{origin}
         \end{gathered} \; \right) \\
                 \cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
@@ -1790,9 +1791,23 @@ The Earley item of \eqref{eq:pr-conf-stem-200} is
         \cuz
         \Dfref{fd}, \Dfref{ei-focus-concept}, \Dfref{focus-fd-concept},
         \Dfref{confirmation-stem}, \eqref{eq:pr-conf-stem-200} \eqref{eq:pr-conf-stem-210}.
-        } \end{equation}
-\todo{need to prove this is actually a mainstem of \V{fdTC}}
-\todo{Revised to here}
+        }
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-225}
+        \myparbox{\V{fdM} is not a completion \cuz \eqref{eq:pr-conf-stem-210}.}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-230}
+        \myparbox{
+                \V{currentM}, the location of \V{fdM}, is the current location of \V{fdConf}
+                less the length of the terminal string produced by the predot symbol
+                \cuz \eqref{eq:pr-conf-stem-070}.
+        }
+\end{equation}
+Equations \eqref{eq:pr-conf-stem-220}, \eqref{eq:pr-conf-stem-225},
+and \eqref{eq:pr-conf-stem-230}
+are what we needed to show for the theorem.
 \myqed
 \end{proof}
 
