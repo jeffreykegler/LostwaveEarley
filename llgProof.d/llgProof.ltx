@@ -1632,34 +1632,27 @@ Therefore, with
 
 \begin{proof}
         \todo{Now working on this one}
-We assume for the theorem the FD \V{fdTC},
-which is consistent with \eqref{eq:pr-tc-stem-010},
-and otherwise arbitrary:
-\begin{equation}
-        \label{eq:df-fd-010}
-        \begin{gathered}
-        \V{fdTC} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPosTC}, \V{currentTC}, \V{origin}) \\
-        \text{\cuz AF theorem, WLOG.}
-        \end{gathered}
-\end{equation}
-Let the focus dotted rule be an arbitrary confirmed dotted rule.
+For the the focus dotted rule, we consider an arbitrary confirmed dotted rule,
 \begin{equation}
         \begin{gathered}
-        \label{eq:pr-tc-stem-050}
+        \label{eq:pr-tc-stem-005}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
-                \land \; \size{\V{antepredot} \cat V{B}} = \V{dotPosTC}
+                \land \; \size{\V{antepredot} \cat \V{B}} = \V{dotPosTC}
         \text{\cuz AF theorem, \eqref{eq:df-fd-010}, WLOG.}
         \end{gathered}
 \end{equation}
-The focus symbol instance will be \V{A:f}.
-Other major instance tags will be
-``\texttt{L}'' to indicate
-an instance from the LHS step of the transition;
-``\texttt{R}'' to indicate
-an instance from the LHS step of the transition; and
-``\texttt{pd}'' to indicate
-the predot symbol instance.
-\todo{Define predot symbol instance}
+We assume for the theorem the FD \V{fdTC},
+which is consistent with \eqref{eq:pr-tc-stem-005},
+and otherwise arbitrary:
+\begin{equation}
+        \label{eq:pr-tc-stem-010}
+        \begin{gathered}
+        \V{fdTC} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPosTC}, \V{currentTC}, \V{origin}) \\
+                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-tc-stem-005}, WLOG.}
+        \end{gathered}
+\end{equation}
+A focal transition consistent with the preceeding,
+and otherwise arbitrary, is
 \begin{equation}
         \label{eq:pr-tc-stem-030}
         \begin{gathered}
@@ -1670,9 +1663,19 @@ the predot symbol instance.
                 \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \wmydot \\
                 \qquad \qquad \V{postdot:R} \wcat \V{postFocus:R}
                 \; \end{gathered} \right) \\
-                \text{\cuz \eqref{eq:pr-tc-stem-010}, \eqref{eq:pr-tc-stem-015}.}
+                \text{\cuz \Dfref{fd}, \eqref{eq:pr-tc-stem-005}, \eqref{eq:pr-tc-stem-010}.}
         \end{gathered}
 \end{equation}
+\todo{Define predot symbol instance}
+In \eqref{eq:pr-tc-stem-030},
+the focus symbol instance is \V{A:f}.
+Other major instance tags will be
+``\texttt{L}'' to indicate
+an instance from the LHS step of the transition;
+``\texttt{R}'' to indicate
+an instance from the LHS step of the transition; and
+``\texttt{pd}'' to indicate
+the predot symbol instance.
 \begin{equation}
         \label{eq:pr-tc-stem-035}
         \begin{gathered}
