@@ -793,6 +793,7 @@ A well-defined focused derivation has exactly one focus.
 \end{definition}
 
 \begin{definition}[Earley item to focus correspondence]
+        \label{df:earley-item-to-focus}
 The Earley item
 \[
         \tuple{\V{A} \de \V{predot} \mydot \V{postdot}, \V{origin}, \V{current}}
@@ -809,6 +810,7 @@ Thus focus to Earley item correspondence is a many-to-one relationship.
 \end{definition}
 
 \begin{definition}[Earley item concepts and focuses]
+\label{df:ei-focus-concept}
         An Earley item concept applied to a focus
         applies to the Earley item of the focus.
         For example, a focused derivation
@@ -848,6 +850,7 @@ to be both sound and complete.
 \end{definition}
 
 \begin{definition}[Focus concepts and focused derivations]
+        \label{df:focus-fd-concept}
         An focus concept applies to a focused derivation
         if it applies to the focus of the focused derivation.
         For example, the Earley item of a focused derivation
@@ -1630,8 +1633,8 @@ Therefore, with
 \myqed
 \end{proof}
 
-\begin{lemma}[Tangible confirmation mainstem]
-        \label{lm:tc-stem}
+\begin{lemma}[Confirmation mainstem]
+        \label{lm:conf-stem}
         Let \V{fd} be a confirmed FD.
         \V{fd} has a mainstem \Dfref{tangible-inflows}
         which is not a nulling completion,
@@ -1641,30 +1644,29 @@ Therefore, with
 \end{lemma}
 
 \begin{proof}
-        \todo{Now working on this one}
 For the the focus dotted rule, we consider an arbitrary confirmed dotted rule,
 \begin{equation}
         \begin{gathered}
-        \label{eq:pr-tc-stem-005}
+        \label{eq:pr-conf-stem-005}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
                 \land \; \size{\V{antepredot} \cat \V{B}} = \V{dotPosTC}
-        \text{\cuz AF theorem, \eqref{eq:df-fd-010}, WLOG.}
+        \text{\cuz AF theorem, WLOG.}
         \end{gathered}
 \end{equation}
 We assume for the theorem the FD \V{fdTC},
-which is consistent with \eqref{eq:pr-tc-stem-005},
+which is consistent with \eqref{eq:pr-conf-stem-005},
 and otherwise arbitrary:
 \begin{equation}
-        \label{eq:pr-tc-stem-010}
+        \label{eq:pr-conf-stem-010}
         \begin{gathered}
         \V{fdTC} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPosTC}, \V{currentTC}, \V{origin}) \\
-                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-tc-stem-005}, WLOG.}
+                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-conf-stem-005}, WLOG.}
         \end{gathered}
 \end{equation}
 A focal transition consistent with the preceeding,
 and otherwise arbitrary, is
 \begin{equation}
-        \label{eq:pr-tc-stem-030}
+        \label{eq:pr-conf-stem-030}
         \begin{gathered}
         \Velement{drv}{\V{stepIX},(\V{stepIX}+1} = \\
         \V{anteFocus:L} \wcat \V{A:f} \wcat \V{postFocus:L} \\
@@ -1673,11 +1675,11 @@ and otherwise arbitrary, is
                 \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \wmydot \\
                 \qquad \qquad \V{postdot:R} \wcat \V{postFocus:R}
                 \; \end{gathered} \right) \\
-                \text{\cuz \Dfref{fd}, \eqref{eq:pr-tc-stem-005}, \eqref{eq:pr-tc-stem-010}.}
+                \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-005}, \eqref{eq:pr-conf-stem-010}.}
         \end{gathered}
 \end{equation}
 \todo{Define predot symbol instance}
-In \eqref{eq:pr-tc-stem-030},
+In \eqref{eq:pr-conf-stem-030},
 the focus symbol instance is \V{A:f}.
 Other major instance tags will be
 ``\texttt{L}'' to indicate
@@ -1687,70 +1689,69 @@ an instance from the LHS step of the transition; and
 ``\texttt{pd}'' to indicate
 the predot symbol instance.
 \begin{equation}
-        \label{eq:pr-tc-stem-035}
+        \label{eq:pr-conf-stem-035}
         \begin{gathered}
         \text{The initial segment of the input, \Velement{w}{0,\V{currentTC}}, is known} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-tc-stem-010}, \eqref{eq:pr-tc-stem-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-tc-stem-040}
+        \label{eq:pr-conf-stem-040}
         \begin{gathered}
         \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \destarV{drv} \Velement{w}{0,\V{currentTC}} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-tc-stem-010}, \eqref{eq:pr-tc-stem-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-tc-stem-050}
+        \label{eq:pr-conf-stem-050}
         \begin{gathered}
         \V{anteFocus:R} \destarV{drv} \Velement{w}{0,\V{origin}} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-tc-stem-010}, \eqref{eq:pr-tc-stem-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-tc-stem-070}
-        \V{B:pd} \destarV{drv} \Velement{w}{\V{currentM},\V{currentTC}} 
-                \cuz \eqref{eq:pr-tc-stem-040}.
+        \label{eq:pr-conf-stem-070}
+        \V{B:pd} \destarV{drv} \Velement{w}{\V{currentM},\V{currentTC}}
+                \cuz \eqref{eq:pr-conf-stem-040}.
 \end{equation}
-In \eqref{eq:pr-tc-stem-070} we label the origin location of \V{B},
+In \eqref{eq:pr-conf-stem-070} we label the origin location of \V{B},
 \V{currentM}, for reasons that will become clear later in this proof.
 \begin{equation}
-        \label{eq:pr-tc-stem-080}
+        \label{eq:pr-conf-stem-080}
         \begin{gathered}
         \V{origin} \le \V{currentM} \le \V{currentTC} \\
-        \text{\cuz \eqref{eq:pr-tc-stem-040}, \eqref{eq:pr-tc-stem-050}, \eqref{eq:pr-tc-stem-070}.}
+        \text{\cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-050}, \eqref{eq:pr-conf-stem-070}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-tc-stem-090}
+        \label{eq:pr-conf-stem-090}
         \begin{gathered}
         \text{The initial segment of the input, \Velement{w}{0,\V{currentM}}, is known} \\
-        \text{\cuz \eqref{eq:pr-tc-stem-035}, \eqref{eq:pr-tc-stem-080}.}
+        \text{\cuz \eqref{eq:pr-conf-stem-035}, \eqref{eq:pr-conf-stem-080}.}
         \end{gathered}
 \end{equation}
-\todo{Revised to here}
 \begin{equation}
-        \label{eq:pr-tc-stem-100}
+        \label{eq:pr-conf-stem-100}
         \begin{gathered}
         \V{anteFocus:L} \wcat \V{antepredot:R} \destarV{drv} \Velement{w}{0,\V{currentM}} \\
-        \text{\cuz \eqref{eq:pr-tc-stem-040}, \eqref{eq:pr-tc-stem-070}.}
+        \text{\cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-070}.}
         \end{gathered}
 \end{equation}
-We know from \eqref{eq:pr-tc-stem-050} that
+We know from \eqref{eq:pr-conf-stem-005} that
 \begin{equation}
         \begin{gathered}
-        \label{eq:pr-tc-stem-110}
+        \label{eq:pr-conf-stem-110}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
                 \land \; \size{\V{antepredot}} = (\V{dotPosTC} \subtract 1) \\
-        \text{\cuz AF theorem, \eqref{eq:df-fd-010}, WLOG.}
+        \text{\cuz AF theorem, \eqref{eq:pr-conf-stem-005}, WLOG.}
         \end{gathered}
 \end{equation}
 will also be a dotted rule in our grammar \V{g}.
-We get \eqref{eq:pr-tc-stem-120}
+We get \eqref{eq:pr-conf-stem-120}
 by changing the decoration of
-\eqref{eq:pr-tc-stem-030} to align with \eqref{eq:pr-tc-stem-110}.
+\eqref{eq:pr-conf-stem-030} to align with \eqref{eq:pr-conf-stem-110}.
 \begin{equation}
-        \label{eq:pr-tc-stem-120}
+        \label{eq:pr-conf-stem-120}
         \begin{gathered}
                 \Velement{drv}{\V{stepIX},(\V{stepIX}+1)} = \\
         \V{anteFocus:L} \wcat \V{A:f} \wcat \V{postFocus:L} \\
@@ -1759,18 +1760,37 @@ by changing the decoration of
                 \V{anteFocus:L} \wcat \V{antepredot:R} \wmydot \qquad \\
                         \qquad \V{B:pd} \wcat \V{postdot:R} \wcat \V{postFocus:R}
                 \; \end{gathered} \right) \\
-                \text{\cuz \eqref{eq:pr-tc-stem-030}, \eqref{eq:pr-tc-stem-110}.}
+                \text{\cuz \eqref{eq:pr-conf-stem-030}, \eqref{eq:pr-conf-stem-110}.}
         \end{gathered}
 \end{equation}
-\todo{define mainstem of tangible reduction FD}
-\todo{need to fill in here}
+From the foregoing, we know we have the focused derivation,
 \begin{equation}
-        \label{eq:pr-tc-stem-200}
+        \label{eq:pr-conf-stem-200}
+        \begin{gathered}
         \V{fdM} = \left( \; \begin{gathered}
                 \V{drv}, \V{stepIX}, \V{focusPos}, (\V{dotPosTC} \subtract 1), \\
                         \V{currentM}, \V{origin}
-        \end{gathered} \; \right)
+        \end{gathered} \; \right) \\
+                \cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
+                        \eqref{eq:pr-conf-stem-110}, \eqref{eq:pr-conf-stem-120}.
+        \end{gathered}
 \end{equation}
+\todo{Revised to here}
+The Earley item of \eqref{eq:pr-conf-stem-200} is
+\begin{equation}
+        \label{eq:pr-conf-stem-210}
+        \begin{gathered}
+        \tuple{\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{currentM}} \\
+                \cuz \Dfref{fd}, \Dfref{earley-item-to-focus}, \eqref{eq:pr-conf-stem-200}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-220}
+        \myparbox{\V{fdM} is a mainstem of \V{fdConf} at \V{currentM}
+        \cuz
+        \Dfref{fd}, \Dfref{ei-focus-concept}, \Dfref{focus-fd-concept},
+        \Dfref{confirmation-stem}, \eqref{eq:pr-conf-stem-200} \eqref{eq:pr-conf-stem-210}.
+        } \end{equation}
 \todo{need to prove this is actually a mainstem of \V{fdTC}}
 \todo{Revised to here}
 \myqed
