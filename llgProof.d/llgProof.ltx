@@ -786,10 +786,10 @@ the focused derivation described
 in \eqref{eq:df-fd-030}, \eqref{eq:df-fd-040}, and \eqref{eq:df-fd-050} is
 \begin{equation}
         \label{eq:df-fd-060}
-        (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).  \qquad \dfEnd
+        (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current}).
 \end{equation}
 A well-defined focused derivation has exactly one focus.
-\qquad \dfEnd
+\dfEnd
 \end{definition}
 
 \begin{definition}[Earley item to focus correspondence]
@@ -808,11 +808,19 @@ Thus focus to Earley item correspondence is a many-to-one relationship.
 \dfEnd
 \end{definition}
 
+\begin{definition}[Earley item concepts and focuses]
+        An Earley item concept applied to a focus
+        applies to the Earley item of the focus.
+        For example, a focused derivation
+        is a reduction if its Earley item is a reduction.
+        \qquad \dfEnd
+\end{definition}
+
 \begin{definition}[Soundness]
 A set of Earley items is \textbf{sound} for an input \V{w} iff
 the corresponding focus of every Earley item
 matches a derivation with input \V{w}.
-\dfEnd
+\qquad \dfEnd
 \end{definition}
 
 \begin{definition}[Completeness]
@@ -839,13 +847,12 @@ to be both sound and complete.
 \dfEnd
 \end{definition}
 
-\begin{definition}[DI concepts and Earley items]
-        An Earley item concept applied to a DI
-        is true iff the concept is true of the
-        corresponding Earley item of the DI.
-        For example, an Earley item is a reduction
-        iff its corresponding DI is a reduction.
-        \dfEnd
+\begin{definition}[Focus concepts and focused derivations]
+        An focus concept applies to a focused derivation
+        if it applies to the focus of the focused derivation.
+        For example, the Earley item of a focused derivation
+        is the Earley item of its focus.
+        \qquad \dfEnd
 \end{definition}
 
 \begin{definition}[Tangible symbol]
@@ -874,6 +881,8 @@ to be both sound and complete.
 
 \begin{definition}[Tangible reduction inflows]
 \label{df:tangible-inflows}
+\todo{Fix the inflow definitions}
+\todo{Change this to a tributary definition?}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = \FA{FOCUS}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
@@ -896,27 +905,20 @@ We also say that
 of \V{tributary}.
 \end{definition}
 
-\begin{definition}[Confirmation inflows]
-\label{df:confirmatin-inflows}
-\todo{Fix the inflow definitions}
+\begin{definition}[Confirmation mainstem]
+\label{df:confirmation-stem}
         Suppose, without loss of generality, that
 \begin{equation}
-        \V{down} = \FA{FOCUS}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
+        \V{down} = (\V{A} \de \V{antepredotA} \cat \V{B} \mydot \V{postdot}, \V{origin},\V{current})
 \end{equation}
-is an confirmed focus
+is an confirmed Earley item.
 Then we say that
-a DI of the form
+a Earley item of the form
 \begin{equation*}
-        \V{mainstem} =
-        \FA{FOCUS}{
-        \begin{gathered}
-        \; \V{antepredotA}, \; \V{B}\cat\V{postdotA}, \; \\
-                \V{A},\; \V{origin},\; \V{current}
-        \end{gathered}
-}
+        \V{stem} = (\V{A} \de \V{antepredotA} \mydot \V{B} \cat \V{postdot}, \V{origin},\V{joint}).
 \end{equation*}
-        is a \textbf{mainstem} of
-        \V{down}.
+is a \textbf{mainstem} of
+\V{down} at input location \V{joint}.
 We also say that \V{down} is the \textbf{downstream channel}
 (or simply \textbf{downstream})
 of \V{mainstem}.
