@@ -699,7 +699,7 @@ More formally,
 a focused derivation is a 6-tuple
 \begin{equation}
         \label{eq:df-fd-010}
-        \V{df} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPos}, \V{current}, \V{origin})
+        \V{df} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPos}, \V{origin}, \V{current})
 \end{equation}
 where the following are true:
 \begin{MYsloppy}
@@ -1348,7 +1348,7 @@ From the foregoing, we know we have the focused derivation,
         \begin{gathered}
         \V{fdM} = \left( \; \begin{gathered}
                 \V{drv}, \V{stepIX}, \V{focusPos}, (\V{dotPosConf} \subtract 1), \\
-                        \V{currentM}, \V{origin}
+                        \V{origin}, \V{currentM}
         \end{gathered} \; \right) \\
                 \cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
                         \eqref{eq:pr-conf-stem-110}, \eqref{eq:pr-conf-stem-120}.
@@ -1502,7 +1502,12 @@ and let
         \V{B:pd} \de \V{rhsB} \mydot \cuz \eqref{eq:pr-red-tr-090}
 \end{equation}
 be the dotted rule of transition B.
-Transition B may be written
+For convenience, we will create an alternative major instance tag for \V{B:pd},
+\begin{equation}
+        \label{eq:pr-red-tr-105}
+        \V{B:f} = \V{B:pd} \text{ \cuz renaming,}
+\end{equation}
+so that transition B may be written
 \begin{equation}
         \label{eq:pr-red-tr-110}
         \begin{gathered}
@@ -1510,8 +1515,24 @@ Transition B may be written
         \V{anteFocusB:Lb} \wcat \V{B:f} \wcat \V{postFocusB:Lb} \\
         \derivesV{drv}
                 \V{anteFocusB:Lb} \wcat \V{rhsB} \wmydot \V{postFocusB:Lb} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-red-tr-030},
-                \eqref{eq:pr-red-tr-090}, \eqref{eq:pr-red-tr-100}, WLOG.}
+        \text{\cuz \eqref{eq:pr-red-tr-030},
+                \eqref{eq:pr-red-tr-090}, \eqref{eq:pr-red-tr-100},
+                \eqref{eq:pr-red-tr-105}, WLOG;}
+        \end{gathered}
+\end{equation}
+where
+\begin{equation}
+        \label{eq:pr-red-tr-140}
+        \begin{gathered}
+        \V{anteFocusB:Lb} \wcat \V{rhsB} \destarV{drv} \Velement{w}{0,\V{current}} \\
+        \text{\cuz \eqref{eq:pr-red-tr-040}, \eqref{eq:pr-red-tr-090}; and}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-red-tr-150}
+        \begin{gathered}
+        \V{anteFocusB:Lb} \destarV{drv} \Velement{w}{0,\V{joint}} \\
+        \text{\cuz \eqref{eq:pr-red-tr-040}, \eqref{eq:pr-red-tr-090}.}
         \end{gathered}
 \end{equation}
 \todo{Revised to here}
