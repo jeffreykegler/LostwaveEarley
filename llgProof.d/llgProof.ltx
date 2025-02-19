@@ -1500,61 +1500,7 @@ We recall that we assumed for the theorem that \V{fdConf} is tangible,
 \end{lemma}
 
 \begin{proof}
-\todo{Check proof from here}
-        We assumed for the lemma that we have an prediction DI.
-        Without loss of generality, let this be
-\begin{equation}
-        \label{eq:pr-pred-main-5}
-        \V{down} = \FA{DI}{\epsilon,\V{rhsA},\V{A:focus},\V{current},\V{current}}, \\
-\end{equation}
-where
-\begin{gather}
-        \label{eq:pr-pred-main-10}
-\V{rhsA} \in(\V{N}\cup\V{T})^\ast, \\
-        \label{eq:pr-pred-main-16}
-\text{\V{down} is not a nulling completion.}
-\end{gather}
-
-        We can expand the DI \V{down} in \ref{eq:pr-rm-di} to
-\begin{gather}
-        \label{eq:pr-pred-main-20}
-        \V{rhsA} \in (\V{N} \cup \V{T})^\ast \\
-        \land \; (\V{A} \de \V{rhsA}) \in \V{P} \text{, and} \\
-        \label{eq:pr-pred-main-24}
-        \left( \begin{gathered}
-                \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                ( \V{current} < \V{current} \lor \V{rhsA} \neq \epsilon ) \implies \\
-                \left( \begin{gathered}
-                \V{S} \destar \Velement{w}{0,\V{current}} \cat \V{A} \cat \V{unseen} \\
-                        \destar \Velement{w}{0,\V{current}} \mydot \V{rhsA} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{rhsA} \cat \V{unseen}
-                \end{gathered} \right)
-                }
-        \end{gathered} \right).
-\end{gather}
-We know by assumption for the lemma that
-        \begin{equation}
-                \label{eq:pr-pred-main-030}
-                \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{rhsA} = \epsilon) \,\cuz\, \eqref{eq:pr-pred-main-16}.
-        \end{equation}
-Using the helper lemma,
-\begin{equation}
-                \label{eq:pr-pred-main-040}
-                \V{current} < \V{current} \lor \V{rhsA} \neq \epsilon
-                        \,\cuz\, \eqref{eq:pr-pred-main-030}, \Lmref{ante-help},
-\end{equation}
-we simplify \eqref{eq:pr-pred-main-24} to
-\begin{equation}
-        \label{eq:pr-pred-main-050}
-        \begin{gathered}
-        \existQ{ \V{unseen} \in (\V{N}\cup\V{T})^\ast }{ \\
-                \V{S} \destar \Velement{w}{0,\V{current}} \cat \V{A} \cat \V{unseen} \\
-                \destar \Velement{w}{0,\V{current}} \mydot \V{rhsA} \cat \V{unseen}
-        } \\
-        \cuz \eqref{eq:pr-pred-main-24}, \eqref{eq:pr-pred-main-040}.
-        \end{gathered}
-\end{equation}
-\todo{Finish proof}
+\todo{Write this proof}
 \myqed
 \end{proof}
 
