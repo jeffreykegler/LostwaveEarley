@@ -1827,7 +1827,7 @@ are what we needed to show for the theorem.
 For the focus dotted rule, we consider an arbitrary reduction dotted rule,
 \begin{equation}
         \begin{gathered}
-        \label{eq:pr-conf-tr-005}
+        \label{eq:pr-red-tr-005}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
                 \land \; \size{\V{antepredot} \cat \V{B}} = \V{dotPosConf} \\
                 \land \; \V{B} \in \V{N} \\
@@ -1835,21 +1835,21 @@ For the focus dotted rule, we consider an arbitrary reduction dotted rule,
         \end{gathered}
 \end{equation}
 We assume for the theorem the FD \V{fdConf},
-which is consistent with \eqref{eq:pr-conf-tr-005},
+which is consistent with \eqref{eq:pr-red-tr-005},
 and otherwise arbitrary:
 \begin{equation}
-        \label{eq:pr-conf-tr-010}
+        \label{eq:pr-red-tr-010}
         \begin{gathered}
                 \V{fdConf} = \left( \begin{gathered} \;
                         \V{drv}, \V{stepAix}, \V{focusApos}, \V{dotPosConf}, \\
                                  \V{current}, \V{originConf}
                          \; \end{gathered} \right) \\
-                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-conf-tr-005}, WLOG.}
+                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-red-tr-005}, WLOG.}
         \end{gathered}
 \end{equation}
 A focal transition consistent with the preceeding is
 \begin{equation}
-        \label{eq:pr-conf-tr-030}
+        \label{eq:pr-red-tr-030}
         \begin{gathered}
                 \Velement{drv}{\V{stepAix},(\V{stepAix}+1)} = \\
         \V{anteFocusA:La} \wcat \V{A:f} \wcat \V{postFocusA:La} \\
@@ -1858,12 +1858,12 @@ A focal transition consistent with the preceeding is
                 \V{anteFocusA:La} \wcat \V{antepredotA:Ra} \wcat \V{B:pd} \wmydot \\
                 \qquad \qquad \V{postdotA:Ra} \wcat \V{postFocusA:La}
                 \; \end{gathered} \right) \\
-                \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-tr-005}, \eqref{eq:pr-conf-tr-010}, WLOG.}
+                \text{\cuz \Dfref{fd}, \eqref{eq:pr-red-tr-005}, \eqref{eq:pr-red-tr-010}, WLOG.}
         \end{gathered}
 \end{equation}
-We will call the transition of \V{fdConf} and \eqref{eq:pr-conf-tr-030},
+We will call the transition of \V{fdConf} and \eqref{eq:pr-red-tr-030},
 ``transition A''.
-In \eqref{eq:pr-conf-tr-030},
+In \eqref{eq:pr-red-tr-030},
 the focus symbol instance is \V{A:f}.
 Other major instance tags will be
 ``\texttt{La}'' to indicate
@@ -1873,128 +1873,43 @@ an instance from the LHS step of transition A; and
 ``\texttt{pdA}'' to indicate
 the predot symbol instance of transition A.
 \begin{equation}
-        \label{eq:pr-conf-tr-035}
+        \label{eq:pr-red-tr-035}
         \begin{gathered}
         \text{The initial segment of the input, \Velement{w}{0,\V{current}}, is known} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-tr-010}, \eqref{eq:pr-conf-tr-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-red-tr-010}, \eqref{eq:pr-red-tr-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-tr-040}
+        \label{eq:pr-red-tr-040}
         \begin{gathered}
         \V{anteFocus:La} \wcat \V{antepredot:Ra} \wcat \V{B:pd} \destarV{drv} \Velement{w}{0,\V{current}} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-tr-010}, \eqref{eq:pr-conf-tr-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-red-tr-010}, \eqref{eq:pr-red-tr-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-tr-050}
+        \label{eq:pr-red-tr-050}
         \begin{gathered}
         \V{anteFocus:Ra} \destarV{drv} \Velement{w}{0,\V{originConf}} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-tr-010}, \eqref{eq:pr-conf-tr-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-red-tr-010}, \eqref{eq:pr-red-tr-030}.}
         \end{gathered}
 \end{equation}
 We recall that we assumed for the theorem that \V{fdConf} is tangible,
 \begin{gather}
-        \label{eq:pr-conf-tr-070}
+        \label{eq:pr-red-tr-070}
         \V{B:pd} \destarV{drv} \Velement{w}{\V{joint},\V{current}} \\
-        \label{eq:pr-conf-tr-075}
+        \label{eq:pr-red-tr-075}
         \land \; \V{joint} < \V{current} \\
-                \nonumber \cuz \eqref{eq:pr-conf-tr-040}.
+                \nonumber \cuz \eqref{eq:pr-red-tr-040}.
 \end{gather}
-In \eqref{eq:pr-conf-tr-070} we label the origin location of \V{B},
-\V{currentM}, for reasons that will become clear later in this proof.
 \begin{equation}
-        \label{eq:pr-conf-tr-080}
+        \label{eq:pr-red-tr-080}
         \begin{gathered}
         \V{originConf} \le \V{joint} < \V{current} \\
-        \text{\cuz \eqref{eq:pr-conf-tr-040}, \eqref{eq:pr-conf-tr-050},
-                \eqref{eq:pr-conf-tr-070}, \eqref{eq:pr-conf-tr-075}.}
+        \text{\cuz \eqref{eq:pr-red-tr-040}, \eqref{eq:pr-red-tr-050},
+                \eqref{eq:pr-red-tr-070}, \eqref{eq:pr-red-tr-075}.}
         \end{gathered}
 \end{equation}
 \todo{Revised to here}
-\begin{equation}
-        \label{eq:pr-conf-tr-090}
-        \begin{gathered}
-        \text{The initial segment of the input, \Velement{w}{0,\V{current}}, is known} \\
-        \text{\cuz \eqref{eq:pr-conf-tr-035}, \eqref{eq:pr-conf-tr-080}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
-        \label{eq:pr-conf-tr-100}
-        \begin{gathered}
-        \V{anteFocus:L} \wcat \V{antepredot:R} \destarV{drv} \Velement{w}{0,\V{currentM}} \\
-        \text{\cuz \eqref{eq:pr-conf-tr-040}, \eqref{eq:pr-conf-tr-070}.}
-        \end{gathered}
-\end{equation}
-We know from \eqref{eq:pr-conf-tr-005} that
-\begin{equation}
-        \begin{gathered}
-        \label{eq:pr-conf-tr-110}
-        \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
-                \land \; \size{\V{antepredot}} = (\V{dotPosConf} \subtract 1) \\
-        \text{\cuz AF theorem, \eqref{eq:pr-conf-tr-005}, WLOG.}
-        \end{gathered}
-\end{equation}
-will also be a dotted rule in our grammar \V{g}.
-We get \eqref{eq:pr-conf-tr-120}
-by changing the decoration of
-\eqref{eq:pr-conf-tr-030} to align with \eqref{eq:pr-conf-tr-110}.
-\begin{equation}
-        \label{eq:pr-conf-tr-120}
-        \begin{gathered}
-                \Velement{drv}{\V{stepAix},(\V{stepAix}+1)} = \\
-        \V{anteFocus:L} \wcat \V{A:f} \wcat \V{postFocus:L} \\
-        \derivesV{drv}
-                \left( \begin{gathered} \;
-                \V{anteFocus:L} \wcat \V{antepredot:R} \wmydot \qquad \\
-                        \qquad \V{B:pd} \wcat \V{postdot:R} \wcat \V{postFocus:R}
-                \; \end{gathered} \right) \\
-                \text{\cuz \eqref{eq:pr-conf-tr-030}, \eqref{eq:pr-conf-tr-110}.}
-        \end{gathered}
-\end{equation}
-From the foregoing, we know we have the focused derivation,
-\begin{equation}
-        \label{eq:pr-conf-tr-200}
-        \begin{gathered}
-        \V{fdM} = \left( \; \begin{gathered}
-                \V{drv}, \V{stepAix}, \V{focusPos}, (\V{dotPosConf} \subtract 1), \\
-                        \V{currentM}, \V{originConf}
-        \end{gathered} \; \right) \\
-                \cuz \Dfref{fd}, \eqref{eq:pr-conf-tr-090}, \eqref{eq:pr-conf-tr-100},
-                        \eqref{eq:pr-conf-tr-110}, \eqref{eq:pr-conf-tr-120}.
-        \end{gathered}
-\end{equation}
-The Earley item of \eqref{eq:pr-conf-tr-200} is
-\begin{equation}
-        \label{eq:pr-conf-tr-210}
-        \begin{gathered}
-        \tuple{\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{originConf}, \V{currentM}} \\
-                \cuz \Dfref{fd}, \Dfref{earley-item-to-focus}, \eqref{eq:pr-conf-tr-200}.
-        \end{gathered}
-\end{equation}
-\begin{equation}
-        \label{eq:pr-conf-tr-220}
-        \myparbox{\V{fdM} is a mainstem of \V{fdConf} at \V{currentM}
-        \cuz
-        \Dfref{fd}, \Dfref{ei-focus-concept}, \Dfref{focus-fd-concept},
-        \Dfref{confirmation-stem}, \eqref{eq:pr-conf-tr-200} \eqref{eq:pr-conf-tr-210}.
-        }
-\end{equation}
-\begin{equation}
-        \label{eq:pr-conf-tr-225}
-        \myparbox{\V{fdM} is not a completion \cuz \eqref{eq:pr-conf-tr-210}.}
-\end{equation}
-\begin{equation}
-        \label{eq:pr-conf-tr-230}
-        \myparbox{
-                \V{currentM}, the location of \V{fdM}, is the current location of \V{fdConf}
-                less the length of the terminal string produced by the predot symbol
-                \cuz \eqref{eq:pr-conf-tr-070}.
-        }
-\end{equation}
-Equations \eqref{eq:pr-conf-tr-220}, \eqref{eq:pr-conf-tr-225},
-and \eqref{eq:pr-conf-tr-230}
-are what we needed to show for the theorem.
 \myqed
 \end{proof}
 
