@@ -1776,7 +1776,6 @@ From the foregoing, we know we have the focused derivation,
                         \eqref{eq:pr-conf-stem-110}, \eqref{eq:pr-conf-stem-120}.
         \end{gathered}
 \end{equation}
-\todo{Revised to here}
 The Earley item of \eqref{eq:pr-conf-stem-200} is
 \begin{equation}
         \label{eq:pr-conf-stem-210}
@@ -1840,10 +1839,14 @@ and otherwise arbitrary:
 \begin{equation}
         \label{eq:pr-conf-tr-010}
         \begin{gathered}
-        \V{fdConf} = (\V{drv}, \V{stepAix}, \V{focusApos}, \V{dotPosConf}, \V{current}, \V{originConf}) \\
+                \V{fdConf} = \left( \begin{gathered} \;
+                        \V{drv}, \V{stepAix}, \V{focusApos}, \V{dotPosConf}, \\
+                                 \V{current}, \V{originConf}
+                         \; \end{gathered} \right) \\
                 \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-conf-tr-005}, WLOG.}
         \end{gathered}
 \end{equation}
+\todo{Revised to here}
 A focal transition consistent with the preceeding,
 and otherwise arbitrary, is
 \begin{equation}
@@ -1854,7 +1857,7 @@ and otherwise arbitrary, is
         \derivesV{drv}
                 \left( \begin{gathered} \;
                 \V{anteFocusA:La} \wcat \V{antepredotA:Ra} \wcat \V{B:pd} \wmydot \\
-                \qquad \qquad \V{postdotA:Ra} \wcat \V{postFocus:Ra}
+                \qquad \qquad \V{postdotA:Ra} \wcat \V{postFocusA:Ra}
                 \; \end{gathered} \right) \\
                 \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-tr-005}, \eqref{eq:pr-conf-tr-010}.}
         \end{gathered}
@@ -1957,7 +1960,6 @@ From the foregoing, we know we have the focused derivation,
                         \eqref{eq:pr-conf-tr-110}, \eqref{eq:pr-conf-tr-120}.
         \end{gathered}
 \end{equation}
-\todo{Revised to here}
 The Earley item of \eqref{eq:pr-conf-tr-200} is
 \begin{equation}
         \label{eq:pr-conf-tr-210}
