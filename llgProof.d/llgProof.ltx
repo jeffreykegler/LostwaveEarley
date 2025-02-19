@@ -1420,7 +1420,7 @@ and otherwise arbitrary:
         \begin{gathered}
                 \V{fdConf} = \left( \begin{gathered} \;
                         \V{drv}, \V{stepAix}, \V{focusApos}, \V{dotPosConf}, \\
-                                 \V{current}, \V{originConf}
+                                 \V{originConf}, \V{current}
                          \; \end{gathered} \right) \\
                 \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-red-tr-005}, WLOG.}
         \end{gathered}
@@ -1485,6 +1485,33 @@ We recall that we assumed for the theorem that \V{fdConf} is tangible,
         \V{originConf} \le \V{joint} < \V{current} \\
         \text{\cuz \eqref{eq:pr-red-tr-040}, \eqref{eq:pr-red-tr-050},
                 \eqref{eq:pr-red-tr-070}, \eqref{eq:pr-red-tr-075}.}
+        \end{gathered}
+\end{equation}
+Since \V{B} is a non-terminal,
+\begin{equation}
+        \label{eq:pr-red-tr-090}
+        \V{B:pd} \derivesV{drv} \V{rhsB} \destarV{drv} \Velement{w}{\V{joint},\V{current}} \\
+                \cuz \eqref{eq:pr-red-tr-070}.
+\end{equation}
+for some $\V{B} \de \V{rhsB} \in \V{P}$.
+We call the first transition of \eqref{eq:pr-red-tr-090},
+``transition B'',
+and let
+\begin{equation}
+        \label{eq:pr-red-tr-100}
+        \V{B:pd} \de \V{rhsB} \mydot \cuz \eqref{eq:pr-red-tr-090}
+\end{equation}
+be the dotted rule of transition B.
+Transition B may be written
+\begin{equation}
+        \label{eq:pr-red-tr-110}
+        \begin{gathered}
+                \Velement{drv}{\V{stepBix},(\V{stepBix}+1)} = \\
+        \V{anteFocusB:Lb} \wcat \V{B:f} \wcat \V{postFocusB:Lb} \\
+        \derivesV{drv}
+                \V{anteFocusB:Lb} \wcat \V{rhsB} \wmydot \V{postFocusB:Lb} \\
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-red-tr-030},
+                \eqref{eq:pr-red-tr-090}, \eqref{eq:pr-red-tr-100}, WLOG.}
         \end{gathered}
 \end{equation}
 \todo{Revised to here}
