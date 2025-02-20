@@ -880,32 +880,51 @@ to be both sound and complete.
         if it applies to the focus of the focused derivation.
         For example, the Earley item of a focused derivation
         is the Earley item of its focus.
-        \qquad \dfEnd
+        \dfEnd
 \end{definition}
 
 \todo{Work on the inflow definitions}
-\begin{definition}[Tangible reduction tributary]
+\begin{definition}[Reduction tributary]
 \label{df:reduction-trib}
-        Suppose, without loss of generality, that
+Let
 \begin{equation}
-        \V{down} = \FA{FOCUS}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
+        \V{down} = (\V{A} \de \V{antepredotA} \cat \V{B} \mydot \V{postdotA},\V{joint},\V{current}),
 \end{equation}
-is a tangible reduction FD
-        where
-\begin{gather*}
-        \V{B} \de \V{rhs} \in \V{P}
-        \land \; \V{B} \deplus \Velement{w}{\V{originB},\V{current}}.
-\end{gather*}
-Then we say that
-a FD of the form
-\[
-        \V{tributary} = \FA{FOCUS}{\V{rhs},\epsilon,\V{B},\V{originB},\V{current}}
-\]
+be an Earley item.
+We say that an Earley item of the form
+\begin{equation}
+\begin{gathered}
+        \V{trib} = (\V{B} \de \V{rhs} \mydot,\V{joint},\V{current}), \\
+        \text{where $\V{B} \de \V{rhs} \in \V{P}.$}
+\end{gathered}
+\end{equation}
 is a \textbf{tributary} of \V{down}.
 We also say that
 \V{down} is the \textbf{downstream channel}
 (or simply \textbf{downstream})
 of \V{tributary}.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Tangible reduction tributary]
+\label{df:tr-trib}
+        Let \V{tribFD} be a tributary FD
+        of the tangible reduction FD \V{downFD},
+        where \V{tribFD} and \V{downFD} share a derivation \V{drv}.
+        Let \V{B:pd} be the predot instance of \V{downFD},
+        and let
+\begin{gather*}
+        \V{B} \de \V{rhs} \in \V{P}, \\
+        \land \; \V{B} \deplusV{drv} \Velement{w}{\V{joint},\V{current}}, \\
+        \land \; \V{joint} < \V{current}.
+\end{gather*}
+We say that
+\V{tribFD} is a \textbf{tangible reduction tributary} of \V{downFD} at \V{joint}.
+We alos say that
+\V{downFD} is the \textbf{tangible reduction downstream channel}
+(or simply \textbf{downstream})
+of \V{tribFB}.
+\dfEnd
 \end{definition}
 
 \begin{definition}[Confirmation mainstem]
@@ -1295,7 +1314,6 @@ are what we needed to show for the theorem.
 \myqed
 \end{proof}
 
-\todo{define tributary *at* joint}
 \begin{lemma}[Tangible reduction tributary]
         \label{lm:tr-trib}
         Let \V{fdConf} be a tangible reduction FD.
@@ -1465,7 +1483,7 @@ whose Earley item is
         \label{eq:pr-red-tr-180}
         \myparbox{\eqref{eq:pr-red-tr-170} is a tributary of
                 \eqref{eq:pr-red-tr-005} at \V{joint} \cuz
-                \Dfref{reduction-trib}, \eqref{eq:pr-red-tr-005},
+                \Dfref{tr-trib}, \eqref{eq:pr-red-tr-005},
                 \eqref{eq:pr-red-tr-170}.}
 \end{equation}
 \begin{equation}
