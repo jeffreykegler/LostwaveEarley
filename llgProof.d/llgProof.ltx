@@ -829,12 +829,12 @@ Thus focus to Earley item correspondence is a many-to-one relationship.
 
 \begin{definition}[Tangible reduction FD]
         \label{df:rt}
-        A \textbf{tangible reduction}
+        A \textbf{tangible reduction FD}
         is a focused derivation,
         where the focus is a reduction,
         and the predot symbol instance in the derivation
         is tangible.
-        A \textbf{intangible reduction}
+        A \textbf{intangible reduction FD}
         is a focused derivation,
         where the focus is a reduction,
         and the predot symbol instance in the derivation
@@ -883,10 +883,9 @@ to be both sound and complete.
         \qquad \dfEnd
 \end{definition}
 
-\begin{definition}[Tangible reduction inflows]
-\label{df:tangible-inflows}
-\todo{Fix the inflow definitions}
-\todo{Change this to a tributary definition?}
+\todo{Work on the inflow definitions}
+\begin{definition}[Tangible reduction tributary]
+\label{df:reduction-trib}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = \FA{FOCUS}{\V{antepredotA}\cat\V{B},\V{postdotA},\V{A},\V{origin},\V{current}} \\
@@ -929,8 +928,8 @@ of \V{mainstem}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Prediction inflows]
-\label{df:prediction-inflows}
+\begin{definition}[Prediction mainstem]
+\label{df:prediction-stem}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = \FA{DI}{\epsilon,\V{rhsA},\V{A},\V{current},\V{current}} \\
@@ -955,14 +954,6 @@ of \V{mainstem}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Tangible and intangible confirmations]
-        \label{df:tangible}
-        A confirmed FD is \textbf{tangible} if its predot symbol instance
-        derives at least one terminal.
-        A confirmed FD is \textbf{intangible} if its predot symbol instance
-        derives the empty string.
-\end{definition}
-
 \begin{definition}[Generations]
         \label{df:generation}
         Scansions and start Earley items belong to generation 0.
@@ -977,8 +968,11 @@ of \V{mainstem}.
         \dfEnd
 \end{definition}
 
-Note that \Dfref{generation} implies that every generation inflow
+\begin{observation}[Generation inflow location]
+We observe that \Dfref{generation} implies that every generation inflow
 has the same current location as its downstream.
+\obEnd
+\end{observation}
 
 \todo{Prove that every confirmed Earley item belongs to a generation
         within its row -- this will require soundness}
@@ -1123,94 +1117,6 @@ has the same current location as its downstream.
 \FloatBarrier
 
 \section{Inflow lemmas}
-
-\begin{lemma}[Antecedent helper]
-\label{lm:ante-help}
-        \todo{Delete this?}
-        Unless a DI is a nulling completion,
-        either its origin is properly before the current location,
-        or it is a completion.
-        That is, let
-        \begin{equation}
-                \label{eq:ante-help-010}
-                \V{di} = \FA{DI}{\V{predotA},\V{postdotA},\V{A},\V{origin},\V{current}}.
-        \end{equation}
-        If
-        \begin{equation}
-                \label{eq:ante-help-020}
-                \neg ( \V{A} \destarW{\V{di}} \epsilon \land \V{postdotA} = \epsilon)
-        \end{equation}
-        then
-        \begin{equation}
-                \label{eq:ante-help-030}
-                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon.
-        \end{equation}
-\end{lemma}
-
-\begin{proof}
-        We are assuming \eqref{eq:ante-help-020} for the theorem.
-        Let us assume for a deduction that \V{di} is a completion,
-        \begin{equation}
-                \label{eq:ante-help-050}
-                \V{postdotA} = \epsilon
-                \text{ \cuz assumed for a deduction.}
-        \end{equation}
-        \begin{equation}
-                \label{eq:ante-help-060}
-                \neg ( \V{A} \destarW{\V{di}} \epsilon )
-                \,\cuz\, \eqref{eq:ante-help-020}, \eqref{eq:ante-help-050}.
-        \end{equation}
-        \begin{equation}
-                \label{eq:ante-help-070}
-                \begin{gathered}
-                \neg
-                \left( \begin{gathered}
-                        \V{A} \destarW{\V{di}} \V{predotA} \cat \V{postdotA} \\
-                        \destarW{\V{di}} \Velement{w}{\V{origin},\V{current}} \cat \V{postdotA} \\
-                        \destarW{\V{di}} \epsilon. \\
-                \end{gathered} \right) \\
-                        \cuz \eqref{eq:ante-help-010}, \Dfref{fd}.
-                \end{gathered}
-        \end{equation}
-        \begin{equation}
-                \label{eq:ante-help-080}
-                \begin{gathered}
-                \neg ( \Velement{w}{\V{origin},\V{current}} \destarW{\V{di}} \epsilon ) \\
-                \cuz \eqref{eq:ante-help-050}, \eqref{eq:ante-help-070}.
-                \end{gathered}
-        \end{equation}
-        We have been careful in our notation in this proof to include the
-        context DS of our derivations because this proof uses negation
-        of derivation sets, whose consequences can be non-obvious.
-        \begin{equation}
-                \label{eq:ante-help-090}
-                \begin{gathered}
-                        \exists \; \alpha, \beta \in (\V{N} \cup \V{T})^\ast, \V{term} \in \V{T} \mid \\
-                        \Velement{w}{\V{origin},\V{current}} \destarW{\V{di}} \alpha \cat \V{t} \cat \beta \\
-                \cuz \eqref{eq:ante-help-080}.
-                \end{gathered}
-        \end{equation}
-        \begin{equation}
-                \label{eq:ante-help-100}
-                \begin{gathered}
-                        \V{origin} < \V{current} \,\cuz\, \eqref{eq:ante-help-090}.
-                \end{gathered}
-        \end{equation}
-        \begin{equation}
-                \label{eq:ante-help-110}
-                \begin{gathered}
-                        \V{postdotA} = \epsilon \implies \V{origin} < \V{current} \\
-                        \text{ \cuz deduction of \eqref{eq:ante-help-100} from \eqref{eq:ante-help-010}.}
-                \end{gathered}
-        \end{equation}
-        \begin{equation}
-                \label{eq:ante-help-120}
-                \V{origin} < \V{current} \lor \V{postdotA} \neq \epsilon \,\cuz\, \eqref{eq:ante-help-110}.
-        \end{equation}
-        Equation \eqref{eq:ante-help-120} is equivalent to \Eqref{ante-help-030}, which
-        is what we needed to show for the lemma.
-        \myqed
-\end{proof}
 
 \begin{lemma}[Confirmation mainstem]
         \label{lm:conf-stem}
@@ -1563,7 +1469,7 @@ whose Earley item is
         \label{lm:prediction-stem}
         Every prediction DI \Dfref{rt}
         is either a nulling completion,
-        or has a mainstem \Dfref{tangible-inflows}.
+        or has a mainstem \Dfref{prediction-stem}.
         \lmEnd
 \end{lemma}
 
