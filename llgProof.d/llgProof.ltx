@@ -1535,6 +1535,25 @@ where
         \text{\cuz \eqref{eq:pr-red-tr-040}, \eqref{eq:pr-red-tr-090}.}
         \end{gathered}
 \end{equation}
+We can identity the following FD,
+\begin{equation}
+        \label{eq:pr-red-tr-160}
+        \begin{gathered}
+                \V{fdTrib} = \left( \begin{gathered} \;
+                        \V{drv}, \V{stepBix}, \Vsize{anteFocusB:Lb}, \Vsize{rhsB}, \\
+                                 \V{joint}, \V{current}
+                         \; \end{gathered} \right) \\
+                \text{\cuz \Dfref{fd},
+                \eqref{eq:pr-red-tr-010}, \eqref{eq:pr-red-tr-035}, \eqref{eq:pr-red-tr-110},
+                \eqref{eq:pr-red-tr-140}, \eqref{eq:pr-red-tr-150},}
+        \end{gathered}
+\end{equation}
+whose Earley item is
+\begin{equation}
+        \label{eq:pr-red-tr-170}
+        (\V{B} \de \V{rhsB} \mydot, \V{joint}, \V{current}) \\
+                \cuz \Dfref{fd}, \Dfref{earley-item-to-focus}, \eqref{eq:pr-red-tr-160}.
+\end{equation}
 \todo{Revised to here}
 \myqed
 \end{proof}
