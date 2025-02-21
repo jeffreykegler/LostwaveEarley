@@ -1544,10 +1544,10 @@ are what we needed to show for the theorem.
 \dfEnd
 \end{definition}
 
-\begin{lemma}[Row completion basis]
+\begin{lemma}[Chart basis]
         \label{lm:chart-basis}
         After starting the algorithm of \Sref{algorithm},
-        Row 0 is complete.
+        the chart is complete as far as row 0.
         \lmEnd
 \end{lemma}
 
@@ -1654,13 +1654,31 @@ are what we needed to show for the theorem.
         Equation \eqref{eq:row-step-130} shows the case for predictions,
         which started at \eqref{eq:row-step-100}.
         \par
-        \vspace{2ex}\noindent\textbf{Case 2: Reduction with intangible predot symbol.}
+        \vspace{2ex}\noindent\textbf{Case 3: Reduction with tangible predot symbol.}
+        \begin{equation}
+        \label{eq:row-step-400}
+                \myparbox{\V{di} is a reduction with a tangible predot symbol \cuz Assumption for the case.}
+        \end{equation}
+        \par
+        \todo{Delete this this proof after mining it}
+        \myqed
+\end{proof}
+
+\begin{lemma}[Intangible reduction completion]
+        \label{lm:ri-completion}
+        When running the algorithm of \Sref{algorithm},
+        if the chart is complete as far as generation \V{g}
+        of row $\V{i}+1$,
+        the algorithm will add all intangible reductions
+        in generation $\V{g}+1$ to the chart.
+\end{lemma}
+
+\begin{proof}
+        \todo{Rewrite this}
         \begin{equation}
         \label{eq:row-step-200}
                 \myparbox{\V{di} is a reduction with an intangible predot symbol \cuz Assumption for the case.}
         \end{equation}
-\todo{Fix this case}
-\todo{Figure out what to do about the inflow lemma}
         \begin{equation}
         \label{eq:row-step-205}
                 \begin{gathered}
@@ -1697,18 +1715,10 @@ with intangible predot symbols.
         which started at \eqref{eq:row-step-200}.
         \todo{Finish this case}
         \par
-        \vspace{2ex}\noindent\textbf{Case 3: Reduction with tangible predot symbol.}
-        \begin{equation}
-        \label{eq:row-step-400}
-                \myparbox{\V{di} is a reduction with a tangible predot symbol \cuz Assumption for the case.}
-        \end{equation}
-        \par
-        \todo{Finish this case}
-        \todo{Finish this proof}
         \myqed
 \end{proof}
 
-\begin{lemma}[Row step]
+\begin{lemma}[Chart step]
         \label{lm:chart-step}
         When running the algorithm of \Sref{algorithm},
         the chart is complete as far as row $\V{i}+1$
