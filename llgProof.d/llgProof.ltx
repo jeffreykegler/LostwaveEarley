@@ -1544,7 +1544,8 @@ are what we needed to show for the theorem.
 \dfEnd
 \end{definition}
 
-\begin{lemma}[Row 0 completion]
+\begin{lemma}[Row completion basis]
+        \label{lm:chart-basis}
         After starting the algorithm of \Sref{algorithm},
         Row 0 is complete.
         \lmEnd
@@ -1558,6 +1559,7 @@ are what we needed to show for the theorem.
 \end{proof}
 
 \begin{lemma}[Scansion completion]
+        \label{lm:row-basis}
         When running the algorithm of \Sref{algorithm},
         scansion will be complete in row $\V{i}+1$ the chart
         is complete as far as row \V{i}.
@@ -1574,7 +1576,7 @@ are what we needed to show for the theorem.
 \begin{lemma}[Row completion step]
         \label{lm:row-step}
         When running the algorithm of \Sref{algorithm},
-        Reductions will be complete as far as generation $\V{g}+1$
+        reductions will be complete as far as generation $\V{g}+1$
         of row $\V{i}+1$ if
         the chart is complete
         as far as generation \V{g} of row $\V{i+1}$.
@@ -1706,9 +1708,11 @@ with intangible predot symbols.
         \myqed
 \end{proof}
 
-\begin{lemma}[Row completion]
-        Row $\V{i}+1$ is complete
-        if the rows as far as row \V{i} are complete.
+\begin{lemma}[Row step]
+        \label{lm:chart-step}
+        When running the algorithm of \Sref{algorithm},
+        the chart is complete as far as row $\V{i}+1$
+        if it is complete as row \V{i}.
         \lmEnd
 \end{lemma}
 
@@ -1719,13 +1723,15 @@ with intangible predot symbols.
 \end{proof}
 
 \begin{theorem}[The llguidance Earley algorithm is complete]
-        Row $\V{i}+1$ is complete
-        if the rows as far as row \V{i} are complete.
+        After running the algorithm of \Sref{algorithm},
+        the llguidance Earley algorithm is complete.
         \lmEnd
 \end{theorem}
 
 \begin{proof}
         We use induction on the rows.
+        with \Lmref{chart-basis} as the basis,
+        and \Lmref{chart-step} as the step.
         \todo{Finish this proof}
         \myqed
 \end{proof}
