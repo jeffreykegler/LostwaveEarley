@@ -932,6 +932,7 @@ of \V{tribFB}.
 
 \begin{definition}[Confirmation mainstem]
 \label{df:confirmation-stem}
+        \todo{Define \V{joint}?  Necessary?}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = (\V{A} \de \V{antepredotA} \cat \V{B} \mydot \V{postdot}, \V{origin},\V{current})
@@ -1669,7 +1670,7 @@ are what we needed to show for the theorem.
 \end{proof}
 
 \begin{lemma}[Tangible reduction completion]
-        \label{lm:ri-completion}
+        \label{lm:rt-comp}
         When running the algorithm of \Sref{algorithm},
         if the chart is complete as far as generation \V{g}
         of row $\V{i}+1$,
@@ -1685,23 +1686,45 @@ are what we needed to show for the theorem.
         and let the predot symbol instance be \V{B:pd}.
         Without loss of generality, we let its Earley item be
 \begin{equation}
+        \label{eq:pr-rt-comp-010}
         \begin{gathered}
-        \label{eq:pr-ri-completion-005}
-                (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, \V{current}) \\
+                (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1)) \\
         \text{\cuz AF theorem, \Dfref{ei-types}, WLOG.}
         \end{gathered}
 \end{equation}
         where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$.
         Because by assumption for the lemma, \V{downFD} is tangible,
 \begin{equation}
-        \label{eq:pr-red-tr-150}
+        \label{eq:pr-rt-comp-020}
         \begin{gathered}
                 \existQ{\V{joint} \in \naturals}{\\
-                        \V{B:pd} \destarV{drv} \Velement{w}{\V{joint}, \V{current}} \\
-                        \land \; \V{joint} < \V{current}} \\
-        \text{\cuz AF theorem, \eqref{eq:pr-red-tr-040}, \eqref{eq:pr-red-tr-090}.}
+                        \V{B:pd} \destarV{drv} \Velement{w}{\V{joint}, (\V{i}+1)} \\
+                        \land \; \V{joint} < (\V{i}+1)} \\
+        \text{\cuz AF theorem, \eqref{eq:pr-rt-comp-010}.}
         \end{gathered}
 \end{equation}
+\begin{equation}
+        \label{eq:pr-rt-comp-030}
+        \myparbox{\V{joint} is the current location of \V{fdConf} less the length of
+        the terminal string produced by the predot symbol instance.
+        \bcuz \eqref{eq:pr-rt-comp-020}.}
+\end{equation}
+Noting that a reduction is a confirmation,
+\begin{equation}
+        \label{eq:pr-rt-comp-030}
+        \myparbox{\V{downFD} has a mainstem at \V{joint} 
+        \bcuz \Lmref{conf-stem},
+                \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-030}.}
+\end{equation}
+Without loss of generality, we let the mainstem referred to in
+\eqref{eq:pr-rt-comp-030} be
+\begin{equation}
+        \begin{gathered}
+        \V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{joint} \\
+        \cuz \Dfref{confirmation-stem}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-030}
+        \end{gathered}
+\end{equation}
+
 \todo{Written to here}
         \begin{equation}
         \label{eq:row-step-210}
