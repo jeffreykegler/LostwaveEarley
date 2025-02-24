@@ -496,6 +496,7 @@ When $\size{\alpha} = 0$, there is no predot symbol. \dfEnd
 \end{definition}
 
 \begin{definition}[Types of Earley items]
+        \label{df:ei-types}
 We say that
 \begin{itemize}
 \item an Earley item is a \textbf{start item}
@@ -1146,7 +1147,7 @@ has the same current location as its downstream.
         at \V{joint}, where
         \V{fdM} is not a nulling completion, and
         \V{joint} is the current location of \V{fdConf}
-        less the length of the terminal string produced by the predot symbol.
+        less the length of the terminal string produced by the predot symbol instance.
         \lmEnd
 \end{lemma}
 
@@ -1166,7 +1167,10 @@ and otherwise arbitrary:
 \begin{equation}
         \label{eq:pr-conf-stem-010}
         \begin{gathered}
-        \V{fdConf} = (\V{drv}, \V{stepIX}, \V{focusPos}, \V{dotPosConf}, \V{currentConf}, \V{origin}) \\
+                \V{fdConf} = \left( \; \begin{gathered} 
+                        \V{drv}, \V{stepIX}, \V{focusPos}, \\
+                        \V{dotPosConf}, \V{currentConf}, \V{origin})
+                \end{gathered} \; \right) \\
                 \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-conf-stem-005}, WLOG.}
         \end{gathered}
 \end{equation}
@@ -1328,7 +1332,6 @@ are what we needed to show for the theorem.
 \end{lemma}
 
 \begin{proof}
-\todo{This is new.  Revise it.}
 For the focus dotted rule, we consider an arbitrary reduction dotted rule,
 \begin{equation}
         \begin{gathered}
@@ -1336,10 +1339,10 @@ For the focus dotted rule, we consider an arbitrary reduction dotted rule,
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
                 \land \; \size{\V{antepredot} \cat \V{B}} = \V{dotPosConf} \\
                 \land \; \V{B} \in \V{N} \\
-        \text{\cuz AF theorem, WLOG.}
+        \text{\cuz AF theorem, \Dfref{ei-types}, WLOG.}
         \end{gathered}
 \end{equation}
-We assume for the theorem the FD \V{fdConf},
+We assume for the lemma the FD \V{fdConf},
 which is consistent with \eqref{eq:pr-red-tr-005},
 and otherwise arbitrary:
 \begin{equation}
@@ -1349,7 +1352,8 @@ and otherwise arbitrary:
                         \V{drv}, \V{stepAix}, \V{focusApos}, \V{dotPosConf}, \\
                                  \V{originConf}, \V{current}
                          \; \end{gathered} \right) \\
-                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-red-tr-005}, WLOG.}
+                \text{\cuz AF theorem, \Dfref{fd}, \Dfref{ei-focus-concept}, \Dfref{focus-fd-concept},
+                        \eqref{eq:pr-red-tr-005}, WLOG.}
         \end{gathered}
 \end{equation}
 A focal transition consistent with the preceeding is
@@ -1675,17 +1679,30 @@ are what we needed to show for the theorem.
 
 \begin{proof}
         \todo{Rewrite this}
-        \begin{equation}
-        \label{eq:row-step-200}
-                \myparbox{\V{di} is a reduction with an intangible predot symbol \cuz Assumption for the case.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:row-step-205}
-                \begin{gathered}
-                        \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem}} \\
-                        \text{\cuz \eqref{eq:row-step-050}, \eqref{eq:row-step-200}, Inflow lemma (TODO!).}
-                \end{gathered}
-        \end{equation}
+        We assume an arbitrary sound intangible reduction FD,
+        call it \V{downFD}.
+        Let the derivative of \V{downFD} be \V{drv},
+        and let the predot symbol instance be \V{B:pd}.
+        Without loss of generality, we let its Earley item be
+\begin{equation}
+        \begin{gathered}
+        \label{eq:pr-ri-completion-005}
+                (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, \V{current}) \\
+        \text{\cuz AF theorem, \Dfref{ei-types}, WLOG.}
+        \end{gathered}
+\end{equation}
+        where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$.
+        Because by assumption for the lemma, \V{downFD} is tangible,
+\begin{equation}
+        \label{eq:pr-red-tr-150}
+        \begin{gathered}
+                \existQ{\V{joint} \in \naturals}{\\
+                        \V{B:pd} \destarV{drv} \Velement{w}{\V{joint}, \V{current}} \\
+                        \land \; \V{joint} < \V{current}} \\
+        \text{\cuz AF theorem, \eqref{eq:pr-red-tr-040}, \eqref{eq:pr-red-tr-090}.}
+        \end{gathered}
+\end{equation}
+\todo{Written to here}
         \begin{equation}
         \label{eq:row-step-210}
                 \begin{gathered}
