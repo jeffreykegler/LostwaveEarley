@@ -1679,7 +1679,6 @@ are what we needed to show for the theorem.
 \end{lemma}
 
 \begin{proof}
-        \todo{Rewrite this}
         We assume an arbitrary sound tangible reduction FD,
         call it \V{downFD}.
         Let the derivative of \V{downFD} be \V{drv},
@@ -1740,6 +1739,36 @@ Without loss of generality, we let the mainstem referred to in
         \text{is in the chart} \\
         \text{\cuz \eqref{eq:pr-rt-comp-050}, \eqref{eq:pr-rt-comp-070}.}
         \end{gathered}
+\end{equation}
+We now turn to consider the tributary of \V{downFD}.
+\begin{equation}
+        \label{eq:pr-rt-comp-090}
+        \myparbox{\V{downFD} has a tributary, call it \V{tribFD}, at \V{joint},
+        \bcuz \Lmref{tr-trib},
+                \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-030}.}
+\end{equation}
+Without loss of generality, we let the Earley item of \V{tribFD} be
+\begin{equation}
+\label{eq:pr-rt-comp-100}
+        \begin{gathered}
+        \land \; \V{B} \deplusV{drv} \Velement{w}{\V{joint},\V{current}}, \\
+        \text{where $\V{B} \de \V{rhs} \in \V{P}$,} \\
+        \cuz \Dfref{tr-trib}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-090}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-rt-comp-200}
+        \text{\V{downFD} is in generation $\V{g}+1$ \cuz AF theorem.}
+\end{equation}
+Recalling that the generation inflow of a tangible reduction is its tributary,
+\begin{equation}
+\label{eq:pr-rt-comp-210}
+        \text{\V{tribFD} is in generation \V{g} \cuz \Dfref{generation},
+                \eqref{eq:pr-rt-comp-090}, \eqref{eq:pr-rt-comp-200}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-rt-comp-220}
+        \myparbox{Generations 0 through \V{g} of row $\V{i}+1$ are complete \cuz AF theorem.}
 \end{equation}
 
 \todo{Finish this proof}
