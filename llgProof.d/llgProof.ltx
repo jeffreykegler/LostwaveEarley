@@ -1045,51 +1045,86 @@ has the same current location as its downstream.
 \label{alg:finish-row}
 \begin{algorithmic}[1]
         \Procedure{FinishRow}{\V{n}}
+        \label{li:finish-row-010}
         \State $\V{i} \gets 0$ \Comment {Initialize \V{i}}
+        \label{li:finish-row-020}
         \While {$\V{i} < \Vsize{row}$} \Comment {This loop adds items at the end of \V{row},
             so that \Vsize{row} will increase in the course of running this loop}
+        \label{li:finish-row-030}
         \State $\V{current} \gets \Velement{row}{\V{i}}$
                 \Comment {\VVelement{row}{i} is \V{i}'th Earley item in row}
+        \label{li:finish-row-040}
         \If {\V{current} is complete}
+        \label{li:finish-row-050}
              \State $\V{origin} \gets$ origin of \V{current}
+        \label{li:finish-row-060}
              \If {$\V{origin} < \V{n}$}
+        \label{li:finish-row-070}
                   \State \Call{AddTangibleReductions}{\V{current}}
+        \label{li:finish-row-080}
              \EndIf
+        \label{li:finish-row-090}
         \Else \Comment {... else if \V{current} is an incompletion}
+        \label{li:finish-row-100}
              \State $\V{postdot} \gets$ postdot symbol of \V{current}
+        \label{li:finish-row-110}
              \If {\V{postdot} is nullable}
+        \label{li:finish-row-120}
                   \State \Call{AddIntangibleReduction}{\V{current}}
+        \label{li:finish-row-130}
              \EndIf
+        \label{li:finish-row-140}
              \State \Call{AddPredictions}{\V{postdot},\V{n}}
+        \label{li:finish-row-150}
         \EndIf
+        \label{li:finish-row-160}
         \State $\V{i} \gets \V{i} + 1$
+        \label{li:finish-row-170}
         \EndWhile
+        \label{li:finish-row-180}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm}[ht]
         \caption{Add Tangible Reductions}
-\label{alg:tangible-reductions}
+\label{alg:tangible-reduction}
 \begin{algorithmic}[1]
         \Procedure{AddTangibleReductions}{\V{tributary}}
+        \label{li:tangible-reduction-010}
         \State $\V{tribOrigin} \gets \text{origin of \V{tributary}}$
+        \label{li:tangible-reduction-020}
         \State $\V{tribCurrent} \gets \text{current location of \V{tributary}}$
+        \label{li:tangible-reduction-030}
         \State $\V{tribLHS} \gets \text{LHS of \V{tributary}`s rule}$
+        \label{li:tangible-reduction-040}
         \State $\V{originRow} \gets \VVelement{rows}{tribOrigin}$
+        \label{li:tangible-reduction-050}
         \Statex\Comment Find the row where \V{tributary} starts
+        \label{li:tangible-reduction-060}
         \State $\V{mainstems} \gets$
+        \label{li:tangible-reduction-070}
         \Statex $\qquad \qquad \lbrace \V{item} \in \V{originRow} \mid \VFA{Postdot}{item} =  \V{tribLHS} \rbrace$
+        \label{li:tangible-reduction-080}
         \Statex \Comment {Set \V{mainstems} to the set of Earley items in \V{originRow} whose postdot
                 item is \V{tribLHS}.}
+                \label{li:tangible-reduction-090}
      \For {$\V{mainstem} \in \V{mainstems}$}
+        \label{li:tangible-reduction-100}
           \State $\V{dotted} \gets \text{dotted rule of \V{mainstem}}$
+          \label{li:tangible-reduction-110}
           \State $\V{newDotted} \gets \Call{AdvanceDot}{\V{dotted}}$
+          \label{li:tangible-reduction-120}
           \State $\V{newOrigin} \gets \text{origin of \V{mainstem}}$
+          \label{li:tangible-reduction-130}
           \State $\V{reduction} \gets ( \V{newDotted}, \V{newOrigin}, \V{tribCurrent} )$
+          \label{li:tangible-reduction-140}
           \Statex \Comment Create a new Earley item
+          \label{li:tangible-reduction-150}
           \State If \V{reduction} is new, add it to \V{rows}, at the end
+          \label{li:tangible-reduction-160}
      \EndFor
+        \label{li:tangible-reduction-170}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -1711,7 +1746,7 @@ are what we needed to show for the theorem.
 Noting that a reduction is a confirmation,
 \begin{equation}
         \label{eq:pr-rt-comp-040}
-        \myparbox{\V{downFD} has a mainstem at \V{joint}
+        \myparbox{\V{downFD} has a mainstem, call it \V{stemFD}, at \V{joint}
         \bcuz \Lmref{conf-stem},
                 \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-030}.}
 \end{equation}
@@ -1750,9 +1785,11 @@ We now turn to consider the tributary of \V{downFD}.
 The Earley item of \V{tribFD} is
 \begin{equation}
 \label{eq:pr-rt-comp-100}
-        \V{B} \de \V{rhs} \mydot
-        \text{where $\V{B} \de \V{rhs}$ is one of the rules of \V{g}}
+        \begin{gathered}
+        \V{B} \de \V{rhs} \mydot \\
+        \text{where $\V{B} \de \V{rhs}$ is one of the rules of \V{g}} \\
         \text{\cuz \Dfref{tr-trib}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-090}, WLOG.}
+        \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-200}
@@ -1777,19 +1814,31 @@ Recalling that the generation inflow of a tangible reduction is its tributary,
                 \eqref{eq:pr-rt-comp-210}, \eqref{eq:pr-rt-comp-220}.}
         \end{gathered}
 \end{equation}
+Recalling again that \V{downFD} is tangible,
 \begin{equation}
 \label{eq:pr-rt-comp-240}
+        \myparbox{Line \ref{li:finish-row-070} of \Algref{finish-row} calls
+        \Algref{tangible-reduction} for \V{tribFD}
+        \cuz \eqref{eq:pr-rt-comp-100}.}
+\end{equation}
+\begin{equation}
+        \myparbox{The loop of line \ref{li:tangible-reduction-100}
+        in \Algref{tangible-reduction} finds the EI for \V{stemFD}
+        \cuz \eqref{eq:pr-rt-comp-040}, \eqref{eq:pr-rt-comp-050}.}
+\end{equation}
+\todo{Finished to here}
+\begin{equation}
+\label{eq:pr-rt-comp-300}
         \begin{gathered}
         \text{The algorithm of \Sref{algorithm} adds} \\
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1) \\
         \text{to the chart} \\
-        \cuz \Algref{tangible-reductions}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-080},
+        \cuz \Algref{tangible-reduction}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-080},
                 \eqref{eq:pr-rt-comp-230}.
         \end{gathered}
 \end{equation}
 Equation \eqref{eq:pr-rt-comp-240} is what we needed to show
 for the lemma.
-\todo{Check this proof}
 \myqed
 \end{proof}
 
