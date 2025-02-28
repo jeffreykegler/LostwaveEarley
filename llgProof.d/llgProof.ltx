@@ -1148,7 +1148,7 @@ has the same current location as its downstream.
 
 \begin{algorithm}[ht]
         \caption{Add Intangible Reduction}
-\label{alg:intangible-reductions}
+\label{alg:intangible-reduction}
 \begin{algorithmic}[1]
         \Procedure{AddIntangibleReduction}{\V{mainstem}}
         \State $\V{currLoc} \gets \text{current location of \V{mainstem}}$
@@ -1157,6 +1157,7 @@ has the same current location as its downstream.
         \State $\V{newOrigin} \gets  \text{origin of \V{mainstem}}$
         \State $\V{reduction} \gets ( \V{newDotted}, \V{newOrigin}, \V{currLoc} )$
         \Statex \Comment Create a new Earley item
+        \label{li:intangible-reduction-add-ei}
         \State If \V{reduction} is new, add it to \V{rows}, at the end
 \EndProcedure
 \end{algorithmic}
@@ -1953,18 +1954,13 @@ Recalling that the generation inflow of a intangible reduction is its mainflow,
 Recalling again that \V{downFD} is intangible,
 \begin{equation}
 \label{eq:pr-ri-comp-240}
-        \myparc{Line \ref{li:finish-row-070} of \Algref{finish-row} calls
+        \myparc{Line \ref{li:finish-row-120} of \Algref{finish-row} calls
         \Algref{intangible-reduction} for \V{tribEI}
         \cuz \eqref{eq:pr-ri-comp-100}.}
 \end{equation}
 \begin{equation}
-        \myparc{The loop of line \ref{li:intangible-reduction-100}
-        in \Algref{intangible-reduction} finds the EI for \V{stemFD} \\
-        \cuz \eqref{eq:pr-ri-comp-040}, \eqref{eq:pr-ri-comp-050}.}
-\end{equation}
-\begin{equation}
 \label{eq:pr-ri-comp-300}
-        \myparc{Line \ref{li:intangible-reduction-150}
+        \myparc{Line \ref{li:intangible-reduction-add-ei}
         in \Algref{intangible-reduction} adds \V{downEI}
         to the chart \\
         \cuz \eqref{eq:pr-ri-comp-010}.}
