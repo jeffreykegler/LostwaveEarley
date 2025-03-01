@@ -1965,6 +1965,31 @@ for the lemma.
 
 \FloatBarrier
 
+\section{Definitions 2}
+
+\begin{definition}[Altheme]
+        An \textbf{Earley aletheme}, or \textbf{aletheme},
+        is an 8-tuple
+        \begin{equation}
+        \begin{gathered}
+                (\V{fore},\V{after},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \\
+                \text{where $\V{fore},\V{after},\V{pre},\V{post} \in \V{STR}$} \\
+                \land \; \V{lhs} \in \V{N} \\
+                \land \; \V{origin},\V{current} \in \naturals.
+        \end{gathered}
+        \end{equation}
+        An aletheme is considered true the statements if and only if
+        \begin{gather}
+                \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
+                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{after} \\
+                \land \; \V{fore} \destar \Velement{w}{0,\V{origin}}. \quad \dfEnd
+        \end{gather}
+\end{definition}
+
+An aletheme is so called because it is the smallest unit of soundness
+in an Earley parsing context.  It comes from alethes, the Greek word
+for ``truth''.
+
 {
 \clearpage
 
