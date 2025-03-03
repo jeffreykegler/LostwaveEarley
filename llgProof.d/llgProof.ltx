@@ -893,7 +893,7 @@ to be both sound and complete.
 \end{definition}
 
 \begin{definition}[Reduction tributary]
-\label{df:reduction-trib}
+        \todo{To be deleted}
 Let
 \begin{equation}
         \V{down} = (\V{A} \de \V{antepredotA} \cat \V{B} \mydot \V{postdotA},\V{joint},\V{current}),
@@ -2005,6 +2005,44 @@ for ``truth''.
         The \textbf{generation} of \V{x} is
         \[ \VFA{Gen}{x} = \VFA{Dp}{x} + \VFA{Ht}{x}. \quad \dfEnd \]
 \end{definition}
+
+\begin{definition}[Confirmation mainstem]
+        Suppose, without loss of generality, that
+        \[ \V{down} = (\V{fore},\V{after},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        is an confirmed aletheme.
+Then we say that
+an aletheme of the form
+\[
+        \V{stem} = (\V{fore},\V{after},\V{antepre},(\V{B} \cat \V{post}),\V{lhs},\V{origin},\V{j})
+\]
+is a \textbf{mainstem} of
+\V{down} at the \textbf{joint location} \V{j}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{mainstem}.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Reduction tributary]
+\label{df:reduction-trib}
+        Suppose, without loss of generality, that
+        \[ \V{down} = (\V{fore},\V{after},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        is an confirmed aletheme.
+        Where $\V{B} \de \V{rhs} \in \V{P}$,
+Then we say that
+an aletheme of the form
+        \[ \V{trib} = ((\V{fore}\cat\V{antepre}),\V{after},\V{rhs},\epsilon,\V{B},\V{j},\V{current}) \]
+is a \textbf{tributary} of
+\V{down} at the \textbf{joint location} \V{j}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{trib}.
+\dfEnd
+\end{definition}
+
+The term ``joint location'' is based on the idea that the joint location
+is the place were the mainstem and tributary ``join'' to form the downstream.
+
 
 {
 \clearpage
