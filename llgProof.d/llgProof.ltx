@@ -189,7 +189,7 @@
   \ignorespaces#2\par%
   }%
 }
-\newcommand{\myparc}[2][\mathparwidth]{%
+\newcommand{\mycpar}[2][\mathparwidth]{%
   \parbox[t]{#1}{\centering%
   % \linespread{1.15}\selectfont
   \ignorespaces#2\par%
@@ -1183,7 +1183,7 @@ has the same current location as its downstream.
 \section{Inflow lemmas}
 
 \begin{lemma}[Confirmation mainstem]
-        \label{lm:conf-stem}
+        \todo{This lemma to be deleted}
         Let \V{fdConf} be a confirmed FD.
         \V{fdConf} has a mainstem \V{fdM}
         at \V{joint}, where
@@ -1197,29 +1197,29 @@ has the same current location as its downstream.
 For the the focus dotted rule, we consider an arbitrary confirmed dotted rule,
 \begin{equation}
         \begin{gathered}
-        \label{eq:pr-conf-stem-005}
+        \label{eq:X-pr-conf-stem-005}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
                 \land \; \size{\V{antepredot} \cat \V{B}} = \V{dotPosConf}
         \text{\cuz AF theorem, WLOG.}
         \end{gathered}
 \end{equation}
 We assume for the theorem the FD \V{fdConf},
-which is consistent with \eqref{eq:pr-conf-stem-005},
+which is consistent with \eqref{eq:X-pr-conf-stem-005},
 and otherwise arbitrary:
 \begin{equation}
-        \label{eq:pr-conf-stem-010}
+        \label{eq:X-pr-conf-stem-010}
         \begin{gathered}
                 \V{fdConf} = \left( \; \begin{gathered}
                         \V{drv}, \V{stepIX}, \V{focusPos}, \\
                         \V{dotPosConf}, \V{currentConf}, \V{origin})
                 \end{gathered} \; \right) \\
-                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:pr-conf-stem-005}, WLOG.}
+                \text{\cuz AF theorem, \Dfref{fd}, \eqref{eq:X-pr-conf-stem-005}, WLOG.}
         \end{gathered}
 \end{equation}
 A focal transition consistent with the preceeding,
 and otherwise arbitrary, is
 \begin{equation}
-        \label{eq:pr-conf-stem-030}
+        \label{eq:X-pr-conf-stem-030}
         \begin{gathered}
                 \Velement{drv}{\V{stepIX},(\V{stepIX}+1)} = \\
         \V{anteFocus:L} \wcat \V{A:f} \wcat \V{postFocus:L} \\
@@ -1228,11 +1228,11 @@ and otherwise arbitrary, is
                 \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \wmydot \\
                 \qquad \qquad \V{postdot:R} \wcat \V{postFocus:R}
                 \; \end{gathered} \right) \\
-                \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-005}, \eqref{eq:pr-conf-stem-010}.}
+                \text{\cuz \Dfref{fd}, \eqref{eq:X-pr-conf-stem-005}, \eqref{eq:X-pr-conf-stem-010}.}
         \end{gathered}
 \end{equation}
 \todo{Define predot symbol instance}
-In \eqref{eq:pr-conf-stem-030},
+In \eqref{eq:X-pr-conf-stem-030},
 the focus symbol instance is \V{A:f}.
 Other major instance tags will be
 ``\texttt{L}'' to indicate
@@ -1242,69 +1242,69 @@ an instance from the LHS step of the transition; and
 ``\texttt{pd}'' to indicate
 the predot symbol instance.
 \begin{equation}
-        \label{eq:pr-conf-stem-035}
+        \label{eq:X-pr-conf-stem-035}
         \begin{gathered}
         \text{The initial segment of the input, \Velement{w}{0,\V{currentConf}}, is known} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:X-pr-conf-stem-010}, \eqref{eq:X-pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-040}
+        \label{eq:X-pr-conf-stem-040}
         \begin{gathered}
         \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \destarV{drv} \Velement{w}{0,\V{currentConf}} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:X-pr-conf-stem-010}, \eqref{eq:X-pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-050}
+        \label{eq:X-pr-conf-stem-050}
         \begin{gathered}
         \V{anteFocus:R} \destarV{drv} \Velement{w}{0,\V{origin}} \\
-        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
+        \text{\cuz \Dfref{fd}, \eqref{eq:X-pr-conf-stem-010}, \eqref{eq:X-pr-conf-stem-030}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-070}
+        \label{eq:X-pr-conf-stem-070}
         \V{B:pd} \destarV{drv} \Velement{w}{\V{currentM},\V{currentConf}}
-                \cuz \eqref{eq:pr-conf-stem-040}.
+                \cuz \eqref{eq:X-pr-conf-stem-040}.
 \end{equation}
-In \eqref{eq:pr-conf-stem-070} we label the origin location of \V{B},
+In \eqref{eq:X-pr-conf-stem-070} we label the origin location of \V{B},
 \V{currentM}, for reasons that will become clear later in this proof.
 \begin{equation}
-        \label{eq:pr-conf-stem-080}
+        \label{eq:X-pr-conf-stem-080}
         \begin{gathered}
         \V{origin} \le \V{currentM} \le \V{currentConf} \\
-        \text{\cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-050}, \eqref{eq:pr-conf-stem-070}.}
+        \text{\cuz \eqref{eq:X-pr-conf-stem-040}, \eqref{eq:X-pr-conf-stem-050}, \eqref{eq:X-pr-conf-stem-070}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-090}
+        \label{eq:X-pr-conf-stem-090}
         \begin{gathered}
         \text{The initial segment of the input, \Velement{w}{0,\V{currentM}}, is known} \\
-        \text{\cuz \eqref{eq:pr-conf-stem-035}, \eqref{eq:pr-conf-stem-080}.}
+        \text{\cuz \eqref{eq:X-pr-conf-stem-035}, \eqref{eq:X-pr-conf-stem-080}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-100}
+        \label{eq:X-pr-conf-stem-100}
         \begin{gathered}
         \V{anteFocus:L} \wcat \V{antepredot:R} \destarV{drv} \Velement{w}{0,\V{currentM}} \\
-        \text{\cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-070}.}
+        \text{\cuz \eqref{eq:X-pr-conf-stem-040}, \eqref{eq:X-pr-conf-stem-070}.}
         \end{gathered}
 \end{equation}
-We know from \eqref{eq:pr-conf-stem-005} that
+We know from \eqref{eq:X-pr-conf-stem-005} that
 \begin{equation}
         \begin{gathered}
-        \label{eq:pr-conf-stem-110}
+        \label{eq:X-pr-conf-stem-110}
         \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
                 \land \; \size{\V{antepredot}} = (\V{dotPosConf} \subtract 1) \\
-        \text{\cuz AF theorem, \eqref{eq:pr-conf-stem-005}, WLOG.}
+        \text{\cuz AF theorem, \eqref{eq:X-pr-conf-stem-005}, WLOG.}
         \end{gathered}
 \end{equation}
 will also be a dotted rule in our grammar \V{g}.
-We get \eqref{eq:pr-conf-stem-120}
+We get \eqref{eq:X-pr-conf-stem-120}
 by changing the decoration of
-\eqref{eq:pr-conf-stem-030} to align with \eqref{eq:pr-conf-stem-110}.
+\eqref{eq:X-pr-conf-stem-030} to align with \eqref{eq:X-pr-conf-stem-110}.
 \begin{equation}
-        \label{eq:pr-conf-stem-120}
+        \label{eq:X-pr-conf-stem-120}
         \begin{gathered}
                 \Velement{drv}{\V{stepIX},(\V{stepIX}+1)} = \\
         \V{anteFocus:L} \wcat \V{A:f} \wcat \V{postFocus:L} \\
@@ -1313,51 +1313,51 @@ by changing the decoration of
                 \V{anteFocus:L} \wcat \V{antepredot:R} \wmydot \qquad \\
                         \qquad \V{B:pd} \wcat \V{postdot:R} \wcat \V{postFocus:R}
                 \; \end{gathered} \right) \\
-                \text{\cuz \eqref{eq:pr-conf-stem-030}, \eqref{eq:pr-conf-stem-110}.}
+                \text{\cuz \eqref{eq:X-pr-conf-stem-030}, \eqref{eq:X-pr-conf-stem-110}.}
         \end{gathered}
 \end{equation}
 From the foregoing, we know we have the focused derivation,
 \begin{equation}
-        \label{eq:pr-conf-stem-200}
+        \label{eq:X-pr-conf-stem-200}
         \begin{gathered}
         \V{fdM} = \left( \; \begin{gathered}
                 \V{drv}, \V{stepIX}, \V{focusPos}, (\V{dotPosConf} \subtract 1), \\
                         \V{origin}, \V{currentM}
         \end{gathered} \; \right) \\
-                \cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
-                        \eqref{eq:pr-conf-stem-110}, \eqref{eq:pr-conf-stem-120}.
+                \cuz \Dfref{fd}, \eqref{eq:X-pr-conf-stem-090}, \eqref{eq:X-pr-conf-stem-100},
+                        \eqref{eq:X-pr-conf-stem-110}, \eqref{eq:X-pr-conf-stem-120}.
         \end{gathered}
 \end{equation}
-The Earley item of \eqref{eq:pr-conf-stem-200} is
+The Earley item of \eqref{eq:X-pr-conf-stem-200} is
 \begin{equation}
-        \label{eq:pr-conf-stem-210}
+        \label{eq:X-pr-conf-stem-210}
         \begin{gathered}
         \tuple{\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{currentM}} \\
-                \cuz \Dfref{fd}, \Dfref{earley-item-to-focus}, \eqref{eq:pr-conf-stem-200}.
+                \cuz \Dfref{fd}, \Dfref{earley-item-to-focus}, \eqref{eq:X-pr-conf-stem-200}.
         \end{gathered}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-220}
+        \label{eq:X-pr-conf-stem-220}
         \myparbox{\V{fdM} is a mainstem of \V{fdConf} at \V{currentM}
         \cuz
         \Dfref{fd}, \Dfref{ei-focus-concept}, \Dfref{focus-fd-concept},
-        \Dfref{confirmation-stem}, \eqref{eq:pr-conf-stem-200} \eqref{eq:pr-conf-stem-210}.
+        \Dfref{confirmation-stem}, \eqref{eq:X-pr-conf-stem-200} \eqref{eq:X-pr-conf-stem-210}.
         }
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-225}
-        \myparbox{\V{fdM} is not a completion \cuz \eqref{eq:pr-conf-stem-210}.}
+        \label{eq:X-pr-conf-stem-225}
+        \myparbox{\V{fdM} is not a completion \cuz \eqref{eq:X-pr-conf-stem-210}.}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-conf-stem-230}
+        \label{eq:X-pr-conf-stem-230}
         \myparbox{
                 \V{currentM}, the location of \V{fdM}, is the current location of \V{fdConf}
                 less the length of the terminal string produced by the predot symbol
-                \cuz \eqref{eq:pr-conf-stem-070}.
+                \cuz \eqref{eq:X-pr-conf-stem-070}.
         }
 \end{equation}
-Equations \eqref{eq:pr-conf-stem-220}, \eqref{eq:pr-conf-stem-225},
-and \eqref{eq:pr-conf-stem-230}
+Equations \eqref{eq:X-pr-conf-stem-220}, \eqref{eq:X-pr-conf-stem-225},
+and \eqref{eq:X-pr-conf-stem-230}
 are what we needed to show for the theorem.
 \myqed
 \end{proof}
@@ -1746,14 +1746,14 @@ are what we needed to show for the theorem.
 \end{equation}
 \begin{equation}
         \label{eq:pr-rt-comp-030}
-        \myparc{\V{joint} is the current location of \V{fdConf} less the length of
+        \mycpar{\V{joint} is the current location of \V{fdConf} less the length of
         the terminal string produced by the predot symbol instance.
         \bcuz \eqref{eq:pr-rt-comp-020}.}
 \end{equation}
 Noting that a reduction is a confirmation,
 \begin{equation}
         \label{eq:pr-rt-comp-040}
-        \myparc{\V{stemFD} is the mainstem of \V{downFD} at \V{joint}
+        \mycpar{\V{stemFD} is the mainstem of \V{downFD} at \V{joint}
         \bcuz \Lmref{conf-stem},
                 \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-030}.}
 \end{equation}
@@ -1767,11 +1767,11 @@ Noting that a reduction is a confirmation,
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-060}
-        \myparc{Rows 0 through \V{i} are complete \cuz AF lemma.}
+        \mycpar{Rows 0 through \V{i} are complete \cuz AF lemma.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-070}
-        \myparc{Row \V{joint} is complete \cuz \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-060}.}
+        \mycpar{Row \V{joint} is complete \cuz \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-060}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-080}
@@ -1782,7 +1782,7 @@ Noting that a reduction is a confirmation,
 We now turn to consider the tributary of \V{downFD}.
 \begin{equation}
         \label{eq:pr-rt-comp-090}
-        \myparc{\V{tribFD} is the tributary of \V{downFD} at \V{joint} \\
+        \mycpar{\V{tribFD} is the tributary of \V{downFD} at \V{joint} \\
         \cuz \Lmref{tr-trib},
                 \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-030}.}
 \end{equation}
@@ -1807,7 +1807,7 @@ Recalling that the generation inflow of a tangible reduction is its tributary,
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-220}
-        \myparc{Generations 0 through \V{g} of row $\V{i}+1$ are complete \\
+        \mycpar{Generations 0 through \V{g} of row $\V{i}+1$ are complete \\
                 \cuz AF lemma.}
 \end{equation}
 \begin{equation}
@@ -1821,18 +1821,18 @@ Recalling that the generation inflow of a tangible reduction is its tributary,
 Recalling again that \V{downFD} is tangible,
 \begin{equation}
 \label{eq:pr-rt-comp-240}
-        \myparc{Line \ref{li:finish-row-070} of \Algref{finish-row} calls
+        \mycpar{Line \ref{li:finish-row-070} of \Algref{finish-row} calls
         \Algref{tangible-reduction} for \V{tribEI}
         \cuz \eqref{eq:pr-rt-comp-100}.}
 \end{equation}
 \begin{equation}
-        \myparc{The loop of line \ref{li:tangible-reduction-100}
+        \mycpar{The loop of line \ref{li:tangible-reduction-100}
         in \Algref{tangible-reduction} finds the EI for \V{stemFD} \\
         \cuz \eqref{eq:pr-rt-comp-040}, \eqref{eq:pr-rt-comp-050}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-300}
-        \myparc{Line \ref{li:tangible-reduction-150}
+        \mycpar{Line \ref{li:tangible-reduction-150}
         in \Algref{tangible-reduction} adds \V{downEI}
         to the chart \\
         \cuz \eqref{eq:pr-rt-comp-010}.}
@@ -1874,14 +1874,14 @@ for the lemma.
 \end{equation}
 \begin{equation}
         \label{eq:pr-ri-comp-030}
-        \myparc{\V{joint} is the current location of \V{fdConf} less the length of
+        \mycpar{\V{joint} is the current location of \V{fdConf} less the length of
         the terminal string produced by the predot symbol instance.
         \bcuz \eqref{eq:pr-ri-comp-020}.}
 \end{equation}
 Noting that a reduction is a confirmation,
 \begin{equation}
         \label{eq:pr-ri-comp-040}
-        \myparc{\V{stemFD} is the mainstem of \V{downFD} at \V{joint}
+        \mycpar{\V{stemFD} is the mainstem of \V{downFD} at \V{joint}
         \bcuz \Lmref{conf-stem},
                 \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-030}.}
 \end{equation}
@@ -1906,7 +1906,7 @@ Recalling that the generation inflow of a intangible reduction is its mainflow,
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-220}
-        \myparc{Generations 0 through \V{g} of row $\V{i}+1$ are complete \\
+        \mycpar{Generations 0 through \V{g} of row $\V{i}+1$ are complete \\
                 \cuz AF lemma.}
 \end{equation}
 \begin{equation}
@@ -1919,13 +1919,13 @@ Recalling that the generation inflow of a intangible reduction is its mainflow,
 Recalling again that \V{downFD} is intangible,
 \begin{equation}
 \label{eq:pr-ri-comp-240}
-        \myparc{Line \ref{li:finish-row-120} of \Algref{finish-row} calls
+        \mycpar{Line \ref{li:finish-row-120} of \Algref{finish-row} calls
         \Algref{intangible-reduction} for \V{stemEI}
         \cuz \eqref{eq:pr-ri-comp-050}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-300}
-        \myparc{Line \ref{li:intangible-reduction-add-ei}
+        \mycpar{Line \ref{li:intangible-reduction-add-ei}
         in \Algref{intangible-reduction} adds \V{downEI}
         to the chart \\
         \cuz \eqref{eq:pr-ri-comp-010}.}
@@ -2041,8 +2041,179 @@ of \V{trib}.
 \end{definition}
 
 The term ``joint location'' is based on the idea that the joint location
-is the place were the mainstem and tributary ``join'' to form the downstream.
+is the place where the mainstem and tributary ``join'' to form the downstream.
 
+\section{Inflow lemmas}
+
+\begin{lemma}[Confirmation mainstem]
+\todo{Define predot symbol instance}
+        \label{lm:conf-stem}
+        Let \V{alConf} be a confirmed aletheme,
+        whose predot symbol is \V{B},
+        and whose current location is \V{current}.
+        \V{alConf} has a mainstem \V{alStem}
+        at joint location \V{j},
+        where \V{j} is such that
+        \[
+                \V{B} \destar \Velement{w}{\V{j},\V{current}}.
+        \]
+        Further, the current location of \V{alStem} is \V{j},
+        and 
+        \[
+                \VFA{Gen}{alStem} < \VFA{Gen}{alConf}. \quad \lmEnd
+        \]
+\end{lemma}
+
+\begin{proof}
+Our proof strategy is to assume a confirmed aletheme,
+as described in
+the statement of the lemma, and otherwise arbitrary,
+and then to show
+that we have a mainstem as described in
+the statement of the lemma.
+
+We assume for the theorem the following confirmed aletheme:
+\begin{equation}
+\label{eq:pr-conf-stem-005}
+        \begin{gathered}
+        \V{down} =
+                \left( \begin{gathered}
+                \V{fore},\V{after},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
+                        \V{origin},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz AF theorem, WLOG.}
+        \end{gathered}
+\end{equation}
+
+In \eqref{eq:pr-conf-stem-030},
+the focus symbol instance is \V{A:f}.
+Other major instance tags will be
+``\texttt{L}'' to indicate
+an instance from the LHS step of the transition;
+``\texttt{R}'' to indicate
+an instance from the LHS step of the transition; and
+``\texttt{pd}'' to indicate
+the predot symbol instance.
+\begin{equation}
+        \label{eq:pr-conf-stem-035}
+        \begin{gathered}
+        \text{The initial segment of the input, \Velement{w}{0,\V{currentConf}}, is known} \\
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-040}
+        \begin{gathered}
+        \V{anteFocus:L} \wcat \V{antepredot:R} \wcat \V{B:pd} \destarV{drv} \Velement{w}{0,\V{currentConf}} \\
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-050}
+        \begin{gathered}
+        \V{anteFocus:R} \destarV{drv} \Velement{w}{0,\V{origin}} \\
+        \text{\cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-030}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-070}
+        \V{B:pd} \destarV{drv} \Velement{w}{\V{currentM},\V{currentConf}}
+                \cuz \eqref{eq:pr-conf-stem-040}.
+\end{equation}
+In \eqref{eq:pr-conf-stem-070} we label the origin location of \V{B},
+\V{currentM}, for reasons that will become clear later in this proof.
+\begin{equation}
+        \label{eq:pr-conf-stem-080}
+        \begin{gathered}
+        \V{origin} \le \V{currentM} \le \V{currentConf} \\
+        \text{\cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-050}, \eqref{eq:pr-conf-stem-070}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-090}
+        \begin{gathered}
+        \text{The initial segment of the input, \Velement{w}{0,\V{currentM}}, is known} \\
+        \text{\cuz \eqref{eq:pr-conf-stem-035}, \eqref{eq:pr-conf-stem-080}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-100}
+        \begin{gathered}
+        \V{anteFocus:L} \wcat \V{antepredot:R} \destarV{drv} \Velement{w}{0,\V{currentM}} \\
+        \text{\cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-070}.}
+        \end{gathered}
+\end{equation}
+We know from \eqref{eq:pr-conf-stem-005} that
+\begin{equation}
+        \begin{gathered}
+        \label{eq:pr-conf-stem-110}
+        \V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot} \\
+                \land \; \size{\V{antepredot}} = (\V{dotPosConf} \subtract 1) \\
+        \text{\cuz AF theorem, \eqref{eq:pr-conf-stem-005}, WLOG.}
+        \end{gathered}
+\end{equation}
+will also be a dotted rule in our grammar \V{g}.
+We get \eqref{eq:pr-conf-stem-120}
+by changing the decoration of
+\eqref{eq:pr-conf-stem-030} to align with \eqref{eq:pr-conf-stem-110}.
+\begin{equation}
+        \label{eq:pr-conf-stem-120}
+        \begin{gathered}
+                \Velement{drv}{\V{stepIX},(\V{stepIX}+1)} = \\
+        \V{anteFocus:L} \wcat \V{A:f} \wcat \V{postFocus:L} \\
+        \derivesV{drv}
+                \left( \begin{gathered} \;
+                \V{anteFocus:L} \wcat \V{antepredot:R} \wmydot \qquad \\
+                        \qquad \V{B:pd} \wcat \V{postdot:R} \wcat \V{postFocus:R}
+                \; \end{gathered} \right) \\
+                \text{\cuz \eqref{eq:pr-conf-stem-030}, \eqref{eq:pr-conf-stem-110}.}
+        \end{gathered}
+\end{equation}
+From the foregoing, we know we have the focused derivation,
+\begin{equation}
+        \label{eq:pr-conf-stem-200}
+        \begin{gathered}
+        \V{fdM} = \left( \; \begin{gathered}
+                \V{drv}, \V{stepIX}, \V{focusPos}, (\V{dotPosConf} \subtract 1), \\
+                        \V{origin}, \V{currentM}
+        \end{gathered} \; \right) \\
+                \cuz \Dfref{fd}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
+                        \eqref{eq:pr-conf-stem-110}, \eqref{eq:pr-conf-stem-120}.
+        \end{gathered}
+\end{equation}
+The Earley item of \eqref{eq:pr-conf-stem-200} is
+\begin{equation}
+        \label{eq:pr-conf-stem-210}
+        \begin{gathered}
+        \tuple{\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{currentM}} \\
+                \cuz \Dfref{fd}, \Dfref{earley-item-to-focus}, \eqref{eq:pr-conf-stem-200}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-220}
+        \myparbox{\V{fdM} is a mainstem of \V{fdConf} at \V{currentM}
+        \cuz
+        \Dfref{fd}, \Dfref{ei-focus-concept}, \Dfref{focus-fd-concept},
+        \Dfref{confirmation-stem}, \eqref{eq:pr-conf-stem-200} \eqref{eq:pr-conf-stem-210}.
+        }
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-225}
+        \myparbox{\V{fdM} is not a completion \cuz \eqref{eq:pr-conf-stem-210}.}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-conf-stem-230}
+        \myparbox{
+                \V{currentM}, the location of \V{fdM}, is the current location of \V{fdConf}
+                less the length of the terminal string produced by the predot symbol
+                \cuz \eqref{eq:pr-conf-stem-070}.
+        }
+\end{equation}
+Equations \eqref{eq:pr-conf-stem-220}, \eqref{eq:pr-conf-stem-225},
+and \eqref{eq:pr-conf-stem-230}
+are what we needed to show for the theorem.
+\myqed
+\end{proof}
 
 {
 \clearpage
