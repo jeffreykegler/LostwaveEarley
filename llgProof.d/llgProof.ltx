@@ -1978,17 +1978,33 @@ for the lemma.
                 \land \; \V{origin},\V{current} \in \naturals.
         \end{gathered}
         \end{equation}
-        An aletheme is considered true the statements if and only if
+        An aletheme is considered true if and only if
         \begin{gather}
-                \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
-                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{after} \\
+                \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
+                \land \; \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
+                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft} \\
                 \land \; \V{fore} \destar \Velement{w}{0,\V{origin}}. \quad \dfEnd
         \end{gather}
 \end{definition}
 
 An aletheme is so called because it is the smallest unit of soundness
-in an Earley parsing context.  It comes from alethes, the Greek word
+in an Earley parsing context.  It comes from \textit{alethes},
+the Greek word
 for ``truth''.
+
+\begin{definition}[Generation]
+        Let
+        \[ \V{x} = (\V{fore},\V{after},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
+        be an aletheme.
+        The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest derivation such
+        that
+        \[ \V{S} \destarV{g} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
+        The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest derivation such
+        that
+        \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
+        The \textbf{generation} of \V{x} is
+        \[ \VFA{Gen}{x} = \VFA{Dp}{x} + \VFA{Ht}{x}. \quad \dfEnd \]
+\end{definition}
 
 {
 \clearpage
