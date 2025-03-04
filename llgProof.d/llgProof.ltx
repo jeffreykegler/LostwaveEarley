@@ -190,7 +190,7 @@
   }%
 }
 \newcommand{\mycpar}[2][\mathparwidth]{%
-  \parbox[t]{#1}{\centering%
+  \parbox[c]{#1}{\centering%
   % \linespread{1.15}\selectfont
   \ignorespaces#2\par%
   }%
@@ -959,20 +959,6 @@ We also say that \V{down} is the \textbf{downstream channel}
 (or simply \textbf{downstream})
 of \V{mainstem}.
 \dfEnd
-\end{definition}
-
-\begin{definition}[Generations]
-        \label{df:generation}
-        Scansions and start Earley items belong to generation 0.
-        The generation of all other Earley items is that of their
-        first generation candidate.
-
-        If an Earley item \V{down} has a \textbf{generation inflow} whose generation is \V{i},
-        $\V{i}+1$ is a \textbf{generation candidate} of \V{down}.
-        The generation inflow of predictions is its mainstem.
-        The generation inflow of an intangible reduction is its mainstem.
-        The generation inflow of an tangible reduction is its tributary.
-        \dfEnd
 \end{definition}
 
 \begin{observation}[Generation inflow location]
@@ -1793,6 +1779,7 @@ the Greek word
 for ``truth''.
 
 \begin{definition}[Generation]
+        \label{df:generation}
         Let
         \[ \V{x} = (\V{fore},\V{after},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
         be an aletheme.
@@ -1942,36 +1929,45 @@ For the lemma, it remains to show the relationship between the generation of the
 and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-110}
-        \mycpar{Let \V{n1} be the minimum number of steps in a derivation \\
+        \mycpar{Let \V{n1} be the minimum number of steps in the derivation \\
         $\V{S} \destar \V{fore} \cat \V{A} \cat \V{after}.$}
 \end{equation}
-Then
 \begin{equation}
 \label{eq:pr-conf-stem-120}
-        \mycpar{\VFA{Dp}{downAL} = \VFA{Dp}{stemAL} = \V{n1} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-110}.}
+        \mycpar{\VFA{Dp}{downAL} = \V{n1} \\
+        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-110}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-123}
+        \mycpar{\VFA{Dp}{stemAL} = \V{n1} \\
+        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-110}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-126}
+        \mycpar{\VFA{Dp}{downAL} = \VFA{Dp}{stemAL} \\
+        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-120}, \eqref{eq:pr-conf-stem-123}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-130}
-        \mycpar{Let \V{n2} be the minimum number of steps in a derivation \\
+        \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
         $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.
         }
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-140}
-        \mycpar{\VFA{Dp}{downAL} = \V{n2} \\
+        \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
         \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-130}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-150}
-        \mycpar{Let \V{n3} be the minimum number of steps in a derivation \\
+        \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
         $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-160}
-        \mycpar{\VFA{Dp}{stemAL} = \V{n3} \\
+        \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
         \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-150}.}
 \end{equation}
 Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
@@ -1980,8 +1976,29 @@ must take at least one step, we know that
 \label{eq:pr-conf-stem-170}
         \V{n3} < \V{n2} \cuz \eqref{eq:pr-conf-stem-130}, \eqref{eq:pr-conf-stem-150}.
 \end{equation}
-
-        \todo{Finish this proof}
+\begin{equation}
+\label{eq:pr-conf-stem-180}
+        \VFA{Ht}{stemAL} < \VFA{Ht}{downAL} \cuz \eqref{eq:pr-conf-stem-140},
+                \eqref{eq:pr-conf-stem-160}, \eqref{eq:pr-conf-stem-170}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-190}
+        \VFA{Gen}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{generation}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-200}
+        \VFA{Gen}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-210}
+        \VFA{Gen}{stemAL} < \VFA{Gen}{downAL} \cuz \eqref{eq:pr-conf-stem-126},
+                \eqref{eq:pr-conf-stem-180},
+                \eqref{eq:pr-conf-stem-190},
+                \eqref{eq:pr-conf-stem-200}.
+\end{equation}
+With \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
+and \eqref{eq:pr-conf-stem-210},
+we have the lemma.
 \myqed
 \end{proof}
 
