@@ -935,27 +935,6 @@ of \V{tribFB}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Confirmation mainstem]
-\label{df:confirmation-stem}
-        \todo{Define \V{joint}?  Necessary?}
-        Suppose, without loss of generality, that
-\begin{equation}
-        \V{down} = (\V{A} \de \V{antepredotA} \cat \V{B} \mydot \V{postdot}, \V{origin},\V{current})
-\end{equation}
-is an confirmed Earley item.
-Then we say that
-a Earley item of the form
-\begin{equation*}
-        \V{stem} = (\V{A} \de \V{antepredotA} \mydot \V{B} \cat \V{postdot}, \V{origin},\V{joint}).
-\end{equation*}
-is a \textbf{mainstem} of
-\V{down} at input location \V{joint}.
-We also say that \V{down} is the \textbf{downstream channel}
-(or simply \textbf{downstream})
-of \V{mainstem}.
-\dfEnd
-\end{definition}
-
 \begin{definition}[Prediction mainstem]
 \label{df:prediction-stem}
         Suppose, without loss of generality, that
@@ -1582,7 +1561,7 @@ Noting that a reduction is a confirmation,
 \label{eq:pr-rt-comp-050}
         \begin{gathered}
                 \V{stemEI} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{joint}) \\
-        \cuz \Dfref{confirmation-stem}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-040}.
+        \cuz \Dfref{conf-stem}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-040}.
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1710,7 +1689,7 @@ The EI of \V{stemFD} is
 \label{eq:pr-ri-comp-050}
         \begin{gathered}
                 \V{stemEI} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, (\V{i}+1)) \\
-        \cuz \Dfref{confirmation-stem}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-020},
+        \cuz \Dfref{conf-stem}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-020},
                 \eqref{eq:pr-ri-comp-040}.
         \end{gathered}
 \end{equation}
@@ -1788,6 +1767,7 @@ for the lemma.
 \section{Definitions 2}
 
 \begin{definition}[Altheme]
+        \label{df:aletheme}
         An \textbf{Earley aletheme}, or \textbf{aletheme},
         is an 8-tuple
         \begin{equation}
@@ -1827,6 +1807,7 @@ for ``truth''.
 \end{definition}
 
 \begin{definition}[Confirmation mainstem]
+        \label{df:conf-stem}
         Suppose, without loss of generality, that
         \[ \V{down} = (\V{fore},\V{after},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
         is an confirmed aletheme.
@@ -1868,16 +1849,17 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 \begin{lemma}[Confirmation mainstem]
 \todo{Define predot symbol instance}
         \label{lm:conf-stem}
-        Let \V{alConf} be a confirmed aletheme,
+        Let \V{downAL} be a confirmed aletheme,
         whose predot symbol is \V{B},
-        and whose current location is \V{current}.
-        \V{alConf} has a mainstem \V{alStem}
-        at joint location \V{j},
-        where \V{j} is such that
+        whose current location is \V{current},
+        and where \V{j} is such that
         \[
+                0 \le \V{j} \le \V{current} \land
                 \V{B} \destar \Velement{w}{\V{j},\V{current}}.
         \]
-        Further, the current location of \V{alStem} is \V{j},
+        Then \V{downAL} has a mainstem \V{stemAL}
+        at joint location \V{j},
+        the current location of \V{alStem} is \V{j},
         and 
         \[
                 \VFA{Gen}{alStem} < \VFA{Gen}{alConf}. \quad \lmEnd
@@ -1892,16 +1874,60 @@ and then to show
 that we have a mainstem as described in
 the statement of the lemma.
 
-We assume for the theorem the following confirmed aletheme:
+We assumed for the lemma the following confirmed aletheme:
 \begin{equation}
-\label{eq:pr-conf-stem-005}
+\label{eq:pr-conf-stem-010}
         \begin{gathered}
-        \V{down} =
+        \V{downAL} =
                 \left( \begin{gathered}
                 \V{fore},\V{after},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
                         \V{origin},\V{current}
                 \end{gathered} \right) \\
-                \text{\cuz AF theorem, WLOG.}
+                \text{\cuz AF lemma, WLOG.}
+        \end{gathered}
+\end{equation}
+We also assumed for the lemma that
+\begin{equation}
+\label{eq:pr-conf-stem-020}
+        \begin{gathered}
+                0 \le \V{j} \le \V{current} \\
+                \land \; \V{B} \destar \Velement{w}{\V{j},\V{current}} \\
+                \text{\cuz AF lemma, WLOG.}
+        \end{gathered}
+\end{equation}
+From \V{downAL} we can conclude
+\begin{gather}
+\label{eq:pr-conf-stem-030}
+        \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
+\label{eq:pr-conf-stem-040}
+        \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
+\label{eq:pr-conf-stem-050}
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
+\label{eq:pr-conf-stem-060}
+        \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.}
+\end{gather}
+We can deduce one useful new derivation:
+\begin{gather}
+\label{eq:pr-conf-stem-070}
+        \mycpar{$\V{antepre} \destar \Velement{w}{\V{origin},\V{j}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-020}.}
+\end{gather}
+With the foregoing, we have our mainstem aletheme:
+\begin{equation}
+\label{eq:pr-conf-stem-080}
+        \begin{gathered}
+        \V{stemAL} =
+                \left( \begin{gathered}
+                        \V{fore},\V{after},\V{antepre},(\V{B}\cat\V{post}),\V{A}, \\
+                        \V{origin},\V{j}
+                \end{gathered} \right) \\
+                \text{\cuz \Dfref{aletheme}, \Dfref{conf-stem},
+                        \eqref{eq:pr-conf-stem-030}, \eqref{eq:pr-conf-stem-050},
+                        \eqref{eq:pr-conf-stem-060}, \eqref{eq:pr-conf-stem-070}.}
         \end{gathered}
 \end{equation}
 
