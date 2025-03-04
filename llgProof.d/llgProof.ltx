@@ -1891,7 +1891,7 @@ From \V{downAL} we can conclude
         \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-050}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft}$
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-060}
         \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
@@ -2060,23 +2060,42 @@ From \V{downAL} we can conclude
         \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-050}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft}$
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-060}
         \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.}
 \end{gather}
-We can deduce one useful new derivation:
+
+We consider a new derivation:
+\begin{equation}
+\label{eq:pr-red-trib-080}
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-red-trib-030}, \eqref{eq:pr-red-trib-050},}
+\end{equation}
+which we simplify to
+\begin{equation}
+\label{eq:pr-red-trib-090}
+        \mycpar{$\V{S} \derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-red-trib-080}.}
+\end{equation}
+Because $\V{B} \in \V{N}$ we know for that,
+for some $\V{rhs} \in \V{STR}$,
+\begin{equation}
+\label{eq:pr-red-trib-100}
+        \mycpar{$\V{B} \de \V{rhs}$.}
+\end{equation}
+        \todo{Revised to here}
 \begin{gather}
 \label{eq:pr-red-trib-070}
         \mycpar{$\V{antepre} \destar \Velement{w}{\V{origin},\V{j}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-020}.}
 \end{gather}
 
-        \todo{Revised to here}
 With the foregoing, we have our mainstem aletheme:
 \begin{equation}
-\label{eq:pr-red-trib-080}
+\label{eq:X-pr-red-trib-080}
         \begin{gathered}
         \V{stemAL} =
                 \left( \begin{gathered}
@@ -2089,86 +2108,86 @@ With the foregoing, we have our mainstem aletheme:
         \end{gathered}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-090}
-        \mycpar{The current location of \V{stemAL} is \V{j} \cuz \eqref{eq:pr-red-trib-080}.}
+\label{eq:X-pr-red-trib-090}
+        \mycpar{The current location of \V{stemAL} is \V{j} \cuz \eqref{eq:X-pr-red-trib-080}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-100}
-        \mycpar{The joint location of \V{stemAL} is \V{j} \cuz \Dfref{conf-stem}, \eqref{eq:pr-red-trib-080}.}
+\label{eq:X-pr-red-trib-100}
+        \mycpar{The joint location of \V{stemAL} is \V{j} \cuz \Dfref{conf-stem}, \eqref{eq:X-pr-red-trib-080}.}
 \end{equation}
 For the lemma, it remains to show the relationship between the generation of the mainstem
 and its downstream.
 \begin{equation}
-\label{eq:pr-red-trib-110}
+\label{eq:X-pr-red-trib-110}
         \mycpar{Let \V{n1} be the minimum number of steps in the derivation \\
         $\V{S} \destar \V{fore} \cat \V{A} \cat \V{after}.$}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-120}
+\label{eq:X-pr-red-trib-120}
         \mycpar{\VFA{Dp}{downAL} = \V{n1} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-110}.}
+        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-010}, \eqref{eq:X-pr-red-trib-110}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-123}
+\label{eq:X-pr-red-trib-123}
         \mycpar{\VFA{Dp}{stemAL} = \V{n1} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-080}, \eqref{eq:pr-red-trib-110}.}
+        \cuz \Dfref{generation}, \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-110}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-126}
+\label{eq:X-pr-red-trib-126}
         \mycpar{\VFA{Dp}{downAL} = \VFA{Dp}{stemAL} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-120}, \eqref{eq:pr-red-trib-123}.}
+        \cuz \Dfref{generation}, \eqref{eq:X-pr-red-trib-120}, \eqref{eq:X-pr-red-trib-123}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-130}
+\label{eq:X-pr-red-trib-130}
         \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
         $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.
         }
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-140}
+\label{eq:X-pr-red-trib-140}
         \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-130}.}
+        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-010}, \eqref{eq:X-pr-red-trib-130}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-150}
+\label{eq:X-pr-red-trib-150}
         \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
         $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-160}
+\label{eq:X-pr-red-trib-160}
         \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-080}, \eqref{eq:pr-red-trib-150}.}
+        \cuz \Dfref{generation}, \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-150}.}
 \end{equation}
 Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
 must take at least one step, we know that
 \begin{equation}
-\label{eq:pr-red-trib-170}
-        \V{n3} < \V{n2} \cuz \eqref{eq:pr-red-trib-130}, \eqref{eq:pr-red-trib-150}.
+\label{eq:X-pr-red-trib-170}
+        \V{n3} < \V{n2} \cuz \eqref{eq:X-pr-red-trib-130}, \eqref{eq:X-pr-red-trib-150}.
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-180}
-        \VFA{Ht}{stemAL} < \VFA{Ht}{downAL} \cuz \eqref{eq:pr-red-trib-140},
-                \eqref{eq:pr-red-trib-160}, \eqref{eq:pr-red-trib-170}.
+\label{eq:X-pr-red-trib-180}
+        \VFA{Ht}{stemAL} < \VFA{Ht}{downAL} \cuz \eqref{eq:X-pr-red-trib-140},
+                \eqref{eq:X-pr-red-trib-160}, \eqref{eq:X-pr-red-trib-170}.
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-190}
+\label{eq:X-pr-red-trib-190}
         \VFA{Gen}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{generation}.
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-200}
+\label{eq:X-pr-red-trib-200}
         \VFA{Gen}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
 \end{equation}
 \begin{equation}
-\label{eq:pr-red-trib-210}
-        \VFA{Gen}{stemAL} < \VFA{Gen}{downAL} \cuz \eqref{eq:pr-red-trib-126},
-                \eqref{eq:pr-red-trib-180},
-                \eqref{eq:pr-red-trib-190},
-                \eqref{eq:pr-red-trib-200}.
+\label{eq:X-pr-red-trib-210}
+        \VFA{Gen}{stemAL} < \VFA{Gen}{downAL} \cuz \eqref{eq:X-pr-red-trib-126},
+                \eqref{eq:X-pr-red-trib-180},
+                \eqref{eq:X-pr-red-trib-190},
+                \eqref{eq:X-pr-red-trib-200}.
 \end{equation}
-With \eqref{eq:pr-red-trib-080}, \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-100},
-and \eqref{eq:pr-red-trib-210},
+With \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-090}, \eqref{eq:X-pr-red-trib-100},
+and \eqref{eq:X-pr-red-trib-210},
 we have the lemma.
 \myqed
 \end{proof}
