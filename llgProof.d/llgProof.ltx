@@ -1128,11 +1128,9 @@ has the same current location as its downstream.
 \label{alg:intangible-reduction}
 \begin{algorithmic}[1]
         \Procedure{AddIntangibleReduction}{\V{mainstem}}
-        \State $\V{currLoc} \gets \text{current location of \V{mainstem}}$
-        \State $\V{dotted} \gets \text{dotted rule of \V{mainstem}}$
+        \State \textbf{let} \V{mainstem} \text{be} $(\V{dottedRule}, \V{origin}, \V{current})$
         \State $\V{newDotted} \gets \Call{AdvanceDot}{\V{dotted}}$
-        \State $\V{newOrigin} \gets  \text{origin of \V{mainstem}}$
-        \State \Call{RecordEdge} { \V{newDotted}, \V{newOrigin}, \V{currLoc} }
+        \State \Call{RecordEdge} { \V{newDotted}, \V{origin}, \V{current} }
         \label{li:intangible-reduction-record-edge}
 \EndProcedure
 \end{algorithmic}
