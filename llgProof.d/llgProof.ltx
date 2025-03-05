@@ -1087,7 +1087,7 @@ has the same current location as its downstream.
           \label{li:tangible-reduction-120}
           \State $\V{newOrigin} \gets \text{origin of \V{mainstem}}$
           \label{li:tangible-reduction-130}
-          \State \Call{RecordEdge} { \V{newDotted}, \V{newOrigin}, \V{tribCurrent} }
+          \State \Call{RecordEdge}{\V{newDotted}, \V{newOrigin}, \V{tribCurrent}}
      \EndFor
         \label{li:tangible-reduction-170}
 \EndProcedure
@@ -1130,7 +1130,7 @@ has the same current location as its downstream.
         \Procedure{AddIntangibleReduction}{\V{mainstem}}
         \State \textbf{let} \V{mainstem} \text{be} $(\V{dottedRule}, \V{origin}, \V{current})$
         \State $\V{newDotted} \gets \Call{AdvanceDot}{\V{dotted}}$
-        \State \Call{RecordEdge} { \V{newDotted}, \V{origin}, \V{current} }
+        \State \Call{RecordEdge}{\V{newDotted}, \V{origin}, \V{current}}
         \label{li:intangible-reduction-record-edge}
 \EndProcedure
 \end{algorithmic}
@@ -1143,7 +1143,7 @@ has the same current location as its downstream.
         \Procedure{AddPredictions}{\V{sym},\V{currLoc}}
         \For {every \V{rule} such that $\V{sym} \de \alpha$ and $\alpha \in (\V{N}\cup\V{T})^\ast$}
         \Statex \Comment for every \V{rule} in grammar with LHS equal to \V{sym}
-                \State \Call{RecordEdge} { $(\V{sym} \de \mydot \alpha), \V{currLoc}, \V{currLoc}$ }
+                \State \Call{RecordEdge}{$(\V{sym} \de \mydot \alpha), \V{currLoc}, \V{currLoc}$}
         \EndFor
 \EndProcedure
 \end{algorithmic}
@@ -1795,8 +1795,8 @@ for ``truth''.
         The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest derivation such
         that
         \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
-        The \textbf{generation} of \V{x} is
-        \[ \VFA{Gen}{x} = \VFA{Dp}{x} + \VFA{Ht}{x}. \quad \dfEnd \]
+        The \textbf{rank} of \V{x} is
+        \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
 \end{definition}
 
 \begin{definition}[Confirmation mainstem]
@@ -1855,7 +1855,7 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
         the current location of \V{stemAL} is \V{j},
         and 
         \[
-                \VFA{Gen}{stemAL} < \VFA{Gen}{downAL}. \quad \lmEnd
+                \VFA{Rank}{stemAL} < \VFA{Rank}{downAL}. \quad \lmEnd
         \]
 \end{lemma}
 
@@ -1989,15 +1989,15 @@ must take at least one step, we know that
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-190}
-        \VFA{Gen}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \cuz \Dfref{generation}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-200}
-        \VFA{Gen}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-210}
-        \VFA{Gen}{stemAL} < \VFA{Gen}{downAL} \cuz \eqref{eq:pr-conf-stem-126},
+        \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:pr-conf-stem-126},
                 \eqref{eq:pr-conf-stem-180},
                 \eqref{eq:pr-conf-stem-190},
                 \eqref{eq:pr-conf-stem-200}.
@@ -2023,7 +2023,7 @@ we have the lemma.
         the current location of \V{tribAL} is \V{j},
         and 
         \[
-                \VFA{Gen}{tribAL} < \VFA{Gen}{downAL}. \quad \lmEnd
+                \VFA{Rank}{tribAL} < \VFA{Rank}{downAL}. \quad \lmEnd
         \]
 \end{lemma}
 
@@ -2179,15 +2179,15 @@ must take at least one step, we know that
 \end{equation}
 \begin{equation}
 \label{eq:X-pr-red-trib-190}
-        \VFA{Gen}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{generation}.
 \end{equation}
 \begin{equation}
 \label{eq:X-pr-red-trib-200}
-        \VFA{Gen}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
 \end{equation}
 \begin{equation}
 \label{eq:X-pr-red-trib-210}
-        \VFA{Gen}{stemAL} < \VFA{Gen}{downAL} \cuz \eqref{eq:X-pr-red-trib-126},
+        \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:X-pr-red-trib-126},
                 \eqref{eq:X-pr-red-trib-180},
                 \eqref{eq:X-pr-red-trib-190},
                 \eqref{eq:X-pr-red-trib-200}.
