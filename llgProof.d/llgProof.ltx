@@ -961,15 +961,6 @@ of \V{mainstem}.
 \dfEnd
 \end{definition}
 
-\begin{observation}[Generation inflow location]
-We observe that \Dfref{generation} implies that every generation inflow
-has the same current location as its downstream.
-\obEnd
-\end{observation}
-
-\todo{Prove that every confirmed Earley item belongs to a generation
-        within its row}
-
 \needspace{3in}
 \section{Algorithm}
 \label{sec:algorithm}
@@ -1470,7 +1461,7 @@ are what we needed to show for the theorem.
         \label{eq:row-step-110}
                 \begin{gathered}
                 \text{\V{stem} is in generation \V{g} or earlier} \\
-                \text{\cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-105}, \Dfref{generation}.}
+                        \text{\cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-105}, \Dfref{rank}.}
                 \end{gathered}
         \end{equation}
         \begin{equation}
@@ -1593,7 +1584,7 @@ The Earley item of \V{tribFD} is
 Recalling that the generation inflow of a tangible reduction is its tributary,
 \begin{equation}
 \label{eq:pr-rt-comp-210}
-        \text{\V{tribFD} is in generation \V{g} \cuz \Dfref{generation},
+        \text{\V{tribFD} is in generation \V{g} \cuz \Dfref{rank},
                 \eqref{eq:pr-rt-comp-090}, \eqref{eq:pr-rt-comp-200}.}
 \end{equation}
 \begin{equation}
@@ -1692,7 +1683,7 @@ The EI of \V{stemFD} is
 Recalling that the generation inflow of a intangible reduction is its mainflow,
 \begin{equation}
 \label{eq:pr-ri-comp-210}
-        \text{\V{stemFD} is in generation \V{g} \cuz \Dfref{generation},
+        \text{\V{stemFD} is in generation \V{g} \cuz \Dfref{rank},
                 \eqref{eq:pr-ri-comp-040}, \eqref{eq:pr-ri-comp-200}.}
 \end{equation}
 \begin{equation}
@@ -1784,8 +1775,8 @@ in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
 the Greek word
 for ``truth''.
 
-\begin{definition}[Generation]
-        \label{df:generation}
+\begin{definition}[Rank]
+        \label{df:rank}
         Let
         \[ \V{x} = (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
         be an aletheme.
@@ -1818,7 +1809,7 @@ of \V{mainstem}.
 \end{definition}
 
 \begin{definition}[Reduction tributary]
-\label{df:reduction-trib}
+\label{df:red-trib}
         Suppose, without loss of generality, that
         \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
         is an confirmed aletheme.
@@ -1931,7 +1922,7 @@ With the foregoing, we have our mainstem aletheme:
 \label{eq:pr-conf-stem-100}
         \mycpar{The joint location of \V{stemAL} is \V{j} \cuz \Dfref{conf-stem}, \eqref{eq:pr-conf-stem-080}.}
 \end{equation}
-For the lemma, it remains to show the relationship between the generation of the mainstem
+For the lemma, it remains to show the relationship between the rank of the mainstem
 and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-110}
@@ -1941,17 +1932,17 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-120}
         \mycpar{\VFA{Dp}{downAL} = \V{n1} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-110}.}
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-110}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-123}
         \mycpar{\VFA{Dp}{stemAL} = \V{n1} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-110}.}
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-110}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-126}
         \mycpar{\VFA{Dp}{downAL} = \VFA{Dp}{stemAL} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-120}, \eqref{eq:pr-conf-stem-123}.}
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-120}, \eqref{eq:pr-conf-stem-123}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-130}
@@ -1963,7 +1954,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-140}
         \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-130}.}
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-130}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-150}
@@ -1974,7 +1965,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-160}
         \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-150}.}
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-150}.}
 \end{equation}
 Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
 must take at least one step, we know that
@@ -1989,11 +1980,11 @@ must take at least one step, we know that
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-190}
-        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \cuz \Dfref{rank}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-200}
-        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-210}
@@ -2133,45 +2124,45 @@ With the foregoing, we have our tributary aletheme:
                         \V{rhs},\epsilon,(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}),\V{B}, \\
                         \V{j},\V{current}
                 \end{gathered} \right) \\
-                \text{\cuz \Dfref{aletheme}, \Dfref{reduction-trib},
-                        \eqref{eq:pr-red-trib-100}, \eqref{eq:pr-red-trib-155},
-                        \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-170}.}
+                \text{\cuz \Dfref{aletheme}, \Dfref{red-trib},
+                        \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-155},
+                        \eqref{eq:pr-red-trib-170}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-190}
-        \mycpar{The current location of \V{tribAL} is \V{j} \cuz \eqref{eq:pr-red-trib-180}.}
+        \mycpar{The current location of \V{tribAL} is \V{current} \cuz \eqref{eq:pr-red-trib-180}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-200}
-        \mycpar{The joint location of \V{tribAL} is \V{j} \cuz \Dfref{reduction-trib}, \eqref{eq:pr-red-trib-180}.}
+        \mycpar{The joint location of \V{tribAL} is \V{j} \cuz \Dfref{red-trib}, \eqref{eq:pr-red-trib-180}.}
 \end{equation}
-
-        \todo{Revised to here}
-For the lemma, it remains to show the relationship between the generation of the mainstem
+For the lemma, it remains to show the relationship between the rank of the mainstem
 and its downstream.
 \begin{equation}
-\label{eq:X-pr-red-trib-110}
-        \mycpar{Let \V{n1} be the minimum number of steps in the derivation \\
+\label{eq:pr-red-trib-310}
+        \mycpar{Let \V{DdMin}, ``depth downAl minimum''  be the minimum number of steps in the derivation \\
         $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
-\label{eq:X-pr-red-trib-120}
-        \mycpar{\VFA{Dp}{downAL} = \V{n1} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-010}, \eqref{eq:X-pr-red-trib-110}.}
+\label{eq:pr-red-trib-320}
+        \mycpar{\VFA{Dp}{downAL} = \V{DdMin} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-310}.}
 \end{equation}
 \begin{equation}
-\label{eq:X-pr-red-trib-123}
-        \mycpar{\VFA{Dp}{stemAL} = \V{n1} \\
-        \cuz \Dfref{generation}, \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-110}.}
+\label{eq:pr-red-trib-330}
+        \mycpar{Let \V{DtMin}, ``depth tribAl minimum''  be the minimum number of steps in the derivation \\
+        $\V{S} \destar \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
-\label{eq:X-pr-red-trib-126}
-        \mycpar{\VFA{Dp}{downAL} = \VFA{Dp}{stemAL} \\
-        \cuz \Dfref{generation}, \eqref{eq:X-pr-red-trib-120}, \eqref{eq:X-pr-red-trib-123}.}
+\label{eq:pr-red-trib-440}
+        \mycpar{\VFA{Dp}{tribAL} = \V{DtMin} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-330}.}
 \end{equation}
+        \todo{Revised to here}
+
 \begin{equation}
-\label{eq:X-pr-red-trib-130}
+\label{eq:X-pr-red-trib-150}
         \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
         $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.
@@ -2180,10 +2171,10 @@ and its downstream.
 \begin{equation}
 \label{eq:X-pr-red-trib-140}
         \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
-        \cuz \Dfref{generation}, \eqref{eq:pr-red-trib-010}, \eqref{eq:X-pr-red-trib-130}.}
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:X-pr-red-trib-130}.}
 \end{equation}
 \begin{equation}
-\label{eq:X-pr-red-trib-150}
+\label{eq:Y-pr-red-trib-150}
         \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
         $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.}
@@ -2191,7 +2182,7 @@ and its downstream.
 \begin{equation}
 \label{eq:X-pr-red-trib-160}
         \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
-        \cuz \Dfref{generation}, \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-150}.}
+        \cuz \Dfref{rank}, \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-150}.}
 \end{equation}
 Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
 must take at least one step, we know that
@@ -2206,11 +2197,11 @@ must take at least one step, we know that
 \end{equation}
 \begin{equation}
 \label{eq:X-pr-red-trib-190}
-        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{rank}.
 \end{equation}
 \begin{equation}
 \label{eq:X-pr-red-trib-200}
-        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{generation}.
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
 \end{equation}
 \begin{equation}
 \label{eq:X-pr-red-trib-210}
