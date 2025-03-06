@@ -1,13 +1,14 @@
 
-.phony: all clean aspell
+.phony: all clean aspell earley.pdf
 
 .SUFFIXES: .pdf .ltx
 
 .ltx.pdf:
 	pdflatex $<
 
-all: llgProof.pdf
+all:
+	pdflatex earley.ltx
 
 aspell:
-	cat llgProof.ltx | aspell list --home-dir=. --personal=aspell-ignore.txt -t | sort | uniq
+	cat earley.ltx | aspell list --home-dir=. --personal=aspell-ignore.txt -t | sort | uniq
 
