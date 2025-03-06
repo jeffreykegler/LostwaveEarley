@@ -1142,6 +1142,504 @@ of \V{mainstem}.
 
 \FloatBarrier
 
+\section{Definitions 2}
+
+\begin{definition}[Altheme]
+        \label{df:aletheme}
+        An \textbf{Earley aletheme}, or \textbf{aletheme},
+        is an 8-tuple
+        \begin{equation}
+        \begin{gathered}
+                (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \\
+                \text{where $\V{fore},\V{aft},\V{pre},\V{post} \in \V{STR}$} \\
+                \land \; \V{lhs} \in \V{N} \\
+                \land \; \V{origin},\V{current} \in \naturals.
+        \end{gathered}
+        \end{equation}
+        An aletheme is considered true if and only if
+        \begin{gather}
+                \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
+                \land \; \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
+                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft} \\
+                \land \; \V{fore} \destar \Velement{w}{0,\V{origin}}. \quad \dfEnd
+        \end{gather}
+\end{definition}
+
+An aletheme is so called because it is the smallest unit of soundness
+in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
+the Greek word
+for ``truth''.
+
+\begin{definition}[Rank]
+        \label{df:rank}
+        Let
+        \[ \V{x} = (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
+        be an aletheme.
+        The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest derivation such
+        that
+        \[ \V{S} \destarV{g} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
+        The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest derivation such
+        that
+        \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
+        The \textbf{rank} of \V{x} is
+        \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
+\end{definition}
+
+\begin{definition}[Confirmation mainstem]
+        \label{df:conf-stem}
+        Suppose, without loss of generality, that
+        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        is an confirmed aletheme.
+Then we say that
+an aletheme of the form
+\[
+        \V{stem} = (\V{fore},\V{aft},\V{antepre},(\V{B} \cat \V{post}),\V{lhs},\V{origin},\V{j})
+\]
+is a \textbf{mainstem} of
+\V{down} at the \textbf{joint location} \V{j}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{mainstem}.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Reduction tributary]
+\label{df:red-trib}
+        Suppose, without loss of generality, that
+        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        is an confirmed aletheme.
+        Where $\V{B} \de \V{rhs} \in \V{P}$,
+then we say that
+an aletheme of the form
+        \[ \V{trib} = ((\V{fore}\cat\V{antepre}),\V{aft},\V{rhs},\epsilon,\V{B},\V{j},\V{current}) \]
+is a \textbf{tributary} of
+\V{down} at the \textbf{joint location} \V{j}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{trib}.
+\dfEnd
+\end{definition}
+
+The term ``joint location'' is based on the idea that the joint location
+is the place where the mainstem and tributary ``join'' to form the downstream.
+
+\section{Inflow lemmas}
+
+\begin{lemma}[Confirmation mainstem]
+\todo{Define predot symbol instance}
+        \label{lm:conf-stem}
+        Let \V{downAL} be a confirmed aletheme,
+        whose predot symbol is \V{B},
+        whose current location is \V{current},
+        and where \V{j} is such that
+        \[
+                0 \le \V{j} \le \V{current} \land
+                \V{B} \destar \Velement{w}{\V{j},\V{current}}.
+        \]
+        Then \V{downAL} has a mainstem \V{stemAL}
+        at joint location \V{j},
+        the current location of \V{stemAL} is \V{j},
+        and
+        \[
+                \VFA{Rank}{stemAL} < \VFA{Rank}{downAL}. \quad \lmEnd
+        \]
+\end{lemma}
+
+\begin{proof}
+Our proof strategy is to assume a confirmed aletheme,
+as described in
+the statement of the lemma, and otherwise arbitrary,
+and then to show
+that we have a mainstem as described in
+the statement of the lemma.
+
+We assumed for the lemma the following confirmed aletheme:
+\begin{equation}
+\label{eq:pr-conf-stem-010}
+        \begin{gathered}
+        \V{downAL} =
+                \left( \begin{gathered}
+                        \V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
+                        \V{origin},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz AF lemma, WLOG.}
+        \end{gathered}
+\end{equation}
+We also assumed for the lemma that
+\begin{equation}
+\label{eq:pr-conf-stem-020}
+        \begin{gathered}
+                0 \le \V{j} \le \V{current} \\
+                \land \; \V{B} \destar \Velement{w}{\V{j},\V{current}} \\
+                \text{\cuz AF lemma, WLOG.}
+        \end{gathered}
+\end{equation}
+From \V{downAL} we can conclude
+\begin{gather}
+\label{eq:pr-conf-stem-030}
+        \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
+\label{eq:pr-conf-stem-040}
+        \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
+\label{eq:pr-conf-stem-050}
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
+\label{eq:pr-conf-stem-060}
+        \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.}
+\end{gather}
+We can deduce one useful new derivation:
+\begin{gather}
+\label{eq:pr-conf-stem-070}
+        \mycpar{$\V{antepre} \destar \Velement{w}{\V{origin},\V{j}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-020}.}
+\end{gather}
+With the foregoing, we have our mainstem aletheme:
+\begin{equation}
+\label{eq:pr-conf-stem-080}
+        \begin{gathered}
+        \V{stemAL} =
+                \left( \begin{gathered}
+                        \V{fore},\V{aft},\V{antepre},(\V{B}\cat\V{post}),\V{A}, \\
+                        \V{origin},\V{j}
+                \end{gathered} \right) \\
+                \text{\cuz \Dfref{aletheme}, \Dfref{conf-stem},
+                        \eqref{eq:pr-conf-stem-030}, \eqref{eq:pr-conf-stem-050},
+                        \eqref{eq:pr-conf-stem-060}, \eqref{eq:pr-conf-stem-070}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-090}
+        \mycpar{The current location of \V{stemAL} is \V{j} \cuz \eqref{eq:pr-conf-stem-080}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-100}
+        \mycpar{The joint location of \V{stemAL} is \V{j} \cuz \Dfref{conf-stem}, \eqref{eq:pr-conf-stem-080}.}
+\end{equation}
+For the lemma, it remains to show the relationship between the rank of the mainstem
+and its downstream.
+\begin{equation}
+\label{eq:pr-conf-stem-110}
+        \mycpar{Let \V{n1} be the minimum number of steps in the derivation \\
+        $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-120}
+        \mycpar{\VFA{Dp}{downAL} = \V{n1} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-110}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-123}
+        \mycpar{\VFA{Dp}{stemAL} = \V{n1} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-110}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-126}
+        \mycpar{\VFA{Dp}{downAL} = \VFA{Dp}{stemAL} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-120}, \eqref{eq:pr-conf-stem-123}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-130}
+        \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
+        $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
+        \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.
+        }
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-140}
+        \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-130}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-150}
+        \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
+        $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
+        \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-160}
+        \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-150}.}
+\end{equation}
+Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
+must take at least one step, we know that
+\begin{equation}
+\label{eq:pr-conf-stem-170}
+        \V{n3} < \V{n2} \cuz \eqref{eq:pr-conf-stem-130}, \eqref{eq:pr-conf-stem-150}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-180}
+        \VFA{Ht}{stemAL} < \VFA{Ht}{downAL} \cuz \eqref{eq:pr-conf-stem-140},
+                \eqref{eq:pr-conf-stem-160}, \eqref{eq:pr-conf-stem-170}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-190}
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-200}
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-conf-stem-210}
+        \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:pr-conf-stem-126},
+                \eqref{eq:pr-conf-stem-180},
+                \eqref{eq:pr-conf-stem-190},
+                \eqref{eq:pr-conf-stem-200}.
+\end{equation}
+With \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
+and \eqref{eq:pr-conf-stem-210},
+we have the lemma.
+\myqed
+\end{proof}
+
+\begin{lemma}[Reduction tributary]
+        \label{lm:red-trib}
+        Let \V{downAL} be a reduced aletheme,
+        whose predot symbol is \V{B},
+        whose current location is \V{current},
+        and where \V{j} is such that
+        \[
+                0 \le \V{j} \le \V{current} \land
+                \V{B} \destar \Velement{w}{\V{j},\V{current}}.
+        \]
+        Then \V{downAL} has a tributary \V{tribAL}
+        at joint location \V{j},
+        the current location of \V{tribAL} is \V{j},
+        and
+        \[
+                \VFA{Rank}{tribAL} < \VFA{Rank}{downAL}. \quad \lmEnd
+        \]
+\end{lemma}
+
+\begin{proof}
+Our proof strategy is to assume a reduced aletheme
+that is arbitrary except
+as described in
+the statement of the lemma,
+and then to show
+that we have a tributary as described in
+the statement of the lemma.
+
+We assumed for the lemma the following reduced aletheme:
+\begin{equation}
+\label{eq:pr-red-trib-010}
+        \begin{gathered}
+        \V{downAL} =
+                \left( \begin{gathered}
+                        \V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
+                        \V{origin},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz AF lemma, WLOG.}
+        \end{gathered}
+\end{equation}
+We also assumed for the lemma that
+\begin{equation}
+\label{eq:pr-red-trib-020}
+        \begin{gathered}
+                0 \le \V{j} \le \V{current} \\
+                \land \; \V{B} \destar \Velement{w}{\V{j},\V{current}} \\
+                \text{\cuz AF lemma, WLOG.}
+        \end{gathered}
+\end{equation}
+From \V{downAL} we can conclude
+\begin{gather}
+\label{eq:pr-red-trib-030}
+        \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
+\label{eq:pr-red-trib-040}
+        \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
+\label{eq:pr-red-trib-050}
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
+\label{eq:pr-red-trib-060}
+        \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.}
+\end{gather}
+
+Let the derivation \V{minDrv} be the shortest derivation of
+\Velement{w}{\V{j},\V{current}} from \V{B}.
+Because $\V{B} \in \V{N}$ we know for that,
+for some $\V{rhs} \in \V{STR}$,
+\begin{equation}
+\label{eq:pr-red-trib-070}
+        \mycpar{$\V{B} \derivesV{minDrv} \V{rhs} \destarV{minDrv} \Velement{w}{\V{j},\V{current}}$
+        \cuz \eqref{eq:pr-red-trib-020},
+        }
+\end{equation}
+and that
+\begin{equation}
+\label{eq:pr-red-trib-075}
+        \V{B} \de \V{rhs} \in \V{P} \cuz \eqref{eq:pr-red-trib-070}.
+\end{equation}
+
+We consider a new derivation:
+\begin{equation}
+\label{eq:pr-red-trib-080}
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
+        $\derives \V{fore} \cat \V{antepre} \cat \V{rhs} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-red-trib-030}, \eqref{eq:pr-red-trib-050}, \eqref{eq:pr-red-trib-070}.}
+\end{equation}
+which we simplify to
+\begin{equation}
+\label{eq:pr-red-trib-090}
+        \mycpar{$\V{S} \derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-red-trib-080}.}
+\end{equation}
+
+We deduce a few more facts that we will need:
+\begin{equation}
+\label{eq:pr-red-trib-150}
+        \begin{gathered}
+        \V{B} \derives \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
+              \cuz \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-155}
+        \begin{gathered}
+        \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
+              \cuz \eqref{eq:pr-red-trib-150}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-160}
+        \begin{gathered}
+                \V{antepre} \destar \Velement{w}{\V{origin},\V{j}} \\
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-170}
+        \begin{gathered}
+                \V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}} \\
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-160}.
+        \end{gathered}
+\end{equation}
+With the foregoing, we have our tributary aletheme:
+\begin{equation}
+\label{eq:pr-red-trib-180}
+        \begin{gathered}
+        \V{tribAL} =
+                \left( \begin{gathered}
+                        \V{rhs},\epsilon,(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}),\V{B}, \\
+                        \V{j},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz \Dfref{aletheme}, \Dfref{red-trib},
+                        \eqref{eq:pr-red-trib-075}, \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-155},
+                        \eqref{eq:pr-red-trib-170}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-190}
+        \mycpar{The current location of \V{tribAL} is \V{current} \cuz \eqref{eq:pr-red-trib-180}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-200}
+        \mycpar{The joint location of \V{tribAL} is \V{j} \cuz \Dfref{red-trib}, \eqref{eq:pr-red-trib-180}.}
+\end{equation}
+For the lemma, it remains to show the relationship between the rank of the mainstem
+and its downstream.
+\begin{equation}
+\label{eq:pr-red-trib-310}
+        \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
+        $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-320}
+        \mycpar{\VFA{Dp}{downAL} = \V{DownMinD} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-310}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-330}
+        \mycpar{Let \V{TribMinD}, ``tribAl minimum depth''  be the minimum number of steps in the derivation \\
+        $\V{S} \destar \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-340}
+        \mycpar{\VFA{Dp}{tribAL} = \V{TribMinD} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-330}.}
+\end{equation}
+Whatever the value of \V{TribMinD},
+because of the derivation
+\begin{equation}
+\label{eq:pr-red-trib-350}
+        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
+        }
+\end{equation}
+the derivation of \eqref{eq:pr-red-trib-310}
+cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-310},
+\begin{equation}
+\label{eq:pr-red-trib-360}
+        \V{TribMinD} \le \V{DownMinD} + 1,
+\end{equation}
+so that
+\begin{equation}
+\label{eq:pr-red-trib-370}
+        \VFA{Dp}{tribAl} \le \VFA{Dp}{downAL} + 1.
+\end{equation}
+
+        \todo{Revised to here}
+
+\begin{equation}
+\label{eq:X-pr-red-trib-150}
+        \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
+        $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
+        \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.
+        }
+\end{equation}
+\begin{equation}
+\label{eq:X-pr-red-trib-140}
+        \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:X-pr-red-trib-130}.}
+\end{equation}
+\begin{equation}
+\label{eq:Y-pr-red-trib-150}
+        \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
+        $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
+        \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.}
+\end{equation}
+\begin{equation}
+\label{eq:X-pr-red-trib-160}
+        \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
+        \cuz \Dfref{rank}, \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-150}.}
+\end{equation}
+Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
+must take at least one step, we know that
+\begin{equation}
+\label{eq:X-pr-red-trib-170}
+        \V{n3} < \V{n2} \cuz \eqref{eq:X-pr-red-trib-130}, \eqref{eq:X-pr-red-trib-150}.
+\end{equation}
+\begin{equation}
+\label{eq:X-pr-red-trib-180}
+        \VFA{Ht}{stemAL} < \VFA{Ht}{downAL} \cuz \eqref{eq:X-pr-red-trib-140},
+                \eqref{eq:X-pr-red-trib-160}, \eqref{eq:X-pr-red-trib-170}.
+\end{equation}
+\begin{equation}
+\label{eq:X-pr-red-trib-190}
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:X-pr-red-trib-200}
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:X-pr-red-trib-210}
+        \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:X-pr-red-trib-126},
+                \eqref{eq:X-pr-red-trib-180},
+                \eqref{eq:X-pr-red-trib-190},
+                \eqref{eq:X-pr-red-trib-200}.
+\end{equation}
+With \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-090}, \eqref{eq:X-pr-red-trib-100},
+and \eqref{eq:X-pr-red-trib-210},
+we have the lemma.
+\myqed
+\end{proof}
+
 \section{OLD Inflow lemmas}
 
 \begin{lemma}[Tangible reduction tributary]
@@ -1746,504 +2244,6 @@ for the lemma.
 \end{proof}
 
 \FloatBarrier
-
-\section{Definitions 2}
-
-\begin{definition}[Altheme]
-        \label{df:aletheme}
-        An \textbf{Earley aletheme}, or \textbf{aletheme},
-        is an 8-tuple
-        \begin{equation}
-        \begin{gathered}
-                (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \\
-                \text{where $\V{fore},\V{aft},\V{pre},\V{post} \in \V{STR}$} \\
-                \land \; \V{lhs} \in \V{N} \\
-                \land \; \V{origin},\V{current} \in \naturals.
-        \end{gathered}
-        \end{equation}
-        An aletheme is considered true if and only if
-        \begin{gather}
-                \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
-                \land \; \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
-                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft} \\
-                \land \; \V{fore} \destar \Velement{w}{0,\V{origin}}. \quad \dfEnd
-        \end{gather}
-\end{definition}
-
-An aletheme is so called because it is the smallest unit of soundness
-in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
-the Greek word
-for ``truth''.
-
-\begin{definition}[Rank]
-        \label{df:rank}
-        Let
-        \[ \V{x} = (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
-        be an aletheme.
-        The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest derivation such
-        that
-        \[ \V{S} \destarV{g} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
-        The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest derivation such
-        that
-        \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
-        The \textbf{rank} of \V{x} is
-        \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
-\end{definition}
-
-\begin{definition}[Confirmation mainstem]
-        \label{df:conf-stem}
-        Suppose, without loss of generality, that
-        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
-        is an confirmed aletheme.
-Then we say that
-an aletheme of the form
-\[
-        \V{stem} = (\V{fore},\V{aft},\V{antepre},(\V{B} \cat \V{post}),\V{lhs},\V{origin},\V{j})
-\]
-is a \textbf{mainstem} of
-\V{down} at the \textbf{joint location} \V{j}.
-We also say that \V{down} is the \textbf{downstream channel}
-(or simply \textbf{downstream})
-of \V{mainstem}.
-\dfEnd
-\end{definition}
-
-\begin{definition}[Reduction tributary]
-\label{df:red-trib}
-        Suppose, without loss of generality, that
-        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
-        is an confirmed aletheme.
-        Where $\V{B} \de \V{rhs} \in \V{P}$,
-then we say that
-an aletheme of the form
-        \[ \V{trib} = ((\V{fore}\cat\V{antepre}),\V{aft},\V{rhs},\epsilon,\V{B},\V{j},\V{current}) \]
-is a \textbf{tributary} of
-\V{down} at the \textbf{joint location} \V{j}.
-We also say that \V{down} is the \textbf{downstream channel}
-(or simply \textbf{downstream})
-of \V{trib}.
-\dfEnd
-\end{definition}
-
-The term ``joint location'' is based on the idea that the joint location
-is the place where the mainstem and tributary ``join'' to form the downstream.
-
-\section{Inflow lemmas}
-
-\begin{lemma}[Confirmation mainstem]
-\todo{Define predot symbol instance}
-        \label{lm:conf-stem}
-        Let \V{downAL} be a confirmed aletheme,
-        whose predot symbol is \V{B},
-        whose current location is \V{current},
-        and where \V{j} is such that
-        \[
-                0 \le \V{j} \le \V{current} \land
-                \V{B} \destar \Velement{w}{\V{j},\V{current}}.
-        \]
-        Then \V{downAL} has a mainstem \V{stemAL}
-        at joint location \V{j},
-        the current location of \V{stemAL} is \V{j},
-        and
-        \[
-                \VFA{Rank}{stemAL} < \VFA{Rank}{downAL}. \quad \lmEnd
-        \]
-\end{lemma}
-
-\begin{proof}
-Our proof strategy is to assume a confirmed aletheme,
-as described in
-the statement of the lemma, and otherwise arbitrary,
-and then to show
-that we have a mainstem as described in
-the statement of the lemma.
-
-We assumed for the lemma the following confirmed aletheme:
-\begin{equation}
-\label{eq:pr-conf-stem-010}
-        \begin{gathered}
-        \V{downAL} =
-                \left( \begin{gathered}
-                        \V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
-                        \V{origin},\V{current}
-                \end{gathered} \right) \\
-                \text{\cuz AF lemma, WLOG.}
-        \end{gathered}
-\end{equation}
-We also assumed for the lemma that
-\begin{equation}
-\label{eq:pr-conf-stem-020}
-        \begin{gathered}
-                0 \le \V{j} \le \V{current} \\
-                \land \; \V{B} \destar \Velement{w}{\V{j},\V{current}} \\
-                \text{\cuz AF lemma, WLOG.}
-        \end{gathered}
-\end{equation}
-From \V{downAL} we can conclude
-\begin{gather}
-\label{eq:pr-conf-stem-030}
-        \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
-\label{eq:pr-conf-stem-040}
-        \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
-\label{eq:pr-conf-stem-050}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
-\label{eq:pr-conf-stem-060}
-        \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.}
-\end{gather}
-We can deduce one useful new derivation:
-\begin{gather}
-\label{eq:pr-conf-stem-070}
-        \mycpar{$\V{antepre} \destar \Velement{w}{\V{origin},\V{j}}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-020}.}
-\end{gather}
-With the foregoing, we have our mainstem aletheme:
-\begin{equation}
-\label{eq:pr-conf-stem-080}
-        \begin{gathered}
-        \V{stemAL} =
-                \left( \begin{gathered}
-                        \V{fore},\V{aft},\V{antepre},(\V{B}\cat\V{post}),\V{A}, \\
-                        \V{origin},\V{j}
-                \end{gathered} \right) \\
-                \text{\cuz \Dfref{aletheme}, \Dfref{conf-stem},
-                        \eqref{eq:pr-conf-stem-030}, \eqref{eq:pr-conf-stem-050},
-                        \eqref{eq:pr-conf-stem-060}, \eqref{eq:pr-conf-stem-070}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-090}
-        \mycpar{The current location of \V{stemAL} is \V{j} \cuz \eqref{eq:pr-conf-stem-080}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-100}
-        \mycpar{The joint location of \V{stemAL} is \V{j} \cuz \Dfref{conf-stem}, \eqref{eq:pr-conf-stem-080}.}
-\end{equation}
-For the lemma, it remains to show the relationship between the rank of the mainstem
-and its downstream.
-\begin{equation}
-\label{eq:pr-conf-stem-110}
-        \mycpar{Let \V{n1} be the minimum number of steps in the derivation \\
-        $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-120}
-        \mycpar{\VFA{Dp}{downAL} = \V{n1} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-110}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-123}
-        \mycpar{\VFA{Dp}{stemAL} = \V{n1} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-110}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-126}
-        \mycpar{\VFA{Dp}{downAL} = \VFA{Dp}{stemAL} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-120}, \eqref{eq:pr-conf-stem-123}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-130}
-        \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
-        \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.
-        }
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-140}
-        \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-010}, \eqref{eq:pr-conf-stem-130}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-150}
-        \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
-        \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-160}
-        \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-150}.}
-\end{equation}
-Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
-must take at least one step, we know that
-\begin{equation}
-\label{eq:pr-conf-stem-170}
-        \V{n3} < \V{n2} \cuz \eqref{eq:pr-conf-stem-130}, \eqref{eq:pr-conf-stem-150}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-180}
-        \VFA{Ht}{stemAL} < \VFA{Ht}{downAL} \cuz \eqref{eq:pr-conf-stem-140},
-                \eqref{eq:pr-conf-stem-160}, \eqref{eq:pr-conf-stem-170}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-190}
-        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \cuz \Dfref{rank}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-200}
-        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-conf-stem-210}
-        \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:pr-conf-stem-126},
-                \eqref{eq:pr-conf-stem-180},
-                \eqref{eq:pr-conf-stem-190},
-                \eqref{eq:pr-conf-stem-200}.
-\end{equation}
-With \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-090}, \eqref{eq:pr-conf-stem-100},
-and \eqref{eq:pr-conf-stem-210},
-we have the lemma.
-\myqed
-\end{proof}
-
-\begin{lemma}[Reduction tributary]
-        \label{lm:red-trib}
-        Let \V{downAL} be a reduced aletheme,
-        whose predot symbol is \V{B},
-        whose current location is \V{current},
-        and where \V{j} is such that
-        \[
-                0 \le \V{j} \le \V{current} \land
-                \V{B} \destar \Velement{w}{\V{j},\V{current}}.
-        \]
-        Then \V{downAL} has a tributary \V{tribAL}
-        at joint location \V{j},
-        the current location of \V{tribAL} is \V{j},
-        and
-        \[
-                \VFA{Rank}{tribAL} < \VFA{Rank}{downAL}. \quad \lmEnd
-        \]
-\end{lemma}
-
-\begin{proof}
-Our proof strategy is to assume a reduced aletheme
-that is arbitrary except
-as described in
-the statement of the lemma,
-and then to show
-that we have a tributary as described in
-the statement of the lemma.
-
-We assumed for the lemma the following reduced aletheme:
-\begin{equation}
-\label{eq:pr-red-trib-010}
-        \begin{gathered}
-        \V{downAL} =
-                \left( \begin{gathered}
-                        \V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
-                        \V{origin},\V{current}
-                \end{gathered} \right) \\
-                \text{\cuz AF lemma, WLOG.}
-        \end{gathered}
-\end{equation}
-We also assumed for the lemma that
-\begin{equation}
-\label{eq:pr-red-trib-020}
-        \begin{gathered}
-                0 \le \V{j} \le \V{current} \\
-                \land \; \V{B} \destar \Velement{w}{\V{j},\V{current}} \\
-                \text{\cuz AF lemma, WLOG.}
-        \end{gathered}
-\end{equation}
-From \V{downAL} we can conclude
-\begin{gather}
-\label{eq:pr-red-trib-030}
-        \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
-\label{eq:pr-red-trib-040}
-        \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
-\label{eq:pr-red-trib-050}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
-\label{eq:pr-red-trib-060}
-        \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.}
-\end{gather}
-
-Let the derivation \V{minDrv} be the shortest derivation of
-\Velement{w}{\V{j},\V{current}} from \V{B}.
-Because $\V{B} \in \V{N}$ we know for that,
-for some $\V{rhs} \in \V{STR}$,
-\begin{equation}
-\label{eq:pr-red-trib-070}
-        \mycpar{$\V{B} \derivesV{minDrv} \V{rhs} \destarV{minDrv} \Velement{w}{\V{j},\V{current}}$
-        \cuz \eqref{eq:pr-red-trib-020},
-        }
-\end{equation}
-and that
-\begin{equation}
-\label{eq:pr-red-trib-075}
-        \V{B} \de \V{rhs} \in \V{P} \cuz \eqref{eq:pr-red-trib-070}.
-\end{equation}
-
-We consider a new derivation:
-\begin{equation}
-\label{eq:pr-red-trib-080}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$ \\
-        $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
-        $\derives \V{fore} \cat \V{antepre} \cat \V{rhs} \cat \V{post} \cat \V{aft}$ \\
-                \cuz \eqref{eq:pr-red-trib-030}, \eqref{eq:pr-red-trib-050}, \eqref{eq:pr-red-trib-070}.}
-\end{equation}
-which we simplify to
-\begin{equation}
-\label{eq:pr-red-trib-090}
-        \mycpar{$\V{S} \derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
-                \cuz \eqref{eq:pr-red-trib-080}.}
-\end{equation}
-
-We deduce a few more facts that we will need:
-\begin{equation}
-\label{eq:pr-red-trib-150}
-        \begin{gathered}
-        \V{B} \derives \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
-              \cuz \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-155}
-        \begin{gathered}
-        \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
-              \cuz \eqref{eq:pr-red-trib-150}.
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-160}
-        \begin{gathered}
-                \V{antepre} \destar \Velement{w}{\V{origin},\V{j}} \\
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-170}
-        \begin{gathered}
-                \V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}} \\
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-160}.
-        \end{gathered}
-\end{equation}
-With the foregoing, we have our tributary aletheme:
-\begin{equation}
-\label{eq:pr-red-trib-180}
-        \begin{gathered}
-        \V{tribAL} =
-                \left( \begin{gathered}
-                        \V{rhs},\epsilon,(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}),\V{B}, \\
-                        \V{j},\V{current}
-                \end{gathered} \right) \\
-                \text{\cuz \Dfref{aletheme}, \Dfref{red-trib},
-                        \eqref{eq:pr-red-trib-075}, \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-155},
-                        \eqref{eq:pr-red-trib-170}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-190}
-        \mycpar{The current location of \V{tribAL} is \V{current} \cuz \eqref{eq:pr-red-trib-180}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-200}
-        \mycpar{The joint location of \V{tribAL} is \V{j} \cuz \Dfref{red-trib}, \eqref{eq:pr-red-trib-180}.}
-\end{equation}
-For the lemma, it remains to show the relationship between the rank of the mainstem
-and its downstream.
-\begin{equation}
-\label{eq:pr-red-trib-310}
-        \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-320}
-        \mycpar{\VFA{Dp}{downAL} = \V{DownMinD} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-310}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-330}
-        \mycpar{Let \V{TribMinD}, ``tribAl minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destar \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
-\end{equation}
-\begin{equation}
-\label{eq:pr-red-trib-340}
-        \mycpar{\VFA{Dp}{tribAL} = \V{TribMinD} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-330}.}
-\end{equation}
-Whatever the value of \V{TribMinD},
-because of the derivation
-\begin{equation}
-\label{eq:pr-red-trib-350}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$ \\
-        $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
-        }
-\end{equation}
-the derivation of \eqref{eq:pr-red-trib-310}
-cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-310},
-\begin{equation}
-\label{eq:pr-red-trib-360}
-        \V{TribMinD} \le \V{DownMinD} + 1,
-\end{equation}
-so that
-\begin{equation}
-\label{eq:pr-red-trib-370}
-        \VFA{Dp}{tribAl} \le \VFA{Dp}{downAL} + 1.
-\end{equation}
-
-        \todo{Revised to here}
-
-\begin{equation}
-\label{eq:X-pr-red-trib-150}
-        \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
-        \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.
-        }
-\end{equation}
-\begin{equation}
-\label{eq:X-pr-red-trib-140}
-        \mycpar{\VFA{Ht}{downAL} = \V{n2} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:X-pr-red-trib-130}.}
-\end{equation}
-\begin{equation}
-\label{eq:Y-pr-red-trib-150}
-        \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
-        \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.}
-\end{equation}
-\begin{equation}
-\label{eq:X-pr-red-trib-160}
-        \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
-        \cuz \Dfref{rank}, \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-150}.}
-\end{equation}
-Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
-must take at least one step, we know that
-\begin{equation}
-\label{eq:X-pr-red-trib-170}
-        \V{n3} < \V{n2} \cuz \eqref{eq:X-pr-red-trib-130}, \eqref{eq:X-pr-red-trib-150}.
-\end{equation}
-\begin{equation}
-\label{eq:X-pr-red-trib-180}
-        \VFA{Ht}{stemAL} < \VFA{Ht}{downAL} \cuz \eqref{eq:X-pr-red-trib-140},
-                \eqref{eq:X-pr-red-trib-160}, \eqref{eq:X-pr-red-trib-170}.
-\end{equation}
-\begin{equation}
-\label{eq:X-pr-red-trib-190}
-        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{rank}.
-\end{equation}
-\begin{equation}
-\label{eq:X-pr-red-trib-200}
-        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
-\end{equation}
-\begin{equation}
-\label{eq:X-pr-red-trib-210}
-        \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:X-pr-red-trib-126},
-                \eqref{eq:X-pr-red-trib-180},
-                \eqref{eq:X-pr-red-trib-190},
-                \eqref{eq:X-pr-red-trib-200}.
-\end{equation}
-With \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-090}, \eqref{eq:X-pr-red-trib-100},
-and \eqref{eq:X-pr-red-trib-210},
-we have the lemma.
-\myqed
-\end{proof}
 
 {
 \clearpage
