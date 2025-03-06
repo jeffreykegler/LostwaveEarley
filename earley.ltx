@@ -1379,7 +1379,7 @@ With the foregoing, we have our tributary aletheme:
 \label{eq:pr-red-trib-200}
         \mycpar{The joint location of \V{tribAL} is \V{j} \cuz \Dfref{red-trib}, \eqref{eq:pr-red-trib-180}.}
 \end{equation}
-For the lemma, it remains to show the relationship between the rank of the mainstem
+For the lemma, it remains to show the relationship between the rank of the tributary
 and its downstream.
 \begin{equation}
 \label{eq:pr-red-trib-310}
@@ -1440,7 +1440,7 @@ so that
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-480}
-        \mycpar{\VFA{Ht}{stemAL} = \V{tribMinH} \\
+        \mycpar{\VFA{Ht}{tribAL} = \V{tribMinH} \\
         \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-180}, \eqref{eq:pr-red-trib-470}.}
 \end{equation}
 \begin{equation}
@@ -1486,13 +1486,13 @@ so that
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-560}
-        \mycpar{$\VFA{Ht}{stemAL} = \V{H1} + \V{HtRHS}
+        \mycpar{$\VFA{Ht}{tribAL} = \V{H1} + \V{HtRHS}
         \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-470}, \eqref{eq:pr-red-trib-480},
                 \eqref{eq:pr-red-trib-490}, \eqref{eq:pr-red-trib-530}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-570}
-        \mycpar{$\VFA{Ht}{downAL} = \VFA{Ht}{stemAL} + 1
+        \mycpar{$\VFA{Ht}{downAL} = \VFA{Ht}{tribAL} + 1
         \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-540}, \eqref{eq:pr-red-trib-550},
                 \eqref{eq:pr-red-trib-560}.$}
 \end{equation}
@@ -1502,23 +1502,42 @@ so that
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-590}
-        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
+        \VFA{Rank}{tribAL} = \VFA{Dp}{tribAL} + 2 \mult \VFA{Ht}{tribAL} \cuz \Dfref{rank}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-600}
-        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult (\VFA{Ht}{stemAL}+1) \cuz \Dfref{rank}.
+        \mycpar{$\VFA{Rank}{tribAL} = \VFA{Dp}{tribAL} + 2 \mult (\VFA{Ht}{downAL} \subtract 1)$ \\
+                \cuz \eqref{eq:pr-red-trib-570}, \eqref{eq:pr-red-trib-590}.}
 \end{equation}
-        \todo{Revised to here}
 \begin{equation}
-\label{eq:X-pr-red-trib-210}
-        \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:X-pr-red-trib-126},
-                \eqref{eq:X-pr-red-trib-180},
-                \eqref{eq:X-pr-red-trib-190},
-                \eqref{eq:X-pr-red-trib-200}.
+\label{eq:pr-red-trib-610}
+        \mycpar{$\VFA{Rank}{tribAL} \le (\VFA{Dp}{downAL}+1) + 2 \mult (\VFA{Ht}{downAL} \subtract 1)$ \\
+                \cuz \eqref{eq:pr-red-trib-370}, \eqref{eq:pr-red-trib-600}.}
 \end{equation}
-With \eqref{eq:X-pr-red-trib-080}, \eqref{eq:X-pr-red-trib-090}, \eqref{eq:X-pr-red-trib-100},
-and \eqref{eq:X-pr-red-trib-210},
+\begin{equation}
+\label{eq:pr-red-trib-620}
+        \VFA{Rank}{tribAL} \le \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} + 1 \subtract 2 \cuz
+                \eqref{eq:pr-red-trib-610}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-630}
+        \VFA{Rank}{tribAL} \le \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \subtract 1 \cuz
+                \eqref{eq:pr-red-trib-620}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-640}
+        \VFA{Rank}{tribAl} \le \VFA{Rank}{downAL} \subtract 1
+        \cuz \eqref{eq:pr-red-trib-580}, \eqref{eq:pr-red-trib-630}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-650}
+        \VFA{Rank}{tribAl} < \VFA{Rank}{downAL}
+        \cuz \eqref{eq:pr-red-trib-640}.
+\end{equation}
+With \eqref{eq:pr-red-trib-180}, \eqref{eq:pr-red-trib-190}, \eqref{eq:pr-red-trib-200},
+and \eqref{eq:pr-red-trib-650},
 we have the lemma.
+        \todo{Check this lemma}
 \myqed
 \end{proof}
 
