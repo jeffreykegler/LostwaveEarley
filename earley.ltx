@@ -1478,18 +1478,37 @@ so that
                 \cuz \eqref{eq:pr-red-trib-500}, \eqref{eq:pr-red-trib-510},
                         \eqref{eq:pr-red-trib-520}, \eqref{eq:pr-red-trib-530}.
 \end{equation}
-
+\begin{equation}
+\label{eq:pr-red-trib-550}
+        \mycpar{$\VFA{Ht}{downAL} = \V{H1} + \V{HtB}
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-470}, \eqref{eq:pr-red-trib-480},
+                \eqref{eq:pr-red-trib-490}, \eqref{eq:pr-red-trib-520}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-560}
+        \mycpar{$\VFA{Ht}{stemAL} = \V{H1} + \V{HtRHS}
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-470}, \eqref{eq:pr-red-trib-480},
+                \eqref{eq:pr-red-trib-490}, \eqref{eq:pr-red-trib-530}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-570}
+        \mycpar{$\VFA{Ht}{downAL} = \VFA{Ht}{stemAL} + 1
+        \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-540}, \eqref{eq:pr-red-trib-550},
+                \eqref{eq:pr-red-trib-560}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-580}
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-590}
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-600}
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult (\VFA{Ht}{stemAL}+1) \cuz \Dfref{rank}.
+\end{equation}
         \todo{Revised to here}
-Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
-must take at least one step, we know that
-\begin{equation}
-\label{eq:X-pr-red-trib-190}
-        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + \VFA{Ht}{downAL} \cuz \Dfref{rank}.
-\end{equation}
-\begin{equation}
-\label{eq:X-pr-red-trib-200}
-        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
-\end{equation}
 \begin{equation}
 \label{eq:X-pr-red-trib-210}
         \VFA{Rank}{stemAL} < \VFA{Rank}{downAL} \cuz \eqref{eq:X-pr-red-trib-126},
