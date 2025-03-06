@@ -961,6 +961,87 @@ of \V{mainstem}.
 \dfEnd
 \end{definition}
 
+\section{Definitions 2}
+
+\begin{definition}[Altheme]
+        \label{df:aletheme}
+        An \textbf{Earley aletheme}, or \textbf{aletheme},
+        is an 8-tuple
+        \begin{equation}
+        \begin{gathered}
+                (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \\
+                \text{where $\V{fore},\V{aft},\V{pre},\V{post} \in \V{STR}$} \\
+                \land \; \V{lhs} \in \V{N} \\
+                \land \; \V{origin},\V{current} \in \naturals.
+        \end{gathered}
+        \end{equation}
+        An aletheme is considered true if and only if
+        \begin{gather}
+                \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
+                \land \; \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
+                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft} \\
+                \land \; \V{fore} \destar \Velement{w}{0,\V{origin}}. \quad \dfEnd
+        \end{gather}
+\end{definition}
+
+An aletheme is so called because it is the smallest unit of soundness
+in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
+the Greek word
+for ``truth''.
+
+\begin{definition}[Rank]
+        \label{df:rank}
+        Let
+        \[ \V{x} = (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
+        be an aletheme.
+        The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest derivation such
+        that
+        \[ \V{S} \destarV{g} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
+        The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest derivation such
+        that
+        \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
+        The \textbf{rank} of \V{x} is
+        \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
+\end{definition}
+
+\begin{definition}[Confirmation mainstem]
+        \label{df:conf-stem}
+        Suppose, without loss of generality, that
+        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        is an confirmed aletheme.
+Then we say that
+an aletheme of the form
+\[
+        \V{stem} = (\V{fore},\V{aft},\V{antepre},(\V{B} \cat \V{post}),\V{lhs},\V{origin},\V{j})
+\]
+is a \textbf{mainstem} of
+\V{down} at the \textbf{joint location} \V{j}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{mainstem}.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Reduction tributary]
+\label{df:red-trib}
+        Suppose, without loss of generality, that
+        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        is an confirmed aletheme.
+        Where $\V{B} \de \V{rhs} \in \V{P}$,
+then we say that
+an aletheme of the form
+        \[ \V{trib} = ((\V{fore}\cat\V{antepre}),\V{aft},\V{rhs},\epsilon,\V{B},\V{j},\V{current}) \]
+is a \textbf{tributary} of
+\V{down} at the \textbf{joint location} \V{j}.
+We also say that \V{down} is the \textbf{downstream channel}
+(or simply \textbf{downstream})
+of \V{trib}.
+\dfEnd
+\end{definition}
+
+The term ``joint location'' is based on the idea that the joint location
+is the place where the mainstem and tributary ``join'' to form the downstream.
+
 \needspace{3in}
 \section{Algorithm}
 \label{sec:algorithm}
@@ -1141,87 +1222,6 @@ of \V{mainstem}.
 \end{algorithm}
 
 \FloatBarrier
-
-\section{Definitions 2}
-
-\begin{definition}[Altheme]
-        \label{df:aletheme}
-        An \textbf{Earley aletheme}, or \textbf{aletheme},
-        is an 8-tuple
-        \begin{equation}
-        \begin{gathered}
-                (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \\
-                \text{where $\V{fore},\V{aft},\V{pre},\V{post} \in \V{STR}$} \\
-                \land \; \V{lhs} \in \V{N} \\
-                \land \; \V{origin},\V{current} \in \naturals.
-        \end{gathered}
-        \end{equation}
-        An aletheme is considered true if and only if
-        \begin{gather}
-                \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
-                \land \; \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
-                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft} \\
-                \land \; \V{fore} \destar \Velement{w}{0,\V{origin}}. \quad \dfEnd
-        \end{gather}
-\end{definition}
-
-An aletheme is so called because it is the smallest unit of soundness
-in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
-the Greek word
-for ``truth''.
-
-\begin{definition}[Rank]
-        \label{df:rank}
-        Let
-        \[ \V{x} = (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
-        be an aletheme.
-        The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest derivation such
-        that
-        \[ \V{S} \destarV{g} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
-        The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest derivation such
-        that
-        \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
-        The \textbf{rank} of \V{x} is
-        \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
-\end{definition}
-
-\begin{definition}[Confirmation mainstem]
-        \label{df:conf-stem}
-        Suppose, without loss of generality, that
-        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
-        is an confirmed aletheme.
-Then we say that
-an aletheme of the form
-\[
-        \V{stem} = (\V{fore},\V{aft},\V{antepre},(\V{B} \cat \V{post}),\V{lhs},\V{origin},\V{j})
-\]
-is a \textbf{mainstem} of
-\V{down} at the \textbf{joint location} \V{j}.
-We also say that \V{down} is the \textbf{downstream channel}
-(or simply \textbf{downstream})
-of \V{mainstem}.
-\dfEnd
-\end{definition}
-
-\begin{definition}[Reduction tributary]
-\label{df:red-trib}
-        Suppose, without loss of generality, that
-        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
-        is an confirmed aletheme.
-        Where $\V{B} \de \V{rhs} \in \V{P}$,
-then we say that
-an aletheme of the form
-        \[ \V{trib} = ((\V{fore}\cat\V{antepre}),\V{aft},\V{rhs},\epsilon,\V{B},\V{j},\V{current}) \]
-is a \textbf{tributary} of
-\V{down} at the \textbf{joint location} \V{j}.
-We also say that \V{down} is the \textbf{downstream channel}
-(or simply \textbf{downstream})
-of \V{trib}.
-\dfEnd
-\end{definition}
-
-The term ``joint location'' is based on the idea that the joint location
-is the place where the mainstem and tributary ``join'' to form the downstream.
 
 \section{Inflow lemmas}
 
