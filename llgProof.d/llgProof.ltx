@@ -1844,7 +1844,7 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
         Then \V{downAL} has a mainstem \V{stemAL}
         at joint location \V{j},
         the current location of \V{stemAL} is \V{j},
-        and 
+        and
         \[
                 \VFA{Rank}{stemAL} < \VFA{Rank}{downAL}. \quad \lmEnd
         \]
@@ -2012,7 +2012,7 @@ we have the lemma.
         Then \V{downAL} has a tributary \V{tribAL}
         at joint location \V{j},
         the current location of \V{tribAL} is \V{j},
-        and 
+        and
         \[
                 \VFA{Rank}{tribAL} < \VFA{Rank}{downAL}. \quad \lmEnd
         \]
@@ -2064,11 +2064,20 @@ From \V{downAL} we can conclude
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.}
 \end{gather}
 
+Let the derivation \V{minDrv} be the shortest derivation of
+\Velement{w}{\V{j},\V{current}} from \V{B}.
 Because $\V{B} \in \V{N}$ we know for that,
 for some $\V{rhs} \in \V{STR}$,
 \begin{equation}
 \label{eq:pr-red-trib-070}
-        \mycpar{$\V{B} \de \V{rhs}$.}
+        \mycpar{$\V{B} \derivesV{minDrv} \V{rhs} \destarV{minDrv} \Velement{w}{\V{j},\V{current}}$
+        \cuz \eqref{eq:pr-red-trib-020},
+        }
+\end{equation}
+and that
+\begin{equation}
+\label{eq:pr-red-trib-075}
+        \V{B} \de \V{rhs} \in \V{P} \cuz \eqref{eq:pr-red-trib-070}.
 \end{equation}
 
 We consider a new derivation:
@@ -2125,7 +2134,7 @@ With the foregoing, we have our tributary aletheme:
                         \V{j},\V{current}
                 \end{gathered} \right) \\
                 \text{\cuz \Dfref{aletheme}, \Dfref{red-trib},
-                        \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-155},
+                        \eqref{eq:pr-red-trib-075}, \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-155},
                         \eqref{eq:pr-red-trib-170}.}
         \end{gathered}
 \end{equation}
@@ -2141,25 +2150,25 @@ For the lemma, it remains to show the relationship between the rank of the mains
 and its downstream.
 \begin{equation}
 \label{eq:pr-red-trib-310}
-        \mycpar{Let \V{DdMin}, ``depth downAl minimum''  be the minimum number of steps in the derivation \\
+        \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
         $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-320}
-        \mycpar{\VFA{Dp}{downAL} = \V{DdMin} \\
+        \mycpar{\VFA{Dp}{downAL} = \V{DownMinD} \\
         \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-310}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-330}
-        \mycpar{Let \V{DtMin}, ``depth tribAl minimum''  be the minimum number of steps in the derivation \\
+        \mycpar{Let \V{TribMinD}, ``tribAl minimum depth''  be the minimum number of steps in the derivation \\
         $\V{S} \destar \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-340}
-        \mycpar{\VFA{Dp}{tribAL} = \V{DtMin} \\
+        \mycpar{\VFA{Dp}{tribAL} = \V{TribMinD} \\
         \cuz \Dfref{rank}, \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-330}.}
 \end{equation}
-Whatever the value of \V{DtMin},
+Whatever the value of \V{TribMinD},
 because of the derivation
 \begin{equation}
 \label{eq:pr-red-trib-350}
@@ -2167,10 +2176,11 @@ because of the derivation
         $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
         }
 \end{equation}
-\V{DtMin} cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-310}:
+the derivation of \eqref{eq:pr-red-trib-310}
+cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-310},
 \begin{equation}
 \label{eq:pr-red-trib-360}
-        \V{DtMin} \le \V{DdMin} + 1,
+        \V{TribMinD} \le \V{DownMinD} + 1,
 \end{equation}
 so that
 \begin{equation}
