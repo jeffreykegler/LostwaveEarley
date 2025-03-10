@@ -1,7 +1,5 @@
 \documentclass[draft,12pt]{amsart}
 \usepackage{float}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
 
 \usepackage[final]{listings}
 \usepackage{float}
@@ -18,7 +16,7 @@
 \usepackage{amssymb}
 \usepackage{wasysym} % Used for \Circle
 \usepackage{algorithm}
-\usepackage{algpseudocode}
+\usepackage[commentColor=blue,italicComments=false]{algpseudocodex}
 \usepackage{xspace}
 \usepackage{graphicx}
 \usepackage{ragged2e}
@@ -926,10 +924,12 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 \begin{algorithmic}[1]
         \Procedure{FinishRow}{\V{n}}
         \label{li:finish-row-010}
-        \State $\V{i} \gets 0$ \Comment {Initialize \V{i}}
+        \State $\V{i} \gets 0$ \Comment{Initialize \V{i}}
         \label{li:finish-row-020}
-        \While {$\V{i} < \Vsize{row}$} \Comment {This loop adds items at the end of \V{row},
-            so that \Vsize{row} will increase in the course of running this loop}
+        \While {$\V{i} < \Vsize{row}$} \Comment {Earley entry activation loop}
+        \LComment{The activation loop activates the entries in \V{row}, from index 0 to \Vsize{row}.
+        New entries are added to \V{row} during the loop
+                so that \Vsize{row} increases during the running of the loop.}
         \label{li:finish-row-030}
         \State $\V{current} \gets \Velement{row}{\V{i}}$
                 \Comment {\VVelement{row}{i} is \V{i}'th Earley item in row}
@@ -978,17 +978,16 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
         \label{li:tangible-reduction-030}
         \State $\V{tribLHS} \gets \text{LHS of \V{tributary}`s rule}$
         \label{li:tangible-reduction-040}
+        \LComment{Find the row where \V{tributary} starts}
         \State $\V{originRow} \gets \VVelement{rows}{tribOrigin}$
         \label{li:tangible-reduction-050}
-        \Statex\Comment Find the row where \V{tributary} starts
         \label{li:tangible-reduction-060}
+        \LComment{Set \V{mainstems} to the set of Earley items in \V{originRow} whose postdot
+                item is \V{tribLHS}.}
         \State $\V{mainstems} \gets$
         \label{li:tangible-reduction-070}
         \Statex $\qquad \qquad \lbrace \V{item} \in \V{originRow} \mid \VFA{Postdot}{item} =  \V{tribLHS} \rbrace$
         \label{li:tangible-reduction-080}
-        \Statex \Comment {Set \V{mainstems} to the set of Earley items in \V{originRow} whose postdot
-                item is \V{tribLHS}.}
-                \label{li:tangible-reduction-090}
      \For {$\V{mainstem} \in \V{mainstems}$}
         \label{li:tangible-reduction-100}
           \State $\V{dotted} \gets \text{dotted rule of \V{mainstem}}$
@@ -1023,10 +1022,10 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
         \Function{RecordEdge}{\V{edge}}
         \State \textbf{let} \V{edge} \text{be} $(\V{dottedRule}, \V{origin}, \V{current})$
         \If {\V{edge} is already in the Earley chart}
-        \State \textbf{return} \Comment Do not add duplicate items
+        \State \textbf{return} \Comment{Do not add duplicate items}
         \EndIf
         \If {\V{dottedRule} is completion and $\V{origin} = \V{current}$}
-        \State \textbf{return} \Comment Do not add nulling completion
+        \State \textbf{return} \Comment{Do not add nulling completion}
         \EndIf
         \State Add \V{edge} to the Earley chart
 \EndFunction
@@ -1051,8 +1050,8 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 \label{alg:predictions}
 \begin{algorithmic}[1]
         \Procedure{AddPredictions}{\V{sym},\V{currLoc}}
+        \LComment{for every \V{rule} in grammar with LHS equal to \V{sym}}
         \For {every \V{rule} such that $\V{sym} \de \alpha$ and $\alpha \in (\V{N}\cup\V{T})^\ast$}
-        \Statex \Comment for every \V{rule} in grammar with LHS equal to \V{sym}
                 \State \Call{RecordEdge}{$(\V{sym} \de \mydot \alpha), \V{currLoc}, \V{currLoc}$}
         \EndFor
 \EndProcedure
