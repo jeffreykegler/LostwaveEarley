@@ -918,6 +918,8 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 \end{algorithmic}
 \end{algorithm}
 
+\FloatBarrier
+
 \begin{algorithm}[ht]
         \caption{Finish Row \V{n}}
 \label{alg:finish-row}
@@ -965,6 +967,41 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\begin{definition}[Earley entry recording]
+        An Earley entry is \textbf{recorded} when it is added to the
+        Earley chart.
+        An \textbf{Earley entry recording event} is the series of
+        code step during which the Earley entry is recorded.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Earley entry activation]
+        An Earley entry is \textbf{activated} when it is examined
+        and used for recording other Earley entries.
+        An \textbf{Earley entry activation event} is the series of
+        code steps during which it is begin examined and used
+        for the purpose of recording other Earley entries.
+\dfEnd
+\end{definition}
+
+Based on the pseudocode, we make a series of useful
+observations.
+
+\begin{observation}[No Earley entry is record twice]
+        There are no duplicate Earley entries.
+        That is, an Earley entry is recorded at most one.
+        This is enforced at
+        line \ref{li:record-edge-100} of \Algref{record-edge}.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Earley entry recording is first]
+        Every Earley entry is recorded before it is activated.
+        \obEnd
+\end{observation}
+
+\FloatBarrier
 
 \begin{algorithm}[ht]
         \caption{Add Tangible Reductions}
@@ -1023,6 +1060,7 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
         \State \textbf{let} \V{edge} \text{be} $(\V{dottedRule}, \V{origin}, \V{current})$
         \If {\V{edge} is already in the Earley chart}
         \State \textbf{return} \Comment{Do not add duplicate items}
+        \label{li:record-edge-100}
         \EndIf
         \If {\V{dottedRule} is completion and $\V{origin} = \V{current}$}
         \State \textbf{return} \Comment{Do not add nulling completion}
