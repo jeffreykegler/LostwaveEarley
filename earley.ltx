@@ -988,7 +988,7 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 Based on the pseudocode, we make a series of useful
 observations.
 
-\begin{observation}[No Earley entry is record twice]
+\begin{observation}[No Earley entry is recorded twice]
         There are no duplicate Earley entries.
         That is, an Earley entry is recorded at most one.
         This is enforced at
@@ -996,8 +996,57 @@ observations.
         \obEnd
 \end{observation}
 
-\begin{observation}[Earley entry recording is first]
-        Every Earley entry is recorded before it is activated.
+\begin{observation}[An Earley entry is activated once]
+        That is, a recorded Earley entry is activated exactly once.
+        Relevant to this observation is the activation loop in \Algref{finish-row}.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Recording and activation of an event do not overlap]
+        While the activation loop \Algref{finish-row} records entries
+        during activation events,
+        these are always entries other than the activated entry.
+        No steps in the activation of an event \V{ev} overlaps
+        steps in the the recording of \V{ev},
+        and vice versa.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Entry activation is after recording]
+        \label{obs:activation-after-recording}
+        Before any Earley entry is activated,
+        it must first be recorded.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Edges are recorded row by row]
+        \label{obs:recording-row-by-row}
+        Edges are recorded one row at a time.
+        More precisely, no edge in row \V{i}
+        will
+        ever be recorded after any edge in row $\V{i}+1$
+        is recorded.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Edges are activated row by row]
+        \label{obs:activation-row-by-row}
+        Edges are activated one row at a time.
+        More precisely, no edge in row \V{i}
+        will
+        ever be activated after any edge in row $\V{i}+1$
+        is recorded.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Activation is after recording of previous rows]
+        Before any Earley entry is activated,
+        all Earley entries that will ever be recorded in previous rows
+        must already have been recorded.
+        One way this can be seen is from
+        \Obref{activation-after-recording},
+        \Obref{recording-row-by-row},
+        and \Obref{activation-row-by-row}.
         \obEnd
 \end{observation}
 
@@ -1597,19 +1646,19 @@ we have the lemma.
         \myqed
 \end{proof}
 
-\section{OLD Completion lemmas}
+\section{Completion lemmas}
 
 \begin{definition}[Complete ``as far as'']
 \label{df:complete-as-far}
         We say that the Earley chart \V{ch} is
         complete as far as row \V{i},
-        if all sound Earley items in the
-        rows from 0 to \V{i} are actually in the chart.
+        if all alethemes in the
+        rows from 0 to \V{i} are present in \V{ch}.
         We say that the Earley chart \V{ch} is
-        complete as far as generation \V{g} of row \V{i},
+        complete as far as rank \V{r} of row \V{i},
         if \V{ch} is complete as far as row $\V{i} \subtract 1$,
-        and if all sound Earley items in the generations
-        from 0 to \V{g} in row \V{i} are actually in \V{ch}.
+        and if all alethemes of rank
+        from 0 to \V{r} in row \V{i} are present in \V{ch}.
 \dfEnd
 \end{definition}
 
@@ -1621,9 +1670,7 @@ we have the lemma.
 \end{lemma}
 
 \begin{proof}
-        Proof is omitted because it is straightforward,
-        and essentially the same
-        as others in the literature.
+        Proof omitted.
         \myqed
 \end{proof}
 
