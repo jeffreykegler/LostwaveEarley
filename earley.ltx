@@ -1743,124 +1743,6 @@ we have the lemma.
         \myqed
 \end{proof}
 
-\begin{lemma}[Chart basis]
-        \label{lm:chart-basis}
-        After starting the algorithm of \Sref{algorithm},
-        the chart is complete as far as row 0.
-        \lmEnd
-\end{lemma}
-
-\begin{proof}
-        Proof omitted.
-        \myqed
-\end{proof}
-
-\begin{lemma}[Scansion completion]
-        \label{lm:row-basis}
-        When running the algorithm of \Sref{algorithm},
-        scansion will be complete in row $\V{i}+1$ the chart
-        is complete as far as row \V{i}.
-        \lmEnd
-\end{lemma}
-
-\begin{proof}
-        Proof is omitted because it is straightforward,
-        and essentially the same
-        as others in the literature.
-        \myqed
-\end{proof}
-
-\begin{lemma}[Row completion step]
-        \label{lm:row-step}
-        When running the algorithm of \Sref{algorithm},
-        reductions will be complete as far as generation $\V{g}+1$
-        of row $\V{i}+1$ if
-        the chart is complete
-        as far as generation \V{g} of row $\V{i+1}$.
-        \lmEnd
-\end{lemma}
-
-\begin{proof}
-        \todo{Delete this this proof after mining it}
-        We consider, without loss of generality, a generation
-        DI \V{di}, focused in a derivation \V{drv}.
-        We need to show for the lemma that, if
-                \todo{Refer to definition of completeness?}
-        \begin{gather}
-                \label{eq:row-step-050}
-                \text{\V{di} is not a nulling completion;} \\
-                \label{eq:row-step-055}
-                \text{\V{di} is in generation $\V{g}+1$ of row \V{i};} \\
-                \label{eq:row-step-060}
-                \text{rows 0 through \V{i} are complete; and} \\
-                \label{eq:row-step-070}
-                \text{generations 0 through \V{g} are complete in row $\V{i}+1$;}
-        \end{gather}
-        then the code in
-        Section~\ref{sec:algorithm}
-        on page~\ref{sec:algorithm}
-        adds the Earley item
-        \V{di} to \V{rows}.
-
-        \begin{equation}
-        \label{eq:row-step-080}
-                \text{\V{di} is not in generation 0 \cuz \eqref{eq:row-step-055}.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:row-step-090}
-                \myparbox{\V{di} is a prediction; a reduction with a tangible predot symbol;
-                or a a reduction with an intangible predot symbol
-                \cuz \eqref{eq:row-step-080}.}
-        \end{equation}
-        We proceed by cases.
-        \par
-        \vspace{2ex}\noindent\textbf{Case 1: Prediction.}
-        \begin{equation}
-        \label{eq:row-step-100}
-                \text{\V{di} is a prediction \cuz Assumption for the case.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:row-step-105}
-                \begin{gathered}
-                        \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem}} \\
-                        \text{\cuz \eqref{eq:row-step-050}, \eqref{eq:row-step-100}, \Lmref{pred-stem}.}
-                \end{gathered}
-        \end{equation}
-        \begin{equation}
-        \label{eq:row-step-110}
-                \begin{gathered}
-                \text{\V{stem} is in generation \V{g} or earlier} \\
-                        \text{\cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-105}, \Dfref{rank}.}
-                \end{gathered}
-        \end{equation}
-        \begin{equation}
-        \label{eq:row-step-120}
-                \begin{gathered}
-                        \text{The Earley item corresponding to \V{stem} exists in \V{rows}} \\
-                        \text{\cuz \eqref{eq:row-step-070}, \eqref{eq:row-step-110}.}
-                \end{gathered}
-        \end{equation}
-        Looking at the code, we see that
-        \begin{equation}
-        \label{eq:row-step-130}
-                \begin{gathered}
-                \text{the Earley item corresponding to \V{di} is created in \V{rows}} \\
-                        \text{\cuz \eqref{eq:row-step-100}, \eqref{eq:row-step-120},
-                                \Algref{finish-row}, \Algref{predictions}.}
-                \end{gathered}
-        \end{equation}
-        Equation \eqref{eq:row-step-130} shows the case for predictions,
-        which started at \eqref{eq:row-step-100}.
-        \par
-        \vspace{2ex}\noindent\textbf{Case 3: Reduction with tangible predot symbol.}
-        \begin{equation}
-        \label{eq:row-step-400}
-                \myparbox{\V{di} is a reduction with a tangible predot symbol \cuz Assumption for the case.}
-        \end{equation}
-        \par
-        \myqed
-\end{proof}
-
 \begin{lemma}[Tangible reduction completion]
         \label{lm:rt-comp}
         When running the algorithm of \Sref{algorithm},
@@ -1991,6 +1873,124 @@ Recalling again that \V{downFD} is tangible,
 Equation \eqref{eq:pr-rt-comp-300} is what we needed to show
 for the lemma.
 \myqed
+\end{proof}
+
+\begin{lemma}[Chart basis]
+        \label{lm:chart-basis}
+        After starting the algorithm of \Sref{algorithm},
+        the chart is complete as far as row 0.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        Proof omitted.
+        \myqed
+\end{proof}
+
+\begin{lemma}[Scansion completion]
+        \label{lm:row-basis}
+        When running the algorithm of \Sref{algorithm},
+        scansion will be complete in row $\V{i}+1$ the chart
+        is complete as far as row \V{i}.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        Proof is omitted because it is straightforward,
+        and essentially the same
+        as others in the literature.
+        \myqed
+\end{proof}
+
+\begin{lemma}[Row completion step]
+        \label{lm:row-step}
+        When running the algorithm of \Sref{algorithm},
+        reductions will be complete as far as generation $\V{g}+1$
+        of row $\V{i}+1$ if
+        the chart is complete
+        as far as generation \V{g} of row $\V{i+1}$.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \todo{Delete this this proof after mining it}
+        We consider, without loss of generality, a generation
+        DI \V{di}, focused in a derivation \V{drv}.
+        We need to show for the lemma that, if
+                \todo{Refer to definition of completeness?}
+        \begin{gather}
+                \label{eq:row-step-050}
+                \text{\V{di} is not a nulling completion;} \\
+                \label{eq:row-step-055}
+                \text{\V{di} is in generation $\V{g}+1$ of row \V{i};} \\
+                \label{eq:row-step-060}
+                \text{rows 0 through \V{i} are complete; and} \\
+                \label{eq:row-step-070}
+                \text{generations 0 through \V{g} are complete in row $\V{i}+1$;}
+        \end{gather}
+        then the code in
+        Section~\ref{sec:algorithm}
+        on page~\ref{sec:algorithm}
+        adds the Earley item
+        \V{di} to \V{rows}.
+
+        \begin{equation}
+        \label{eq:row-step-080}
+                \text{\V{di} is not in generation 0 \cuz \eqref{eq:row-step-055}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:row-step-090}
+                \myparbox{\V{di} is a prediction; a reduction with a tangible predot symbol;
+                or a a reduction with an intangible predot symbol
+                \cuz \eqref{eq:row-step-080}.}
+        \end{equation}
+        We proceed by cases.
+        \par
+        \vspace{2ex}\noindent\textbf{Case 1: Prediction.}
+        \begin{equation}
+        \label{eq:row-step-100}
+                \text{\V{di} is a prediction \cuz Assumption for the case.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:row-step-105}
+                \begin{gathered}
+                        \text{\V{di} has a mainstem DI in \V{drv}, call it \V{stem}} \\
+                        \text{\cuz \eqref{eq:row-step-050}, \eqref{eq:row-step-100}, \Lmref{pred-stem}.}
+                \end{gathered}
+        \end{equation}
+        \begin{equation}
+        \label{eq:row-step-110}
+                \begin{gathered}
+                \text{\V{stem} is in generation \V{g} or earlier} \\
+                        \text{\cuz \eqref{eq:row-step-055}, \eqref{eq:row-step-105}, \Dfref{rank}.}
+                \end{gathered}
+        \end{equation}
+        \begin{equation}
+        \label{eq:row-step-120}
+                \begin{gathered}
+                        \text{The Earley item corresponding to \V{stem} exists in \V{rows}} \\
+                        \text{\cuz \eqref{eq:row-step-070}, \eqref{eq:row-step-110}.}
+                \end{gathered}
+        \end{equation}
+        Looking at the code, we see that
+        \begin{equation}
+        \label{eq:row-step-130}
+                \begin{gathered}
+                \text{the Earley item corresponding to \V{di} is created in \V{rows}} \\
+                        \text{\cuz \eqref{eq:row-step-100}, \eqref{eq:row-step-120},
+                                \Algref{finish-row}, \Algref{predictions}.}
+                \end{gathered}
+        \end{equation}
+        Equation \eqref{eq:row-step-130} shows the case for predictions,
+        which started at \eqref{eq:row-step-100}.
+        \par
+        \vspace{2ex}\noindent\textbf{Case 3: Reduction with tangible predot symbol.}
+        \begin{equation}
+        \label{eq:row-step-400}
+                \myparbox{\V{di} is a reduction with a tangible predot symbol \cuz Assumption for the case.}
+        \end{equation}
+        \par
+        \myqed
 \end{proof}
 
 \begin{lemma}[Intangible reduction completion]
