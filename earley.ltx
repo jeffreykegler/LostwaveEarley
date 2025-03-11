@@ -696,11 +696,11 @@ matches a derivation with input \V{w}.
 
 \begin{definition}[Completeness]
 \label{df:completeness}
-A set of Earley items is \textbf{complete} for an input \V{w} with
-respect to a set of focuses iff
-for every focus in that set,
-either that focus is a nulling completion,
-or its Earley item is in \V{Rows}.  \dfEnd
+An Earley chart is \textbf{complete} for an input \V{w} with
+respect to a set of alethemes iff
+for every aletheme in that set, call that aletheme \V{al},
+either \V{al} is a nulling completion,
+or an Earley entry corresponding to \V{al} is in \V{ch}.  \dfEnd
 \end{definition}
 
 We note that our definition of \Dfref{completeness},
@@ -1040,6 +1040,7 @@ observations.
 \end{observation}
 
 \begin{observation}[Activation is after recording of previous rows]
+        \label{obs:activation-after-previous-row}
         Before any Earley entry is activated,
         all Earley entries that will ever be recorded in previous rows
         must already have been recorded.
@@ -1662,7 +1663,8 @@ we have the lemma.
 \dfEnd
 \end{definition}
 
-\begin{lemma}[Tangible mainstem helper]
+\begin{lemma}[Previous row inflows]
+        \label{lem:prev-inflows}
         If the chart is complete as far as row \V{i},
         then all alethemes in row \V{i} and earlier
         will be present in the chart
@@ -1672,7 +1674,72 @@ we have the lemma.
 \end{lemma}
 
 \begin{proof}
-        Proof omitted.
+        \begin{equation}
+        \label{eq:pr-prev-inflows-010}
+                \mycpar{Let \V{ev} be an activation event in row
+                \V{j}, but otherwise arbitrary
+                \cuz AF lemma, WLOG.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-prev-inflows-020}
+                \mycpar{Let \V{al} be an aletheme,
+                in row \V{i}, $\V{i}<\V{j}$,
+                but otherwise arbitrary
+                \cuz AF lemma, WLOG.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-prev-inflows-030}
+                \mycpar{Row \V{i} is complete \cuz AF lemma, WLOG.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-prev-inflows-040}
+                \mycpar{Let \V{ee} be the Earley entry corresponding to \V{al}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-prev-inflows-050}
+                \mycpar{\V{ee} will be added in the Earley chart \cuz \Dfref{completeness},
+                        \eqref{eq:pr-prev-inflows-020},
+                        \eqref{eq:pr-prev-inflows-030},
+                        \eqref{eq:pr-prev-inflows-040}.}
+        \end{equation}
+        In \eqref{eq:pr-prev-inflows-030}, we note that ``completeness'' is
+        a concept which abstracts from the implementation.
+        With \eqref{eq:pr-prev-inflows-050} we have shown that \V{ee} will be added
+        to the Earley chart at some point, but we have not shown anything about when it will
+        be added in terms of the implementation.
+        In particular, we have yet to show that \V{ee} will be in the Earley chart
+        when the event \V{ev} occurs.
+        We proceed to do this.
+        \begin{equation}
+                \label{eq:pr-prev-inflows-060}
+                \mycpar{If \V{ee} is in the Earley chart, it is recorded before
+                any activation event in row \V{j} \cuz
+                \Obref{activation-after-previous-row},
+                        \eqref{eq:pr-prev-inflows-020},
+                        \eqref{eq:pr-prev-inflows-040}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-prev-inflows-070}
+                \mycpar{If \V{ee} is in the Earley chart, it is recorded before \V{ev} \cuz
+                        \eqref{eq:pr-prev-inflows-010},
+                        \eqref{eq:pr-prev-inflows-060}.}
+        \end{equation}
+        We know that \V{ee} is in the Earley chart.
+                With \eqref{eq:pr-prev-inflows-070}
+        we also know where \V{ee} must have been recorded if \V{ee} is in
+        the Earley chart.
+        We therefore conclude
+        \begin{equation}
+                \label{eq:pr-prev-inflows-080}
+                \mycpar{\V{ee} is recorded before \V{ev} \cuz
+                        \eqref{eq:pr-prev-inflows-060},
+                        \eqref{eq:pr-prev-inflows-070}.}
+        \end{equation}
+        We choose \V{al} WLOG, so that our choice of \V{ee} is also WLOG.
+        Since our choice of \V{ev} was WLOG as well, the
+        lemma follows directly from
+                \eqref{eq:pr-prev-inflows-080}.
+        \todo{Recheck this proof}
         \myqed
 \end{proof}
 
