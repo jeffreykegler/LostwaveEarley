@@ -1666,7 +1666,8 @@ we have the lemma.
 \begin{lemma}[Previous row inflows]
         \label{lem:prev-inflows}
         If the chart is complete as far as row \V{i},
-        then all alethemes in row \V{i} and earlier
+        then Earley events
+        for all alethemes in row \V{i} and earlier
         will be present in the chart
         during every activation event
         in row $\V{i}+1$.
@@ -1697,7 +1698,7 @@ we have the lemma.
         \end{equation}
         \begin{equation}
                 \label{eq:pr-prev-inflows-050}
-                \mycpar{\V{ee} will be added in the Earley chart \cuz \Dfref{completeness},
+                \mycpar{\V{ee} will be added to the Earley chart \cuz \Dfref{completeness},
                         \eqref{eq:pr-prev-inflows-020},
                         \eqref{eq:pr-prev-inflows-030},
                         \eqref{eq:pr-prev-inflows-040}.}
@@ -1724,7 +1725,7 @@ we have the lemma.
                         \eqref{eq:pr-prev-inflows-010},
                         \eqref{eq:pr-prev-inflows-060}.}
         \end{equation}
-        We know that \V{ee} is in the Earley chart.
+        We know that \V{ee} is in the Earley chart \eqref{eq:pr-prev-inflows-050}.
                 With \eqref{eq:pr-prev-inflows-070}
         we also know where \V{ee} must have been recorded if \V{ee} is in
         the Earley chart.
@@ -1732,14 +1733,13 @@ we have the lemma.
         \begin{equation}
                 \label{eq:pr-prev-inflows-080}
                 \mycpar{\V{ee} is recorded before \V{ev} \cuz
-                        \eqref{eq:pr-prev-inflows-060},
+                        \eqref{eq:pr-prev-inflows-050},
                         \eqref{eq:pr-prev-inflows-070}.}
         \end{equation}
-        We choose \V{al} WLOG, so that our choice of \V{ee} is also WLOG.
+        We chose \V{al} WLOG, so that our choice of \V{ee} is also WLOG.
         Since our choice of \V{ev} was WLOG as well, the
         lemma follows directly from
                 \eqref{eq:pr-prev-inflows-080}.
-        \todo{Recheck this proof}
         \myqed
 \end{proof}
 
