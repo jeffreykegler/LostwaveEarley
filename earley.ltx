@@ -1386,19 +1386,16 @@ From \V{downAL} we can conclude
 
 Let the derivation \V{minDrv} be the shortest derivation of
 \Velement{w}{\V{j},\V{current}} from \V{B}.
-Because $\V{B} \in \V{N}$ we know for that,
+Because $\V{B} \in \V{N}$ we know that,
 for some $\V{rhs} \in \V{STR}$,
-\begin{equation}
+\begin{gather}
 \label{eq:pr-red-trib-070}
         \mycpar{$\V{B} \derivesV{minDrv} \V{rhs} \destarV{minDrv} \Velement{w}{\V{j},\V{current}}$
         \cuz \eqref{eq:pr-red-trib-020},
-        }
-\end{equation}
-and that
-\begin{equation}
+        } \\
 \label{eq:pr-red-trib-075}
-        \V{B} \de \V{rhs} \in \V{P} \cuz \eqref{eq:pr-red-trib-070}.
-\end{equation}
+        \land \; \V{B} \de \V{rhs} \in \V{P} \cuz \eqref{eq:pr-red-trib-070}.
+\end{gather}
 
 We consider a new derivation:
 \begin{equation}
@@ -1746,28 +1743,32 @@ we have the lemma.
 \begin{lemma}[Tangible reduction completion]
         \label{lm:rt-comp}
         When running the algorithm of \Sref{algorithm},
-        if the chart is complete as far as generation \V{g}
+        if the chart is complete as far as rank \V{r}
         of row $\V{i}+1$,
-        the algorithm will add all tangible reductions
-        in generation $\V{g}+1$ to the chart.
+        then \Sref{algorithm} will add all tangible reductions
+        in generation $\V{r}+1$ to the chart.
 \end{lemma}
 
 \begin{proof}
-        Let \V{downFD}
-        be an arbitrary tangible reduction FD in generation
-        $\V{g}+1$ of row $\V{i}+1$.
-        Let the derivative of \V{downFD} be \V{drv},
-        and let the predot symbol instance be \V{B:pd}.
+\begin{equation}
+        \label{eq:pr-rt-comp-005}
+        \mycpar{Let \V{downAL}
+        be an arbitrary tangible reduction aletheme of rank
+        $\V{r}+1$ in row $\V{i}+1$
+        \cuz AF lemma.}
+\end{equation}
         Without loss of generality, we let the Earley item of \V{downFD} be
 \begin{equation}
         \label{eq:pr-rt-comp-010}
         \begin{gathered}
-                \V{downEI} = (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1)) \\
+                \V{downEE} = (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1)) \\
         \text{\cuz AF lemma, \Dfref{ei-types}, WLOG.}
         \end{gathered}
 \end{equation}
         where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$.
-        Because by assumption for the lemma, \V{downFD} is tangible,
+        Because by assumption for the lemma, \V{downEE} is tangible,
+        There will be a derivation of \V{downAL}, call it \V{drv},
+        where the predot symbol instance is \V{B:pd} and
 \begin{equation}
         \label{eq:pr-rt-comp-020}
         \begin{gathered}
@@ -1779,81 +1780,71 @@ we have the lemma.
 \end{equation}
 \begin{equation}
         \label{eq:pr-rt-comp-030}
-        \mycpar{\V{joint} is the current location of \V{fdConf} less the length of
+        \mycpar{\V{joint} is the current location of \V{downEE} less the length of
         the terminal string produced by the predot symbol instance.
         \bcuz \eqref{eq:pr-rt-comp-020}.}
 \end{equation}
 Noting that a reduction is a confirmation,
 \begin{equation}
         \label{eq:pr-rt-comp-040}
-        \mycpar{\V{stemFD} is the mainstem of \V{downFD} at \V{joint}
+        \mycpar{\V{stemAL} is the mainstem of \V{downAL} at \V{joint}
         \bcuz \Lmref{conf-stem},
                 \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-030}.}
 \end{equation}
-        The EI of \V{stemFD} is
+        The EE of \V{stemAL} is
 \begin{equation}
 \label{eq:pr-rt-comp-050}
         \begin{gathered}
-                \V{stemEI} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{joint}) \\
+                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{joint}) \\
         \cuz \Dfref{conf-stem}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-040}.
         \end{gathered}
 \end{equation}
-\begin{equation}
-\label{eq:pr-rt-comp-060}
-        \mycpar{Rows 0 through \V{i} are complete \cuz AF lemma.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-rt-comp-070}
-        \mycpar{Row \V{joint} is complete \cuz \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-060}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-rt-comp-080}
-        \begin{gathered}
-        \text{\V{stemEI} is in the chart \cuz \eqref{eq:pr-rt-comp-050}, \eqref{eq:pr-rt-comp-070}.}
-        \end{gathered}
-\end{equation}
-We now turn to consider the tributary of \V{downFD}.
+We now turn to consider the tributary of \V{downAL}.
 \begin{equation}
         \label{eq:pr-rt-comp-090}
-        \mycpar{\V{tribFD} is the tributary of \V{downFD} at \V{joint} \\
+        \mycpar{\V{tribAL} is the tributary of \V{downAL} at \V{joint} \\
         \cuz \Lmref{red-trib},
                 \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-030}.}
 \end{equation}
-The Earley item of \V{tribFD} is
 \begin{equation}
 \label{eq:pr-rt-comp-100}
-        \begin{gathered}
-                \V{tribEI} = (\V{B} \de \V{rhs} \mydot, \V{joint}, (\V{i}+1)) \\
-        \text{where $\V{B} \de \V{rhs}$ is one of the rules of \V{g}} \\
-        \text{\cuz \Dfref{red-trib}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-090}, WLOG.}
-        \end{gathered}
+        \mycpar{The Earley entry of \V{tribAL} is \\
+                $\V{tribEE} = (\V{B} \de \V{rhs} \mydot, \V{joint}, (\V{i}+1))$ \\
+        where $\V{B} \de \V{rhs}$ is one of the rules of \V{g} \\
+        \cuz \Dfref{red-trib}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-090}, WLOG.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-200}
-        \text{\V{downFD} is in generation $\V{g}+1$ \cuz AF lemma.}
+        \mycpar{$\VFA{Rank}{tribAl} < \VFA{Rank}{downAL}$
+                \cuz \Lmref{red-trib}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-090}.}
 \end{equation}
-Recalling that the generation inflow of a tangible reduction is its tributary,
 \begin{equation}
 \label{eq:pr-rt-comp-210}
-        \text{\V{tribFD} is in generation \V{g} \cuz \Dfref{rank},
-                \eqref{eq:pr-rt-comp-090}, \eqref{eq:pr-rt-comp-200}.}
+        \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$
+                \cuz \eqref{eq:pr-rt-comp-005}, \eqref{eq:pr-rt-comp-200}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-220}
-        \mycpar{Generations 0 through \V{g} of row $\V{i}+1$ are complete \\
-                \cuz AF lemma.}
+        \mycpar{$0 \le \VFA{Rank}{tribAL} \le \V{r}$
+                \cuz \eqref{eq:pr-rt-comp-200}, \eqref{eq:pr-rt-comp-210}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-230}
-        \begin{gathered}
-                \text{\V{tribEI} is in the chart
-                        \cuz \eqref{eq:pr-rt-comp-090}, \eqref{eq:pr-rt-comp-100},
-                        \eqref{eq:pr-rt-comp-210}, \eqref{eq:pr-rt-comp-220}.}
-        \end{gathered}
+        \mycpar{The chart is complete as far as rank \V{r} of
+        row $\V{i}+1$ \cuz AF lemma.}
 \end{equation}
-Recalling again that \V{downFD} is tangible,
 \begin{equation}
 \label{eq:pr-rt-comp-240}
+        \begin{gathered}
+                \text{\V{tribEE} is in the chart
+                        \cuz \eqref{eq:pr-rt-comp-100},
+                        \eqref{eq:pr-rt-comp-220}, \eqref{eq:pr-rt-comp-230}.}
+        \end{gathered}
+\end{equation}
+\todo{Revised to here}
+Recalling again that \V{downFD} is tangible,
+\begin{equation}
+\label{eq:pr-rt-comp-340}
         \mycpar{Line \ref{li:finish-row-070} of \Algref{finish-row} calls
         \Algref{tangible-reduction} for \V{tribEI}
         \cuz \eqref{eq:pr-rt-comp-100}.}
@@ -1864,13 +1855,13 @@ Recalling again that \V{downFD} is tangible,
         \cuz \eqref{eq:pr-rt-comp-040}, \eqref{eq:pr-rt-comp-050}.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-rt-comp-300}
+\label{eq:pr-rt-comp-400}
         \mycpar{Line \ref{li:tangible-reduction-130}
         in \Algref{tangible-reduction} adds \V{downEI}
         to the chart \\
         \cuz \eqref{eq:pr-rt-comp-010}.}
 \end{equation}
-Equation \eqref{eq:pr-rt-comp-300} is what we needed to show
+Equation \eqref{eq:pr-rt-comp-400} is what we needed to show
 for the lemma.
 \myqed
 \end{proof}
