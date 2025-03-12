@@ -997,7 +997,8 @@ observations.
 \end{observation}
 
 \begin{observation}[An Earley entry is activated once]
-        That is, a recorded Earley entry is activated exactly once.
+        \label{obs:activation-unique}
+        A recorded Earley entry is activated exactly once.
         Relevant to this observation is the activation loop in \Algref{finish-row}.
         \obEnd
 \end{observation}
@@ -1029,6 +1030,13 @@ observations.
         \obEnd
 \end{observation}
 
+\begin{observation}[Edges are recorded row by row]
+        \label{obs:recording-at-currloc}
+        An edge is recorded in the activation loop for
+        its current location.
+        \obEnd
+\end{observation}
+
 \begin{observation}[Edges are activated row by row]
         \label{obs:activation-row-by-row}
         Edges are activated one row at a time.
@@ -1036,6 +1044,13 @@ observations.
         will
         ever be activated after any edge in row $\V{i}+1$
         is recorded.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Edge activation at current location]
+        \label{obs:activation-at-currloc}
+        An edge is activated in the activation loop for
+        its current location.
         \obEnd
 \end{observation}
 
@@ -1661,7 +1676,7 @@ we have the lemma.
 \end{definition}
 
 \begin{lemma}[Previous row inflows]
-        \label{lem:prev-inflows}
+        \label{lm:prev-inflows}
         If the chart is complete as far as row \V{i},
         then Earley events
         for all alethemes in row \V{i} and earlier
@@ -1745,8 +1760,10 @@ we have the lemma.
         When running the algorithm of \Sref{algorithm},
         if the chart is complete as far as rank \V{r}
         of row $\V{i}+1$,
-        then \Sref{algorithm} will add all tangible reductions
-        in generation $\V{r}+1$ to the chart.
+        and \V{downAL} is a tangible reduction aletheme
+        in generation $\V{r}+1$,
+        then \Sref{algorithm} will add \V{downAL}
+        to the chart.
 \end{lemma}
 
 \begin{proof}
@@ -1840,6 +1857,35 @@ We now turn to consider the tributary of \V{downAL}.
                         \cuz \eqref{eq:pr-rt-comp-100},
                         \eqref{eq:pr-rt-comp-220}, \eqref{eq:pr-rt-comp-230}.}
         \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-rt-comp-250}
+        \begin{gathered}
+                \text{\V{tribEE} will be activated exactly once
+                        \cuz \Obref{activation-unique},
+                        \eqref{eq:pr-rt-comp-240}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-rt-comp-260}
+        \begin{gathered}
+                \text{\V{tribEE} will be activated
+                at row $\V{i}+1$
+                        \cuz \Obref{activation-at-currloc}, \eqref{eq:pr-rt-comp-100}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-rt-comp-270}
+        \mycpar{If \V{stemEE} is in the chart, it will be in row \V{joint},
+            $\V{joint} < \V{i}+1$ \cuz \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-050}.}
+\end{equation}
+        \todo{cuz's incomplete in next}
+\begin{equation}
+\label{eq:pr-rt-comp-280}
+                \mycpar{\V{stemEE} will be in the chart when
+                \V{tribEE} is activated
+        \cuz \Lmref{prev-inflows}, TODO,
+                        \eqref{eq:pr-rt-comp-270}.}
 \end{equation}
 \todo{Revised to here}
 Recalling again that \V{downFD} is tangible,
