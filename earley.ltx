@@ -1710,37 +1710,39 @@ we have the lemma.
         \end{equation}
         \begin{equation}
                 \label{eq:pr-prev-inflows-050}
-                \mycpar{\V{ee} will be added to the Earley chart \cuz \Dfref{completeness},
+                \mycpar{\V{ee} will be recorded in the Earley chart \\
+                        \cuz \Dfref{completeness},
                         \eqref{eq:pr-prev-inflows-020},
                         \eqref{eq:pr-prev-inflows-030},
                         \eqref{eq:pr-prev-inflows-040}.}
         \end{equation}
         In \eqref{eq:pr-prev-inflows-030}, we note that ``completeness'' is
         a concept which abstracts from the implementation.
-        With \eqref{eq:pr-prev-inflows-050} we have shown that \V{ee} will be added
-        to the Earley chart at some point, but we have not shown anything about when it will
-        be added in terms of the implementation.
-        In particular, we have yet to show that \V{ee} will be in the Earley chart
-        when the event \V{ev} occurs.
+        With \eqref{eq:pr-prev-inflows-050} we have shown that \V{ee} will be
+        recorded in the Earley chart at some point,
+        but we have not shown anything about when it will
+        be recorded in terms of the implementation.
+        In particular, we have yet to show that \V{ee} will have been
+        recorded in the Earley chart
+        before the event \V{ev} occurs.
         We proceed to do this.
         \begin{equation}
                 \label{eq:pr-prev-inflows-060}
                 \mycpar{If \V{ee} is in the Earley chart, it is recorded before
                 any activation event in row \V{j} \cuz
                 \Obref{activation-after-previous-row},
+                        \eqref{eq:pr-prev-inflows-010},
                         \eqref{eq:pr-prev-inflows-020},
                         \eqref{eq:pr-prev-inflows-040}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-prev-inflows-070}
-                \mycpar{If \V{ee} is in the Earley chart, it is recorded before \V{ev} \cuz
-                        \eqref{eq:pr-prev-inflows-010},
+                \mycpar{If \V{ee} is in the Earley chart, it is recorded
+                before the event \V{ev} occurs
+                \cuz \eqref{eq:pr-prev-inflows-010},
                         \eqref{eq:pr-prev-inflows-060}.}
         \end{equation}
         We know that \V{ee} is in the Earley chart \eqref{eq:pr-prev-inflows-050}.
-                With \eqref{eq:pr-prev-inflows-070}
-        we also know where \V{ee} must have been recorded if \V{ee} is in
-        the Earley chart.
         We therefore conclude
         \begin{equation}
                 \label{eq:pr-prev-inflows-080}
@@ -1748,9 +1750,8 @@ we have the lemma.
                         \eqref{eq:pr-prev-inflows-050},
                         \eqref{eq:pr-prev-inflows-070}.}
         \end{equation}
-        We chose \V{al} WLOG, so that our choice of \V{ee} is also WLOG.
-        Since our choice of \V{ev} was WLOG as well, the
-        lemma follows directly from
+        Our choice of \V{al}, \V{ee} and \V{ev} were WLOG,
+        so that the lemma follows directly from
                 \eqref{eq:pr-prev-inflows-080}.
         \myqed
 \end{proof}
