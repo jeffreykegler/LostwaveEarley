@@ -799,24 +799,25 @@ of \V{mainstem}.
 
 \section{Definitions 2}
 
-\begin{definition}[Altheme]
+\begin{definition}[Aletheme]
         \label{df:aletheme}
         An \textbf{Earley aletheme}, or \textbf{aletheme},
         is an 8-tuple
         \begin{equation}
         \begin{gathered}
-                (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \\
-                \text{where $\V{fore},\V{aft},\V{pre},\V{post} \in \V{STR}$} \\
-                \land \; \V{lhs} \in \V{N} \\
-                \land \; \V{origin},\V{current} \in \naturals.
+                (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \\
+                \text{where \V{drv} is a derivation,} \\
+                \V{fore},\V{aft},\V{pre},\V{post} \in \V{STR}, \\
+                \V{lhs} \in \V{N} \text{, and}, \\
+                \V{origin},\V{current} \in \naturals.
         \end{gathered}
         \end{equation}
-        An aletheme is considered true if and only if
+        An aletheme is considered \textbf{sound} if and only if
         \begin{gather}
                 \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
-                \land \; \V{pre} \destar \Velement{w}{\V{origin},\V{current}} \\
-                \land \; \V{S} \destar \V{fore} \cat \V{lhs} \cat \V{aft} \\
-                \land \; \V{fore} \destar \Velement{w}{0,\V{origin}}. \quad \dfEnd
+                \land \; \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
+                \land \; \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft} \\
+                \land \; \V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}. \quad \dfEnd
         \end{gather}
 \end{definition}
 
@@ -1920,6 +1921,175 @@ Keeping in mind that \V{tribEE} is a completion, and tangible,
                 \cuz \eqref{eq:pr-rt-comp-320}, \eqref{eq:pr-rt-comp-330}.}
 \end{equation}
 Equation \eqref{eq:pr-rt-comp-340} is what we needed to show
+for the lemma.
+\myqed
+\end{proof}
+
+\begin{lemma}[Intangible reduction completion]
+        \label{lm:ri-comp}
+        When running the algorithm of \Sref{algorithm},
+        if the chart is complete as far as rank \V{r}
+        of row $\V{i}+1$,
+        and \V{downAL} is an intangible reduction aletheme
+        of rank $\V{r}+1$ in row $\V{i}+1$,
+        then \Sref{algorithm} will record the Earley entry
+        for \V{downAL} in the chart.
+\end{lemma}
+
+\begin{proof}
+\begin{equation}
+        \label{eq:pr-ri-comp-005}
+        \mycpar{Let \V{downAL}
+        be an arbitrary intangible reduction aletheme of rank
+        $\V{r}+1$ in row $\V{i}+1$
+        \cuz AF lemma.}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-ri-comp-007}
+        \mycpar{$\V{downAL} = (\V{drv},\V{fore},\V{aft},(\V{antepredot}\cat\V{B}),\V{postdot},$
+        $\V{lhs},\V{origin},(\V{i}+1))$ \\
+        where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
+        \cuz AF lemma, \Dfref{ei-types}, \eqref{eq:pr-ri-comp-005}, WLOG.}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-ri-comp-010}
+        \mycpar{$\V{downEE} = (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1))$ \\
+                \cuz \eqref{eq:pr-ri-comp-007}.}
+\end{equation}
+        By assumption for the lemma, \V{downEE} is intangible so that,
+        where the predot symbol instance of \V{downAL} is \V{B:pd},
+\begin{equation}
+        \label{eq:pr-ri-comp-020}
+        \mycpar{$\V{B:pd} \destarV{drv} \epsilon$ \cuz AF lemma, \eqref{eq:pr-ri-comp-010}.}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-ri-comp-022}
+\end{equation}
+        \todo{Revised to here}
+\begin{equation}
+        \label{eq:pr-ri-comp-030}
+        \mycpar{\V{joint} is the current location of \V{downEE} less the length of
+        the terminal string produced by the predot symbol instance.
+        \bcuz \eqref{eq:pr-ri-comp-020}.}
+\end{equation}
+Noting that a reduction is a confirmation,
+\begin{equation}
+        \label{eq:pr-ri-comp-040}
+        \mycpar{\V{stemAL} is the mainstem of \V{downAL} at \V{joint}
+        \bcuz \Lmref{conf-stem},
+                \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-030}.}
+\end{equation}
+        The EE of \V{stemAL} is
+\begin{equation}
+\label{eq:pr-ri-comp-050}
+        \begin{gathered}
+                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{joint}) \\
+        \cuz \Dfref{conf-stem}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-040}.
+        \end{gathered}
+\end{equation}
+We now turn to consider the tributary of \V{downAL}.
+\begin{equation}
+        \label{eq:pr-ri-comp-090}
+        \mycpar{\V{tribAL} is the tributary of \V{downAL} at \V{joint} \\
+        \cuz \Lmref{red-trib},
+                \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-030}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-100}
+        \mycpar{The Earley entry of \V{tribAL} is \\
+                $\V{tribEE} = (\V{B} \de \V{rhs} \mydot, \V{joint}, (\V{i}+1))$ \\
+        where $\V{B} \de \V{rhs} \in \V{P}$ \\
+        \cuz \Dfref{red-trib}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-090}, WLOG.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-200}
+        \mycpar{$\VFA{Rank}{tribAl} < \VFA{Rank}{downAL}$
+                \cuz \Lmref{red-trib}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-090}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-210}
+        \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$
+                \cuz \eqref{eq:pr-ri-comp-005}, \eqref{eq:pr-ri-comp-200}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-220}
+        \mycpar{$0 \le \VFA{Rank}{tribAL} \le \V{r}$
+                \cuz \eqref{eq:pr-ri-comp-200}, \eqref{eq:pr-ri-comp-210}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-230}
+        \mycpar{The chart is complete as far as rank \V{r} of row $\V{i}+1$ \\
+        \cuz AF lemma.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-240}
+        \begin{gathered}
+                \text{\V{tribEE} is in the chart
+                        \cuz \eqref{eq:pr-ri-comp-100},
+                        \eqref{eq:pr-ri-comp-220}, \eqref{eq:pr-ri-comp-230}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-250}
+        \begin{gathered}
+                \text{\V{tribEE} will be activated exactly once
+                        \cuz \Obref{activation-unique},
+                        \eqref{eq:pr-ri-comp-240}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-260}
+        \begin{gathered}
+                \text{\V{tribEE} will be activated
+                at row $\V{i}+1$
+                        \cuz \Obref{activation-at-currloc}, \eqref{eq:pr-ri-comp-100}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-270}
+        \mycpar{If \V{stemEE} is in the chart, it will be in row \V{joint},
+            $\V{joint} < \V{i}+1$ \cuz \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-050}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-280}
+        \mycpar{Rows 0 thru $\V{i}+1$ are complete \cuz AF lemma.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-290}
+        \mycpar{Row \V{joint} is complete \cuz \eqref{eq:pr-ri-comp-270}, \eqref{eq:pr-ri-comp-280}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-300}
+                \mycpar{\V{stemEE} will be in row \V{joint} of the chart when
+                \V{tribEE} is activated
+        \cuz \Lmref{prev-inflows}, \eqref{eq:pr-ri-comp-260}, \eqref{eq:pr-ri-comp-270},
+                        \eqref{eq:pr-ri-comp-290}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-310}
+        \mycpar{When run for \V{tribEE}, \Algref{tangible-reduction}
+            looks for \V{stemEE} in row \V{joint} and,
+            if it finds it, records \V{downEE} \cuz \Algref{tangible-reduction}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-320}
+        \mycpar{When run for \V{tribEE}, \Algref{tangible-reduction} records \V{downEE} \\
+            \cuz \Algref{tangible-reduction} \eqref{eq:pr-ri-comp-300}, \eqref{eq:pr-ri-comp-310}.}
+\end{equation}
+Keeping in mind that \V{tribEE} is a completion, and tangible,
+\begin{equation}
+\label{eq:pr-ri-comp-330}
+        \mycpar{When \V{tribEE} is activated, \Algref{tangible-reduction}
+        is run for \V{tribEE} \\
+        \cuz lines \ref{li:finish-row-050}--\ref{li:finish-row-080} of \Algref{finish-row},
+                \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-100}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-340}
+        \mycpar{\Sref{algorithm} records \V{downEE}
+                \cuz \eqref{eq:pr-ri-comp-320}, \eqref{eq:pr-ri-comp-330}.}
+\end{equation}
+Equation \eqref{eq:pr-ri-comp-340} is what we needed to show
 for the lemma.
 \myqed
 \end{proof}
