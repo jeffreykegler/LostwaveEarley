@@ -1980,6 +1980,7 @@ Noting that a reduction is a confirmation,
         \mycpar{$\V{stemAL} = (\V{drv},\V{fore},\V{aft},\V{antepredot},(\V{B:pd}\cat\V{postdot}),$ \\
         $\V{lhs},\V{origin},(\V{i}+1))$ \\
         is the mainstem of \V{downAL} at $\V{i}+1$ \\
+        and $\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
         \cuz \Lmref{conf-stem}, \eqref{eq:pr-ri-comp-007}, \eqref{eq:pr-ri-comp-030}.}
 \end{equation}
         The EE of \V{stemAL} is
@@ -1990,83 +1991,81 @@ Noting that a reduction is a confirmation,
         \cuz \Dfref{ee-to-al}, \eqref{eq:pr-ri-comp-040}.
         \end{gathered}
 \end{equation}
-        \todo{Revised to here}
 We now turn to consider the tributary of \V{downAL}.
 \begin{equation}
 \label{eq:pr-ri-comp-210}
-        \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$
-                \cuz \eqref{eq:pr-ri-comp-005}, \eqref{eq:pr-ri-comp-200}.}
+        \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$ \cuz \eqref{eq:pr-ri-comp-005}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-220}
-        \mycpar{$0 \le \VFA{Rank}{tribAL} \le \V{r}$
-                \cuz \eqref{eq:pr-ri-comp-200}, \eqref{eq:pr-ri-comp-210}.}
+        \mycpar{$\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
+                \cuz \eqref{eq:pr-ri-comp-040}.}
 \end{equation}
+        \todo{Revised to here}
 \begin{equation}
 \label{eq:pr-ri-comp-230}
+        \mycpar{$0 \le \VFA{Rank}{stemAL} \le \V{r}$
+                \cuz \eqref{eq:pr-ri-comp-210}, \eqref{eq:pr-ri-comp-220}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-ri-comp-240}
         \mycpar{The chart is complete as far as rank \V{r} of row $\V{i}+1$ \\
         \cuz AF lemma.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-ri-comp-240}
-        \begin{gathered}
-                \text{\V{tribEE} is in the chart
-                        \cuz \eqref{eq:pr-ri-comp-100},
-                        \eqref{eq:pr-ri-comp-220}, \eqref{eq:pr-ri-comp-230}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
 \label{eq:pr-ri-comp-250}
         \begin{gathered}
-                \text{\V{tribEE} will be activated exactly once
-                        \cuz \Obref{activation-unique},
-                        \eqref{eq:pr-ri-comp-240}.}
+                \text{\V{stemEE} is in the chart
+                        \cuz \eqref{eq:pr-ri-comp-050},
+                        \eqref{eq:pr-ri-comp-230}, \eqref{eq:pr-ri-comp-240}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-260}
         \begin{gathered}
-                \text{\V{tribEE} will be activated
-                at row $\V{i}+1$
-                        \cuz \Obref{activation-at-currloc}, \eqref{eq:pr-ri-comp-100}.}
+                \text{\V{stemEE} will be activated exactly once
+                        \cuz \Obref{activation-unique},
+                        \eqref{eq:pr-ri-comp-250}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-270}
-        \mycpar{If \V{stemEE} is in the chart, it will be in row \V{joint},
-            $\V{joint} < \V{i}+1$ \cuz \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-050}.}
+        \begin{gathered}
+                \text{\V{stemEE} will be activated
+                at row $\V{i}+1$
+                        \cuz \Obref{activation-at-currloc}, \eqref{eq:pr-ri-comp-260}.}
+        \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-280}
-        \mycpar{Rows 0 thru $\V{i}+1$ are complete \cuz AF lemma.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-comp-290}
-        \mycpar{Row \V{joint} is complete \cuz \eqref{eq:pr-ri-comp-270}, \eqref{eq:pr-ri-comp-280}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-comp-300}
-                \mycpar{\V{stemEE} will be in row \V{joint} of the chart when
-                \V{tribEE} is activated
-        \cuz \Lmref{prev-inflows}, \eqref{eq:pr-ri-comp-260}, \eqref{eq:pr-ri-comp-270},
-                        \eqref{eq:pr-ri-comp-290}.}
+        \mycpar{If \V{stemEE} is in the chart, it will be in row $\V{i}+1$ \\
+            \cuz \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-050}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-310}
-        \mycpar{When run for \V{tribEE}, \Algref{tangible-reduction}
-            looks for \V{stemEE} in row \V{joint} and,
-            if it finds it, records \V{downEE} \cuz \Algref{tangible-reduction}.}
+        \mycpar{When run for \V{stemEE}, \Algref{intangible-reduction}
+            records \V{downEE} \cuz \Algref{intangible-reduction}.}
 \end{equation}
+Keeping in mind that \V{stemEE} is an incompletion,
+with a nullable postdot symbol,
 \begin{equation}
-\label{eq:pr-ri-comp-320}
-        \mycpar{When run for \V{tribEE}, \Algref{tangible-reduction} records \V{downEE} \\
-            \cuz \Algref{tangible-reduction} \eqref{eq:pr-ri-comp-300}, \eqref{eq:pr-ri-comp-310}.}
+\label{eq:pr-ri-comp-330}
+        \mycpar{When \V{stemEE} is activated, \Algref{intangible-reduction}
+        is run for \V{stemEE} \\
+        \cuz lines \ref{li:finish-row-090}--\ref{li:finish-row-130} of \Algref{finish-row}
+                \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-050}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-340}
-        \mycpar{\Sref{algorithm} records \V{downEE} \cuz \eqref{eq:pr-ri-comp-320}.}
+        \mycpar{When run for \V{stemEE}, \Algref{intangible-reduction} records \V{downEE} \\
+            \cuz \Algref{intangible-reduction}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-050}.}
 \end{equation}
-Equation \eqref{eq:pr-ri-comp-340} is what we needed to show
+\begin{equation}
+\label{eq:pr-ri-comp-350}
+        \mycpar{\Sref{algorithm} records \V{downEE}
+                \cuz \eqref{eq:pr-ri-comp-270}, \eqref{eq:pr-ri-comp-330}, \eqref{eq:pr-ri-comp-340}.}
+\end{equation}
+Equation \eqref{eq:pr-ri-comp-350} is what we needed to show
 for the lemma.
 \myqed
 \end{proof}
