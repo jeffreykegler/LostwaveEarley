@@ -635,22 +635,6 @@ it is a \textbf{sentence}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Soundness]
-A set of Earley items is \textbf{sound} for an input \V{w} iff
-the corresponding focus it has corresponding alethemes
-which are sound.
-\qquad \dfEnd
-\end{definition}
-
-\begin{definition}[Completeness]
-\label{df:completeness}
-An Earley chart is \textbf{complete} for an input \V{w} with
-respect to a set of alethemes iff
-for every aletheme in that set, call that aletheme \V{al},
-either \V{al} is a nulling completion,
-or an Earley entry corresponding to \V{al} is in \V{ch}.  \dfEnd
-\end{definition}
-
 We note that our definition of \Dfref{completeness},
 carves nulling completions out of the definition.
 This differs from
@@ -733,22 +717,27 @@ We note that aletheme-to-entry correspondence is a many-to-one relationship.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Fundamental invariant]
-\label{df:invariant}
-        \todo{To be replaced}
-The \textbf{fundamental invariant}\footnote{
-This fundamental invariant is similar to the traditional
-one, as found in~\cite[Theorem 4.9, p. 323]{AH1972v1}
-}
-of the llguidance Earley algorithm requires
-that in the Earley chart for a grammar \V{g}
-and an input \V{w}
-that every Earley entry that is not a nulling
-completion have a sound aletheme,
-and vice versa.
-The fundamental invariant is equivalent to the
-requirement that the Earley chart be
-both sound and complete.
+\begin{definition}[Soundness]
+Let \V{aleths} be the set of sound
+alethemes for a grammar \V{g} and an input \V{w}.
+Let \V{entries} be a set of Earley entries.
+\V{entries} is \textbf{sound}
+with respect to \V{aleths}
+iff \V{entries} does not contain any nulling completions,
+and if every element of \V{entries}
+corresponds to an element of \V{aleths}.
+\qquad \dfEnd
+\end{definition}
+
+\begin{definition}[Completeness]
+\label{df:completeness}
+Let \V{aleths} be a subset of the sound
+alethemes for a grammar \V{g} and an input \V{w}.
+An Earley chart is \textbf{complete}
+with respect to \V{aleths} iff,
+for every $\V{al} \in \V{aleths},
+either \V{al} is a nulling completion,
+or an Earley entry corresponding to \V{al} is in the Earley chart.
 \dfEnd
 \end{definition}
 
