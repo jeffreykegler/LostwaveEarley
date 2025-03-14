@@ -635,34 +635,6 @@ it is a \textbf{sentence}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Earley item to focus correspondence]
-        \todo{Revise for aletheme}
-        \label{df:earley-item-to-focus}
-The Earley item
-\[
-        \tuple{\V{A} \de \V{predot} \mydot \V{postdot}, \V{origin}, \V{current}}
-\]
-\textbf{corresponds} to the focus
-\[
-        (\V{predot},\V{postdot},\V{A:f},\V{origin},\V{current})
-\]
-and vice versa.
-We note that, while the focus specifies the focus symbol instance \V{A:f},
-the Earley item only specifies the LHS symbol \V{A}.
-Thus focus to Earley item correspondence is a many-to-one relationship.
-\dfEnd
-\end{definition}
-
-\begin{definition}[Earley item concepts and focuses]
-\label{df:ei-focus-concept}
-        \todo{Revise for aletheme}
-        An Earley item concept applied to a focus
-        applies to the Earley item of the focus.
-        For example, a focused derivation
-        is a reduction if its Earley item is a reduction.
-        \qquad \dfEnd
-\end{definition}
-
 \begin{definition}[Tangible symbol]
         In the context of a derivation,
         a \textbf{tangible} symbol instance is one that produces
@@ -825,6 +797,33 @@ An aletheme is so called because it is the smallest unit of soundness
 in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
 the Greek word
 for ``truth''.
+
+\begin{definition}[Earley entry to aletheme correspondence]
+        \label{df:ee-to-al}
+Alethemes of the form
+\begin{equation}
+        \label{eq:df-ee-to-al-010}
+        (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current})
+\end{equation}
+correspond to the Earley entry
+\begin{equation}
+        \label{eq:df-ee-to-al-020}
+        \tuple{\V{A} \de \V{pre} \mydot \V{post}, \V{origin}, \V{current}}.
+\end{equation}
+In the other direction, the Earley entry \eqref{eq:df-ee-to-al-020}
+\textbf{corresponds} to the alethemes of the form \eqref{eq:df-ee-to-al-010}.
+We note that aletheme-to-entry correspondence is a many-to-one relationship.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Earley entry concepts and alethemes]
+\label{df:ee-al-concept}
+        An Earley entry concept applied to an aletheme
+        applies to the Earley entry of the aletheme.
+        For example, an aletheme
+        is a reduction if its Earley entry is a reduction.
+        \dfEnd
+\end{definition}
 
 \begin{definition}[Rank]
         \label{df:rank}
@@ -1234,7 +1233,7 @@ We can deduce one useful new derivation:
 \begin{gather}
 \label{eq:pr-conf-stem-070}
         \mycpar{$\V{antepre} \destar \Velement{w}{\V{origin},\V{j}}$
-              \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-020}.}
+              \cuz \eqref{eq:pr-conf-stem-020}, \eqref{eq:pr-conf-stem-040}.}
 \end{gather}
 With the foregoing, we have our mainstem aletheme:
 \begin{equation}
@@ -1946,7 +1945,7 @@ for the lemma.
 \end{equation}
 \begin{equation}
         \label{eq:pr-ri-comp-007}
-        \mycpar{$\V{downAL} = (\V{drv},\V{fore},\V{aft},(\V{antepredot}\cat\V{B}),\V{postdot},$
+        \mycpar{$\V{downAL} = (\V{drv},\V{fore},\V{aft},(\V{antepredot}\cat\V{B:pd}),\V{postdot},$
         $\V{lhs},\V{origin},(\V{i}+1))$ \\
         where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
         \cuz AF lemma, \Dfref{ei-types}, \eqref{eq:pr-ri-comp-005}, WLOG.}
@@ -1954,58 +1953,45 @@ for the lemma.
 \begin{equation}
         \label{eq:pr-ri-comp-010}
         \mycpar{$\V{downEE} = (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1))$ \\
-                \cuz \eqref{eq:pr-ri-comp-007}.}
+                \cuz \Dfref{ee-to-al}, \eqref{eq:pr-ri-comp-007}.}
 \end{equation}
-        By assumption for the lemma, \V{downEE} is intangible so that,
-        where the predot symbol instance of \V{downAL} is \V{B:pd},
+        By assumption for the lemma, \V{downEE} is intangible so that
 \begin{equation}
         \label{eq:pr-ri-comp-020}
         \mycpar{$\V{B:pd} \destarV{drv} \epsilon$ \cuz AF lemma, \eqref{eq:pr-ri-comp-010}.}
 \end{equation}
 \begin{equation}
         \label{eq:pr-ri-comp-022}
+        \mycpar{$\V{antepredot}\cat\V{B} \derivesV{drv} \Velement{w}{0,(\V{i}+1)}$ \cuz \Dfref{aletheme}, \eqref{eq:pr-ri-comp-007}.}
 \end{equation}
-        \todo{Revised to here}
+\begin{equation}
+        \label{eq:pr-ri-comp-024}
+        \mycpar{$\V{antepredot} \derivesV{drv} \Velement{w}{0,(\V{i}+1)}$ \cuz \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-022}.}
+\end{equation}
 \begin{equation}
         \label{eq:pr-ri-comp-030}
-        \mycpar{\V{joint} is the current location of \V{downEE} less the length of
+        \mycpar{(\V{i}+1) is the current location of \V{downEE} less the length of
         the terminal string produced by the predot symbol instance.
-        \bcuz \eqref{eq:pr-ri-comp-020}.}
+        \bcuz \eqref{eq:pr-ri-comp-024}.}
 \end{equation}
 Noting that a reduction is a confirmation,
 \begin{equation}
         \label{eq:pr-ri-comp-040}
-        \mycpar{\V{stemAL} is the mainstem of \V{downAL} at \V{joint}
-        \bcuz \Lmref{conf-stem},
-                \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-030}.}
+        \mycpar{\V{stemAL} = (\V{drv},\V{fore},\V{aft},\V{antepredot},(\V{B:pd}\cat\V{postdot}),$ \\
+        $\V{lhs},\V{origin},(\V{i}+1))$ \\
+        is the mainstem of \V{downAL} at $\V{i}+1$ \\
+        \cuz \Lmref{conf-stem}, \eqref{eq:pr-ri-comp-007}, \eqref{eq:pr-ri-comp-030}.}
 \end{equation}
         The EE of \V{stemAL} is
 \begin{equation}
 \label{eq:pr-ri-comp-050}
         \begin{gathered}
-                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{joint}) \\
-        \cuz \Dfref{conf-stem}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-040}.
+                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin},(\V{i}+1)) \\
+        \cuz \Dfref{ee-to-al}, \eqref{eq:pr-ri-comp-040}.
         \end{gathered}
 \end{equation}
+        \todo{Revised to here}
 We now turn to consider the tributary of \V{downAL}.
-\begin{equation}
-        \label{eq:pr-ri-comp-090}
-        \mycpar{\V{tribAL} is the tributary of \V{downAL} at \V{joint} \\
-        \cuz \Lmref{red-trib},
-                \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-030}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-comp-100}
-        \mycpar{The Earley entry of \V{tribAL} is \\
-                $\V{tribEE} = (\V{B} \de \V{rhs} \mydot, \V{joint}, (\V{i}+1))$ \\
-        where $\V{B} \de \V{rhs} \in \V{P}$ \\
-        \cuz \Dfref{red-trib}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-090}, WLOG.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-comp-200}
-        \mycpar{$\VFA{Rank}{tribAl} < \VFA{Rank}{downAL}$
-                \cuz \Lmref{red-trib}, \eqref{eq:pr-ri-comp-010}, \eqref{eq:pr-ri-comp-090}.}
-\end{equation}
 \begin{equation}
 \label{eq:pr-ri-comp-210}
         \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$
