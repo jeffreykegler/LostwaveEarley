@@ -635,27 +635,6 @@ it is a \textbf{sentence}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Tangible symbol]
-        \label{df:tangible-symbol}
-        In the context of a derivation,
-        a \textbf{tangible} symbol instance is one that produces
-        at least one terminal,
-        and an \textbf{intangible} symbol instance in one that is
-        not tangible.
-        \dfEnd
-\end{definition}
-
-\begin{definition}[Tangible reduction aletheme]
-        \label{df:tangible-reduction}
-        A \textbf{tangible reduction aletheme}
-        is a reduction aletheme whose
-        predot symbol instance is tangible.
-        An \textbf{intangible reduction FD}
-        is a reduction aletheme
-        whose predot symbol instance is intangible.
-        \dfEnd
-\end{definition}
-
 \begin{definition}[Soundness]
 A set of Earley items is \textbf{sound} for an input \V{w} iff
 the corresponding focus it has corresponding alethemes
@@ -706,6 +685,36 @@ in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
 the Greek word
 for ``truth''.
 
+\begin{definition}[Earley entry concepts and alethemes]
+\label{df:ee-al-concept}
+        An Earley entry concept applied to an aletheme
+        applies to the Earley entry of the aletheme.
+        For example, an aletheme
+        is a reduction if its Earley entry is a reduction.
+        \dfEnd
+\end{definition}
+
+\begin{definition}[Tangible symbol]
+        \label{df:tangible-symbol}
+        In the context of a derivation,
+        a \textbf{tangible} symbol instance is one that produces
+        at least one terminal,
+        and an \textbf{intangible} symbol instance in one that is
+        not tangible.
+        \dfEnd
+\end{definition}
+
+\begin{definition}[Tangible reduction aletheme]
+        \label{df:tangible-reduction}
+        A \textbf{tangible reduction aletheme}
+        is a reduction aletheme whose
+        predot symbol instance is tangible.
+        An \textbf{intangible reduction FD}
+        is a reduction aletheme
+        whose predot symbol instance is intangible.
+        \dfEnd
+\end{definition}
+
 \begin{definition}[Earley entry to aletheme correspondence]
         \label{df:ee-to-al}
 Alethemes of the form
@@ -741,15 +750,6 @@ The fundamental invariant is equivalent to the
 requirement that the Earley chart be
 both sound and complete.
 \dfEnd
-\end{definition}
-
-\begin{definition}[Earley entry concepts and alethemes]
-\label{df:ee-al-concept}
-        An Earley entry concept applied to an aletheme
-        applies to the Earley entry of the aletheme.
-        For example, an aletheme
-        is a reduction if its Earley entry is a reduction.
-        \dfEnd
 \end{definition}
 
 \begin{definition}[Rank]
