@@ -636,6 +636,7 @@ it is a \textbf{sentence}.
 \end{definition}
 
 \begin{definition}[Tangible symbol]
+        \label{df:tangible-symbol}
         In the context of a derivation,
         a \textbf{tangible} symbol instance is one that produces
         at least one terminal,
@@ -644,18 +645,14 @@ it is a \textbf{sentence}.
         \dfEnd
 \end{definition}
 
-\begin{definition}[Tangible reduction FD]
-        \label{df:rt}
-        A \textbf{tangible reduction FD}
-        is a focused derivation,
-        where the focus is a reduction,
-        and the predot symbol instance in the derivation
-        is tangible.
-        A \textbf{intangible reduction FD}
-        is a focused derivation,
-        where the focus is a reduction,
-        and the predot symbol instance in the derivation
-        is intangible.
+\begin{definition}[Tangible reduction aletheme]
+        \label{df:tangible-reduction}
+        A \textbf{tangible reduction aletheme}
+        is a reduction aletheme whose
+        predot symbol instance is tangible.
+        An \textbf{intangible reduction FD}
+        is a reduction aletheme
+        whose predot symbol instance is intangible.
         \dfEnd
 \end{definition}
 
@@ -2043,6 +2040,37 @@ with a nullable postdot symbol,
 \end{equation}
 Equation \eqref{eq:pr-ri-comp-350} is what we needed to show
 for the lemma.
+\myqed
+\end{proof}
+
+\begin{lemma}[Reduction completion]
+        \label{lm:red-comp}
+        When running the algorithm of \Sref{algorithm},
+        if the chart is complete as far as rank \V{r}
+        of row $\V{i}+1$,
+        and \V{downAL} is a reduction aletheme
+        of rank $\V{r}+1$ in row $\V{i}+1$,
+        then \Sref{algorithm} will record the Earley entry
+        for \V{downAL} in the chart.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \begin{equation}
+        \label{eq:pr-red-comp-100}
+                \mycpar{Every reduction is either tangible or intangible. \\
+        \cuz \Dfref{tangible-symbol}, \Dfref{tangible-reduction}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-red-comp-110}
+                \mycpar{The statement of this lemma is true for tangible reductions. \cuz \Lmref{rt-comp}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-red-comp-120}
+                \mycpar{The statement of this lemma is true for intangible reductions. \cuz \Lmref{ri-comp}.}
+        \end{equation}
+        The lemma follows directly from
+        \eqref{eq:pr-red-comp-100}, \eqref{eq:pr-red-comp-110}, and \eqref{eq:pr-red-comp-120}.
 \myqed
 \end{proof}
 
