@@ -1800,7 +1800,7 @@ we have the lemma.
         \label{eq:pr-rt-comp-030}
         \mycpar{\V{joint} is the current location of \V{downEE} less the length of
         the terminal string produced by the predot symbol instance.
-        \bcuz \eqref{eq:pr-rt-comp-020}.}
+        \cuz \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-020}.}
 \end{equation}
 Noting that a reduction is a confirmation,
 \begin{equation}
@@ -1945,10 +1945,14 @@ for the lemma.
 \end{equation}
 \begin{equation}
         \label{eq:pr-ri-comp-007}
-        \mycpar{$\V{downAL} = (\V{drv},\V{fore},\V{aft},(\V{antepredot}\cat\V{B:pd}),\V{postdot},$
-        $\V{lhs},\V{origin},(\V{i}+1))$ \\
-        where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
+        \begin{gathered}
+        \V{downAL} = \left( \begin{gathered} \;
+                \V{drv},\V{fore},\V{aft},(\V{antepredot}\cat\V{B:pd}),\V{postdot}, \\
+                \V{lhs},\V{origin},(\V{i}+1)
+                \; \end{gathered} \right) \\
+        \mycpar{where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
         \cuz AF lemma, \Dfref{ei-types}, \eqref{eq:pr-ri-comp-005}, WLOG.}
+        \end{gathered}
 \end{equation}
 \begin{equation}
         \label{eq:pr-ri-comp-010}
@@ -1961,18 +1965,10 @@ for the lemma.
         \mycpar{$\V{B:pd} \destarV{drv} \epsilon$ \cuz AF lemma, \eqref{eq:pr-ri-comp-010}.}
 \end{equation}
 \begin{equation}
-        \label{eq:pr-ri-comp-022}
-        \mycpar{$\V{antepredot}\cat\V{B} \derivesV{drv} \Velement{w}{0,(\V{i}+1)}$ \cuz \Dfref{aletheme}, \eqref{eq:pr-ri-comp-007}.}
-\end{equation}
-\begin{equation}
-        \label{eq:pr-ri-comp-024}
-        \mycpar{$\V{antepredot} \derivesV{drv} \Velement{w}{0,(\V{i}+1)}$ \cuz \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-022}.}
-\end{equation}
-\begin{equation}
         \label{eq:pr-ri-comp-030}
         \mycpar{(\V{i}+1) is the current location of \V{downEE} less the length of
         the terminal string produced by the predot symbol instance.
-        \bcuz \eqref{eq:pr-ri-comp-024}.}
+        \cuz \eqref{eq:pr-ri-comp-020}.}
 \end{equation}
 Noting that a reduction is a confirmation,
 \begin{equation}
@@ -1991,7 +1987,6 @@ Noting that a reduction is a confirmation,
         \cuz \Dfref{ee-to-al}, \eqref{eq:pr-ri-comp-040}.
         \end{gathered}
 \end{equation}
-We now turn to consider the tributary of \V{downAL}.
 \begin{equation}
 \label{eq:pr-ri-comp-210}
         \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$ \cuz \eqref{eq:pr-ri-comp-005}.}
@@ -2001,7 +1996,6 @@ We now turn to consider the tributary of \V{downAL}.
         \mycpar{$\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
                 \cuz \eqref{eq:pr-ri-comp-040}.}
 \end{equation}
-        \todo{Revised to here}
 \begin{equation}
 \label{eq:pr-ri-comp-230}
         \mycpar{$0 \le \VFA{Rank}{stemAL} \le \V{r}$
@@ -2028,24 +2022,6 @@ We now turn to consider the tributary of \V{downAL}.
                         \eqref{eq:pr-ri-comp-250}.}
         \end{gathered}
 \end{equation}
-\begin{equation}
-\label{eq:pr-ri-comp-270}
-        \begin{gathered}
-                \text{\V{stemEE} will be activated
-                at row $\V{i}+1$
-                        \cuz \Obref{activation-at-currloc}, \eqref{eq:pr-ri-comp-260}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-comp-280}
-        \mycpar{If \V{stemEE} is in the chart, it will be in row $\V{i}+1$ \\
-            \cuz \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-050}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-ri-comp-310}
-        \mycpar{When run for \V{stemEE}, \Algref{intangible-reduction}
-            records \V{downEE} \cuz \Algref{intangible-reduction}.}
-\end{equation}
 Keeping in mind that \V{stemEE} is an incompletion,
 with a nullable postdot symbol,
 \begin{equation}
@@ -2063,7 +2039,7 @@ with a nullable postdot symbol,
 \begin{equation}
 \label{eq:pr-ri-comp-350}
         \mycpar{\Sref{algorithm} records \V{downEE}
-                \cuz \eqref{eq:pr-ri-comp-270}, \eqref{eq:pr-ri-comp-330}, \eqref{eq:pr-ri-comp-340}.}
+                \cuz \eqref{eq:pr-ri-comp-260}, \eqref{eq:pr-ri-comp-330}, \eqref{eq:pr-ri-comp-340}.}
 \end{equation}
 Equation \eqref{eq:pr-ri-comp-350} is what we needed to show
 for the lemma.
