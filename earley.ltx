@@ -658,8 +658,8 @@ it is a \textbf{sentence}.
 
 \begin{definition}[Soundness]
 A set of Earley items is \textbf{sound} for an input \V{w} iff
-the corresponding focus of every Earley item
-matches a derivation with input \V{w}.
+the corresponding focus it has corresponding alethemes
+which are sound.
 \qquad \dfEnd
 \end{definition}
 
@@ -679,6 +679,7 @@ the usual definition of completeness in Earley parsing,
 
 \begin{definition}[Fundamental invariant]
 \label{df:invariant}
+        \todo{To be replaced}
 The \textbf{fundamental invariant}\footnote{
 This fundamental invariant is similar to the traditional
 one, as found in~\cite[Theorem 4.9, p. 323]{AH1972v1}
@@ -688,60 +689,9 @@ to be both sound and complete.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Focus concepts and focused derivations]
-        \label{df:focus-fd-concept}
-        An focus concept applies to a focused derivation
-        if it applies to the focus of the focused derivation.
-        For example, the Earley item of a focused derivation
-        is the Earley item of its focus.
-        \dfEnd
-\end{definition}
-
-\begin{definition}[Reduction tributary]
-        \todo{To be deleted}
-Let
-\begin{equation}
-        \V{down} = (\V{A} \de \V{antepredotA} \cat \V{B} \mydot \V{postdotA},\V{joint},\V{current}),
-\end{equation}
-be an Earley item.
-We say that an Earley item of the form
-\begin{equation}
-\begin{gathered}
-        \V{trib} = (\V{B} \de \V{rhs} \mydot,\V{joint},\V{current}), \\
-        \text{where $\V{B} \de \V{rhs} \in \V{P}.$}
-\end{gathered}
-\end{equation}
-is a \textbf{tributary} of \V{down}.
-We also say that
-\V{down} is the \textbf{downstream channel}
-(or simply \textbf{downstream})
-of \V{tributary}.
-\dfEnd
-\end{definition}
-
-\begin{definition}[Tangible reduction tributary]
-\label{df:tr-trib}
-        Let \V{tribFD} be a tributary FD
-        of the tangible reduction FD \V{downFD},
-        where \V{tribFD} and \V{downFD} share a derivation \V{drv}.
-        Let \V{B:pd} be the predot instance of \V{downFD},
-        and let
-\begin{gather*}
-        \V{B} \de \V{rhs} \in \V{P}, \\
-        \land \; \V{B} \deplusV{drv} \Velement{w}{\V{joint},\V{current}}, \\
-        \land \; \V{joint} < \V{current}.
-\end{gather*}
-We say that
-\V{tribFD} is a \textbf{tangible reduction tributary} of \V{downFD} at \V{joint}.
-We also say that
-\V{downFD} is the \textbf{tangible reduction downstream channel}
-(or simply \textbf{downstream})
-of \V{tribFB}.
-\dfEnd
-\end{definition}
-
 \begin{definition}[Prediction mainstem]
 \label{df:prediction-stem}
+        \todo{To be replaced}
         Suppose, without loss of generality, that
 \begin{equation}
         \V{down} = \FA{DI}{\epsilon,\V{rhsA},\V{A},\V{current},\V{current}} \\
