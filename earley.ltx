@@ -1292,12 +1292,13 @@ we have the lemma.
 \begin{lemma}[Reduction tributary]
         \label{lm:red-trib}
         Let \V{downAL} be a reduced aletheme,
+        whose derivation is \V{drv},
         whose predot symbol is \V{B},
         whose current location is \V{current},
         and where \V{j} is such that
         \[
                 0 \le \V{j} \le \V{current} \land
-                \V{B} \destar \Velement{w}{\V{j},\V{current}}.
+                \V{B} \destarV{drv} \Velement{w}{\V{j},\V{current}}.
         \]
         Then \V{downAL} has a tributary \V{tribAL}
         at joint location \V{j},
@@ -1334,7 +1335,7 @@ We also assumed for the lemma that
 \label{eq:pr-red-trib-020}
         \begin{gathered}
                 0 \le \V{j} \le \V{current} \\
-                \land \; \V{B} \destar \Velement{w}{\V{j},\V{current}} \\
+                \land \; \V{B} \destarV{drv} \Velement{w}{\V{j},\V{current}} \\
                 \text{\cuz AF lemma, WLOG.}
         \end{gathered}
 \end{equation}
@@ -1344,41 +1345,33 @@ From \V{downAL} we can conclude
         \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-040}
-        \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
+        \mycpar{$\V{antepre}\cat\V{B} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-050}
         \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-060}
-        \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
+        \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.}
 \end{gather}
 
-Let the derivation \V{minDrv} be the shortest derivation of
-\Velement{w}{\V{j},\V{current}} from \V{B}.
 Because $\V{B} \in \V{N}$ we know that,
-for some $\V{rhs} \in \V{STR}$,
-\begin{gather}
+\begin{equation}
 \label{eq:pr-red-trib-070}
-        \mycpar{$\V{B} \derivesV{minDrv} \V{rhs} \destarV{minDrv} \Velement{w}{\V{j},\V{current}}$
-        \cuz \eqref{eq:pr-red-trib-020},
-        } \\
-\label{eq:pr-red-trib-075}
-        \land \; \V{B} \de \V{rhs} \in \V{P} \cuz \eqref{eq:pr-red-trib-070}.
-\end{gather}
-
-We consider a new derivation:
+                \mycpar{there is some $\V{B} \de \V{rhs} \in \V{P}$,}
+\end{equation}
+so that
 \begin{equation}
 \label{eq:pr-red-trib-080}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$ \\
-        $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
-        $\derives \V{fore} \cat \V{antepre} \cat \V{rhs} \cat \V{post} \cat \V{aft}$ \\
-                \cuz \eqref{eq:pr-red-trib-030}, \eqref{eq:pr-red-trib-050}, \eqref{eq:pr-red-trib-070}.}
+        \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        $\derivesV{drv} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
+        $\derivesV{drv} \V{fore} \cat \V{antepre} \cat \V{rhs} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-red-trib-030}, \eqref{eq:pr-red-trib-050}.}
 \end{equation}
-which we simplify to
+We simplify \eqref{eq:pr-red-trib-080} to
 \begin{equation}
 \label{eq:pr-red-trib-090}
-        \mycpar{$\V{S} \derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
+        \mycpar{$\V{S} \derivesV{drv} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}$ \\
                 \cuz \eqref{eq:pr-red-trib-080}.}
 \end{equation}
 
@@ -1386,28 +1379,28 @@ We deduce a few more facts that we will need:
 \begin{equation}
 \label{eq:pr-red-trib-150}
         \begin{gathered}
-        \V{B} \derives \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
+                \V{B} \derivesV{drv} \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
               \cuz \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-155}
         \begin{gathered}
-        \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
+                \V{rhs} \destarV{drv} \Velement{w}{\V{j},\V{current}}
               \cuz \eqref{eq:pr-red-trib-150}.
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-160}
         \begin{gathered}
-                \V{antepre} \destar \Velement{w}{\V{origin},\V{j}} \\
+                \V{antepre} \destarV{drv} \Velement{w}{\V{origin},\V{j}} \\
                 \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-170}
         \begin{gathered}
-                \V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}} \\
+                \V{fore} \cat \V{antepre} \destarV{drv} \Velement{w}{0,\V{j}} \\
                 \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-160}.
         \end{gathered}
 \end{equation}
@@ -1417,12 +1410,12 @@ With the foregoing, we have our tributary aletheme:
         \begin{gathered}
         \V{tribAL} =
                 \left( \begin{gathered}
-                        \V{rhs},\epsilon,(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}),\V{B}, \\
-                        \V{j},\V{current}
+                        \V{drv},(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}), \\
+                        \V{rhs},\epsilon,\V{B},\V{j},\V{current}
                 \end{gathered} \right) \\
                 \text{\cuz \Dfref{aletheme}, \Dfref{red-trib},
-                        \eqref{eq:pr-red-trib-075}, \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-155},
-                        \eqref{eq:pr-red-trib-170}.}
+                        \eqref{eq:pr-red-trib-070}, \eqref{eq:pr-red-trib-090},
+                        \eqref{eq:pr-red-trib-155}, \eqref{eq:pr-red-trib-170}.}
         \end{gathered}
 \end{equation}
 \begin{equation}
@@ -1438,7 +1431,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-red-trib-310}
         \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
+        $\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-320}
@@ -1448,7 +1441,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-red-trib-330}
         \mycpar{Let \V{TribMinD}, ``tribAl minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destar \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
+        $\V{S} \destarV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-340}
@@ -1459,8 +1452,8 @@ Whatever the value of \V{TribMinD},
 because of the derivation
 \begin{equation}
 \label{eq:pr-red-trib-350}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$ \\
-        $\derives \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
+        \mycpar{$\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        $\derivesV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
         }
 \end{equation}
 the derivation of \eqref{eq:pr-red-trib-310}
@@ -1477,7 +1470,7 @@ so that
 \begin{equation}
 \label{eq:pr-red-trib-450}
         \mycpar{Let \V{downMinH} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
+        $\V{fore} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.
         }
 \end{equation}
@@ -1489,7 +1482,7 @@ so that
 \begin{equation}
 \label{eq:pr-red-trib-470}
         \mycpar{Let \V{tribMinH} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{rhs} \destar \Velement{w}{0,\V{current}}$ \\
+        $\V{fore} \cat \V{antepre} \cat \V{rhs} \destarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.}
 \end{equation}
 \begin{equation}
@@ -1500,14 +1493,14 @@ so that
 \begin{equation}
 \label{eq:pr-red-trib-490}
         \mycpar{Let \V{H1} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
+        $\V{fore} \cat \V{antepre} \destarV{g} \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-170}.}
 \end{equation}
-Recalling from above the derivation
+\todo{Explain this next more}
 \begin{equation}
 \label{eq:pr-red-trib-500}
         \mycpar{$\V{B} \derivesV{minDrv} \V{rhs} \destarV{minDrv} \Velement{w}{\V{j},\V{current}}$
-        \cuz \eqref{eq:pr-red-trib-070},}
+        \cuz \eqref{eq:pr-red-trib-080},}
 \end{equation}
 where
 \begin{equation}
