@@ -462,6 +462,9 @@ $\V{rhs} \in (\V{N}\cup\V{T})^\ast$.
 \label{df:g}
 When we say that \V{g} is \textbf{proper} we mean that it has
 no unreachable symbols, no unproductive symbol,
+        \todo{Define unreachable symbol}
+        \todo{Define unproductive symbol}
+        \todo{Define cycle}
 and no cycles.
 Every grammar in this document is the proper grammar
 \[
@@ -469,8 +472,14 @@ Every grammar in this document is the proper grammar
 \]
 \end{definition}
 
-\begin{definition}[Earley item]
-We will write an Earley item as
+\begin{definition}[Earley entry]
+        We will write an Earley entry\footnote{
+More often
+call an ``Earley item'' in the literature.
+For this document,
+we have adapted chart parsing terminology.}
+        call an ``Earley item'' in the literature.}
+        as
 \[
         \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
 \]
@@ -483,14 +492,14 @@ and $\V{A} \de \alpha \cat \beta$ is a rule in the grammar \V{g},
         (\V{A} \de \alpha \cat \beta) \in \V{P}.
 \]
 A large raised dot ($\mydot$) indicates the dot location in the rule.
-\V{origin} is the origin location of the item in the input, and
+\V{origin} is the origin location of the Earley entry in the input, and
 \V{current} is the location of the dot in the input,
 or dot location.
 \dfEnd
 \end{definition}
 
 \begin{definition}[Predot symbol]
-In an Earley item
+In an Earley entry
 \[
         \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}},
 \]
