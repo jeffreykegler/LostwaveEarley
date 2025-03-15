@@ -1129,7 +1129,7 @@ observations.
         and where \V{j} is such that
         \[
                 0 \le \V{j} \le \V{current} \land
-                \V{B} \destar \Velement{w}{\V{j},\V{current}}.
+                \V{B} \destarV{g} \Velement{w}{\V{j},\V{current}}.
         \]
         Then \V{downAL} has a mainstem \V{stemAL}
         at joint location \V{j},
@@ -1160,13 +1160,12 @@ We assumed for the lemma the following confirmed aletheme:
                 \text{\cuz AF lemma, WLOG.}
         \end{gathered}
 \end{equation}
-\todo{Revised to here}
 We also assumed for the lemma that
 \begin{equation}
 \label{eq:pr-conf-stem-020}
         \begin{gathered}
                 0 \le \V{j} \le \V{current} \\
-                \land \; \V{B} \destar \Velement{w}{\V{j},\V{current}} \\
+                \land \; \V{B} \destarV{drv} \Velement{w}{\V{j},\V{current}} \\
                 \text{\cuz AF lemma, WLOG.}
         \end{gathered}
 \end{equation}
@@ -1176,19 +1175,19 @@ From \V{downAL} we can conclude
         \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-040}
-        \mycpar{$\V{antepre}\cat\V{B} \destar \Velement{w}{\V{origin},\V{current}}$
+        \mycpar{$\V{antepre}\cat\V{B} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-050}
         \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-060}
-        \mycpar{$\V{fore} \destar \Velement{w}{0,\V{origin}}$
+        \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.}
 \end{gather}
 We can deduce one useful new derivation:
 \begin{gather}
 \label{eq:pr-conf-stem-070}
-        \mycpar{$\V{antepre} \destar \Velement{w}{\V{origin},\V{j}}$
+        \mycpar{$\V{antepre} \destarV{drv} \Velement{w}{\V{origin},\V{j}}$
               \cuz \eqref{eq:pr-conf-stem-020}, \eqref{eq:pr-conf-stem-040}.}
 \end{gather}
 With the foregoing, we have our mainstem aletheme:
@@ -1218,7 +1217,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-110}
         \mycpar{Let \V{n1} be the minimum number of steps in the derivation \\
-        $\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}.$}
+        $\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-120}
@@ -1238,7 +1237,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-130}
         \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{B} \destar \Velement{w}{0,\V{current}}$ \\
+        $\V{fore} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.
         }
 \end{equation}
@@ -1250,7 +1249,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-150}
         \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \destar \Velement{w}{0,\V{j}}$ \\
+        $\V{fore} \cat \V{antepre} \destarV{g} \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.}
 \end{equation}
 \begin{equation}
@@ -1258,7 +1257,7 @@ and its downstream.
         \mycpar{\VFA{Ht}{stemAL} = \V{n3} \\
         \cuz \Dfref{rank}, \eqref{eq:pr-conf-stem-080}, \eqref{eq:pr-conf-stem-150}.}
 \end{equation}
-Because the derivation from \V{B}, even if it is $\V{B} \derives \epsilon$,
+Because the derivation from \V{B}, even if it is $\V{B} \derivesV{g} \epsilon$,
 must take at least one step, we know that
 \begin{equation}
 \label{eq:pr-conf-stem-170}
