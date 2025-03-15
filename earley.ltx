@@ -508,22 +508,22 @@ the predot symbol.
 When $\size{\alpha} = 0$, there is no predot symbol. \dfEnd
 \end{definition}
 
-\begin{definition}[Types of Earley items]
+\begin{definition}[Types of Earley entry]
         \label{df:ei-types}
 We say that
 \begin{itemize}
-\item an Earley item is a \textbf{start item}
+\item an Earley entry is a \textbf{start entry}
         if its LHS is the start symbol and
         it has no predot symbol;
-\item an Earley item is \textbf{predicted}, or a \textbf{prediction}
+\item an Earley entry is \textbf{predicted}, or a \textbf{prediction}
         if its LHS is not the start symbol and
         it has no predot symbol;
-\item an Earley item is \textbf{confirmed}, or a \textbf{confirmation},
+\item an Earley entry is \textbf{confirmed}, or a \textbf{confirmation},
         if it has a predot symbol;
-\item an Earley item is \textbf{scanned}, or a \textbf{scansion},
+\item an Earley entry is \textbf{scanned}, or a \textbf{scansion},
         if its predot symbol is a terminal,
          $\element{\alpha}{\lastix{\alpha}} \in \V{T}$;
-\item an Earley item is \textbf{reduced}, or a \textbf{reduction},
+\item an Earley entry is \textbf{reduced}, or a \textbf{reduction},
         if its predot symbol is a non-terminal;
         $\element{\alpha}{\lastix{\alpha}} \in \V{N}$; \qquad \dfEnd
 \end{itemize}
@@ -648,8 +648,6 @@ We note that our definition of \Dfref{completeness},
 carves nulling completions out of the definition.
 This differs from
 the usual definition of completeness in Earley parsing,
-
-\todo{Newer definitions begin here}
 
 \begin{definition}[Aletheme]
         \label{df:aletheme}
@@ -877,7 +875,7 @@ of \V{stem}.
                 so that \Vsize{row} increases during the running of the loop.}
         \label{li:finish-row-030}
         \State $\V{current} \gets \Velement{row}{\V{i}}$
-                \Comment {\VVelement{row}{i} is \V{i}'th Earley item in row}
+                \Comment {\VVelement{row}{i} is \V{i}'th Earley entry in row}
         \label{li:finish-row-040}
         \If {\V{current} is complete}
         \label{li:finish-row-050}
