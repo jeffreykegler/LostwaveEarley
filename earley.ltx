@@ -751,7 +751,7 @@ or an Earley entry corresponding to \V{al} is in the Earley chart.
 \begin{definition}[Rank]
         \label{df:rank}
         Let
-        \[ \V{x} = (\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
+        \[ \V{x} = (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
         be an aletheme.
         The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest derivation such
         that
@@ -766,12 +766,12 @@ or an Earley entry corresponding to \V{al} is in the Earley chart.
 \begin{definition}[Confirmation mainstem]
         \label{df:conf-stem}
         Suppose, without loss of generality, that
-        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        \[ \V{down} = (\V{drv},\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
         is an confirmed aletheme.
 Then we say that
 an aletheme of the form
 \[
-        \V{stem} = (\V{fore},\V{aft},\V{antepre},(\V{B} \cat \V{post}),\V{lhs},\V{origin},\V{j})
+        \V{stem} = (\V{drv},\V{fore},\V{aft},\V{antepre},(\V{B} \cat \V{post}),\V{lhs},\V{origin},\V{j})
 \]
 is a \textbf{mainstem} of
 \V{down} at the \textbf{joint location} \V{j}.
@@ -784,7 +784,7 @@ of \V{mainstem}.
 \begin{definition}[Reduction tributary]
 \label{df:red-trib}
         Suppose, without loss of generality, that
-        \[ \V{down} = (\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        \[ \V{down} = (\V{drv},\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
         is an confirmed aletheme.
         Where $\V{B} \de \V{rhs} \in \V{P}$,
 then we say that
@@ -810,7 +810,7 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 is a sound aletheme.
 Then we say that
 any sound aletheme of the form
-        \[ \V{main} = (\V{fore},\V{aft},\V{pre},\V{B}\cat\V{post},\V{A},\V{origin},\V{current}) \]
+        \[ \V{main} = (\V{drv},\V{fore},\V{aft},\V{pre},\V{B}\cat\V{post},\V{A},\V{origin},\V{current}) \]
         is a \textbf{mainstem} of
         \V{down}.
 We also say that \V{down} is the \textbf{downstream channel}
@@ -1142,10 +1142,10 @@ observations.
 
 \begin{proof}
 Our proof strategy is to assume a confirmed aletheme,
-as described in
-the statement of the lemma, and otherwise arbitrary,
+described as in
+the statement of the lemma and otherwise arbitrary,
 and then to show
-that we have a mainstem as described in
+that we have the mainstem described in
 the statement of the lemma.
 
 We assumed for the lemma the following confirmed aletheme:
@@ -1154,12 +1154,13 @@ We assumed for the lemma the following confirmed aletheme:
         \begin{gathered}
         \V{downAL} =
                 \left( \begin{gathered}
-                        \V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
+                        \V{drv},\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
                         \V{origin},\V{current}
                 \end{gathered} \right) \\
                 \text{\cuz AF lemma, WLOG.}
         \end{gathered}
 \end{equation}
+\todo{Revised to here}
 We also assumed for the lemma that
 \begin{equation}
 \label{eq:pr-conf-stem-020}
@@ -1196,7 +1197,7 @@ With the foregoing, we have our mainstem aletheme:
         \begin{gathered}
         \V{stemAL} =
                 \left( \begin{gathered}
-                        \V{fore},\V{aft},\V{antepre},(\V{B}\cat\V{post}),\V{A}, \\
+                        \V{drv},\V{fore},\V{aft},\V{antepre},(\V{B}\cat\V{post}),\V{A}, \\
                         \V{origin},\V{j}
                 \end{gathered} \right) \\
                 \text{\cuz \Dfref{aletheme}, \Dfref{conf-stem},
@@ -1323,7 +1324,7 @@ We assumed for the lemma the following reduced aletheme:
         \begin{gathered}
         \V{downAL} =
                 \left( \begin{gathered}
-                        \V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
+                        \V{drv},\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{A}, \\
                         \V{origin},\V{current}
                 \end{gathered} \right) \\
                 \text{\cuz AF lemma, WLOG.}
