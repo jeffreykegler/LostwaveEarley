@@ -1301,12 +1301,19 @@ we have the lemma.
                 \V{B} \destarV{drv} \Velement{w}{\V{j},\V{current}}.
         \]
         \todo{Use proxy AL}
-        Then \V{downAL} has a tributary \V{tribAL}
-        at joint location \V{j},
-        the current location of \V{tribAL} is \V{j},
+        Then \V{downAL} has two, not necessarily distinct,
+        tributaries:
+        a direct tributary, \V{tribAL},
+        and an indirect, or proxy, tributary \V{proxAL}.
+        Both tributaries are at joint location \V{j},
+        and have a current location of \V{j}.
+        \V{tribAL} has the same derivation as
+        \V{downAL}, but its rank in unspecified.
+        \V{proxAL} corresponds to the same Earley item as
+        \V{tribAL}
         and
         \[
-                \VFA{Rank}{tribAL} < \VFA{Rank}{downAL}. \quad \lmEnd
+                \VFA{Rank}{proxAL} < \VFA{Rank}{downAL}. \quad \lmEnd
         \]
 \end{lemma}
 
