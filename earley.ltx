@@ -674,8 +674,8 @@ it is a \textbf{sentence}.
         An aletheme is considered \textbf{sound} if and only if
         \begin{gather}
                 \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
-                \land \; \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
                 \land \; \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft} \\
+                \land \; \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
                 \land \; \V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}. \quad \dfEnd
         \end{gather}
 \end{definition}
@@ -684,6 +684,18 @@ An aletheme is so called because it is the smallest unit of soundness
 in an Earley parsing context.  It comes from \textit{\kern-2pt alethes},
 the Greek word
 for ``truth''.
+
+\begin{definition}[Predot and postdot symbol instance]
+\label{df:predot-symbol-instance}
+Let
+\[ \V{al} = (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
+be an aletheme.
+The \textbf{predot symbol instance} is the last symbol instance in \V{pre}.
+The predot symbol instance does not exist if $\V{pre} = \epsilon$.
+The \textbf{postdot symbol instance} is the first symbol instance in \V{post}.
+The postdot symbol instance does not exist if $\V{post} = \epsilon$.
+\dfEnd
+\end{definition}
 
 \begin{definition}[Earley entry concepts and alethemes]
 \label{df:ee-al-concept}
