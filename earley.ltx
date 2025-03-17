@@ -1308,12 +1308,13 @@ we have the lemma.
         and have a current location of \V{j}.
         \V{tribAL} has the same derivation as
         \V{downAL}, but its rank in unspecified.
-        \V{proxAL} corresponds to the same Earley item as
-        \V{tribAL}
-        and
+        The rank of \V{proxAL}
+        is such that
         \[
-                \VFA{Rank}{proxAL} < \VFA{Rank}{downAL}. \quad \lmEnd
+                \VFA{Rank}{proxAL} < \VFA{Rank}{downAL}.
         \]
+        \V{proxAL} may differ from \V{tribAL} in its derivation,
+        and in the RHS of its rule.  \quad \lmEnd
 \end{lemma}
 
 \begin{proof}
@@ -1444,6 +1445,21 @@ we
 For the lemma, it remains to
 define \V{proxyAL}
 and show what we need with respect to it.
+\begin{equation}
+\label{eq:pr-red-trib-220}
+        \mycpar{Let \V{drv2} be identical to \V{drv} except that \\
+                $\V{B} \derivesV{drv} \V{rhs2} \destar \Velement{w}{\V{j},\V{current}}$, \\
+                where $\V{B} \de \V{rhs2} \in \V{P}$, \\
+                is a minimal length derivation.}
+\end{equation}
+As an aside,
+\begin{equation}
+\label{eq:pr-red-trib-230}
+        \mycpar{we note that, in \eqref{eq:pr-red-trib-220},
+        it is quite possible that $\V{rhs2} = \V{rhs}$,
+        in which case is it also possible that $\V{drv} = \V{drv2}$.}
+\end{equation}
+Resuming our main development \ldots.
 \todo{Revise from here}
 \begin{equation}
 \label{eq:pr-red-trib-310}
