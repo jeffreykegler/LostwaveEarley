@@ -789,9 +789,11 @@ of \V{mainstem}.
         Where $\V{B} \de \V{rhs} \in \V{P}$,
 then we say that
 an aletheme of the form
-        \[ \V{trib} = ((\V{fore}\cat\V{antepre}),\V{aft},\V{rhs},\epsilon,\V{B},\V{j},\V{current}) \]
+        \[ \V{trib} = (\V{drv2},(\V{fore}\cat\V{antepre}),\V{aft},\V{rhs},\epsilon,\V{B},\V{j},\V{current}) \]
 is a \textbf{tributary} of
 \V{down} at the \textbf{joint location} \V{j}.
+If $\V{drv} = \V{drv2}$,
+then \V{trib} is a \V{direct tributary} of \V{down}.
 We also say that \V{down} is the \textbf{downstream channel}
 (or simply \textbf{downstream})
 of \V{trib}.
@@ -1293,12 +1295,12 @@ we have the lemma.
         \label{lm:red-trib}
         Let \V{downAL} be a reduced aletheme,
         whose derivation is \V{drv},
-        whose predot symbol is \V{B},
+        whose predot symbol instance is \V{B:pd},
         whose current location is \V{current},
         and where \V{j} is such that
         \[
                 0 \le \V{j} \le \V{current} \land
-                \V{B} \destarV{drv} \Velement{w}{\V{j},\V{current}}.
+                \V{B:pd} \destarV{drv} \Velement{w}{\V{j},\V{current}}.
         \]
         Then \V{downAL} has two, not necessarily distinct,
         tributaries:
