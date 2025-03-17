@@ -391,7 +391,7 @@
 
 This document contains a proof of correctness for \llE.
 It assumes familiarity with parsing theory.
-Familiarity with the code in \\llE
+Familiarity with the code in \llE
 and with the traditional proof of correctness
 for Earley's algorithm~\cite[pp. 323-325]{AH1972v1}.
 will be helpful.
@@ -425,6 +425,9 @@ Ranges are inclusive start,
 \par
 \noindent $\bullet$ \TRUE is a boolean (or optional boolean) true; and
         \FALSE is a boolean (or optional boolean) false.
+\par
+\noindent $\bullet$ The epsilon symbol ($\epsilon$) is notation for the
+empty string.
 
 \section{Definitions}
 
@@ -445,7 +448,7 @@ A grammar is a 4-tuple
 where \V{N} (the non-terminals)
 and \V{T} (the terminals) are disjoint sets of symbols.
 $\V{S} \in \V{N}$ is
-the start symbol.
+a dedicated start symbol.
 \V{P} is the set of rules, or productions.
 The rules are of the form
 $\V{A} \de \V{rhs}$,
@@ -465,18 +468,27 @@ no unreachable symbols, no unproductive symbol,
 and no cycles.
 Every grammar in this document is the proper grammar
 \[
-        \V{g} = \tuple{\V{N},\V{T},\V{P},\V{S}}. \qquad \dfEnd
+        \V{g} = \tuple{\V{N},\V{T},\V{P},\V{S}}. \quad \dfEnd
 \]
 \end{definition}
 
 \begin{definition}[Earley entry]
-We will write an \textbf{Earley entry}\footnote{
-What we call an ``Earley entry''
-is more often
-called an ``Earley item'' in the literature.
+We will write an \textbf{Earley entry}\footnote{%
 For this document,
-we have adapted chart parsing terminology.}
-        as
+we have adapted chart parsing terminology
+in place of the terminology used in the older
+literature on Earley parsing.
+The chart parsing terms are less overloaded,
+and are more familiar to an audience with an
+AI background.
+What we call an ``Earley entry''
+is traditionally
+called an ``Earley item''.
+What we call an ``Earley row'' is traditionally called
+an ``Earley set''.
+And what we call an ``Earley chart'' is traditionally
+called an Earley table.}
+as
 \[
         \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}}
 \]
@@ -488,10 +500,13 @@ and $\V{A} \de \alpha \cat \beta$ is a rule in the grammar \V{g},
 \[
         (\V{A} \de \alpha \cat \beta) \in \V{P}.
 \]
-A large raised dot ($\mydot$) indicates the dot location in the rule.
-\V{origin} is the origin location of the Earley entry in the input, and
-\V{current} is the location of the dot in the input,
-or dot location.
+A large raised dot ($\mydot$) indicates
+the \textbf{dot location} within the rule.
+\V{origin} is the location of the start of the Earley entry in the input,
+also called the \textbf{origin}.
+\V{current} is
+the location of the dot within the input,
+also called the \textbf{current location}.
 \dfEnd
 \end{definition}
 
