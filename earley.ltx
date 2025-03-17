@@ -826,7 +826,7 @@ of \V{stem}.
 \label{sec:algorithm}
 \FloatBarrier
 
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
 \caption{Do Earley Parse}
 \label{alg:earley}
 \begin{algorithmic}[1]
@@ -839,7 +839,7 @@ of \V{stem}.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
 \caption{Add Row 0}
 \label{alg:add-row-0}
 \begin{algorithmic}[1]
@@ -850,7 +850,7 @@ of \V{stem}.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
         \caption{Add Row \V{n}}
 \label{alg:add-row-n}
 \begin{algorithmic}[1]
@@ -861,9 +861,7 @@ of \V{stem}.
 \end{algorithmic}
 \end{algorithm}
 
-\FloatBarrier
-
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
         \caption{Finish Row \V{n}}
 \label{alg:finish-row}
 \begin{algorithmic}[1]
@@ -1009,9 +1007,7 @@ observations.
         \obEnd
 \end{observation}
 
-\FloatBarrier
-
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
         \caption{Add Tangible Reductions}
 \label{alg:tangible-reduction}
 \begin{algorithmic}[1]
@@ -1048,7 +1044,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
         \caption{Advance Dot}
 \label{alg:advance-dot}
 \begin{algorithmic}[1]
@@ -1060,7 +1056,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
         \caption{Record Edge}
 \label{alg:record-edge}
 \begin{algorithmic}[1]
@@ -1078,7 +1074,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
         \caption{Add Intangible Reduction}
 \label{alg:intangible-reduction}
 \begin{algorithmic}[1]
@@ -1091,7 +1087,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[ht]
+\begin{algorithm}[th]
         \caption{Add Predictions}
 \label{alg:predictions}
 \begin{algorithmic}[1]
@@ -1302,21 +1298,22 @@ we have the lemma.
                 0 \le \V{j} \le \V{current} \land
                 \V{B:pd} \destarV{drv} \Velement{w}{\V{j},\V{current}}.
         \]
-        Then \V{downAL} has two, not necessarily distinct,
-        tributaries:
+        Then \V{downAL} has 
         a direct tributary, \V{tribAL},
-        and an indirect, or proxy, tributary \V{proxAL}.
+        and a ranked, or proxy, tributary \V{proxAL}.
         Both tributaries are at joint location \V{j},
         and have a current location of \V{j}.
-        \V{tribAL} has the same derivation as
-        \V{downAL}, but its rank in unspecified.
+        \V{tribAL} will have the same derivation as
+        \V{downAL}, but its rank is not necessarily specified.
         The rank of \V{proxAL}
         is such that
         \[
                 \VFA{Rank}{proxAL} < \VFA{Rank}{downAL}.
         \]
-        \V{proxAL} may differ from \V{tribAL} in its derivation,
-        and in the RHS of its rule.  \quad \lmEnd
+        \V{proxAL} and \V{tribAL} need not differ.
+        If they differ, they can do so only
+        in their derivations, or in the RHS of their rules.
+        \quad \lmEnd
 \end{lemma}
 
 \begin{proof}
