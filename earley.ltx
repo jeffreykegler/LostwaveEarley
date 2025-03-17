@@ -939,16 +939,17 @@ of \V{stem}.
 \begin{definition}[Earley entry recording]
         An Earley entry is \textbf{recorded} when it is added to the
         Earley chart.
-        An \textbf{Earley entry recording event} is the series of
-        code step during which the Earley entry is recorded.
+        An \textbf{Earley entry recording event} is a series of
+        code steps during which the Earley entry is recorded.
 \dfEnd
 \end{definition}
 
 \begin{definition}[Earley entry activation]
         An Earley entry is \textbf{activated} when it is examined
         and used for recording other Earley entries.
-        An \textbf{Earley entry activation event} is the series of
-        code steps during which it is begin examined and used
+        An \textbf{Earley entry activation event} is a series of
+        code steps during which the Earley entry
+        is being examined and used
         for the purpose of recording other Earley entries.
 \dfEnd
 \end{definition}
@@ -975,7 +976,7 @@ observations.
         While the activation loop \Algref{finish-row} records entries
         during activation events,
         these are always entries other than the activated entry.
-        No steps in the activation of an event \V{ev} overlaps
+        No steps in the activation of an event \V{ev} overlap
         steps in the the recording of \V{ev},
         and vice versa.
         \obEnd
