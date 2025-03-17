@@ -1452,7 +1452,7 @@ Defining \V{drv2}, we
 \begin{equation}
 \label{eq:pr-red-trib-220}
         \mycpar{let \V{drv2} be identical to \V{drv} except that \\
-                $\V{B} \derivesV{drv2} \V{rhs2} \destarV{drv2} \Velement{w}{\V{j},\V{current}}$, \\
+                $\V{B:pd} \derivesV{drv2} \V{rhs2} \destarV{drv2} \Velement{w}{\V{j},\V{current}}$, \\
                 where $\V{B} \de \V{rhs2} \in \V{P}$, \\
                 is a minimal length derivation.}
 \end{equation}
@@ -1463,6 +1463,45 @@ As an aside, we note that,
         it is quite possible that $\V{rhs2} = \V{rhs}$,
         in which case is it also possible that $\V{drv} = \V{drv2}$.}
 \end{equation}
+Breaking out \eqref{eq:pr-red-trib-220},
+\begin{equation}
+\label{eq:pr-red-trib-235}
+        \mycpar{$\V{B} \de \V{rhs2} \in \V{P}$ and}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-240}
+        \mycpar{\V{drv2} is identical to \V{drv} except in the subtree under \V{B:pd}.}
+\end{equation}
+To define \V{proxAL}, it remains to deduce a few facts.
+\begin{equation}
+\label{eq:pr-red-trib-250}
+        \mycpar{$\V{S} \destarV{drv2} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-240}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-260}
+        \V{rhs} \destarV{drv2} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-220}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-red-trib-270}
+        \V{fore} \cat \V{antepre} \destarV{drv2} \Velement{w}{0,\V{j}}
+                \cuz \eqref{eq:pr-red-trib-170}, \eqref{eq:pr-red-trib-240}.
+\end{equation}
+We are now in a position to define our proxy aletheme.
+\begin{equation}
+\label{eq:pr-red-trib-280}
+        \begin{gathered}
+        \V{proxAL} =
+                \left( \begin{gathered}
+                        \V{drv2},(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}), \\
+                        \V{rhs2},\epsilon,\V{B:pd},\V{j},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz \Dfref{aletheme}, \Dfref{red-trib},
+                        \eqref{eq:pr-red-trib-235}, \eqref{eq:pr-red-trib-250},
+                        \eqref{eq:pr-red-trib-260}, \eqref{eq:pr-red-trib-270}.}
+        \end{gathered}
+\end{equation}
+\todo{Revise from here}
 For the lemma, it remains to determine the rank of \V{proxAL}.
 \begin{equation}
 \label{eq:pr-red-trib-310}
@@ -1493,7 +1532,7 @@ because of the derivation
         }
 \end{equation}
 the derivation of \eqref{eq:pr-red-trib-310}
-cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-310},
+cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-330},
 \begin{equation}
 \label{eq:pr-red-trib-360}
         \V{TribMinD} \le \V{DownMinD} + 1,
@@ -1532,7 +1571,6 @@ so that
         $\V{fore} \cat \V{antepre} \destarV{g} \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-170}.}
 \end{equation}
-\todo{Revise from here}
 We recall from above that
 \begin{equation}
 \label{eq:pr-red-trib-500}
@@ -1552,9 +1590,10 @@ are shortest derivations.
 \begin{equation}
 \label{eq:pr-red-trib-530}
         \mycpar{let \V{HtRHS} be the minimum number of steps in the derivation
-        $\V{rhs} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500},$}
+        $\V{rhs} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500}.$}
 \end{equation}
-so that
+Because \eqref{eq:pr-red-trib-520} and \eqref{eq:pr-red-trib-530}
+are minimal derivations
 \begin{equation}
 \label{eq:pr-red-trib-540}
         \V{HtB} = \V{HtRHS}+1
