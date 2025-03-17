@@ -578,7 +578,10 @@ We say that
 \end{definition}
 
 \begin{definition}[Trivial derivation]
-        In \Dfref{transition} the symbols in
+        In the SF transition
+        \[ ( (\alpha \cat \V{A} \cat \beta), (\alpha \cat \V{rhsA} \cat \beta), \]
+        where $\V{A} \de \V{rhsA} \in \V{P}$,
+        the symbols in
         $\alpha$ and $\beta$ are simply copied --- they can
         be said to be derived from themselves.
         We say that the
@@ -642,9 +645,8 @@ We say that
         \]
         then
         \[
-        \V{predot:f} = \V{A:f}\cat\V{B:f}\cat\V{C:f}.
+        \V{predot:f} = \V{A:f}\cat\V{B:f}\cat\V{C:f}. \quad \dfEnd
         \]
-        \dfEnd
 \end{definition}
 
 \begin{definition}[Sentences and Sentential forms]
@@ -655,11 +657,6 @@ If a sentential form consists entirely of terminals,
 it is a \textbf{sentence}.
 \dfEnd
 \end{definition}
-
-We note that our definition of \Dfref{completeness},
-carves nulling completions out of the definition.
-This differs from
-the usual definition of completeness in Earley parsing,
 
 \begin{definition}[Aletheme]
         \label{df:aletheme}
@@ -759,6 +756,12 @@ either \V{al} is a nulling completion,
 or an Earley entry corresponding to \V{al} is in the Earley chart.
 \dfEnd
 \end{definition}
+
+We note that our definition of \Dfref{completeness},
+excludes nulling completions out of the definition.
+This differs from
+the usual definition of completeness in Earley parsing,
+and a special feature of the \llE.
 
 \begin{definition}[Rank]
         \label{df:rank}
