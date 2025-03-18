@@ -1468,8 +1468,9 @@ At this point,
 For the lemma, it remains to
 define \V{proxyAL}
 and show what we need with respect to it.
-\V{proxyAL} will have a different derivation, \V{drv2},
-such that \V{drv2} is potential distinct from \V{drv}.
+The derivation for
+\V{proxyAL} is potentially distinct from \V{drv},
+so we will call it \V{drv2}.
 Defining \V{drv2}, we
 \begin{equation}
 \label{eq:pr-red-trib-220}
@@ -1552,16 +1553,17 @@ because of the derivation
         $\derivesV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
         }
 \end{equation}
-the derivation of \eqref{eq:pr-red-trib-310}
-cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-330},
+the derivation of \eqref{eq:pr-red-trib-330}
+cannot be longer than one step more than the derivation in \eqref{eq:pr-red-trib-310},
 \begin{equation}
 \label{eq:pr-red-trib-360}
-        \V{TribMinD} \le \V{DownMinD} + 1,
+        \V{TribMinD} \le \V{DownMinD} + 1 \cuz \eqref{eq:pr-red-trib-350},
 \end{equation}
 so that
 \begin{equation}
 \label{eq:pr-red-trib-370}
-        \VFA{Dp}{tribAl} \le \VFA{Dp}{downAL} + 1.
+        \VFA{Dp}{tribAl} \le \VFA{Dp}{downAL} + 1
+        \cuz \eqref{eq:pr-red-trib-320}, \eqref{eq:pr-red-trib-340}, \eqref{eq:pr-red-trib-360}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-450}
