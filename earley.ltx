@@ -1001,7 +1001,7 @@ observations.
         \obEnd
 \end{observation}
 
-\begin{observation}[Edges are recorded row by row]
+\begin{observation}[Edges are recorded at current location]
         \label{obs:recording-at-currloc}
         An edge is recorded in the activation loop for
         its current location.
@@ -1923,7 +1923,8 @@ We now turn to consider the tributary of \V{downAL}.
 \begin{equation}
 \label{eq:pr-rt-comp-270}
         \mycpar{If \V{stemEE} is in the chart, it will be in row \V{joint},
-            $\V{joint} < \V{i}+1$ \cuz \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-050}.}
+            $\V{joint} < \V{i}+1$
+            \cuz \Obref{recording-at-currloc} \eqref{eq:pr-rt-comp-020}, \eqref{eq:pr-rt-comp-050}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-280}
@@ -1962,7 +1963,7 @@ Keeping in mind that \V{tribEE} is a completion, and tangible,
 \begin{equation}
 \label{eq:pr-rt-comp-340}
         \mycpar{\Sref{algorithm} records \V{downEE}
-                \cuz \eqref{eq:pr-rt-comp-320}, \eqref{eq:pr-rt-comp-330}.}
+                \cuz \eqref{eq:pr-rt-comp-250}, \eqref{eq:pr-rt-comp-320}, \eqref{eq:pr-rt-comp-330}.}
 \end{equation}
 Equation \eqref{eq:pr-rt-comp-340} is what we needed to show
 for the lemma.
