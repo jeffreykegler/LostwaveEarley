@@ -380,7 +380,8 @@
 \ifdraft{ \thanks{DRAFT as of \DTMnow} }{}
 \date{\DTMnow.}
 
-\newcommand{\llguidance}{{\tt llguidance}\xspace}
+\newcommand\textvtt[1]{{\normalfont\fontfamily{cmvtt}\selectfont #1}}
+\newcommand{\llguidance}{\textvtt{llguidance}\xspace}
 \newcommand{\llE}{{\llguidance Earley}\xspace}
 \newcommand{\pref}[1]{\ref{#1} on page~\pageref{#1}\xspace}
 
