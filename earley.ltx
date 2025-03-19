@@ -1351,8 +1351,13 @@ we have the lemma.
         \V{HtB} = \V{HtRHS} + 1 \cuz
                 \eqref{eq:lm-ht-minimization-050}, \eqref{eq:lm-ht-minimization-055}, \eqref{eq:lm-ht-minimization-060}.
 \end{equation}
-        It remains to show \eqref{eq:lm-ht-minimization-070}, which we do via the
-        following reductio.  For the reductio, we assume that
+It remains to show \eqref{eq:lm-ht-minimization-070}, which we do via the
+following reductio.
+
+For the reductio, we assume that there is a derivation $\V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}},$
+which is shorter than that of
+\eqref{eq:lm-ht-minimization-055}.
+More specifically, we assume
 \begin{equation}
         \label{eq:pr-lm-ht-minimization-050}
         \mycpar{$\V{B} \derivesV{drv} \V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}},$
@@ -1374,9 +1379,9 @@ Then
 \end{equation}
 \begin{equation}
         \label{eq:pr-lm-ht-minimization-100}
-        \mycpar{$\V{B} \derivesV{g} \V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}},$
+        \mycpar{$\V{B} \derivesV{g} \V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}}$ \\
         is a derivation of length $\V{HtRHS2}+1$ \cuz
-                \eqref{eq:pr-lm-ht-minimization-090}, \eqref{eq:pr-lm-ht-minimization-100}, and}
+                \eqref{eq:pr-lm-ht-minimization-070}, \eqref{eq:pr-lm-ht-minimization-090}, and}
 \end{equation}
 \begin{equation}
         \label{eq:pr-lm-ht-minimization-110}
@@ -1390,8 +1395,9 @@ Then
 \begin{equation}
         \label{eq:pr-lm-ht-minimization-120}
         \mycpar{\eqref{eq:pr-lm-ht-minimization-100} is a derivation
-        from \V{B} to \Velement{w}{\V{a},\V{b}} that is
-        shorter than the derivation of \eqref{eq:pr-lm-ht-minimization-050}.}
+        from \V{B} to \Velement{w}{\V{a},\V{b}} and
+        the length of \eqref{eq:pr-lm-ht-minimization-100} is
+        shorter than the length of the derivation in \eqref{eq:pr-lm-ht-minimization-050}.}
 \end{equation}
 But
 \begin{equation}
@@ -1414,9 +1420,24 @@ From the reductio, we conclude
         \eqref{eq:pr-lm-ht-minimization-080},
         \eqref{eq:pr-lm-ht-minimization-140}.
 \end{equation}
-or in other words,
-        \todo{Finish this proof}
-        \myqed
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-160}
+        \mycpar{\V{HtRHS} is the minimal length for
+        $\V{rhs} \destarV{g} \Velement{w}{\V{a},\V{b}}$
+        cuz \eqref{eq:pr-lm-ht-minimization-070}, \eqref{eq:pr-lm-ht-minimization-150}.}
+\end{equation}
+and therefore,
+\begin{equation}
+\label{eq:lm-ht-minimization-170}
+        \mycpar{$\V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}$ is a minimal
+        length derivation \cuz \eqref{eq:lm-ht-minimization-060},
+                \eqref{eq:pr-lm-ht-minimization-160},}
+\end{equation}
+which is what we were seeking in the lemma.
+With
+\eqref{eq:pr-lm-ht-minimization-040} and
+\eqref{eq:lm-ht-minimization-170}, we have
+what we need for this lemma.  \myqed
 \end{proof}
 
 \begin{lemma}[Reduction tributary]
@@ -1430,7 +1451,7 @@ or in other words,
                 0 \le \V{j} \le \V{current} \land
                 \V{B:pd} \destarV{drv} \Velement{w}{\V{j},\V{current}}.
         \]
-        Then \V{downAL} has 
+        Then \V{downAL} has
         a direct tributary, call it \V{tribAL},
         and a ranked, or proxy, tributary,
         call it \V{proxAL}.
