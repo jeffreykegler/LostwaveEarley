@@ -1318,6 +1318,107 @@ we have the lemma.
 \myqed
 \end{proof}
 
+\begin{lemma}[Height minimization helper]
+        \label{lm:ht-minimization}
+\begin{gather}
+        \label{eq:lm-ht-minimization-050}
+        \mycpar{Let \V{HtB} be the length of a minimal length derivation
+        from \V{B} to \Velement{w}{\V{a},\V{b}},
+        where $\V{B} \in \V{N}$
+        and $0 \le \V{a} < \V{b} < \Vsize{w}$,} \\
+        \label{eq:lm-ht-minimization-055}
+        \mycpar{let $\V{B} \derivesV{drv} \V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}$ \\
+        be a minimal length derivation of length \V{HtB}, and} \\
+        \label{eq:lm-ht-minimization-060}
+        \mycpar{let \V{HtRHS} be the length of $\V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}.$}
+\end{gather}
+        Then
+\begin{equation}
+\label{eq:lm-ht-minimization-065}
+        \mycpar{$\V{HtB} = \V{HtRHS} + 1$ and}
+\end{equation}
+\begin{equation}
+\label{eq:lm-ht-minimization-070}
+        \mycpar{$\V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}$ is a minimal
+        length derivation. \lmEnd}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+        We first note
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-040}
+        \V{HtB} = \V{HtRHS} + 1 \cuz
+                \eqref{eq:lm-ht-minimization-050}, \eqref{eq:lm-ht-minimization-055}, \eqref{eq:lm-ht-minimization-060}.
+\end{equation}
+        It remains to show \eqref{eq:lm-ht-minimization-070}, which we do via the
+        following reductio.  For the reductio, we assume that
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-050}
+        \mycpar{$\V{B} \derivesV{drv} \V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}},$
+        is a minimal derivation of length \V{HtB} \cuz AF lemma, and}
+\end{equation}
+\begin{equation}
+\label{eq:pr-lm-ht-minimization-070}
+        \mycpar{$\V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}}$ is a minimal
+        length derivation of length \V{HtRHS2} \cuz WLOG,}
+\end{equation}
+\begin{equation}
+\label{eq:pr-lm-ht-minimization-080}
+        \mycpar{where $\V{HtRHS2} < \V{HtRHS}$ \cuz AF reductio.}
+\end{equation}
+Then
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-090}
+        \V{B} \de \V{rhs} \in \V{P} \cuz \eqref{eq:pr-lm-ht-minimization-050}.
+\end{equation}
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-100}
+        \mycpar{$\V{B} \derivesV{g} \V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}},$
+        is a derivation of length $\V{HtRHS2}+1$ \cuz
+                \eqref{eq:pr-lm-ht-minimization-090}, \eqref{eq:pr-lm-ht-minimization-100}, and}
+\end{equation}
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-110}
+        \V{HtRHS2}+1 < \V{HtRHS}+1 \cuz \eqref{eq:pr-lm-ht-minimization-080}.
+\end{equation}
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-115}
+        \V{HtRHS2}+1 < \V{HtB}
+                \cuz \eqref{eq:pr-lm-ht-minimization-040}, \eqref{eq:pr-lm-ht-minimization-110}.
+\end{equation}
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-120}
+        \mycpar{\eqref{eq:pr-lm-ht-minimization-100} is a derivation
+        from \V{B} to \Velement{w}{\V{a},\V{b}} that is
+        shorter than the derivation of \eqref{eq:pr-lm-ht-minimization-050}.}
+\end{equation}
+But
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-130}
+        \mycpar{\eqref{eq:pr-lm-ht-minimization-050} is a minimal
+        derivation \cuz \eqref{eq:pr-lm-ht-minimization-050},}
+\end{equation}
+so that
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-140}
+        \mycpar{\eqref{eq:pr-lm-ht-minimization-120} and
+        \eqref{eq:pr-lm-ht-minimization-130}
+        contradict,}
+\end{equation}
+which shows the reductio.
+From the reductio, we conclude
+\begin{equation}
+        \label{eq:pr-lm-ht-minimization-150}
+        \V{HtRHS2} \ge \V{HtRHS} \cuz
+        \eqref{eq:pr-lm-ht-minimization-080},
+        \eqref{eq:pr-lm-ht-minimization-140}.
+\end{equation}
+or in other words,
+        \todo{Finish this proof}
+        \myqed
+\end{proof}
+
 \begin{lemma}[Reduction tributary]
         \label{lm:red-trib}
         Let \V{downAL} be a reduced aletheme,
