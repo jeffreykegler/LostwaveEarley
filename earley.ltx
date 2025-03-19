@@ -525,7 +525,7 @@ When $\size{\alpha} = 0$, there is no predot symbol. \dfEnd
 \end{definition}
 
 \begin{definition}[Types of Earley entry]
-        \label{df:ei-types}
+        \label{df:ee-types}
 We say that
 \begin{itemize}
 \item an Earley entry is a \textbf{start entry}
@@ -1815,21 +1815,364 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
 
 \begin{lemma}[Prediction mainstem]
         \label{lm:pred-stem}
-        Let \V{downAL} be a prediction aletheme
+        Let \V{downAL} be a predicted aletheme,
         whose current location is \V{current}.
-        Then \V{downAL} has a mainstem \V{stemAL}
-        at current location \V{j},
-        the current location of \V{stemAL} is \V{j},
-        and
+        Then \V{downAL} has
+        a mainsteam, call it \V{stemAL},
+        whose joint location 
+        and current location is \V{current}.
+        The rank of \V{stemAL}
+        is such that
         \[
-                \VFA{Rank}{stemAL} < \VFA{Rank}{downAL}. \quad \lmEnd
+                \VFA{Rank}{stemAL} = \VFA{Rank}{downAL} \subtract 1.
         \]
+        \quad \lmEnd
 \end{lemma}
 
 \begin{proof}
-        \todo{Write this proof}
-        \myqed
+Our proof strategy is to assume a predicted aletheme
+that is arbitrary except
+as described in
+the statement of the lemma,
+and then to show
+that we have the mainstem as described in
+the statement of the lemma.
+
+We assume for the lemma the following predicted aletheme:
+\begin{equation}
+\label{eq:pr-pred-stem-010}
+        \begin{gathered}
+        \V{downAL} =
+                \left( \begin{gathered}
+                        \V{drv},\V{foreZ},\V{aftZ},\epsilon,\V{rhsZ},\V{Z:f}, \\
+                        \V{current},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz AF lemma, WLOG.}
+        \end{gathered}
+\end{equation}
+In \eqref{eq:pr-pred-stem-010}, we can assume WLOG
+\begin{equation}
+\label{eq:pr-pred-stem-015}
+        \mycpar{\V{drv} is a minimal derivation from \V{S} to \V{Z:f} \cuz WLOG.}
+\end{equation}
+From \V{downAL} we can conclude
+\begin{gather}
+\label{eq:pr-pred-stem-030}
+        \mycpar{$\V{Z} \de \V{rhsZ} \in \V{P}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-010}.} \\
+\label{eq:pr-pred-stem-040}
+        \mycpar{$\V{S} \destarV{drv} \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-010}.} \\
+\label{eq:pr-pred-stem-050}
+        \mycpar{$\V{foreZ} \destarV{drv} \Velement{w}{0,\V{origin}}$
+              \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-010}.}
+\end{gather}
+
+Because \V{downAL} is a predicted aletheme
+we know that, by the definition of a prediction,
+\begin{equation}
+\label{eq:pr-pred-stem-070}
+        \V{Z} \neq \V{S} \cuz \Dfref{ee-types}, \eqref{eq:pr-pred-stem-010}.
+\end{equation}
+so that
+\begin{equation}
+\label{eq:pr-pred-stem-075}
+        \mycpar{there is some $\V{Y} \de \V{pre} \cat \V{Z} \cat \V{post}$ \cuz WLOG}
+\end{equation}
+such that
+\begin{equation}
+\label{eq:pr-pred-stem-080}
+        \mycpar{$\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}$ \\
+        $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{Z:f} \cat \V{post} \cat \V{aftY}$ \\
+        $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{rhsZ} \cat \V{post} \cat \V{aftY}$ \\
+                \cuz \eqref{eq:pr-pred-stem-030}, \eqref{eq:pr-pred-stem-040},
+                        \eqref{eq:pr-pred-stem-070}, \eqref{eq:pr-pred-stem-075}.}
+\end{equation}
+\todo{Revised to here}
+We simplify \eqref{eq:pr-pred-stem-080} to
+\begin{equation}
+\label{eq:pr-pred-stem-090}
+        \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-pred-stem-080},}
+\end{equation}
+and deduce a few more facts that we will need:
+\begin{equation}
+\label{eq:pr-pred-stem-150}
+        \begin{gathered}
+                \V{B:pd} \derivesV{drv} \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
+              \cuz \eqref{eq:pr-pred-stem-020}, \eqref{eq:pr-pred-stem-040}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-155}
+        \begin{gathered}
+                \V{rhs} \destarV{drv} \Velement{w}{\V{j},\V{current}}
+              \cuz \eqref{eq:pr-pred-stem-150}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-160}
+        \begin{gathered}
+                \V{antepre} \destarV{drv} \Velement{w}{\V{origin},\V{j}} \\
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-020}, \eqref{eq:pr-pred-stem-040}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-170}
+        \begin{gathered}
+                \V{fore} \cat \V{antepre} \destarV{drv} \Velement{w}{0,\V{j}} \\
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-060}, \eqref{eq:pr-pred-stem-160}.
+        \end{gathered}
+\end{equation}
+With the foregoing, we have our direct tributary aletheme:
+\begin{equation}
+\label{eq:pr-pred-stem-180}
+        \begin{gathered}
+        \V{tribAL} =
+                \left( \begin{gathered}
+                        \V{drv},(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}), \\
+                        \V{rhs},\epsilon,\V{B:pd},\V{j},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz \Dfref{aletheme}, \Dfref{pred-stem},
+                        \eqref{eq:pr-pred-stem-070}, \eqref{eq:pr-pred-stem-090},
+                        \eqref{eq:pr-pred-stem-155}, \eqref{eq:pr-pred-stem-170}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-190}
+        \mycpar{The current location of \V{tribAL} is \V{current} \cuz \eqref{eq:pr-pred-stem-180}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-200}
+        \mycpar{The joint location of \V{tribAL} is \V{j} \cuz \Dfref{pred-stem}, \eqref{eq:pr-pred-stem-180}.}
+\end{equation}
+At this point,
+\begin{equation}
+\label{eq:pr-pred-stem-210}
+        \mycpar{we have what we needed to show about
+        \V{tribAL} for the lemma
+        \cuz \eqref{eq:pr-pred-stem-180}, \eqref{eq:pr-pred-stem-190} and \eqref{eq:pr-pred-stem-200}.}
+\end{equation}
+For the lemma, it remains to
+define \V{proxyAL}
+and show what we need with respect to it.
+The derivation for
+\V{proxyAL} is potentially distinct from \V{drv},
+so we will call it \V{drv2}.
+Defining \V{drv2}, we
+\begin{equation}
+\label{eq:pr-pred-stem-220}
+        \mycpar{let \V{drv2} be identical to \V{drv} except that \\
+                $\V{B:pd} \derivesV{drv2} \V{rhs2} \destarV{drv2} \Velement{w}{\V{j},\V{current}}$, \\
+                where $\V{B} \de \V{rhs2} \in \V{P}$, \\
+                is a minimal length derivation.}
+\end{equation}
+As an aside, we note that,
+\begin{equation}
+\label{eq:pr-pred-stem-230}
+        \mycpar{in \eqref{eq:pr-pred-stem-220}
+        it is quite possible that $\V{rhs2} = \V{rhs}$,
+        in which case is it also possible that $\V{drv} = \V{drv2}$.}
+\end{equation}
+Breaking out \eqref{eq:pr-pred-stem-220},
+\begin{equation}
+\label{eq:pr-pred-stem-235}
+        \mycpar{$\V{B} \de \V{rhs2} \in \V{P}$ and}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-240}
+        \mycpar{\V{drv2} is identical to \V{drv} except in the subtree under \V{B:pd}.}
+\end{equation}
+To define \V{proxAL}, it remains to deduce a few facts.
+\begin{equation}
+\label{eq:pr-pred-stem-250}
+        \mycpar{$\V{S} \destarV{drv2} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
+                \cuz \eqref{eq:pr-pred-stem-090}, \eqref{eq:pr-pred-stem-240}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-260}
+        \V{rhs} \destarV{drv2} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-220}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-270}
+        \V{fore} \cat \V{antepre} \destarV{drv2} \Velement{w}{0,\V{j}}
+                \cuz \eqref{eq:pr-pred-stem-170}, \eqref{eq:pr-pred-stem-240}.
+\end{equation}
+We are now in a position to define our proxy aletheme.
+\begin{equation}
+\label{eq:pr-pred-stem-280}
+        \begin{gathered}
+        \V{proxAL} =
+                \left( \begin{gathered}
+                        \V{drv2},(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}), \\
+                        \V{rhs2},\epsilon,\V{B:pd},\V{j},\V{current}
+                \end{gathered} \right) \\
+                \text{\cuz \Dfref{aletheme}, \Dfref{pred-stem},
+                        \eqref{eq:pr-pred-stem-235}, \eqref{eq:pr-pred-stem-250},
+                        \eqref{eq:pr-pred-stem-260}, \eqref{eq:pr-pred-stem-270}.}
+        \end{gathered}
+\end{equation}
+For the lemma, it remains to determine the rank of \V{proxAL}.
+\begin{equation}
+\label{eq:pr-pred-stem-310}
+        \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
+        $\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-320}
+        \mycpar{\VFA{Dp}{downAL} = \V{DownMinD} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-010}, \eqref{eq:pr-pred-stem-310}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-330}
+        \mycpar{Let \V{TribMinD}, ``tribAl minimum depth''  be the minimum number of steps in the derivation \\
+        $\V{S} \destarV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-340}
+        \mycpar{\VFA{Dp}{tribAL} = \V{TribMinD} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-010}, \eqref{eq:pr-pred-stem-330}.}
+\end{equation}
+Whatever the value of \V{TribMinD},
+because of the derivation
+\begin{equation}
+\label{eq:pr-pred-stem-350}
+        \mycpar{$\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        $\derivesV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
+        }
+\end{equation}
+the derivation of \eqref{eq:pr-pred-stem-330}
+cannot be longer than one step more than the derivation in \eqref{eq:pr-pred-stem-310},
+\begin{equation}
+\label{eq:pr-pred-stem-360}
+        \V{TribMinD} \le \V{DownMinD} + 1 \cuz \eqref{eq:pr-pred-stem-350},
+\end{equation}
+so that
+\begin{equation}
+\label{eq:pr-pred-stem-370}
+        \VFA{Dp}{tribAl} \le \VFA{Dp}{downAL} + 1
+        \cuz \eqref{eq:pr-pred-stem-320}, \eqref{eq:pr-pred-stem-340}, \eqref{eq:pr-pred-stem-360}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-450}
+        \mycpar{Let \V{downMinH} be the minimum number of steps in the derivation \\
+        $\V{fore} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        \cuz \eqref{eq:pr-pred-stem-040}, \eqref{eq:pr-pred-stem-060}.
+        }
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-460}
+        \mycpar{\VFA{Ht}{downAL} = \V{downMinH} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-010}, \eqref{eq:pr-pred-stem-450}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-470}
+        \mycpar{Let \V{tribMinH} be the minimum number of steps in the derivation \\
+        $\V{fore} \cat \V{antepre} \cat \V{rhs} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        \cuz \eqref{eq:pr-pred-stem-040}, \eqref{eq:pr-pred-stem-060}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-480}
+        \mycpar{\VFA{Ht}{tribAL} = \V{tribMinH} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-180}, \eqref{eq:pr-pred-stem-470}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-490}
+        \mycpar{Let \V{H1} be the minimum number of steps in the derivation \\
+        $\V{fore} \cat \V{antepre} \destarV{g} \Velement{w}{0,\V{j}}$ \\
+        \cuz \eqref{eq:pr-pred-stem-060}, \eqref{eq:pr-pred-stem-170}.}
+\end{equation}
+We recall from above that
+\begin{equation}
+\label{eq:pr-pred-stem-500}
+        \mycpar{$\V{B} \derivesV{drvs} \V{rhs} \destarV{drvs} \Velement{w}{\V{j},\V{current}}$
+        \cuz \eqref{eq:pr-pred-stem-080}, and}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-510}
+        \V{B} \destarV{drvs} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-500}.
+\end{equation}
+are minimal derivations.
+\begin{equation}
+\label{eq:pr-pred-stem-520}
+        \mycpar{Let \V{HtB} be the minimum number of steps in the derivation
+        $\V{B} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-500}$, and}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-530}
+        \mycpar{let \V{HtRHS} be the minimum number of steps in the derivation
+        $\V{rhs} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-500}.$}
+\end{equation}
+Because \eqref{eq:pr-pred-stem-520} and \eqref{eq:pr-pred-stem-530}
+are minimal derivations,
+\begin{equation}
+\label{eq:pr-pred-stem-540}
+        \V{HtB} = \V{HtRHS}+1
+                \cuz \Lmref{ht-minimization},
+                \eqref{eq:pr-pred-stem-500}, \eqref{eq:pr-pred-stem-510},
+                        \eqref{eq:pr-pred-stem-520}, \eqref{eq:pr-pred-stem-530}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-550}
+        \mycpar{$\VFA{Ht}{downAL} = \V{H1} + \V{HtB}
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-470}, \eqref{eq:pr-pred-stem-480},
+                \eqref{eq:pr-pred-stem-490}, \eqref{eq:pr-pred-stem-520}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-560}
+        \mycpar{$\VFA{Ht}{tribAL} = \V{H1} + \V{HtRHS}
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-470}, \eqref{eq:pr-pred-stem-480},
+                \eqref{eq:pr-pred-stem-490}, \eqref{eq:pr-pred-stem-530}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-570}
+        \mycpar{$\VFA{Ht}{downAL} = \VFA{Ht}{tribAL} + 1
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-540}, \eqref{eq:pr-pred-stem-550},
+                \eqref{eq:pr-pred-stem-560}.$}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-580}
+        \VFA{Rank}{downAL} = \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-590}
+        \VFA{Rank}{tribAL} = \VFA{Dp}{tribAL} + 2 \mult \VFA{Ht}{tribAL} \cuz \Dfref{rank}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-600}
+        \mycpar{$\VFA{Rank}{tribAL} = \VFA{Dp}{tribAL} + 2 \mult (\VFA{Ht}{downAL} \subtract 1)$ \\
+                \cuz \eqref{eq:pr-pred-stem-570}, \eqref{eq:pr-pred-stem-590}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-610}
+        \mycpar{$\VFA{Rank}{tribAL} \le (\VFA{Dp}{downAL}+1) + 2 \mult (\VFA{Ht}{downAL} \subtract 1)$ \\
+                \cuz \eqref{eq:pr-pred-stem-370}, \eqref{eq:pr-pred-stem-600}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-620}
+        \VFA{Rank}{tribAL} \le \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} + 1 \subtract 2 \cuz
+                \eqref{eq:pr-pred-stem-610}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-630}
+        \VFA{Rank}{tribAL} \le \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \subtract 1 \cuz
+                \eqref{eq:pr-pred-stem-620}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-640}
+        \VFA{Rank}{tribAl} \le \VFA{Rank}{downAL} \subtract 1
+        \cuz \eqref{eq:pr-pred-stem-580}, \eqref{eq:pr-pred-stem-630}.
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-650}
+        \VFA{Rank}{tribAl} < \VFA{Rank}{downAL}
+        \cuz \eqref{eq:pr-pred-stem-640}.
+\end{equation}
+With \eqref{eq:pr-pred-stem-180}, \eqref{eq:pr-pred-stem-190}, \eqref{eq:pr-pred-stem-200}, \eqref{eq:pr-pred-stem-280},
+and \eqref{eq:pr-pred-stem-650}, we have the lemma.
+\myqed
 \end{proof}
+
 
 \section{Completion lemmas}
 
@@ -1952,7 +2295,7 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
         \label{eq:pr-rt-comp-010}
         \begin{gathered}
                 \V{downEE} = (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1)) \\
-        \text{\cuz AF lemma, \Dfref{ei-types}, WLOG.}
+        \text{\cuz AF lemma, \Dfref{ee-types}, WLOG.}
         \end{gathered}
 \end{equation}
         where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$.
@@ -2124,7 +2467,7 @@ for the lemma.
                 \V{lhs},\V{origin},(\V{i}+1)
                 \; \end{gathered} \right) \\
         \mycpar{where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
-        \cuz AF lemma, \Dfref{ei-types}, \eqref{eq:pr-ri-comp-005}, WLOG.}
+        \cuz AF lemma, \Dfref{ee-types}, \eqref{eq:pr-ri-comp-005}, WLOG.}
         \end{gathered}
 \end{equation}
 \begin{equation}
