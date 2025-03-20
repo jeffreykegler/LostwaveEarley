@@ -2014,7 +2014,7 @@ the derivation of \eqref{eq:pr-pred-stem-310}
 is exactly one step longer than the derivation in \eqref{eq:pr-pred-stem-330},
 \begin{equation}
 \label{eq:pr-pred-stem-360}
-        \V{StemMinD} \le \V{DownMinD} + 1
+        \V{StemMinD} = \V{DownMinD} + 1
                 \cuz \Lmref{dp-minimization}, \eqref{eq:pr-pred-stem-350}.
 \end{equation}
 so that
@@ -2023,29 +2023,43 @@ so that
         \VFA{Dp}{stemAl} = \VFA{Dp}{downAL} + 1
         \cuz \eqref{eq:pr-pred-stem-320}, \eqref{eq:pr-pred-stem-340}, \eqref{eq:pr-pred-stem-360}.
 \end{equation}
-\todo{Revised to here}
+\begin{equation}
+\label{eq:pr-pred-stem-380}
+        \V{foreZ} \destarV{g} \Velement{w}{0,\V{current}} \cuz
+                \eqref{eq:pr-pred-stem-090}, \eqref{eq:pr-pred-stem-130}, \eqref{eq:pr-pred-stem-140}.
+\end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-450}
         \mycpar{Let \V{downMinH} be the minimum number of steps in the derivation \\
-        $\V{foreZ} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
-        \cuz \eqref{eq:pr-pred-stem-040}, \eqref{eq:pr-pred-stem-060}.
+                $\V{foreZ} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        \cuz \eqref{eq:pr-pred-stem-380}.
         }
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-460}
-        \mycpar{\VFA{Ht}{downAL} = \V{downMinH} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-010}, \eqref{eq:pr-pred-stem-450}.}
+        \mycpar{\VFA{Ht}{downAL} = \V{downMinH}
+                \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-010}, \eqref{eq:pr-pred-stem-450}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-470}
-        \mycpar{Let \V{tribMinH} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{rhs} \destarV{g} \Velement{w}{0,\V{current}}$ \\
-        \cuz \eqref{eq:pr-pred-stem-040}, \eqref{eq:pr-pred-stem-060}.}
+        \mycpar{Let \V{stemMinH} be the minimum number of steps in the derivation \\
+        $\V{foreY} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        \cuz \eqref{eq:pr-pred-stem-130}, \eqref{eq:pr-pred-stem-140}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-480}
-        \mycpar{\VFA{Ht}{tribAL} = \V{tribMinH} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-180}, \eqref{eq:pr-pred-stem-470}.}
+        \mycpar{\VFA{Ht}{stemAL} = \V{stemMinH} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-470}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-490}
+        \mycpar{\V{downMinH} = \V{stemMinH} \\
+        \cuz \eqref{eq:pr-pred-stem-090}, \eqref{eq:pr-pred-stem-450}, \eqref{eq:pr-pred-stem-470}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-500}
+        \mycpar{\VFA{Ht}{downAL} = \VFA{Ht}{stemAL} \\
+        \cuz \eqref{eq:pr-pred-stem-460}, \eqref{eq:pr-pred-stem-480}, \eqref{eq:pr-pred-stem-490}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-580}
@@ -2053,38 +2067,14 @@ so that
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-590}
-        \VFA{Rank}{tribAL} = \VFA{Dp}{tribAL} + 2 \mult \VFA{Ht}{tribAL} \cuz \Dfref{rank}.
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{stemAL} \cuz \Dfref{rank}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-600}
-        \mycpar{$\VFA{Rank}{tribAL} = \VFA{Dp}{tribAL} + 2 \mult (\VFA{Ht}{downAL} \subtract 1)$ \\
-                \cuz \eqref{eq:pr-pred-stem-570}, \eqref{eq:pr-pred-stem-590}.}
+        \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{downAL}
+                \cuz \eqref{eq:pr-pred-stem-490}, \eqref{eq:pr-pred-stem-590}.
 \end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-610}
-        \mycpar{$\VFA{Rank}{tribAL} \le (\VFA{Dp}{downAL}+1) + 2 \mult (\VFA{Ht}{downAL} \subtract 1)$ \\
-                \cuz \eqref{eq:pr-pred-stem-370}, \eqref{eq:pr-pred-stem-600}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-620}
-        \VFA{Rank}{tribAL} \le \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} + 1 \subtract 2 \cuz
-                \eqref{eq:pr-pred-stem-610}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-630}
-        \VFA{Rank}{tribAL} \le \VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL} \subtract 1 \cuz
-                \eqref{eq:pr-pred-stem-620}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-640}
-        \VFA{Rank}{tribAl} \le \VFA{Rank}{downAL} \subtract 1
-        \cuz \eqref{eq:pr-pred-stem-580}, \eqref{eq:pr-pred-stem-630}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-650}
-        \VFA{Rank}{tribAl} < \VFA{Rank}{downAL}
-        \cuz \eqref{eq:pr-pred-stem-640}.
-\end{equation}
+\todo{Revised to here}
 With \eqref{eq:pr-pred-stem-180}, \eqref{eq:pr-pred-stem-190}, \eqref{eq:pr-pred-stem-200}, \eqref{eq:pr-pred-stem-280},
 and \eqref{eq:pr-pred-stem-650}, we have the lemma.
 \myqed
