@@ -125,6 +125,8 @@
 % extra {} in existQOP and univQOp to raise to baseline
 \newcommand{\existQOp}{\mathop{\exists{}}}
 \newcommand{\existQ}[2]{\quantify{\existQOp}{#1}{#2}}
+\newcommand{\nexistQOp}{\mathop{\nexists{}}}
+\newcommand{\nexistQ}[2]{\quantify{\nexistQOp}{#1}{#2}}
 % extra {} in existQOP and univQOp to raise to baseline
 \newcommand{\univQOp}{\mathop{\forall{}\,}}
 \newcommand{\univQ}[2]{\quantify{\univQOp}{#1}{#2}}
@@ -452,7 +454,7 @@ A grammar is a 4-tuple
 where \V{N} (the non-terminals)
 and \V{T} (the terminals) are disjoint sets of symbols.
 $\V{S} \in \V{N}$ is
-a dedicated start symbol.
+the \textbf{dedicated} start symbol.
 \V{P} is the set of rules, or productions.
 The rules are of the form
 $\V{A} \de \V{rhs}$,
@@ -462,18 +464,35 @@ $\V{rhs} \in (\V{N}\cup\V{T})^\ast$.
 \dfEnd
 \end{definition}
 
+
 \begin{definition}[The grammar \V{g}]
 \label{df:g}
-When we say that \V{g} is \textbf{proper} we mean that it has
-no unreachable symbols, no unproductive symbol,
-        \todo{Define unreachable symbol}
-        \todo{Define unproductive symbol}
-        \todo{Define cycle}
-and no cycles.
 Every grammar in this document is the proper grammar
 \[
         \V{g} = \tuple{\V{N},\V{T},\V{P},\V{S}}. \quad \dfEnd
 \]
+\end{definition}
+
+\begin{definition}[Proper grammar]
+\label{df:proper-grammar}
+When we say that a grammar is \textbf{proper} we mean that it has
+no unreachable symbols, no unproductive symbol,
+        \todo{Define unreachable symbol}
+        \todo{Define unproductive symbol}
+        \todo{Define cycle}
+and no cycles. \dfEnd
+\end{definition}
+
+\begin{definition}[Dedicated start symbol]
+\label{df:dedicated-start}
+        When we say the start symbol \V{S} is dedicated
+        we mean that there is a dedicated start rule
+        \[ \mycpar{$(\V{S} \de \V{rhs}) \in \V{P}$ for some $\V{rhs} \in \V{STR}$,} \]
+        that \V{S} does not occur on any other LHS,
+        \[ \nexistQ{\V{rhs2} \in \V{STR}}{\V{rhs2} \neq \V{rhs} \land (\V{S} \de \V{rhs2}) \in \V{P}}, \]
+        and that \V{S} never occurs on a RHS,
+         \[ \nexistQ{\alpha, \beta \in \V{STR},\V{A} \in \V{N}}{(\V{A} \de \alpha \cat \V{S} \cat \beta) \in \V{P}}.
+                 \quad \dfEnd \]
 \end{definition}
 
 \begin{definition}[Earley entry]
