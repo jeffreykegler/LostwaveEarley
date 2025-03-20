@@ -1150,7 +1150,7 @@ observations.
 
 \section{Inflow lemmas}
 
-\begin{lemma}[Confirmation mainstem]
+\begin{lemma}[Confirmation mainstem inflow]
         \label{lm:conf-stem}
         Let \V{downAL} be a confirmed aletheme,
         whose predot symbol is \V{B},
@@ -1442,7 +1442,7 @@ With
 what we need for this lemma.  \myqed
 \end{proof}
 
-\begin{lemma}[Reduction tributary]
+\begin{lemma}[Reduction tributary inflow]
         \label{lm:red-trib}
         Let \V{downAL} be a reduced aletheme,
         whose derivation is \V{drv},
@@ -1813,7 +1813,7 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
 \myqed
 \end{proof}
 
-\begin{lemma}[Prediction mainstem]
+\begin{lemma}[Prediction mainstem inflow]
         \label{lm:pred-stem}
         Let \V{downAL} be a predicted aletheme,
         whose current location is \V{current}.
@@ -1874,28 +1874,31 @@ we know that, by the definition of a prediction,
 \label{eq:pr-pred-stem-070}
         \V{Z} \neq \V{S} \cuz \Dfref{ee-types}, \eqref{eq:pr-pred-stem-010}.
 \end{equation}
-so that
-\begin{equation}
-\label{eq:pr-pred-stem-075}
-        \mycpar{there is some $\V{Y} \de \V{pre} \cat \V{Z} \cat \V{post}$ \cuz WLOG}
-\end{equation}
-such that
+We can therefore say there is some
 \begin{equation}
 \label{eq:pr-pred-stem-080}
+        \V{pre}, \V{foreY}, \V{post}, \V{aftY} \in \V{STR}, \V{Y} \in \V{N}, \V{j} \in \naturals,
+\end{equation}
+such that
+\begin{gather}
+\label{eq:pr-pred-stem-090}
+        \mycpar{$\V{foreY}\cat\V{pre} = \V{foreZ}$ \cuz WLOG,} \\
+\label{eq:pr-pred-stem-100}
+        \mycpar{$\V{post}\cat\V{aftY} = \V{aftZ}$ \cuz WLOG,} \\
+\label{eq:pr-pred-stem-110}
+        \mycpar{$\V{Y} \de \V{pre} \cat \V{Z} \cat \V{post} \in \V{P}$ \cuz WLOG,} \\
+\label{eq:pr-pred-stem-120}
         \mycpar{$\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}$ \\
         $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{Z:f} \cat \V{post} \cat \V{aftY}$ \\
         $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{rhsZ} \cat \V{post} \cat \V{aftY}$ \\
-                \cuz \eqref{eq:pr-pred-stem-030}, \eqref{eq:pr-pred-stem-040},
-                        \eqref{eq:pr-pred-stem-070}, \eqref{eq:pr-pred-stem-075}.}
-\end{equation}
+                \cuz \eqref{eq:pr-pred-stem-030}, \eqref{eq:pr-pred-stem-040}, \eqref{eq:pr-pred-stem-110},} \\
+\label{eq:pr-pred-stem-130}
+        \mycpar{$\V{foreY} \destarV{drv} \Velement{w}{0,\V{j}}$ \cuz WLOG, and} \\
+\label{eq:pr-pred-stem-140}
+        \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{j},\V{current}}$ \cuz WLOG.}
+\end{gather}
 \todo{Revised to here}
-We simplify \eqref{eq:pr-pred-stem-080} to
-\begin{equation}
-\label{eq:pr-pred-stem-090}
-        \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
-                \cuz \eqref{eq:pr-pred-stem-080},}
-\end{equation}
-and deduce a few more facts that we will need:
+... and deduce a few more facts that we will need:
 \begin{equation}
 \label{eq:pr-pred-stem-150}
         \begin{gathered}
