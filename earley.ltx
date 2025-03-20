@@ -1864,6 +1864,7 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
         \todo{Write this proof}
         Proof omitted.  \myqed
 \end{proof}
+
 \begin{lemma}[Prediction mainstem inflow]
         \label{lm:pred-stem}
         Let \V{downAL} be a predicted aletheme,
@@ -1999,31 +2000,34 @@ For the lemma, it remains to determine the rank of \V{stemAL}.
         \mycpar{\VFA{Dp}{stemAL} = \V{StemMinD} \\
         \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-330}.}
 \end{equation}
-\todo{Revised to here}
 Whatever the value of \V{downMinD},
 because of the derivation
 \begin{equation}
 \label{eq:pr-pred-stem-350}
-        \mycpar{$\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}$ \\
-        $\derivesV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
-        }
+        \mycpar{$\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}$ \\
+        $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{Z:f} \cat \V{post} \cat \V{aftZ}$ \\
+        $= \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}$ \\
+        \cuz \eqref{eq:pr-pred-stem-090}, \eqref{eq:pr-pred-stem-100},
+                \eqref{eq:pr-pred-stem-310}, \eqref{eq:pr-pred-stem-330}.}
 \end{equation}
-the derivation of \eqref{eq:pr-pred-stem-330}
-cannot be longer than one step more than the derivation in \eqref{eq:pr-pred-stem-310},
+the derivation of \eqref{eq:pr-pred-stem-310}
+is exactly one step longer than the derivation in \eqref{eq:pr-pred-stem-330},
 \begin{equation}
 \label{eq:pr-pred-stem-360}
-        \V{TribMinD} \le \V{DownMinD} + 1 \cuz \eqref{eq:pr-pred-stem-350},
+        \V{StemMinD} \le \V{DownMinD} + 1
+                \cuz \Lmref{dp-minimization}, \eqref{eq:pr-pred-stem-350}.
 \end{equation}
 so that
 \begin{equation}
 \label{eq:pr-pred-stem-370}
-        \VFA{Dp}{tribAl} \le \VFA{Dp}{downAL} + 1
+        \VFA{Dp}{stemAl} = \VFA{Dp}{downAL} + 1
         \cuz \eqref{eq:pr-pred-stem-320}, \eqref{eq:pr-pred-stem-340}, \eqref{eq:pr-pred-stem-360}.
 \end{equation}
+\todo{Revised to here}
 \begin{equation}
 \label{eq:pr-pred-stem-450}
         \mycpar{Let \V{downMinH} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        $\V{foreZ} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-pred-stem-040}, \eqref{eq:pr-pred-stem-060}.
         }
 \end{equation}
@@ -2042,60 +2046,6 @@ so that
 \label{eq:pr-pred-stem-480}
         \mycpar{\VFA{Ht}{tribAL} = \V{tribMinH} \\
         \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-180}, \eqref{eq:pr-pred-stem-470}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-490}
-        \mycpar{Let \V{H1} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \destarV{g} \Velement{w}{0,\V{j}}$ \\
-        \cuz \eqref{eq:pr-pred-stem-060}, \eqref{eq:pr-pred-stem-170}.}
-\end{equation}
-We recall from above that
-\begin{equation}
-\label{eq:pr-pred-stem-500}
-        \mycpar{$\V{B} \derivesV{drvs} \V{rhs} \destarV{drvs} \Velement{w}{\V{j},\V{current}}$
-        \cuz \eqref{eq:pr-pred-stem-080}, and}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-510}
-        \V{B} \destarV{drvs} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-500}.
-\end{equation}
-are minimal derivations.
-\begin{equation}
-\label{eq:pr-pred-stem-520}
-        \mycpar{Let \V{HtB} be the minimum number of steps in the derivation
-        $\V{B} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-500}$, and}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-530}
-        \mycpar{let \V{HtRHS} be the minimum number of steps in the derivation
-        $\V{rhs} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-500}.$}
-\end{equation}
-Because \eqref{eq:pr-pred-stem-520} and \eqref{eq:pr-pred-stem-530}
-are minimal derivations,
-\begin{equation}
-\label{eq:pr-pred-stem-540}
-        \V{HtB} = \V{HtRHS}+1
-                \cuz \Lmref{ht-minimization},
-                \eqref{eq:pr-pred-stem-500}, \eqref{eq:pr-pred-stem-510},
-                        \eqref{eq:pr-pred-stem-520}, \eqref{eq:pr-pred-stem-530}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-550}
-        \mycpar{$\VFA{Ht}{downAL} = \V{H1} + \V{HtB}
-        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-470}, \eqref{eq:pr-pred-stem-480},
-                \eqref{eq:pr-pred-stem-490}, \eqref{eq:pr-pred-stem-520}.$}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-560}
-        \mycpar{$\VFA{Ht}{tribAL} = \V{H1} + \V{HtRHS}
-        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-470}, \eqref{eq:pr-pred-stem-480},
-                \eqref{eq:pr-pred-stem-490}, \eqref{eq:pr-pred-stem-530}.$}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-570}
-        \mycpar{$\VFA{Ht}{downAL} = \VFA{Ht}{tribAL} + 1
-        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-540}, \eqref{eq:pr-pred-stem-550},
-                \eqref{eq:pr-pred-stem-560}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-580}
