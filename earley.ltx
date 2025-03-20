@@ -2014,13 +2014,13 @@ the derivation of \eqref{eq:pr-pred-stem-310}
 is exactly one step longer than the derivation in \eqref{eq:pr-pred-stem-330},
 \begin{equation}
 \label{eq:pr-pred-stem-360}
-        \V{StemMinD} = \V{DownMinD} + 1
+        \V{DownMinD} = \V{StemMinD} + 1
                 \cuz \Lmref{dp-minimization}, \eqref{eq:pr-pred-stem-350}.
 \end{equation}
 so that
 \begin{equation}
 \label{eq:pr-pred-stem-370}
-        \VFA{Dp}{stemAl} = \VFA{Dp}{downAL} + 1
+        \VFA{Dp}{downAl} = \VFA{Dp}{stemAL} + 1
         \cuz \eqref{eq:pr-pred-stem-320}, \eqref{eq:pr-pred-stem-340}, \eqref{eq:pr-pred-stem-360}.
 \end{equation}
 \begin{equation}
@@ -2072,14 +2072,26 @@ so that
 \begin{equation}
 \label{eq:pr-pred-stem-600}
         \VFA{Rank}{stemAL} = \VFA{Dp}{stemAL} + 2 \mult \VFA{Ht}{downAL}
-                \cuz \eqref{eq:pr-pred-stem-490}, \eqref{eq:pr-pred-stem-590}.
+                \cuz \eqref{eq:pr-pred-stem-500}, \eqref{eq:pr-pred-stem-590}.
 \end{equation}
-\todo{Revised to here}
-With \eqref{eq:pr-pred-stem-180}, \eqref{eq:pr-pred-stem-190}, \eqref{eq:pr-pred-stem-200}, \eqref{eq:pr-pred-stem-280},
-and \eqref{eq:pr-pred-stem-650}, we have the lemma.
+\begin{equation}
+\label{eq:pr-pred-stem-610}
+        \mycpar{$\VFA{Rank}{stemAL} = (\VFA{Dp}{downAL} \subtract 1) + 2 \mult \VFA{Ht}{downAL}$ \\
+                \cuz \eqref{eq:pr-pred-stem-370}, \eqref{eq:pr-pred-stem-600}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-620}
+        \mycpar{$\VFA{Rank}{stemAL} = (\VFA{Dp}{downAL} + 2 \mult \VFA{Ht}{downAL}) \subtract 1$ \\
+                \cuz \eqref{eq:pr-pred-stem-610}.}
+\end{equation}
+\begin{equation}
+\label{eq:pr-pred-stem-630}
+        \VFA{Rank}{stemAL} = \VFA{Rank}{downAL} \subtract 1
+                \cuz \eqref{eq:pr-pred-stem-580}, \eqref{eq:pr-pred-stem-620}.
+\end{equation}
+With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-pred-stem-630}, we have the lemma.
 \myqed
 \end{proof}
-
 
 \section{Completion lemmas}
 
