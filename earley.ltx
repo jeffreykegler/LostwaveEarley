@@ -1928,67 +1928,8 @@ At this point,
         \V{stemAL} for the lemma
         \cuz \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-210}.}
 \end{equation}
+For the lemma, it remains to determine the rank of \V{stemAL}.
 \todo{Revised to here}
-For the lemma, it remains to
-define \V{proxyAL}
-and show what we need with respect to it.
-The derivation for
-\V{proxyAL} is potentially distinct from \V{drv},
-so we will call it \V{drv2}.
-Defining \V{drv2}, we
-\begin{equation}
-\label{eq:pr-pred-stem-220}
-        \mycpar{let \V{drv2} be identical to \V{drv} except that \\
-                $\V{B:pd} \derivesV{drv2} \V{rhs2} \destarV{drv2} \Velement{w}{\V{j},\V{current}}$, \\
-                where $\V{B} \de \V{rhs2} \in \V{P}$, \\
-                is a minimal length derivation.}
-\end{equation}
-As an aside, we note that,
-\begin{equation}
-\label{eq:pr-pred-stem-230}
-        \mycpar{in \eqref{eq:pr-pred-stem-220}
-        it is quite possible that $\V{rhs2} = \V{rhs}$,
-        in which case is it also possible that $\V{drv} = \V{drv2}$.}
-\end{equation}
-Breaking out \eqref{eq:pr-pred-stem-220},
-\begin{equation}
-\label{eq:pr-pred-stem-235}
-        \mycpar{$\V{B} \de \V{rhs2} \in \V{P}$ and}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-240}
-        \mycpar{\V{drv2} is identical to \V{drv} except in the subtree under \V{B:pd}.}
-\end{equation}
-To define \V{proxAL}, it remains to deduce a few facts.
-\begin{equation}
-\label{eq:pr-pred-stem-250}
-        \mycpar{$\V{S} \destarV{drv2} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
-                \cuz \eqref{eq:pr-pred-stem-090}, \eqref{eq:pr-pred-stem-240}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-260}
-        \V{rhs} \destarV{drv2} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-pred-stem-220}.
-\end{equation}
-\begin{equation}
-\label{eq:pr-pred-stem-270}
-        \V{fore} \cat \V{antepre} \destarV{drv2} \Velement{w}{0,\V{j}}
-                \cuz \eqref{eq:pr-pred-stem-170}, \eqref{eq:pr-pred-stem-240}.
-\end{equation}
-We are now in a position to define our proxy aletheme.
-\begin{equation}
-\label{eq:pr-pred-stem-280}
-        \begin{gathered}
-        \V{proxAL} =
-                \left( \begin{gathered}
-                        \V{drv2},(\V{fore}\cat\V{antepre}),(\V{post}\cat\V{aft}), \\
-                        \V{rhs2},\epsilon,\V{B:pd},\V{j},\V{current}
-                \end{gathered} \right) \\
-                \text{\cuz \Dfref{aletheme}, \Dfref{pred-stem},
-                        \eqref{eq:pr-pred-stem-235}, \eqref{eq:pr-pred-stem-250},
-                        \eqref{eq:pr-pred-stem-260}, \eqref{eq:pr-pred-stem-270}.}
-        \end{gathered}
-\end{equation}
-For the lemma, it remains to determine the rank of \V{proxAL}.
 \begin{equation}
 \label{eq:pr-pred-stem-310}
         \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
