@@ -1832,6 +1832,38 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
 \myqed
 \end{proof}
 
+\begin{lemma}[Depth minimization helper]
+        \label{lm:dp-minimization}
+\begin{gather}
+        \label{eq:lm-dp-minimization-050}
+        \mycpar{Let \V{DpZ} be the length of a minimal length derivation
+        from \V{S} to $\V{foreZ}\cat\V{Z}\cat\V{aftZ}$
+        where $\V{Z} \in \V{N}, \V{foreZ}, \V{aftZ} \in \V{STR}$,} \\
+        \label{eq:lm-dp-minimization-055}
+        \mycpar{let $\V{S} \destarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}
+        \derivesV{drv} \V{foreZ}\cat\V{Z}\cat\V{aftZ}$ \V{foreZ} \\
+        be a minimal length derivation of length \V{DpZ}, and} \\
+        \label{eq:lm-dp-minimization-060}
+        \mycpar{let \V{DpY} be the derivation length of
+        $\V{S} \destarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}$.}
+\end{gather}
+        Then
+\begin{equation}
+\label{eq:lm-dp-minimization-065}
+        \mycpar{$\V{DpZ} = \V{DpY} + 1$ and}
+\end{equation}
+\begin{equation}
+\label{eq:lm-dp-minimization-070}
+        \mycpar{$\V{S} \destarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}$ is a minimal
+        length derivation. \lmEnd}
+\end{equation}
+        \todo{Check this statement of the lemma}
+\end{lemma}
+
+\begin{proof}
+        \todo{Write this proof}
+        Proof omitted.  \myqed
+\end{proof}
 \begin{lemma}[Prediction mainstem inflow]
         \label{lm:pred-stem}
         Let \V{downAL} be a predicted aletheme,
@@ -1918,7 +1950,7 @@ such that
 We can simplify \eqref{eq:pr-pred-stem-120},
 \begin{equation}
 \label{eq:pr-pred-stem-150}
-        \V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY} \cuz
+        \V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}
               \cuz \eqref{eq:pr-pred-stem-120}.
 \end{equation}
 With the foregoing, we have our mainstem aletheme:
@@ -1947,11 +1979,10 @@ At this point,
         \cuz \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-210}.}
 \end{equation}
 For the lemma, it remains to determine the rank of \V{stemAL}.
-\todo{Revised to here}
 \begin{equation}
 \label{eq:pr-pred-stem-310}
         \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
+        $\V{S} \destarV{drv} \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-320}
@@ -1960,15 +1991,16 @@ For the lemma, it remains to determine the rank of \V{stemAL}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-330}
-        \mycpar{Let \V{TribMinD}, ``tribAl minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destarV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
+        \mycpar{Let \V{StemMinD}, ``stemAl minimum depth''  be the minimum number of steps in the derivation \\
+        $\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-340}
-        \mycpar{\VFA{Dp}{tribAL} = \V{TribMinD} \\
-        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-010}, \eqref{eq:pr-pred-stem-330}.}
+        \mycpar{\VFA{Dp}{stemAL} = \V{StemMinD} \\
+        \cuz \Dfref{rank}, \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-330}.}
 \end{equation}
-Whatever the value of \V{TribMinD},
+\todo{Revised to here}
+Whatever the value of \V{downMinD},
 because of the derivation
 \begin{equation}
 \label{eq:pr-pred-stem-350}
