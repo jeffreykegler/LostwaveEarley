@@ -2630,31 +2630,34 @@ for the lemma.
         \begin{gathered}
         \V{downAL} = \left( \begin{gathered} \;
                 \V{drv},\V{fore},\V{aft},\epsilon,\V{rhs}, \\
-                \V{Z},(\V{i}+1),(\V{i}+1)
+                \V{Z:f},(\V{i}+1),(\V{i}+1)
                 \; \end{gathered} \right) \\
-                \mycpar{where $\V{fore}, \V{pre}, \V{rhs} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
+                \mycpar{where $\V{fore}, \V{pre}, \V{rhs} \in \V{STR}$ and $\V{Z} \in \V{N}$ \\
         \cuz AF lemma, \Dfref{ee-types}, \eqref{eq:pred-comp-010}, WLOG.}
         \end{gathered}
 \end{equation}
 \begin{equation}
         \label{eq:pred-comp-030}
-        \mycpar{$\V{downEE} = (\V{Z} \de \mydot \V{post}, (\V{i}+1)), (\V{i}+1))$ \\
+        \mycpar{$\V{downEE} = (\V{Z} \de \mydot \V{rhs}, (\V{i}+1)), (\V{i}+1))$ \\
                 \cuz \Dfref{ee-to-al}, \eqref{eq:pred-comp-020}.}
 \end{equation}
-        \todo{Revised to here}
 \begin{equation}
         \label{eq:pred-comp-040}
-        \mycpar{$\V{stemAL} = (\V{drv},\V{fore},\V{aft},\V{antepredot},(\V{B:pd}\cat\V{postdot}),$ \\
-        $\V{lhs},\V{origin},(\V{i}+1))$ \\
-        is the mainstem of \V{downAL} at $\V{i}+1$ \\
-        and $\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
-        \cuz \Lmref{conf-stem}, \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-030}.}
+        \begin{gathered}
+        \V{stemAL} = \left( \begin{gathered}
+                        \V{drv},\V{foreY},\V{aftY}, \\
+                        \V{pre},\V{Z:f}\cat\V{post},\V{Y},\V{origin},(\V{i}+1)
+                \end{gathered} \right) \\
+        \mycpar{is the mainstem of \V{downAL} at $\V{i}+1$ \\
+                and $\VFA{Rank}{stemAL} = \VFA{Rank}{downAL} \subtract 1$ \\
+                \cuz \Lmref{pred-stem}, \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-030}.}
+        \end{gathered}
 \end{equation}
         The EE of \V{stemAL} is
 \begin{equation}
 \label{eq:pred-comp-050}
         \begin{gathered}
-                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin},(\V{i}+1)) \\
+                \V{stemEE} = (\V{Y} \de \V{pre} \mydot \V{Z:f} \cat \V{post}, \V{origin},(\V{i}+1)) \\
         \cuz \Dfref{ee-to-al}, \eqref{eq:pred-comp-040}.
         \end{gathered}
 \end{equation}
@@ -2664,12 +2667,12 @@ for the lemma.
 \end{equation}
 \begin{equation}
 \label{eq:pred-comp-220}
-        \mycpar{$\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
+        \mycpar{$\VFA{Rank}{stemAL} = \VFA{Rank}{downAL} \subtract 1$ \\
                 \cuz \eqref{eq:pred-comp-040}.}
 \end{equation}
 \begin{equation}
 \label{eq:pred-comp-230}
-        \mycpar{$0 \le \VFA{Rank}{stemAL} \le \V{r}$
+        \mycpar{$\VFA{Rank}{stemAL} = \V{r}$
                 \cuz \eqref{eq:pred-comp-210}, \eqref{eq:pred-comp-220}.}
 \end{equation}
 \begin{equation}
@@ -2693,6 +2696,7 @@ for the lemma.
                         \eqref{eq:pred-comp-250}.}
         \end{gathered}
 \end{equation}
+        \todo{Revised to here}
 Keeping in mind that \V{stemEE} is an incompletion,
 with a nullable postdot symbol,
 \begin{equation}
