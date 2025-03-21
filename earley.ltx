@@ -820,6 +820,7 @@ and is a special feature of the \llE.
 In the context of a derivation, expansions are defined recursively,
 as follows:
 \begin{itemize}
+                \begin{MYsloppy}
 \item The symbol instance string \V{str} is an
 expansion of the LHS symbol instance of a transition \V{tr},
 if \V{str} is the direct expansion of the transition \V{tr}.
@@ -828,9 +829,9 @@ of the expansions of the symbol instances in \V{str2}.
 \item A symbol instance string \V{str4} is an expansion of \V{str3} if
 \V{str4} is a direct expansion of an expansion of \V{str3}.
 \item A symbol instance string \V{str4} is an expansion of the symbol instance \V{A}
-if \V{str4} is a direct expansion of an expansion of \V{A}.
+if \V{str4} is a direct expansion of an expansion of \V{A}.  \dfEnd
+                \end{MYsloppy}
 \end{itemize}
-\dfEnd
 \end{definition}
 
 \begin{definition}[Transition descendant]
@@ -838,7 +839,8 @@ if \V{str4} is a direct expansion of an expansion of \V{A}.
 In the context of a derivation,
 a transition is considered to be a \textbf{descendant}
 of the symbol instance \V{A:f} if its LHS symbol instance
-is \V{A:f} or if it part of an expansion of \V{A:f}.
+is \V{A:f} or if its LHS symbol instance
+is part of an expansion of \V{A:f}.
 A transition is considered to be an descendant
 of a string of symbol instances if it is a descendant
 of any symbol instance in the string.
@@ -850,15 +852,15 @@ if they are non-trivial transitions.
 
 \begin{definition}[Derivation length]
         \label{df:derivation-length}
-        In the context of a derivation \V{drv},
-        The length of a derivation from a symbol instance \V{A}
-        to a symbol instance string $\alpha$ is the number of
-        transitions which are non-trivial descendants of \V{A}
-        in the steps \Velement{drv}{\V{i},\V{j}},
-        where \V{i} is the index of the derivation step of the symbol
-        instance \V{A},
-        and \V{j} is the index of the derivation step of the symbol
-        instance string $\alpha$.
+        Let \V{drv} be a derivation,
+        \V{i} the index of the derivation step of a symbol
+        instance \V{A:t}, and
+        and \V{j} is the index of the derivation step of \V{$\alpha$:b},
+        where \V{$\alpha$:b} is an expansion of \V{A:t}.
+        The length of the derivation from \V{A:t} to \V{$\alpha$:b},
+        is the number of
+        transitions which are non-trivial descendants of \V{A:t}
+        in the range of steps \Velement{drv}{\V{i},\V{j}}.
 \dfEnd
 \end{definition}
 
