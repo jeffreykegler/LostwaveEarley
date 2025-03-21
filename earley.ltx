@@ -595,8 +595,10 @@ We say that
         \end{equation}
         where $\alpha$ and $\beta$ are strings.
         Overloading terminology a bit,
-        \V{Lstr} is called the \textbf{LHS} string of \V{tr},
-        and \V{Rstr} is called the \textbf{RHS} string of \V{tr}.
+        \V{A} is called the \textbf{LHS symbol} of \V{tr},
+        \V{rhs} is called the \textbf{direct expansion} of \V{tr},
+        \V{Lstr} is called the \textbf{LHS step} of \V{tr},
+        and \V{Rstr} is called the \textbf{RHS step} of \V{tr}.
         \dfEnd
 \end{definition}
 
@@ -811,6 +813,53 @@ and is a special feature of the \llE.
         \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
         The \textbf{rank} of \V{x} is
         \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
+\end{definition}
+
+\begin{definition}[Transition expansion]
+        \label{df:transition-expansion}
+In the context of a derivation, expansions are defined recursively,
+as follows:
+\begin{itemize}
+\item The symbol instance string \V{str} is an
+expansion of the LHS symbol instance of a transition \V{tr},
+if \V{str} is the direct expansion of the transition \V{tr}.
+\item The direct expansion of a symbol instance string \V{str2} is the concatenation
+of the expansions of the symbol instances in \V{str2}.
+\item A symbol instance string \V{str4} is an expansion of \V{str3} if
+\V{str4} is a direct expansion of an expansion of \V{str3}.
+\item A symbol instance string \V{str4} is an expansion of the symbol instance \V{A}
+if \V{str4} is a direct expansion of an expansion of \V{A}.
+\end{itemize}
+\dfEnd
+\end{definition}
+
+\begin{definition}[Transition descendant]
+        \label{df:transition-descendant}
+In the context of a derivation,
+a transition is considered to be a \textbf{descendant}
+of the symbol instance \V{A:f} if its LHS symbol instance
+is \V{A:f} or if it part of an expansion of \V{A:f}.
+A transition is considered to be an descendant
+of a string of symbol instances if it is a descendant
+of any symbol instance in the string.
+The descendant transitions are considered to be
+\textbf{non-trivial descendants}
+if they are non-trivial transitions.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Derivation length]
+        \label{df:derivation-length}
+        In the context of a derivation \V{drv},
+        The length of a derivation from a symbol instance \V{A}
+        to a symbol instance string $\alpha$ is the number of
+        transitions which are non-trivial descendants of \V{A}
+        in the steps \Velement{drv}{\V{i},\V{j}},
+        where \V{i} is the index of the derivation step of the symbol
+        instance \V{A},
+        and \V{j} is the index of the derivation step of the symbol
+        instance string $\alpha$.
+\dfEnd
 \end{definition}
 
 \begin{definition}[Confirmation mainstem]
