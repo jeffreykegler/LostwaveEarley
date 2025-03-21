@@ -2593,15 +2593,110 @@ for the lemma.
 \begin{lemma}[Prediction completion]
         \label{lm:prediction-comp}
         When running \llE,
-        scansion will be complete in row $\V{i}+1$
+        prediction will be complete in row $\V{i}+1$
         if the chart
         is complete as far as row \V{i}.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
-        Proof omitted. \todo{Write this proof}
-        \myqed
+\begin{equation}
+        \label{eq:pred-comp-010}
+        \mycpar{Let \V{downAL}
+        be an arbitrary sound prediction aletheme of rank
+        $\V{r}+1$ in row $\V{i}+1$
+        \cuz AF lemma.}
+\end{equation}
+\begin{equation}
+        \label{eq:pred-comp-020}
+        \begin{gathered}
+        \V{downAL} = \left( \begin{gathered} \;
+                \V{drv},\V{fore},\V{aft},\epsilon,\V{rhs}, \\
+                \V{Z},(\V{i}+1),(\V{i}+1)
+                \; \end{gathered} \right) \\
+                \mycpar{where $\V{fore}, \V{pre}, \V{rhs} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
+        \cuz AF lemma, \Dfref{ee-types}, \eqref{eq:pred-comp-010}, WLOG.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+        \label{eq:pred-comp-030}
+        \mycpar{$\V{downEE} = (\V{Z} \de \mydot \V{post}, (\V{i}+1)), (\V{i}+1))$ \\
+                \cuz \Dfref{ee-to-al}, \eqref{eq:pred-comp-020}.}
+\end{equation}
+        \todo{Revised to here}
+\begin{equation}
+        \label{eq:pred-comp-040}
+        \mycpar{$\V{stemAL} = (\V{drv},\V{fore},\V{aft},\V{antepredot},(\V{B:pd}\cat\V{postdot}),$ \\
+        $\V{lhs},\V{origin},(\V{i}+1))$ \\
+        is the mainstem of \V{downAL} at $\V{i}+1$ \\
+        and $\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
+        \cuz \Lmref{conf-stem}, \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-030}.}
+\end{equation}
+        The EE of \V{stemAL} is
+\begin{equation}
+\label{eq:pred-comp-050}
+        \begin{gathered}
+                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin},(\V{i}+1)) \\
+        \cuz \Dfref{ee-to-al}, \eqref{eq:pred-comp-040}.
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-210}
+        \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$ \cuz \eqref{eq:pred-comp-010}.}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-220}
+        \mycpar{$\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
+                \cuz \eqref{eq:pred-comp-040}.}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-230}
+        \mycpar{$0 \le \VFA{Rank}{stemAL} \le \V{r}$
+                \cuz \eqref{eq:pred-comp-210}, \eqref{eq:pred-comp-220}.}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-240}
+        \mycpar{The chart is complete as far as rank \V{r} of row $\V{i}+1$ \\
+        \cuz AF lemma.}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-250}
+        \begin{gathered}
+                \text{\V{stemEE} is in the chart
+                        \cuz \eqref{eq:pred-comp-050},
+                        \eqref{eq:pred-comp-230}, \eqref{eq:pred-comp-240}.}
+        \end{gathered}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-260}
+        \begin{gathered}
+                \text{\V{stemEE} will be activated exactly once
+                        \cuz \Obref{activation-unique},
+                        \eqref{eq:pred-comp-250}.}
+        \end{gathered}
+\end{equation}
+Keeping in mind that \V{stemEE} is an incompletion,
+with a nullable postdot symbol,
+\begin{equation}
+\label{eq:pred-comp-330}
+        \mycpar{When \V{stemEE} is activated, \Algref{intangible-reduction}
+        is run for \V{stemEE} \\
+        \cuz lines \ref{li:finish-row-090}--\ref{li:finish-row-130} of \Algref{finish-row}
+                \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-050}.}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-340}
+        \mycpar{When run for \V{stemEE}, \Algref{intangible-reduction} records \V{downEE} \\
+            \cuz \Algref{intangible-reduction}, \eqref{eq:pred-comp-010}, \eqref{eq:pred-comp-050}.}
+\end{equation}
+\begin{equation}
+\label{eq:pred-comp-350}
+        \mycpar{\Sref{algorithm} records \V{downEE}
+                \cuz \eqref{eq:pred-comp-260}, \eqref{eq:pred-comp-330}, \eqref{eq:pred-comp-340}.}
+\end{equation}
+Equation \eqref{eq:pred-comp-350} is what we needed to show
+for the lemma.
+\myqed
 \end{proof}
 
 \begin{lemma}[Row step]
