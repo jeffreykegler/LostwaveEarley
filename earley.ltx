@@ -3,6 +3,7 @@
 
 \usepackage[final]{listings}
 \usepackage{float}
+\usepackage{flafter}
 \floatstyle{boxed}
 \restylefloat{figure}
 \usepackage{arydshln}
@@ -922,12 +923,13 @@ of \V{stem}.
 \dfEnd
 \end{definition}
 
-\needspace{3in}
+\needspace{6in}
 \section{Algorithm}
 \label{sec:algorithm}
+
 \FloatBarrier
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
 \caption{Do Earley Parse}
 \label{alg:earley}
 \begin{algorithmic}[1]
@@ -940,7 +942,7 @@ of \V{stem}.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
 \caption{Add Row 0}
 \label{alg:add-row-0}
 \begin{algorithmic}[1]
@@ -951,7 +953,7 @@ of \V{stem}.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
         \caption{Add Row \V{n}}
 \label{alg:add-row-n}
 \begin{algorithmic}[1]
@@ -962,7 +964,7 @@ of \V{stem}.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
         \caption{Finish Row \V{n}}
 \label{alg:finish-row}
 \begin{algorithmic}[1]
@@ -1109,7 +1111,7 @@ observations.
         \obEnd
 \end{observation}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
         \caption{Add Tangible Reductions}
 \label{alg:tangible-reduction}
 \begin{algorithmic}[1]
@@ -1146,7 +1148,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
         \caption{Advance Dot}
 \label{alg:advance-dot}
 \begin{algorithmic}[1]
@@ -1158,7 +1160,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
         \caption{Record Edge}
 \label{alg:record-edge}
 \begin{algorithmic}[1]
@@ -1176,7 +1178,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
         \caption{Add Intangible Reduction}
 \label{alg:intangible-reduction}
 \begin{algorithmic}[1]
@@ -1189,7 +1191,7 @@ observations.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[th]
+\begin{algorithm}[ht]
         \caption{Add Predictions}
 \label{alg:predictions}
 \begin{algorithmic}[1]
@@ -1908,7 +1910,6 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
         \mycpar{$\V{S} \destarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}$ is a minimal
         length derivation. \lmEnd}
 \end{equation}
-        \todo{Check this statement of the lemma}
 \end{lemma}
 
 \begin{proof}
