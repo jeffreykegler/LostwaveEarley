@@ -2647,11 +2647,11 @@ for the lemma.
         \begin{gathered}
         \V{stemAL} = \left( \begin{gathered}
                         \V{drv},\V{foreY},\V{aftY}, \\
-                        \V{pre},\V{Z:f}\cat\V{post},\V{Y},\V{origin},(\V{i}+1)
+                        \V{pre},(\V{Z:f}\cat\V{post}),\V{Y},\V{origin},(\V{i}+1)
                 \end{gathered} \right) \\
         \mycpar{is the mainstem of \V{downAL} at $\V{i}+1$ \\
                 and $\VFA{Rank}{stemAL} = \VFA{Rank}{downAL} \subtract 1$ \\
-                \cuz \Lmref{pred-stem}, \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-030}.}
+                \cuz \Lmref{pred-stem}, \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-030}, WLOG.}
         \end{gathered}
 \end{equation}
         The EE of \V{stemAL} is
@@ -2702,8 +2702,8 @@ Keeping in mind that \V{stemEE} is an incompletion,
 \label{eq:pred-comp-330}
         \mycpar{When \V{stemEE} is activated, \Algref{predictions}
         is run for \V{stemEE} \\
-        \cuz lines \ref{li:finish-row-090}--\ref{li:finish-row-150} of \Algref{finish-row}
-                \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-050}.}
+        \cuz lines \ref{li:finish-row-100}--\ref{li:finish-row-150} of \Algref{finish-row},
+                \eqref{eq:pred-comp-050}.}
 \end{equation}
 \begin{equation}
 \label{eq:pred-comp-340}
@@ -2717,7 +2717,6 @@ Keeping in mind that \V{stemEE} is an incompletion,
 \end{equation}
 Equation \eqref{eq:pred-comp-350} is what we needed to show
 for the lemma.
-\todo{Check this proof}
 \myqed
 \end{proof}
 
