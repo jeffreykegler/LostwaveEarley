@@ -1127,11 +1127,11 @@ observations.
         \State $\V{originRow} \gets \VVelement{rows}{tribOrigin}$
         \label{li:tangible-reduction-050}
         \label{li:tangible-reduction-060}
-        \LComment{Set \V{mainstems} to the set of Earley items in \V{originRow} whose postdot
-                item is \V{tribLHS}.}
+        \LComment{Set \V{mainstems} to the set of Earley entries in \V{originRow} whose postdot
+                symbol is \V{tribLHS}.}
         \State $\V{mainstems} \gets$
         \label{li:tangible-reduction-070}
-        \Statex $\qquad \qquad \lbrace \V{item} \in \V{originRow} \mid \VFA{Postdot}{item} =  \V{tribLHS} \rbrace$
+        \Statex $\qquad \qquad \lbrace \V{entry} \in \V{originRow} \mid \VFA{Postdot}{entry} =  \V{tribLHS} \rbrace$
         \label{li:tangible-reduction-080}
      \For {$\V{mainstem} \in \V{mainstems}$}
         \label{li:tangible-reduction-100}
@@ -1144,6 +1144,39 @@ observations.
           \State \Call{RecordEdge}{\V{newDotted}, \V{newOrigin}, \V{tribCurrent}}
      \EndFor
         \label{li:tangible-reduction-170}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[ht]
+        \caption{Add Scansions}
+\label{alg:scansion}
+\begin{algorithmic}[1]
+        \Procedure{AddScansions}{\V{row}}
+        \label{li:scansion-040}
+        \LComment{Find the row where the terminal starts}
+        \State $\V{prevRow} \gets \V{row} \subtract 1)$
+        \label{li:scansion-050}
+        \State $\V{prevEntries} \gets \VVelement{rows}{prevRow}$
+        \label{li:scansion-060}
+        \LComment{Set \V{mainstems} to the set of Earley entries in row
+                $\V{row} \subtract 1$ whose postdot
+                symbol is \Velement{w}{(\V{row}\subtract 1)}.}
+        \State $\V{mainstems} \gets$
+        \label{li:scansion-070}
+        \Statex $\qquad \qquad \lbrace \V{entry} \in \V{prevEntries} \mid \VFA{Postdot}{entry} =  \VVelement{w}{prevRow} \rbrace$
+        \label{li:scansion-080}
+     \For {$\V{mainstem} \in \V{mainstems}$}
+        \label{li:scansion-100}
+          \State $\V{dotted} \gets \text{dotted rule of \V{mainstem}}$
+          \label{li:scansion-110}
+          \State $\V{newDotted} \gets \Call{AdvanceDot}{\V{dotted}}$
+          \label{li:scansion-120}
+          \State $\V{newOrigin} \gets \text{origin of \V{mainstem}}$
+          \label{li:scansion-130}
+          \State \Call{RecordEdge}{\V{newDotted}, \V{newOrigin}, \V{tribCurrent}}
+     \EndFor
+        \label{li:scansion-170}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -1167,7 +1200,7 @@ observations.
         \Function{RecordEdge}{\V{edge}}
         \State \textbf{let} \V{edge} \text{be} $(\V{dottedRule}, \V{origin}, \V{current})$
         \If {\V{edge} is already in the Earley chart}
-        \State \textbf{return} \Comment{Do not add duplicate items}
+        \State \textbf{return} \Comment{Do not add duplicate entries}
         \label{li:record-edge-100}
         \EndIf
         \If {\V{dottedRule} is completion and $\V{origin} = \V{current}$}
@@ -2261,7 +2294,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         $\V{r}+1$ in row $\V{i}+1$
         \cuz AF lemma.}
 \end{equation}
-        Without loss of generality, we let the Earley item of \V{downAL} be
+        Without loss of generality, we let the Earley entry of \V{downAL} be
 \begin{equation}
         \label{eq:pr-rt-comp-010}
         \begin{gathered}
