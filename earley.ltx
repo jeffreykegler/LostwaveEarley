@@ -1152,19 +1152,22 @@ observations.
         \caption{Add Scansions}
 \label{alg:scansion}
 \begin{algorithmic}[1]
-        \Procedure{AddScansions}{\V{row}}
+        \Procedure{AddScansions}{\V{current}}
         \label{li:scansion-040}
         \LComment{Find the row where the terminal starts}
-        \State $\V{prevRow} \gets \V{row} \subtract 1)$
+        \State $\V{prevRow} \gets \V{current} \subtract 1$
         \label{li:scansion-050}
         \State $\V{prevEntries} \gets \VVelement{rows}{prevRow}$
         \label{li:scansion-060}
         \LComment{Set \V{mainstems} to the set of Earley entries in row
-                $\V{row} \subtract 1$ whose postdot
-                symbol is \Velement{w}{(\V{row}\subtract 1)}.}
-        \State $\V{mainstems} \gets$
-        \label{li:scansion-070}
-        \Statex $\qquad \qquad \lbrace \V{entry} \in \V{prevEntries} \mid \VFA{Postdot}{entry} =  \VVelement{w}{prevRow} \rbrace$
+                $(\V{current} \subtract 1)$ whose postdot
+                symbol is
+                \rule[-.5\baselineskip]{0pt}{\baselineskip}
+                \Velement{w}{(\V{current}\subtract 1)}.}
+        \State{$\V{mainstems} \gets \rule[-1\baselineskip]{0in}{\baselineskip}
+                \left\lbrace \quad \begin{gathered} \V{entry} \in \V{prevEntries} \\[-.4ex]
+                \mid \; \VFA{Postdot}{entry} =  \VVelement{w}{prevRow}
+        \end{gathered}\; \right\rbrace$}
         \label{li:scansion-080}
      \For {$\V{mainstem} \in \V{mainstems}$}
         \label{li:scansion-100}
@@ -1174,7 +1177,7 @@ observations.
           \label{li:scansion-120}
           \State $\V{newOrigin} \gets \text{origin of \V{mainstem}}$
           \label{li:scansion-130}
-          \State \Call{RecordEdge}{\V{newDotted}, \V{newOrigin}, \V{tribCurrent}}
+          \State \Call{RecordEdge}{\V{newDotted}, \V{newOrigin}, \V{current}}
      \EndFor
         \label{li:scansion-170}
 \EndProcedure
