@@ -496,8 +496,8 @@ and no cycles. \dfEnd
                  \quad \dfEnd \]
 \end{definition}
 
-\begin{definition}[Earley entry]
-We will write an \textbf{Earley entry}\footnote{%
+\begin{definition}[Earley edge]
+We will write an \textbf{Earley edge}\footnote{%
 For this document,
 we have adapted chart parsing terminology
 in place of the terminology used in the older
@@ -505,7 +505,7 @@ literature on Earley parsing.
 The chart parsing terms are less overloaded,
 and are more familiar to an audience with an
 AI background.
-What we call an ``Earley entry''
+What we call an ``Earley edge''
 is traditionally
 called an ``Earley item''.
 What we call an ``Earley row'' is traditionally called
@@ -526,7 +526,7 @@ and $\V{A} \de \alpha \cat \beta$ is a rule in the grammar \V{g},
 \]
 A large raised dot ($\mydot$) indicates
 the \textbf{dot location} within the rule.
-\V{origin} is the location of the start of the Earley entry in the input,
+\V{origin} is the location of the start of the Earley edge in the input,
 also called the \textbf{origin}.
 \V{current} is
 the location of the dot within the input,
@@ -535,7 +535,7 @@ also called the \textbf{current location}.
 \end{definition}
 
 \begin{definition}[Predot symbol]
-In an Earley entry
+In an Earley edge
 \[
         \tuple{\V{A} \de \alpha \mydot \beta, \V{origin}, \V{current}},
 \]
@@ -544,22 +544,22 @@ the predot symbol.
 When $\size{\alpha} = 0$, there is no predot symbol. \dfEnd
 \end{definition}
 
-\begin{definition}[Types of Earley entry]
+\begin{definition}[Types of Earley edge]
         \label{df:ee-types}
 We say that
 \begin{itemize}
-\item an Earley entry is a \textbf{start entry}
+\item an Earley edge is a \textbf{start edge}
         if its LHS is the start symbol and
         it has no predot symbol;
-\item an Earley entry is \textbf{predicted}, or a \textbf{prediction}
+\item an Earley edge is \textbf{predicted}, or a \textbf{prediction}
         if its LHS is not the start symbol and
         it has no predot symbol;
-\item an Earley entry is \textbf{confirmed}, or a \textbf{confirmation},
+\item an Earley edge is \textbf{confirmed}, or a \textbf{confirmation},
         if it has a predot symbol;
-\item an Earley entry is \textbf{scanned}, or a \textbf{scansion},
+\item an Earley edge is \textbf{scanned}, or a \textbf{scansion},
         if its predot symbol is a terminal,
          $\element{\alpha}{\lastix{\alpha}} \in \V{T}$;
-\item an Earley entry is \textbf{reduced}, or a \textbf{reduction},
+\item an Earley edge is \textbf{reduced}, or a \textbf{reduction},
         if its predot symbol is a non-terminal;
         $\element{\alpha}{\lastix{\alpha}} \in \V{N}$; \qquad \dfEnd
 \end{itemize}
@@ -723,12 +723,12 @@ The postdot symbol instance does not exist if $\V{post} = \epsilon$.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Earley entry concepts and alethemes]
+\begin{definition}[Earley edge concepts and alethemes]
 \label{df:ee-al-concept}
-        An Earley entry concept applied to an aletheme
-        applies to the Earley entry of the aletheme.
+        An Earley edge concept applied to an aletheme
+        applies to the Earley edge of the aletheme.
         For example, an aletheme
-        is a reduction if its Earley entry is a reduction.
+        is a reduction if its Earley edge is a reduction.
         \dfEnd
 \end{definition}
 
@@ -753,32 +753,32 @@ The postdot symbol instance does not exist if $\V{post} = \epsilon$.
         \dfEnd
 \end{definition}
 
-\begin{definition}[Earley entry to aletheme correspondence]
+\begin{definition}[Earley edge to aletheme correspondence]
         \label{df:ee-to-al}
 Alethemes of the form
 \begin{equation}
         \label{eq:df-ee-to-al-010}
         (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current})
 \end{equation}
-correspond to the Earley entry
+correspond to the Earley edge
 \begin{equation}
         \label{eq:df-ee-to-al-020}
         \tuple{\V{A} \de \V{pre} \mydot \V{post}, \V{origin}, \V{current}}.
 \end{equation}
-In the other direction, the Earley entry \eqref{eq:df-ee-to-al-020}
+In the other direction, the Earley edge \eqref{eq:df-ee-to-al-020}
 \textbf{corresponds} to the alethemes of the form \eqref{eq:df-ee-to-al-010}.
-We note that aletheme-to-entry correspondence is a many-to-one relationship.
+We note that aletheme-to-edge correspondence is a many-to-one relationship.
 \dfEnd
 \end{definition}
 
 \begin{definition}[Soundness]
 Let \V{aleths} be the set of sound
 alethemes for a grammar \V{g} and an input \V{w}.
-Let \V{entries} be a set of Earley entries.
-\V{entries} is \textbf{sound}
+Let \V{edges} be a set of Earley edges.
+\V{edges} is \textbf{sound}
 with respect to \V{aleths}
-iff \V{entries} does not contain any nulling completions,
-and if every element of \V{entries}
+iff \V{edges} does not contain any nulling completions,
+and if every element of \V{edges}
 corresponds to an element of \V{aleths}.
 \qquad \dfEnd
 \end{definition}
@@ -791,7 +791,7 @@ An Earley chart is \textbf{complete}
 with respect to \V{aleths} iff,
 for every $\V{al} \in \V{aleths}$,
 either \V{al} is a nulling completion,
-or an Earley entry corresponding to \V{al} is in the Earley chart.
+or an Earley edge corresponding to \V{al} is in the Earley chart.
 \dfEnd
 \end{definition}
 
@@ -972,13 +972,13 @@ of \V{stem}.
         \label{li:finish-row-010}
         \State $\V{i} \gets 0$ \Comment{Initialize \V{i}}
         \label{li:finish-row-020}
-        \While {$\V{i} < \Vsize{row}$} \Comment {Earley entry activation loop}
-        \LComment{The activation loop activates the entries in \V{row}, from index 0 to \Vsize{row}.
-        New entries are added to \V{row} during the loop
+        \While {$\V{i} < \Vsize{row}$} \Comment {Earley edge activation loop}
+        \LComment{The activation loop activates the edges in \V{row}, from index 0 to \Vsize{row}.
+        New edges are added to \V{row} during the loop
                 so that \Vsize{row} increases during the running of the loop.}
         \label{li:finish-row-030}
         \State $\V{current} \gets \Velement{row}{\V{i}}$
-                \Comment {\VVelement{row}{i} is \V{i}'th Earley entry in row}
+                \Comment {\VVelement{row}{i} is \V{i}'th Earley edge in row}
         \label{li:finish-row-040}
         \If {\V{current} is complete}
         \label{li:finish-row-050}
@@ -1012,55 +1012,55 @@ of \V{stem}.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{definition}[Earley entry recording]
-        An Earley entry is \textbf{recorded} when it is added to the
+\begin{definition}[Earley edge recording]
+        An Earley edge is \textbf{recorded} when it is added to the
         Earley chart.
-        An \textbf{Earley entry recording event} is a series of
-        code steps during which the Earley entry is recorded.
+        An \textbf{Earley edge recording event} is a series of
+        code steps during which the Earley edge is recorded.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Earley entry activation]
-        An Earley entry is \textbf{activated} when it is examined
-        and used for recording other Earley entries.
-        An \textbf{Earley entry activation event} is a series of
-        code steps during which the Earley entry
+\begin{definition}[Earley edge activation]
+        An Earley edge is \textbf{activated} when it is examined
+        and used for recording other Earley edges.
+        An \textbf{Earley edge activation event} is a series of
+        code steps during which the Earley edge
         is being examined and used
-        for the purpose of recording other Earley entries.
+        for the purpose of recording other Earley edges.
 \dfEnd
 \end{definition}
 
 Based on the pseudocode, we make a series of useful
 observations.
 
-\begin{observation}[No Earley entry is recorded twice]
-        There are no duplicate Earley entries.
-        That is, an Earley entry is recorded at most one.
+\begin{observation}[No Earley edge is recorded twice]
+        There are no duplicate Earley edges.
+        That is, an Earley edge is recorded at most one.
         This is enforced at
         line \ref{li:record-edge-100} of \Algref{record-edge}.
         \obEnd
 \end{observation}
 
-\begin{observation}[An Earley entry is activated once]
+\begin{observation}[An Earley edge is activated once]
         \label{obs:activation-unique}
-        A recorded Earley entry is activated exactly once.
+        A recorded Earley edge is activated exactly once.
         Relevant to this observation is the activation loop in \Algref{finish-row}.
         \obEnd
 \end{observation}
 
 \begin{observation}[Recording and activation of an event do not overlap]
-        While the activation loop \Algref{finish-row} records entries
+        While the activation loop \Algref{finish-row} records edges
         during activation events,
-        these are always entries other than the activated entry.
+        these are always edges other than the activated edge.
         No steps in the activation of an event \V{ev} overlap
         steps in the the recording of \V{ev},
         and vice versa.
         \obEnd
 \end{observation}
 
-\begin{observation}[Entry activation is after recording]
+\begin{observation}[edge activation is after recording]
         \label{obs:activation-after-recording}
-        Before any Earley entry is activated,
+        Before any Earley edge is activated,
         it must first be recorded.
         \obEnd
 \end{observation}
@@ -1101,8 +1101,8 @@ observations.
 
 \begin{observation}[Activation is after recording of previous rows]
         \label{obs:activation-after-previous-row}
-        Before any Earley entry is activated,
-        all Earley entries that will ever be recorded in previous rows
+        Before any Earley edge is activated,
+        all Earley edges that will ever be recorded in previous rows
         must already have been recorded.
         One way this can be seen is from
         \Obref{activation-after-recording},
@@ -1127,11 +1127,11 @@ observations.
         \State $\V{originRow} \gets \VVelement{rows}{tribOrigin}$
         \label{li:tangible-reduction-050}
         \label{li:tangible-reduction-060}
-        \LComment{Set \V{mainstems} to the set of Earley entries in \V{originRow} whose postdot
+        \LComment{Set \V{mainstems} to the set of Earley edges in \V{originRow} whose postdot
                 symbol is \V{tribLHS}.}
         \State $\V{mainstems} \gets$
         \label{li:tangible-reduction-070}
-        \Statex $\qquad \qquad \lbrace \V{entry} \in \V{originRow} \mid \VFA{Postdot}{entry} =  \V{tribLHS} \rbrace$
+        \Statex $\qquad \qquad \lbrace \V{edge} \in \V{originRow} \mid \VFA{Postdot}{edge} =  \V{tribLHS} \rbrace$
         \label{li:tangible-reduction-080}
      \For {$\V{mainstem} \in \V{mainstems}$}
         \label{li:tangible-reduction-100}
@@ -1157,16 +1157,16 @@ observations.
         \LComment{Find the row where the terminal starts}
         \State $\V{prevRow} \gets \V{current} \subtract 1$
         \label{li:scansion-050}
-        \State $\V{prevEntries} \gets \VVelement{rows}{prevRow}$
+        \State $\V{prevEdges} \gets \VVelement{rows}{prevRow}$
         \label{li:scansion-060}
-        \LComment{Set \V{mainstems} to the set of Earley entries in row
+        \LComment{Set \V{mainstems} to the set of Earley edges in row
                 $(\V{current} \subtract 1)$ whose postdot
                 symbol is
                 \rule[-.5\baselineskip]{0pt}{\baselineskip}
                 \Velement{w}{(\V{current}\subtract 1)}.}
         \State{$\V{mainstems} \gets \rule[-1\baselineskip]{0in}{\baselineskip}
-                \left\lbrace \quad \begin{gathered} \V{entry} \in \V{prevEntries} \\[-.4ex]
-                \mid \; \VFA{Postdot}{entry} =  \VVelement{w}{prevRow}
+                \left\lbrace \quad \begin{gathered} \V{edge} \in \V{prevEdges} \\[-.4ex]
+                \mid \; \VFA{Postdot}{edge} =  \VVelement{w}{prevRow}
         \end{gathered}\; \right\rbrace$}
         \label{li:scansion-080}
      \For {$\V{mainstem} \in \V{mainstems}$}
@@ -1203,7 +1203,7 @@ observations.
         \Function{RecordEdge}{\V{edge}}
         \State \textbf{let} \V{edge} \text{be} $(\V{dottedRule}, \V{origin}, \V{current})$
         \If {\V{edge} is already in the Earley chart}
-        \State \textbf{return} \Comment{Do not add duplicate entries}
+        \State \textbf{return} \Comment{Do not add duplicate edges}
         \label{li:record-edge-100}
         \EndIf
         \If {\V{dottedRule} is completion and $\V{origin} = \V{current}$}
@@ -2228,7 +2228,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \end{equation}
         \begin{equation}
                 \label{eq:pr-prev-inflows-040}
-                \mycpar{Let \V{ee} be the Earley entry corresponding to \V{al}.}
+                \mycpar{Let \V{ee} be the Earley edge corresponding to \V{al}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-prev-inflows-050}
@@ -2285,7 +2285,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         of row $\V{i}+1$,
         and \V{downAL} is a sound tangible reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley entry
+        then \llE will record the Earley edge
         for \V{downAL} in the chart.
 \end{lemma}
 
@@ -2297,7 +2297,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         $\V{r}+1$ in row $\V{i}+1$
         \cuz AF lemma.}
 \end{equation}
-        Without loss of generality, we let the Earley entry of \V{downAL} be
+        Without loss of generality, we let the Earley edge of \V{downAL} be
 \begin{equation}
         \label{eq:pr-rt-comp-010}
         \begin{gathered}
@@ -2348,7 +2348,7 @@ We now turn to consider the tributary of \V{downAL}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-rt-comp-100}
-        \mycpar{The Earley entry of \V{tribAL} is \\
+        \mycpar{The Earley edge of \V{tribAL} is \\
                 $\V{tribEE} = (\V{B} \de \V{rhs} \mydot, \V{joint}, (\V{i}+1))$ \\
         where $\V{B} \de \V{rhs} \in \V{P}$ \\
         \cuz \Dfref{red-trib}, \eqref{eq:pr-rt-comp-010}, \eqref{eq:pr-rt-comp-090}, WLOG.}
@@ -2454,7 +2454,7 @@ for the lemma.
         of row $\V{i}+1$,
         and \V{downAL} is a sound intangible reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley entry
+        then \llE will record the Earley edge
         for \V{downAL} in the chart.
 \end{lemma}
 
@@ -2576,7 +2576,7 @@ for the lemma.
         of row $\V{i}+1$,
         and \V{downAL} is a reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley entry
+        then \llE will record the Earley edge
         for \V{downAL} in the chart.
         \lmEnd
 \end{lemma}
@@ -2606,7 +2606,7 @@ for the lemma.
         if the chart is complete as far as row \V{i},
         and \V{downAL} is a sound scansion aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley entry
+        then \llE will record the Earley edge
         for \V{downAL} in the chart.
 \end{lemma}
 
@@ -2619,7 +2619,7 @@ for the lemma.
         $\V{r}+1$ in row $\V{i}+1$
         \cuz AF lemma.}
 \end{equation}
-        Without loss of generality, we let the Earley entry of \V{downAL} be
+        Without loss of generality, we let the Earley edge of \V{downAL} be
 \begin{equation}
         \label{eq:pr-scan-comp-010}
         \begin{gathered}
@@ -2670,7 +2670,7 @@ We now turn to consider the tributary of \V{downAL}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-scan-comp-100}
-        \mycpar{The Earley entry of \V{tribAL} is \\
+        \mycpar{The Earley edge of \V{tribAL} is \\
                 $\V{tribEE} = (\V{B} \de \V{rhs} \mydot, \V{joint}, (\V{i}+1))$ \\
         where $\V{B} \de \V{rhs} \in \V{P}$ \\
         \cuz \Dfref{red-trib}, \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-090}, WLOG.}
@@ -2777,7 +2777,7 @@ for the lemma.
         and \V{downAL} is a prediction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
         then either \V{downAL} is a nulling completion,
-        or \llE will record the Earley entry
+        or \llE will record the Earley edge
         for \V{downAL} in the chart.
         \lmEnd
 \end{lemma}
