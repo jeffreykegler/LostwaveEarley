@@ -2615,7 +2615,7 @@ for the lemma.
 \begin{equation}
         \label{eq:pr-scan-comp-005}
         \mycpar{Let \V{downAL}
-        be an arbitrary sound tangible reduction aletheme of rank
+        be an arbitrary sound scansion aletheme of rank
         $\V{r}+1$ in row $\V{i}+1$
         \cuz AF lemma.}
 \end{equation}
@@ -2623,33 +2623,33 @@ for the lemma.
 \begin{equation}
         \label{eq:pr-scan-comp-010}
         \begin{gathered}
-                \V{downEE} = (\V{A} \de \V{antepredot} \cat \V{B} \mydot \V{postdot}, \V{origin}, (\V{i}+1)) \\
+                \V{downEE} = (\V{A} \de \V{antepredot} \cat \V{t} \mydot \V{postdot}, \V{origin}, (\V{i}+1)) \\
         \text{\cuz AF lemma, \Dfref{ee-types}, WLOG.}
         \end{gathered}
 \end{equation}
-        where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$.
+        where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{t} \in \V{T}$.
         Let \V{drv} be the derivation of \V{downAL}.
-        By assumption for the lemma, \V{downEE} is tangible so that,
-        where the predot symbol instance of \V{downAL} is \V{B:pd},
+        By assumption for the lemma, \V{downEE} is a scansion so that,
+        where the predot symbol instance of \V{downAL} is \V{t:f},
+\begin{equation}
+        \label{eq:pr-scan-comp-015}
+        \mycpar{$\V{t:f} = \Velement{w}{\V{i}}$ \cuz AF lemma, \eqref{eq:pr-scan-comp-010}.}
+\end{equation}
 \begin{equation}
         \label{eq:pr-scan-comp-020}
-        \begin{gathered}
-                \existQ{\V{joint} \in \naturals}{\\
-                        \V{B:pd} \destarV{drv} \Velement{w}{\V{joint}, (\V{i}+1)} \\
-                        \land \; \V{joint} < (\V{i}+1)} \\
-        \text{\cuz AF lemma, \eqref{eq:pr-scan-comp-010}.}
-        \end{gathered}
+        \mycpar{$\V{t:f} \destarV{drv} \Velement{w}{\V{i}}$
+                \cuz AF lemma, \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-015}.}
 \end{equation}
 \begin{equation}
         \label{eq:pr-scan-comp-030}
-        \mycpar{\V{joint} is the current location of \V{downEE} less the length of
+        \mycpar{\V{i} is the current location of \V{downEE} less the length of
         the terminal string produced by the predot symbol instance.
         \cuz \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-020}.}
 \end{equation}
-Noting that a reduction is a confirmation,
+Noting that a scansion is a confirmation,
 \begin{equation}
         \label{eq:pr-scan-comp-040}
-        \mycpar{\V{stemAL} is the mainstem of \V{downAL} at \V{joint}
+        \mycpar{\V{stemAL} is the mainstem of \V{downAL} at \V{i}
         \bcuz \Lmref{conf-stem},
                 \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-020}, \eqref{eq:pr-scan-comp-030}.}
 \end{equation}
@@ -2657,38 +2657,9 @@ Noting that a reduction is a confirmation,
 \begin{equation}
 \label{eq:pr-scan-comp-050}
         \begin{gathered}
-                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{B} \cat \V{postdot}, \V{origin}, \V{joint}) \\
+                \V{stemEE} = (\V{A} \de \V{antepredot} \mydot \V{t:f} \cat \V{postdot}, \V{origin}, \V{i}) \\
         \cuz \Dfref{conf-stem}, \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-040}.
         \end{gathered}
-\end{equation}
-We now turn to consider the tributary of \V{downAL}.
-\begin{equation}
-        \label{eq:pr-scan-comp-090}
-        \mycpar{\V{tribAL} is the ranked tributary of \V{downAL} at \V{joint} \\
-        \cuz \Lmref{red-trib},
-                \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-020}, \eqref{eq:pr-scan-comp-030}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-scan-comp-100}
-        \mycpar{The Earley edge of \V{tribAL} is \\
-                $\V{tribEE} = (\V{B} \de \V{rhs} \mydot, \V{joint}, (\V{i}+1))$ \\
-        where $\V{B} \de \V{rhs} \in \V{P}$ \\
-        \cuz \Dfref{red-trib}, \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-090}, WLOG.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-scan-comp-200}
-        \mycpar{$\VFA{Rank}{tribAl} < \VFA{Rank}{downAL}$
-                \cuz \Lmref{red-trib}, \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-090}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-scan-comp-210}
-        \mycpar{$\VFA{Rank}{downAL} = \V{r} + 1$
-                \cuz \eqref{eq:pr-scan-comp-005}, \eqref{eq:pr-scan-comp-200}.}
-\end{equation}
-\begin{equation}
-\label{eq:pr-scan-comp-220}
-        \mycpar{$0 \le \VFA{Rank}{tribAL} \le \V{r}$
-                \cuz \eqref{eq:pr-scan-comp-200}, \eqref{eq:pr-scan-comp-210}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-scan-comp-230}
@@ -2696,50 +2667,26 @@ We now turn to consider the tributary of \V{downAL}.
         \cuz AF lemma.}
 \end{equation}
 \begin{equation}
-\label{eq:pr-scan-comp-240}
-        \begin{gathered}
-                \text{\V{tribEE} is in the chart
-                        \cuz \eqref{eq:pr-scan-comp-100},
-                        \eqref{eq:pr-scan-comp-220}, \eqref{eq:pr-scan-comp-230}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-scan-comp-250}
-        \begin{gathered}
-                \text{\V{tribEE} will be activated exactly once
-                        \cuz \Obref{activation-unique},
-                        \eqref{eq:pr-scan-comp-240}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
-\label{eq:pr-scan-comp-260}
-        \begin{gathered}
-                \text{\V{tribEE} will be activated
-                at row $\V{i}+1$
-                        \cuz \Obref{activation-at-currloc}, \eqref{eq:pr-scan-comp-100}.}
-        \end{gathered}
-\end{equation}
-\begin{equation}
 \label{eq:pr-scan-comp-270}
-        \mycpar{If \V{stemEE} is in the chart, it will be in row \V{joint},
-            $\V{joint} < \V{i}+1$
+        \mycpar{If \V{stemEE} is in the chart, it will be in row \V{i},
             \cuz \Obref{recording-at-currloc} \eqref{eq:pr-scan-comp-020}, \eqref{eq:pr-scan-comp-050}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-scan-comp-280}
-        \mycpar{Rows 0 thru $\V{i}+1$ are complete \cuz AF lemma.}
+        \mycpar{Rows 0 thru \V{i} are complete \cuz AF lemma.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-scan-comp-290}
-        \mycpar{Row \V{joint} is complete \cuz \eqref{eq:pr-scan-comp-270}, \eqref{eq:pr-scan-comp-280}.}
+        \mycpar{Row \V{i} is complete \cuz \eqref{eq:pr-scan-comp-270}, \eqref{eq:pr-scan-comp-280}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-scan-comp-300}
-                \mycpar{\V{stemEE} will be in row \V{joint} of the chart when
-                \V{tribEE} is activated
-        \cuz \Lmref{prev-inflows}, \eqref{eq:pr-scan-comp-260}, \eqref{eq:pr-scan-comp-270},
+                \mycpar{\V{stemEE} will be in row \V{i} of the chart when
+                scansions for row $\V{i}+1$ are recorded
+        \cuz \Lmref{prev-inflows}, \eqref{eq:pr-scan-comp-270},
                         \eqref{eq:pr-scan-comp-290}.}
 \end{equation}
+        \todo{Revise from here}
 \begin{equation}
 \label{eq:pr-scan-comp-310}
         \mycpar{When run for \V{tribEE}, \Algref{tangible-reduction}
