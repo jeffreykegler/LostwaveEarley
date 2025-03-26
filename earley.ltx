@@ -376,8 +376,8 @@
 \newenvironment{MYsloppyC}[3]{\par\tolerance#3 \emergencystretch#1 \hbadness#2\relax}{\par}
 
 \title
-  [Earley variant]
-  {Correctness proofs for a new variant of Earley's algorithm}
+  [Lostwave Earley]
+  {Correctness proofs for a the Lostwave variant of Earley's algorithm}
 
 \author{Jeffrey Kegler}
 \ifdraft{ \thanks{DRAFT as of \DTMnow} }{}
@@ -385,7 +385,7 @@
 
 \newcommand\textvtt[1]{{\normalfont\fontfamily{cmvtt}\selectfont #1}}
 \newcommand{\llguidance}{\textvtt{llguidance}\xspace}
-\newcommand{\llE}{{\llguidance Earley}\xspace}
+\newcommand{\LEV}{{Lostwave Earley}\xspace}
 \newcommand{\pref}[1]{\ref{#1} on page~\pageref{#1}\xspace}
 
 \begin{document}
@@ -396,9 +396,9 @@
 \section{About this document}
 \label{sec:about-me}
 
-This document contains a proof of correctness for \llE.
+This document contains a proof of correctness for \LEV.
 It assumes familiarity with parsing theory.
-Familiarity with the code in \llE
+Familiarity with the code in \LEV
 and with the traditional proof of correctness
 for Earley's algorithm~\cite[pp. 323-325]{AH1972v1}
 will be helpful.
@@ -799,7 +799,7 @@ We note that our definition of \Dfref{completeness},
 nulling completions.
 This differs from
 the usual definition of completeness in Earley parsing,
-and is a special feature of the \llE.
+and is a special feature of the \LEV.
 
 \begin{definition}[Rank]
         \label{df:rank}
@@ -1030,8 +1030,7 @@ of \V{stem}.
 \dfEnd
 \end{definition}
 
-Based on the pseudocode, we make a series of useful
-observations.
+Based on the pseudocode, we make a series of observations.
 
 \begin{observation}[No Earley edge is recorded twice]
         There are no duplicate Earley edges.
@@ -1051,14 +1050,14 @@ observations.
 \begin{observation}[Recording and activation of an event do not overlap]
         While the activation loop \Algref{finish-row} records edges
         during activation events,
-        these are always edges other than the activated edge.
+        the recorded edges are always edges other than the activated edge.
         No steps in the activation of an event \V{ev} overlap
         steps in the the recording of \V{ev},
         and vice versa.
         \obEnd
 \end{observation}
 
-\begin{observation}[edge activation is after recording]
+\begin{observation}[Edge activation is after recording]
         \label{obs:activation-after-recording}
         Before any Earley edge is activated,
         it must first be recorded.
@@ -1077,8 +1076,9 @@ observations.
 
 \begin{observation}[Edges are recorded at current location]
         \label{obs:recording-at-currloc}
-        An edge is recorded in the activation loop for
-        its current location.
+        If edge \V{edge} is recorded by the activation loop
+        for row \V{i},  the current location of \V{edge}
+        will be row \V{i}.
         \obEnd
 \end{observation}
 
@@ -1109,6 +1109,15 @@ observations.
         \Obref{recording-row-by-row},
         and \Obref{activation-row-by-row}.
         \obEnd
+\end{observation}
+
+\begin{observation}[Scansion timing]
+        \label{obs:scansion-timing}
+        Scansion occurs between activation loops.
+        More specifically, scansions for row $\V{i}+1$
+        are recorded after the activation loop for row
+        \V{i}, and before the activation loop for
+        row $\V{i}+1$.
 \end{observation}
 
 \begin{algorithm}[ht]
@@ -2280,12 +2289,12 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \begin{lemma}[Tangible reduction completeness]
         \label{lm:rt-comp}
-        When running \llE,
+        When running \LEV,
         if the chart is complete as far as rank \V{r}
         of row $\V{i}+1$,
         and \V{downAL} is a sound tangible reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley edge
+        then \LEV will record the Earley edge
         for \V{downAL} in the chart.
 \end{lemma}
 
@@ -2449,12 +2458,12 @@ for the lemma.
 
 \begin{lemma}[Intangible reduction completeness]
         \label{lm:ri-comp}
-        When running \llE,
+        When running \LEV,
         if the chart is complete as far as rank \V{r}
         of row $\V{i}+1$,
         and \V{downAL} is a sound intangible reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley edge
+        then \LEV will record the Earley edge
         for \V{downAL} in the chart.
 \end{lemma}
 
@@ -2571,12 +2580,12 @@ for the lemma.
 
 \begin{lemma}[Reduction completeness]
         \label{lm:red-comp}
-        When running \llE,
+        When running \LEV,
         if the chart is complete as far as rank \V{r}
         of row $\V{i}+1$,
         and \V{downAL} is a reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley edge
+        then \LEV will record the Earley edge
         for \V{downAL} in the chart.
         \lmEnd
 \end{lemma}
@@ -2602,11 +2611,11 @@ for the lemma.
 
 \begin{lemma}[Scansion completeness]
         \label{lm:scansion-completeness}
-        When running \llE,
+        When running \LEV,
         if the chart is complete as far as row \V{i},
         and \V{downAL} is a sound scansion aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \llE will record the Earley edge
+        then \LEV will record the Earley edge
         for \V{downAL} in the chart.
 \end{lemma}
 
@@ -2718,13 +2727,13 @@ for the lemma.
 
 \begin{lemma}[Prediction completeness]
         \label{lm:prediction-completeness}
-        When running \llE,
+        When running \LEV,
         if the chart is complete as far as rank \V{r}
         of row $\V{i}+1$,
         and \V{downAL} is a prediction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
         then either \V{downAL} is a nulling completion,
-        or \llE will record the Earley edge
+        or \LEV will record the Earley edge
         for \V{downAL} in the chart.
         \lmEnd
 \end{lemma}
@@ -2823,7 +2832,7 @@ Keeping in mind that \V{stemEE} is an incompletion,
 \end{equation}
 \begin{equation}
 \label{eq:pred-comp-350}
-        \mycpar{\llE records \V{downEE}
+        \mycpar{\LEV records \V{downEE}
                 \cuz \eqref{eq:pred-comp-260}, \eqref{eq:pred-comp-330}, \eqref{eq:pred-comp-340}.}
 \end{equation}
 Equation \eqref{eq:pred-comp-350} is what we needed to show
@@ -2833,7 +2842,7 @@ for the lemma.
 
 \begin{lemma}[Chart basis]
         \label{lm:chart-basis}
-        After starting \llE,
+        After starting \LEV,
         the chart is complete as far as row 0.
         \lmEnd
 \end{lemma}
@@ -2845,8 +2854,8 @@ for the lemma.
 
 \begin{lemma}[Row basis]
         \label{lm:row-basis}
-        If \llE is complete as far as row \V{i},
-        then \llE is complete as far as rank 0 of row $\V{i}+1$.
+        If \LEV is complete as far as row \V{i},
+        then \LEV is complete as far as rank 0 of row $\V{i}+1$.
         \lmEnd
 \end{lemma}
 
@@ -2857,7 +2866,7 @@ for the lemma.
 
 \begin{lemma}[Row step]
         \label{lm:row-step}
-        When running \llE,
+        When running \LEV,
         the chart is complete
         as far as rank $\V{r}+1$ of row $\V{i}+1$
         if it is complete
@@ -2872,7 +2881,7 @@ for the lemma.
 
 \begin{lemma}[Chart step]
         \label{lm:chart-step}
-        When running \llE,
+        When running \LEV,
         the chart is complete as far as row $\V{i}+1$
         if it is complete as far as row \V{i}.
         \lmEnd
@@ -2886,9 +2895,9 @@ for the lemma.
         \myqed
 \end{proof}
 
-\begin{theorem}[\llE is complete]
+\begin{theorem}[\LEV is complete]
         \label{th:llg-earley-complete}
-        \llE is complete.
+        \LEV is complete.
         \lmEnd
 \end{theorem}
 
@@ -2900,8 +2909,8 @@ for the lemma.
         \myqed
 \end{proof}
 
-\begin{theorem}[\llE is correct]
-        \llE is correct.
+\begin{theorem}[\LEV is correct]
+        \LEV is correct.
         \lmEnd
 \end{theorem}
 
