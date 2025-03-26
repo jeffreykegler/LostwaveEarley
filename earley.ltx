@@ -1253,10 +1253,10 @@ Based on the pseudocode, we make a series of observations.
 
 \section{Soundness}
 
-\begin{theorem}[The llguidance Earley algorithm is sound]
-        \label{th:llg-earley-sound}
-        After running the algorithm of \Sref{algorithm},
-        the contents of the Earley chart are sound.
+\begin{theorem}[\LEV is sound]
+        \label{th:lev-sound}
+        After running the algorithm of \LEV,
+        the contents of the Earley chart will be sound.
         \lmEnd
 \end{theorem}
 
@@ -2879,7 +2879,7 @@ for the lemma.
 \end{proof}
 
 \begin{theorem}[\LEV is complete]
-        \label{th:llg-earley-complete}
+        \label{th:lev-complete}
         \LEV is complete.
         \lmEnd
 \end{theorem}
@@ -2899,7 +2899,7 @@ for the lemma.
 
 \begin{proof}
         The theorem follows from
-        \Thref{llg-earley-sound} and \Thref{llg-earley-complete}.
+        \Thref{lev-sound} and \Thref{lev-complete}.
         \myqed
 \end{proof}
 
