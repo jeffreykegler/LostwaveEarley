@@ -144,6 +144,8 @@
 
 \newcommand{\de}{\mathrel{::=}}
 \newcommand{\derives}{\Rightarrow}
+\newcommand{\derivesRaw}[2]
+    {\mathrel{\mbox{$\:\underset{#2}{\overset{#1}{\Rightarrow}}$}}}
 \newcommand{\derivesW}[1]
     {\mathrel{\mbox{$\:\underset{#1}{\Rightarrow}$}}}
 \newcommand{\derivesV}[1]{\derivesW{\V{#1}}}
@@ -2194,67 +2196,67 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \section{Rank zero lemmas}
 
-\begin{lemma}[Start symbol occurrence]
-        \label{lm:start-symbol-occurrence}
+\begin{lemma}[Start symbol instance]
+        \label{lm:start-symbol-instance}
         In a derivation, the only instance of \V{S} is the first (and only) symbol in the first step. \lmEnd
 \end{lemma}
 
 \begin{proof}
         Let \V{drv} be a derivation.
         \begin{equation}
-        \label{eq:pr-start-symbol-occurrence-010}
+        \label{eq:pr-start-symbol-instance-010}
                 \mycpar{\V{S} cannot occur on a \V{rhs} \cuz
                        \Dfref{dedicated-start}.}
         \end{equation}
         \begin{equation}
-        \label{eq:pr-start-symbol-occurrence-020}
+        \label{eq:pr-start-symbol-instance-020}
                 \mycpar{\V{S} is the first (and only) symbol instance in the first step of \V{drv}
                 \cuz \Dfref{derivation}.}
         \end{equation}
         \begin{equation}
-        \label{eq:pr-start-symbol-occurrence-030}
+        \label{eq:pr-start-symbol-instance-030}
                 \mycpar{Every transition of \V{drv} expands a symbol from its LHS step
                 \cuz \Dfref{transition}, \Dfref{derivation}.}
         \end{equation}
         \begin{equation}
-                \label{eq:pr-start-symbol-occurrence-040}
+                \label{eq:pr-start-symbol-instance-040}
                 \mycpar{The transition from the first step of \V{drv}
                 to the second step
                 expands \V{S} to a RHS
-                \cuz \eqref{eq:pr-start-symbol-occurrence-020},
-                        \eqref{eq:pr-start-symbol-occurrence-030}.}
+                \cuz \eqref{eq:pr-start-symbol-instance-020},
+                        \eqref{eq:pr-start-symbol-instance-030}.}
         \end{equation}
         \begin{equation}
-                \label{eq:pr-start-symbol-occurrence-050}
+                \label{eq:pr-start-symbol-instance-050}
                 \mycpar{\V{S} does not occur in the second step of \V{drv} \\
-                \cuz \Dfref{transition}, \eqref{eq:pr-start-symbol-occurrence-010},
-                        \eqref{eq:pr-start-symbol-occurrence-040}.}
+                \cuz \Dfref{transition}, \eqref{eq:pr-start-symbol-instance-010},
+                        \eqref{eq:pr-start-symbol-instance-040}.}
         \end{equation}
         \begin{equation}
-                \label{eq:pr-start-symbol-occurrence-060}
+                \label{eq:pr-start-symbol-instance-060}
                 \mycpar{A new symbol can occur in a step only as part of an expansion
                 \cuz \Dfref{transition}.}
         \end{equation}
         \begin{equation}
-                \label{eq:pr-start-symbol-occurrence-070}
+                \label{eq:pr-start-symbol-instance-070}
                 \mycpar{A symbol in an expansion must be a RHS symbol \\
                 \cuz \Dfref{transition}.}
         \end{equation}
         \begin{equation}
-                \label{eq:pr-start-symbol-occurrence-080}
+                \label{eq:pr-start-symbol-instance-080}
                 \mycpar{\V{S} can never occur in an expansion
-                \cuz \eqref{eq:pr-start-symbol-occurrence-010},
-                        \eqref{eq:pr-start-symbol-occurrence-070}.}
+                \cuz \eqref{eq:pr-start-symbol-instance-010},
+                        \eqref{eq:pr-start-symbol-instance-070}.}
         \end{equation}
         \begin{equation}
-                \label{eq:pr-start-symbol-occurrence-090}
+                \label{eq:pr-start-symbol-instance-090}
                 \mycpar{\V{S} cannot occur in a step after the first
-                \cuz \eqref{eq:pr-start-symbol-occurrence-050},
-                        \eqref{eq:pr-start-symbol-occurrence-060},
-                        \eqref{eq:pr-start-symbol-occurrence-080}.}
+                \cuz \eqref{eq:pr-start-symbol-instance-050},
+                        \eqref{eq:pr-start-symbol-instance-060},
+                        \eqref{eq:pr-start-symbol-instance-080}.}
         \end{equation}
         \V{drv} was chosen arbitrarily, so that with
-        \eqref{eq:pr-start-symbol-occurrence-090}
+        \eqref{eq:pr-start-symbol-instance-090}
         we have the theorem.
         \myqed
 \end{proof}
@@ -2264,19 +2266,44 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         An altheme with the start symbol as its LHS is of the form
         \begin{equation}
                 \V{startAL} = \left( \; \begin{gathered} \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
-                        \V{S},0,\Vsize{pre} \\
+                        \V{S},0,\V{current} \\
                 \end{gathered} \; \right)
         \end{equation}
         where \V{drv} is a derivation and $\V{S} \de \V{pre} \cat \V{post}$
         is the start rule,
         divided at an arbitrary point between \V{pre} and \V{post}.
+        The rank of \V{startAL} is twice the length of minimum derivation
+        from \V{pre} to \Velement{w}{0,\V{current}}.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
         \todo{Write this proof}
+        Without loss of generality, let the dedicated start rule be
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-010}
+                \V{S} \de \V{pre} \cat \V{post} \cuz
+                       \Dfref{dedicated-start}.
+        \end{equation}
+        where the division between \V{pre} and \V{post} is arbitrary.
+        Let
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-020}
+                \V{startAL} = \left( \; \begin{gathered} \V{drv},\V{fore},\V{aft},\V{pre},\V{post}, \\
+                        \V{S},\V{origin},\V{current} \\
+                \end{gathered} \; \right) \\
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-start-sym-aletheme-010}.
+        \end{equation}
+        be an arbitrary altheme with \V{S} on its LHS.
+        The only transition that contains \V{S} is
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-030}
+                (\V{S}, \V{pre} \cat \V{post}) \cuz
+                \Lmref{start-symbol-instance}, \Dfref{transition}, \eqref{eq:pr-start-sym-aletheme-010}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-030}
+                \V{S} \derivesRaw{0}{\V{drv}} \V{S}
         \end{equation}
         \myqed
 \end{proof}
