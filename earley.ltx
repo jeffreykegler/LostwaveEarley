@@ -2196,7 +2196,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \begin{lemma}[Start symbol occurrence]
         \label{lm:start-symbol-occurrence}
-        In a derivation, \V{S} only occurs in the first step. \lmEnd
+        In a derivation, the only instance of \V{S} is the first (and only) symbol in the first step. \lmEnd
 \end{lemma}
 
 \begin{proof}
@@ -2208,7 +2208,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-occurrence-020}
-                \mycpar{\V{S} occurs alone in the first step of \V{drv}
+                \mycpar{\V{S} is the first (and only) symbol instance in the first step of \V{drv}
                 \cuz \Dfref{derivation}.}
         \end{equation}
         \begin{equation}
@@ -2218,14 +2218,17 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \end{equation}
         \begin{equation}
                 \label{eq:pr-start-symbol-occurrence-040}
-                \mycpar{The second step of \V{drv} expands \V{S}
+                \mycpar{The transition from the first step of \V{drv}
+                to the second step
+                expands \V{S} to a RHS.
                 \cuz \eqref{eq:pr-start-symbol-occurrence-020},
                         \eqref{eq:pr-start-symbol-occurrence-030}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-start-symbol-occurrence-050}
                 \mycpar{\V{S} does not occur in the second step of \V{drv}
-                \cuz \Dfref{transition}, \eqref{eq:pr-start-symbol-occurrence-040}.}
+                \cuz \Dfref{transition}, \eqref{eq:pr-start-symbol-occurrence-010},
+                        \eqref{eq:pr-start-symbol-occurrence-040}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-start-symbol-occurrence-060}
@@ -2256,21 +2259,23 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \myqed
 \end{proof}
 
-\begin{lemma}[Start aletheme]
-        \label{lm:start-aletheme}
+\begin{lemma}[Start symbol aletheme]
+        \label{lm:start-sym-aletheme}
         An altheme with the start symbol as its LHS is of the form
-        \[
-        \mycpar{$\V{startAL} = (\V{drv},\epsilon,\epsilon,\V{pre},\V{post},$ \\
-        $\V{S},0,\Vsize{pre})$.}
-        \]
+        \begin{equation}
+                \V{startAL} = \left( \; \begin{gathered} \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
+                        \V{S},0,\Vsize{pre} \\
+                \end{gathered} \; \right)
+        \end{equation}
         where \V{drv} is a derivation and $\V{S} \de \V{pre} \cat \V{post}$
         is the start rule.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
+        \todo{Write this proof}
         \begin{equation}
-        \label{eq:pr-start-aletheme-020}
+        \label{eq:pr-start-sym-aletheme-010}
         \end{equation}
         \myqed
 \end{proof}
