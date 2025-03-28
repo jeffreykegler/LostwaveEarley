@@ -2263,48 +2263,122 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \begin{lemma}[Start symbol aletheme]
         \label{lm:start-sym-aletheme}
-        An altheme with the start symbol as its LHS is of the form
+        Let \V{drv} be a derivation and let
+        \[ \V{S} \de \V{pre} \cat \V{post} \]
+        be the start rule of \V{g},
+        divided at any point in the RHS into \V{pre} and \V{post}.
+        An sound aletheme with the start symbol as its LHS will be of the form
         \begin{equation}
                 \V{startAL} = \left( \; \begin{gathered} \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
-                        \V{S},0,\V{current} \\
-                \end{gathered} \; \right)
+                        \V{S:lhs},0,\V{current} \\
+                \end{gathered} \; \right),
         \end{equation}
-        where \V{drv} is a derivation and $\V{S} \de \V{pre} \cat \V{post}$
-        is the start rule,
-        divided at an arbitrary point between \V{pre} and \V{post}.
-        The rank of \V{startAL} is twice the length of minimum derivation
-        from \V{pre} to \Velement{w}{0,\V{current}}.
+        where
+        \[ \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}. \]
+        The rank of \V{startAL} will be $2 \mult \VFA{Ht}{startAL}$.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
         \todo{Write this proof}
-        Without loss of generality, let the dedicated start rule be
+        Let \V{drv} be an arbitrary derivation and let
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-010}
-                \V{S} \de \V{pre} \cat \V{post} \cuz
-                       \Dfref{dedicated-start}.
+                \mycpar{$\V{S} \de \V{pre} \cat \V{post}$
+                        \cuz \Dfref{dedicated-start},
+                 \eqref{eq:pr-start-sym-aletheme-020}.}
         \end{equation}
-        where the division between \V{pre} and \V{post} is arbitrary.
-        Let
+        be the dedicated start rule, with its RHS
+        arbitrarily divided into \V{pre} and \V{post}.
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-020}
                 \V{startAL} = \left( \; \begin{gathered} \V{drv},\V{fore},\V{aft},\V{pre},\V{post}, \\
-                        \V{S},\V{origin},\V{current} \\
+                        \V{S:lhs},\V{origin},\V{current} \\
                 \end{gathered} \; \right) \\
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-start-sym-aletheme-010}.
+                \cuz \Dfref{aletheme}.
         \end{equation}
-        be an arbitrary altheme with \V{S} on its LHS.
+        be a sound altheme with \V{S} on its LHS,
+        where we seek to determine the values of
+        \V{fore}, \V{aft}, \V{origin}, and \V{current}.
         The only transition that contains \V{S} is
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-030}
-                (\V{S}, \V{pre} \cat \V{post}) \cuz
+                (\V{S:top}, \V{pre} \cat \V{post}) \cuz
                 \Lmref{start-symbol-instance}, \Dfref{transition}, \eqref{eq:pr-start-sym-aletheme-010}.
         \end{equation}
         \begin{equation}
-        \label{eq:pr-start-sym-aletheme-030}
-                \V{S} \derivesRaw{0}{\V{drv}} \V{S}
+        \label{eq:pr-start-sym-aletheme-040}
+                \mycpar{There is only one instance of \V{S} in \V{drv}
+                \cuz \Lmref{start-symbol-instance},}
         \end{equation}
+        so that, in
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-050}
+                \V{S:top} \derivesRaw{\V{n}}{\V{drv}} \V{fore} \cat \V{S:lhs} \cat \V{aft}
+        \end{equation}
+        it must be the case that
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-060}
+                \mycpar{\V{S:top} = \V{S:lhs}
+                \cuz \eqref{eq:pr-start-sym-aletheme-040}, \eqref{eq:pr-start-sym-aletheme-050}, and}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-070}
+                \mycpar{$\V{n} = 0 \cuz \eqref{eq:pr-start-sym-aletheme-050}$.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-080}
+                \mycpar{$\V{S:top} \derivesRaw{0}{\V{drv}} \V{fore} \cat \V{S:top} \cat \V{aft}$
+                \cuz \eqref{eq:pr-start-sym-aletheme-050}, \eqref{eq:pr-start-sym-aletheme-070}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-090}
+                \mycpar{$\V{S:top} = \V{fore} \cat \V{S:top} \cat \V{aft}$
+                \cuz \eqref{eq:pr-start-sym-aletheme-080}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-100}
+                \V{fore} = \epsilon \land \V{aft} = \epsilon
+                \cuz \eqref{eq:pr-start-sym-aletheme-090}.
+        \end{equation}
+        From the soundness of \V{startAL}, we know that
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-110}
+                \V{fore} \destarV{drv} \Velement{0,\V{origin}} \cuz \Dfref{aletheme},
+                        \eqref{eq:pr-start-sym-aletheme-020}, and
+        \end{equation}
+        since $\V{fore} = \epsilon$,
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-120}
+                \V{origin} = 0 \cuz \eqref{eq:pr-start-sym-aletheme-100},
+                        \eqref{eq:pr-start-sym-aletheme-110}.
+        \end{equation}
+        Also from the soundness of \V{startAL}, we know that
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-130}
+                \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
+                        \cuz \Dfref{aletheme}, \eqref{eq:pr-start-sym-aletheme-020}, so that}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-140}
+                 \mycpar{$\V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$ \cuz
+                         \eqref{eq:pr-start-sym-aletheme-120},
+                         \eqref{eq:pr-start-sym-aletheme-130}.}
+         \end{equation}
+        Collecting our results back into \V{startAL}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-150}
+                \V{startAL} = \left( \; \begin{gathered} \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
+                        \V{S:lhs},0,\V{current} \\
+                \end{gathered} \; \right) \\
+                \cuz \eqref{eq:pr-start-sym-aletheme-020}, \eqref{eq:pr-start-sym-aletheme-100},
+                        \eqref{eq:pr-start-sym-aletheme-120}.
+        \end{equation}
+        \eqref{eq:pr-start-sym-aletheme-130} and \eqref{eq:pr-start-sym-aletheme-150} are two
+        of the results we needed for the lemma.
+
+        It remains to characterize the rank of \V{startAL}.
+        \todo{Finish this proof}
         \myqed
 \end{proof}
 
