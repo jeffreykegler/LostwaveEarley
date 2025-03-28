@@ -2275,7 +2275,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \end{equation}
         where
         \[ \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}. \]
-        The rank of \V{startAL} will be $2 \mult \VFA{Ht}{startAL}$.
+        The rank of \V{startAL} will be \VFA{Dp}{startAL}.
         \lmEnd
 \end{lemma}
 
@@ -2377,6 +2377,20 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         of the results we needed for the lemma.
 
         It remains to characterize the rank of \V{startAL}.
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-160}
+                \VFA{Rank}{startAL} = \VFA{Dp}{startAL} + 2 \mult \VFA{Ht}{startAL} \cuz \Dfref{rank}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-170}
+                \VFA{Ht}{startAL} = 0 \cuz \Dfref{rank},
+                        \eqref{eq:pr-start-sym-aletheme-060}, \eqref{eq:pr-start-sym-aletheme-080}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-sym-aletheme-180}
+                \VFA{Rank}{startAL} = \VFA{Dp}{startAL} \cuz
+                        \eqref{eq:pr-start-sym-aletheme-160}, \eqref{eq:pr-start-sym-aletheme-170}.
+        \end{equation}
         \todo{Finish this proof}
         \myqed
 \end{proof}
