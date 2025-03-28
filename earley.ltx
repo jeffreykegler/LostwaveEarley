@@ -2280,16 +2280,15 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 \end{lemma}
 
 \begin{proof}
-        \todo{Write this proof}
         Let \V{drv} be an arbitrary derivation and let
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-010}
                 \mycpar{$\V{S} \de \V{pre} \cat \V{post}$
-                        \cuz \Dfref{dedicated-start},
-                 \eqref{eq:pr-start-sym-aletheme-020}.}
+                        \cuz \Dfref{dedicated-start}.}
         \end{equation}
         be the dedicated start rule, with its RHS
         arbitrarily divided into \V{pre} and \V{post}.
+        Let
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-020}
                 \V{startAL} = \left( \; \begin{gathered} \V{drv},\V{fore},\V{aft},\V{pre},\V{post}, \\
@@ -2329,7 +2328,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-080}
                 \mycpar{$\V{S:top} \derivesRaw{0}{\V{drv}} \V{fore} \cat \V{S:top} \cat \V{aft}$
-                \cuz \eqref{eq:pr-start-sym-aletheme-050}, \eqref{eq:pr-start-sym-aletheme-070}.}
+                \cuz \eqref{eq:pr-start-sym-aletheme-050}, \eqref{eq:pr-start-sym-aletheme-060}, \eqref{eq:pr-start-sym-aletheme-070}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-090}
@@ -2344,8 +2343,8 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         From the soundness of \V{startAL}, we know that
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-110}
-                \V{fore} \destarV{drv} \Velement{0,\V{origin}} \cuz \Dfref{aletheme},
-                        \eqref{eq:pr-start-sym-aletheme-020}, and
+                \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
+                        \cuz \Dfref{aletheme}, \eqref{eq:pr-start-sym-aletheme-020}, and}
         \end{equation}
         since $\V{fore} = \epsilon$,
         \begin{equation}
@@ -2374,7 +2373,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \cuz \eqref{eq:pr-start-sym-aletheme-020}, \eqref{eq:pr-start-sym-aletheme-100},
                         \eqref{eq:pr-start-sym-aletheme-120}.
         \end{equation}
-        \eqref{eq:pr-start-sym-aletheme-130} and \eqref{eq:pr-start-sym-aletheme-150} are two
+        \eqref{eq:pr-start-sym-aletheme-140} and \eqref{eq:pr-start-sym-aletheme-150} are two
         of the results we needed for the lemma.
 
         It remains to characterize the rank of \V{startAL}.
