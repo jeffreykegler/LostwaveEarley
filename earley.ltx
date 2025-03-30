@@ -605,6 +605,18 @@ We say that
         \dfEnd
 \end{definition}
 
+\begin{definition}[Full derivation]
+        \label{df:full-derivation}
+        A derivation, call it \V{drv}, is a sequence of strings
+        \begin{itemize}
+                \item the first of which consists only of the start symbol, \V{S}; and
+                \item and such that every consecutive pair of the sequence is a string transition.
+        \end{itemize}
+        The individual members of a derivation are strings,
+        and in the context of the derivation are called \V{steps}.
+        \dfEnd
+\end{definition}
+
 \begin{definition}[Trivial derivation]
         In the SF transition
         \[ ( (\alpha \cat \V{A} \cat \beta), (\alpha \cat \V{rhsA} \cat \beta), \]
@@ -625,18 +637,6 @@ We say that
         are \textbf{trivially derived} from
         the corresponding symbol instances in $\alpha$ and $\beta$ in \V{Lstr};
 \dfEnd
-\end{definition}
-
-\begin{definition}[Derivation]
-        \label{df:derivation}
-        A derivation, call it \V{drv}, is a sequence of strings
-        \begin{itemize}
-                \item the first of which consists only of the start symbol, \V{S}; and
-                \item and such that every consecutive pair of the sequence is a string transition.
-        \end{itemize}
-        The individual members of a derivation are strings,
-        and in the context of the derivation are called \V{steps}.
-        \dfEnd
 \end{definition}
 
 \begin{definition}[Symbol instance]
@@ -830,7 +830,7 @@ as follows:
 expansion of the LHS symbol instance of a transition \V{tr},
 if \V{str} is the direct expansion of the transition \V{tr}.
 \item The direct expansion of a symbol instance string \V{str2} is the concatenation
-of the expansions of the symbol instances in \V{str2}.
+of the direct expansions of the symbol instances in \V{str2}.
 \item A symbol instance string \V{str4} is an expansion of \V{str3} if
 \V{str4} is a direct expansion of an expansion of \V{str3}.
 \item A symbol instance string \V{str4} is an expansion of the symbol instance \V{A}
@@ -858,13 +858,24 @@ if they are non-trivial transitions.
 \begin{definition}[Derivation length]
         \label{df:derivation-length}
         Let \V{drv} be a derivation,
-        \V{i} the index of the derivation step of a symbol
+        \V{i} be the index of the derivation step of a symbol
         instance \V{A:t}, and
-        and \V{j} is the index of the derivation step of \V{$\alpha$:b},
+        and \V{j} be the index of the derivation step of \V{$\alpha$:b},
         where \V{$\alpha$:b} is an expansion of \V{A:t}.
         The length of the derivation from \V{A:t} to \V{$\alpha$:b},
         is the number of
         transitions which are non-trivial descendants of \V{A:t}
+        in the range of steps \Velement{drv}{\V{i},\V{j}}.
+
+        Let \V{i} be the index of the derivation step of symbol string
+        instance \V{str:t}, and
+        and \V{j} be the index of the derivation step of \V{$\alpha$:b},
+        where \V{$\alpha$:b} is an expansion of \V{str:t}.
+        The length of the derivation from an instance string
+        \V{str:t} to \V{$\alpha$:b},
+        is the sum of the
+        transitions which are non-trivial descendants of
+        each of the symbols in \V{str:t}
         in the range of steps \Velement{drv}{\V{i},\V{j}}.
 \dfEnd
 \end{definition}
@@ -2211,12 +2222,12 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \begin{equation}
         \label{eq:pr-start-symbol-instance-020}
                 \mycpar{\V{S} is the first (and only) symbol instance in the first step of \V{drv}
-                \cuz \Dfref{derivation}.}
+                \cuz \Dfref{full-derivation}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-instance-030}
                 \mycpar{Every transition of \V{drv} expands a symbol from its LHS step
-                \cuz \Dfref{transition}, \Dfref{derivation}.}
+                \cuz \Dfref{transition}, \Dfref{full-derivation}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-start-symbol-instance-040}
@@ -2260,6 +2271,12 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         we have the theorem.
         \myqed
 \end{proof}
+
+\begin{definition}[Start symbol aletheme]
+        A \textbf{start symbol aletheme} is an aletheme
+        whose LHS symbol is the start symbol.
+        \dfEnd
+\end{definition}
 
 \begin{lemma}[Start symbol aletheme]
         \label{lm:start-sym-aletheme}
@@ -2391,7 +2408,55 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \VFA{Rank}{startAL} = \VFA{Dp}{startAL} \cuz
                         \eqref{eq:pr-start-sym-aletheme-160}, \eqref{eq:pr-start-sym-aletheme-170}.
         \end{equation}
-        \todo{Finish this proof}
+        With \eqref{eq:pr-start-sym-aletheme-140}, \eqref{eq:pr-start-sym-aletheme-150},
+        and \eqref{eq:pr-start-sym-aletheme-180},
+        we have all of the results we needed for the lemma.
+        \myqed
+\end{proof}
+
+\begin{lemma}[Zero rank start symbol aletheme]
+        \label{lm:start-sym-0-aletheme}
+        A start symbol aletheme is a zero rank aletheme iff
+        all of the predot symbols in its direct expansion are terminals.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \todo{Write this proof}
+        \textbf{The ``if'' direction}
+        \begin{equation}
+        \label{lm:pr-start-sym-0-aletheme-010}
+                \mycpar{No non-trivial transitions are possible from a
+                string of terminal symbol instances
+                \cuz \Dfref{transition}.}
+        \end{equation}
+        \begin{equation}
+        \label{lm:pr-start-sym-0-aletheme-020}
+        \mycpar{The derivation length from a string of terminal
+                symbol instances to any string is zero.
+                \cuz \Dfref{derivation-length},
+                        \eqref{lm:pr-start-sym-0-aletheme-010}.}
+        \end{equation}
+        \textbf{The ``only if'' direction}
+        \begin{equation}
+        \label{lm:pr-start-sym-0-aletheme-030}
+                \mycpar{
+                In a derivation to a string of terminal symbol instances from
+                a symbol instance string with a non-terminal,
+                there must have be at least one non-trivial transition.
+                \cuz \Dfref{transition}.}
+        \end{equation}
+        \begin{equation}
+        \label{lm:pr-start-sym-0-aletheme-040}
+        \mycpar{The derivation length from a string of terminal
+                symbol instances to a terminal symbol instance string is
+                greater than zero.
+                \cuz \Dfref{derivation-length},
+                        \eqref{lm:pr-start-sym-0-aletheme-030}.}
+        \end{equation}
+        With \eqref{lm:pr-start-sym-0-aletheme-020} and \eqref{lm:pr-start-sym-0-aletheme-040},
+        we have both directions and the theorem.
+        \todo{Prove with a reductio for the ``only if'' direction}
         \myqed
 \end{proof}
 
