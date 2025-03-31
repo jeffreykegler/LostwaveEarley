@@ -931,6 +931,74 @@ and we call \V{tgt:f} the \textbf{target} of \V{drv}.
 \dfEnd
 \end{definition}
 
+\begin{observation}[Target symbol ancestry]
+\label{ob:target symbol ancestor}
+In a partial derivation from a string,
+every symbol instance in the target string has
+exactly one ancestor symbol in the source string.
+\obEnd
+\end{observation}
+
+\begin{definition}[Image of source symbol in target string]
+\label{df:source-image}
+In a partial derivation,
+The string composed of the symbols which share the
+same ancestor symbol instance in the source string, is called
+the \textbf{image} of that symbol instance in the target string.
+\dfEnd
+\end{definition}
+
+\begin{observation}[Derivation source length concatenation]
+\label{ob:derivation-length-concatenation}
+        The length of a partial derivation from a string to its target
+        is the sum of the lengths of the partial derivations of the
+        component symbols to their images in the target string.
+\obEnd
+\end{observation}
+
+\begin{observation}[Derivation chaining]
+\label{ob:derivation-chain}
+Partial derivations that share the same full
+derivation can be chained.
+In every predecessor, successor pair of derivation
+the target of the predecessor must be the source of the successor.
+\obEnd
+\end{observation}
+
+\begin{observation}[Derivation chain length concatenation]
+\label{ob:derivation-chain-length}
+        The length of a chain of partial derivation is
+        is the sum of the lengths of the partial derivations that
+        are the components of the chain.
+\obEnd
+\end{observation}
+
+\begin{definition}
+\label{ob:partial-derivation-notation}
+        We notate a partial derivation from \V{src} to \V{tgt} as
+        \[ \V{src} \derivesRaw{\V{L}}{\V{X}} \V{tgt}, \]
+        where \V{L} is a length indicator,
+        and \V{X} is a derivation indicator.
+        The length indicator \V{L} may be a natural number constant
+        or variable, or one of the two special length indicators,
+        ``$\ast$'' and ``$+$''.
+        The indicator ``$\ast$'' specifies that the length can be
+        any natural number.
+        The indicator ``$+$'' specifies that the length can be
+        any non-zero natural number.
+        Where \V{L} is omitted, the length of the partial
+        derivation is exactly one.
+
+        The derivation indicator can be either a full derivation
+        or \V{g}.
+        When the derivation indicator is \V{g}, it specifies that
+        the derivation may be any full derivation of \V{w} using
+        grammar \V{g}.
+        Omission of the derivation indicator is the same as
+        specifying \V{g} as the derivation indicator.
+\dfEnd
+\end{definition}
+
 \begin{definition}[Confirmation mainstem]
         \label{df:conf-stem}
         Suppose, without loss of generality, that
