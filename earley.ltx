@@ -249,7 +249,7 @@
 % Theorem th:
 % Lemma lm:
 % Remark rm:
-% Observation obs:
+% Observation ob:
 % Example ex:
 % Page page:
 
@@ -335,7 +335,7 @@
 % theoremoids: Ob
 
 \newtheorem{observation}[theorem]{Observation}
-\newcommand{\Obref}[1]{\genref{obs:#1}{Ob}}
+\newcommand{\Obref}[1]{\genref{ob:#1}{Ob}}
 \newcommand{\obEnd}{\Circle}
 
 % theoremoids: Rm
@@ -949,7 +949,7 @@ the \textbf{image} of that symbol instance in the target string.
 \end{definition}
 
 \begin{observation}[Derivation source length concatenation]
-\label{ob:derivation-length-concatenation}
+\label{ob:derivation-source-length}
         The length of a partial derivation from a string to its target
         is the sum of the lengths of the partial derivations of the
         component symbols to their images in the target string.
@@ -1175,7 +1175,7 @@ Based on the pseudocode, we make a series of observations.
 \end{observation}
 
 \begin{observation}[An Earley edge is activated once]
-        \label{obs:activation-unique}
+        \label{ob:activation-unique}
         A recorded Earley edge is activated exactly once.
         Relevant to this observation is the activation loop in \Algref{finish-row}.
         \obEnd
@@ -1192,14 +1192,14 @@ Based on the pseudocode, we make a series of observations.
 \end{observation}
 
 \begin{observation}[Edge activation is after recording]
-        \label{obs:activation-after-recording}
+        \label{ob:activation-after-recording}
         Before any Earley edge is activated,
         it must first be recorded.
         \obEnd
 \end{observation}
 
 \begin{observation}[Edges are recorded row by row]
-        \label{obs:recording-row-by-row}
+        \label{ob:recording-row-by-row}
         Edges are recorded one row at a time.
         More precisely, no edge in row \V{i}
         will
@@ -1209,7 +1209,7 @@ Based on the pseudocode, we make a series of observations.
 \end{observation}
 
 \begin{observation}[Edges are recorded at current location]
-        \label{obs:recording-at-currloc}
+        \label{ob:recording-at-currloc}
         If edge \V{edge} is recorded by the activation loop
         for row \V{i},  the current location of \V{edge}
         will be row \V{i}.
@@ -1217,7 +1217,7 @@ Based on the pseudocode, we make a series of observations.
 \end{observation}
 
 \begin{observation}[Edges are activated row by row]
-        \label{obs:activation-row-by-row}
+        \label{ob:activation-row-by-row}
         Edges are activated one row at a time.
         More precisely, no edge in row \V{i}
         will
@@ -1227,14 +1227,14 @@ Based on the pseudocode, we make a series of observations.
 \end{observation}
 
 \begin{observation}[Edge activation at current location]
-        \label{obs:activation-at-currloc}
+        \label{ob:activation-at-currloc}
         An edge is activated in the activation loop for
         its current location.
         \obEnd
 \end{observation}
 
 \begin{observation}[Activation is after recording of previous rows]
-        \label{obs:activation-after-previous-row}
+        \label{ob:activation-after-previous-row}
         Before any Earley edge is activated,
         all Earley edges that will ever be recorded in previous rows
         must already have been recorded.
@@ -1246,7 +1246,7 @@ Based on the pseudocode, we make a series of observations.
 \end{observation}
 
 \begin{observation}[Scansion timing]
-        \label{obs:scansion-timing}
+        \label{ob:scansion-timing}
         Scansion occurs between activation loops.
         More specifically, scansions for row $\V{i}+1$
         are recorded by \Algref{scansion},
@@ -2533,16 +2533,16 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \myqed
 \end{proof}
 
-\begin{lemma}[Zero rank start symbol aletheme]
+\begin{lemma}[Zero height string]
         \label{lm:start-sym-0-aletheme}
-        A start symbol aletheme is a zero rank aletheme iff
-        all of the predot symbols in its direct expansion are terminals.
+        A partial derivative from a symbol instance string to a terminal symbol instance string
+        is zero length
+        iff all of the symbols in its source are terminals.
         \lmEnd
 \end{lemma}
 
 \begin{proof}
-        \todo{Write this proof}
-        \textbf{The ``if'' direction}
+        \textbf{The ``if'' direction}:
         \begin{equation}
         \label{lm:pr-start-sym-0-aletheme-010}
                 \mycpar{No non-trivial transitions are possible from a
@@ -2553,10 +2553,10 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \label{lm:pr-start-sym-0-aletheme-020}
         \mycpar{The derivation length from a string of terminal
                 symbol instances to any string is zero.
-                \cuz \Dfref{derivation-length},
+                \cuz \Dfref{derivation-length}, \Obref{derivation-source-length},
                         \eqref{lm:pr-start-sym-0-aletheme-010}.}
         \end{equation}
-        \textbf{The ``only if'' direction}
+        \textbf{The ``only if'' direction}:
         \begin{equation}
         \label{lm:pr-start-sym-0-aletheme-030}
                 \mycpar{
@@ -2570,12 +2570,11 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \mycpar{The derivation length from a string of terminal
                 symbol instances to a terminal symbol instance string is
                 greater than zero.
-                \cuz \Dfref{derivation-length},
+                \cuz \Dfref{derivation-length}, \Obref{derivation-source-length},
                         \eqref{lm:pr-start-sym-0-aletheme-030}.}
         \end{equation}
         With \eqref{lm:pr-start-sym-0-aletheme-020} and \eqref{lm:pr-start-sym-0-aletheme-040},
         we have both directions and the theorem.
-        \todo{Prove with a reductio for the ``only if'' direction}
         \myqed
 \end{proof}
 
