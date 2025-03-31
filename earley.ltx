@@ -450,7 +450,7 @@ empty string.
 
 \begin{definition}[Grammar]
 \label{df:grammar}
-A grammar is a 4-tuple
+A grammar is a 5-tuple
 \[
         \tuple{\V{N},\V{T},\V{P},\V{S}},
 \]
@@ -668,6 +668,13 @@ We say that
         For example, \eqref{eq:df-instance-010}
         would almost always be written \V{A:f}.
 
+        When the minor indentifier is omitted,
+        the reference is to the first occurrence in the derivation
+        of an instance with that symbol and major identifier.
+        The tag ``\texttt{f}'', as in \V{A:f}, is frequently used.
+        The ``\texttt{f}''is intended to suggest that the instance is the current
+        topic or ``focus''.
+
         Instance tags are also used after strings,
         to indicate that every symbol instance in the string instance has that
         instance tag.
@@ -855,28 +862,72 @@ if they are non-trivial transitions.
 \dfEnd
 \end{definition}
 
+\begin{definition}[Partial derivation]
+        \label{df:partial-derivation}
+        Let \V{fdrv} be a full derivation.
+        We define a \textbf{partial derivation}
+        from a symbol instance \V{A:f}
+        to a symbol string instance \V{str:f},
+        where \V{str:f} is an expansion of \V{A:f},
+        as a 4-tuple
+        \[ \V{drv} = (\V{fdrv}, \V{fromStep}, \V{toStep}, \V{lhsIx}), \]
+        where
+\begin{itemize}
+        \item \V{fromStep} is the index in \V{fdrv} of the
+step which contains \V{A:f};
+\item \V{lhsIX} is the index of \V{A:f} in \VVelement{fdrv}{fromStep},
+\item \V{toStep} is the index in \V{fdrv} of the step which contains \V{str:f}.
+\end{itemize}
+This implies that
+\[ \element{\VVelement{fdrv}{fromStep}}{\V{lhsIX}} = \V{A:f}. \]
+We call \V{A:f} the \textbf{source} of \V{drv}
+and we call \V{str:f} the \textbf{target} of \V{drv}.
+When it is clear we are speaking of a partial derivation, we often
+refer to it simply as a \textbf{derivation}.
+\dfEnd
+\end{definition}
+
+\begin{definition}[Partial derivation from string]
+\label{df:partial-derivation-string}
+Let \V{fdrv} be a full derivation.
+We define a \textbf{partial derivation}
+from a symbol string instance \V{src:f}
+to a symbol string instance \V{tgt:f},
+where \V{tgt:f} is an expansion of \V{src:f},
+as a 5-tuple
+\[ \V{drv} = (\V{fdrv}, \V{fromStep}, \V{toStep}, \V{lhsIx1}, \V{lhsIx2}), \]
+where
+\V{fromStep} in the index in the derivation of the
+step which contains \V{Lstr:f},
+\[ \element{\VVelement{drv}{fromStep}}{\V{lhsIx1},\V{lhsIx2}} = \V{src:f}, \]
+and
+\V{toStep} is the index in \V{drv} of the step which contains \V{tgt:f}.
+We call \V{src:f} the \textbf{source} of \V{drv}
+and we call \V{tgt:f} the \textbf{target} of \V{drv}.
+\dfEnd
+\end{definition}
+
 \begin{definition}[Derivation length]
         \label{df:derivation-length}
-        Let \V{drv} be a derivation,
-        \V{i} be the index of the derivation step of a symbol
-        instance \V{A:t}, and
-        and \V{j} be the index of the derivation step of \V{$\alpha$:b},
-        where \V{$\alpha$:b} is an expansion of \V{A:t}.
-        The length of the derivation from \V{A:t} to \V{$\alpha$:b},
+        Let \V{fdrv} be a full derivation, and
+        let $\V{drv} = (\V{fdrv}, \V{fromStep}, \V{toStep}, \V{lhsIx})$,
+        be a partial derivation from a symbol instance in \V{drv},
+        such that the source of \V{drv} is \V{A:t}.
+        The \textbf{length} of \V{drv}
         is the number of
         transitions which are non-trivial descendants of \V{A:t}
-        in the range of steps \Velement{drv}{\V{i},\V{j}}.
+        in the range of steps \Velement{fdrv}{\V{fromStep},\V{toStep}}.
 
-        Let \V{i} be the index of the derivation step of symbol string
-        instance \V{str:t}, and
-        and \V{j} be the index of the derivation step of \V{$\alpha$:b},
-        where \V{$\alpha$:b} is an expansion of \V{str:t}.
-        The length of the derivation from an instance string
-        \V{str:t} to \V{$\alpha$:b},
-        is the sum of the
-        transitions which are non-trivial descendants of
-        each of the symbols in \V{str:t}
-        in the range of steps \Velement{drv}{\V{i},\V{j}}.
+        We define the \textbf{length of a partial derivation from a string}
+        analogously.
+        Let \V{fdrv} be a full derivation, and let
+        \[ \V{drv} = (\V{fdrv}, \V{fromStep}, \V{toStep}, \V{lhsIx1}, \V{lhsIx2}), \]
+        be a partial derivation from a symbol instance string in \V{drv},
+        such that the source of \V{drv} is \V{$\alpha$:t}.
+        The length of \V{drv}
+        is the number of
+        transitions which are non-trivial descendants of \V{$\alpha$:t}
+        in the range of steps \Velement{fdrv}{\V{fromStep},\V{toStep}}.
 \dfEnd
 \end{definition}
 
