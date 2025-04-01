@@ -2615,7 +2615,25 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \cuz \Lmref{start-sym-aletheme},
                         \eqref{eq:pr-rank-0-start-symbol-aletheme-020}.}
         \end{equation}
-        \todo{Finish this proof}
+        \begin{equation}
+        \label{eq:pr-rank-0-start-symbol-aletheme-050}
+                \mycpar{\VFA{Ht}{startAL} is the length of the shortest derivation \\
+                such that $\V{pre} \destarV{g} \Velement{w}{0,\V{current}}$
+                \cuz \Dfref{rank}, \eqref{eq:pr-rank-0-start-symbol-aletheme-030}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-start-symbol-aletheme-060}
+                \mycpar{\VFA{Ht}{startAL} is zero iff \V{pre} is all terminals \\
+                \cuz \Lmref{start-sym-0-aletheme}, \eqref{eq:pr-rank-0-start-symbol-aletheme-050}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-start-symbol-aletheme-070}
+                \mycpar{\VFA{Rank}{startAL} is zero iff \V{pre} is all
+                terminals \cuz
+                        \eqref{eq:pr-rank-0-start-symbol-aletheme-040}, \eqref{eq:pr-rank-0-start-symbol-aletheme-060}.}
+        \end{equation}
+        Recalling that \V{startAL} was an arbitrary start symbol aletheme, with
+        \eqref{eq:pr-rank-0-start-symbol-aletheme-070} we have the lemma.
         \myqed
 \end{proof}
 
