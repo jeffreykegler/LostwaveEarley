@@ -2585,6 +2585,40 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \myqed
 \end{proof}
 
+\begin{lemma}[Zero rank start symbol aletheme]
+        \label{lm:rank-0-start-symbol-aletheme}
+        A start symbol aletheme is zero rank
+        iff all of the symbols in the predot string of its RHS are terminals.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \begin{equation}
+        \label{eq:pr-rank-0-start-symbol-aletheme-020}
+                \mycpar{Let \V{startAL} be an arbitrary start symbol aletheme \\
+                \cuz AF lemma.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-start-symbol-aletheme-030}
+                \begin{gathered}
+                \V{startAL} = \left( \; \begin{gathered}
+                                \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
+                                \V{S},0,\V{current} \\
+                        \end{gathered} \; \right) \\
+                        \text{\cuz \Lmref{start-sym-aletheme},
+                                \eqref{eq:pr-rank-0-start-symbol-aletheme-020}, WLOG.}
+                \end{gathered}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-start-symbol-aletheme-040}
+                \mycpar{$\VFA{Rank}{startAL} = 2 \mult \VFA{Ht}{startAL}$ \\
+                \cuz \Lmref{start-sym-aletheme},
+                        \eqref{eq:pr-rank-0-start-symbol-aletheme-020}.}
+        \end{equation}
+        \todo{Finish this proof}
+        \myqed
+\end{proof}
+
 \section{Completion lemmas}
 
 \begin{definition}[Complete ``as far as'']
