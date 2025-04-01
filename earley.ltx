@@ -2668,7 +2668,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \V{notStartAL} = \left( \; \begin{gathered} \V{drv},\V{fore},\V{aft},\V{pre},\V{post}, \\
                         \V{X},\V{origin},\V{current} \\
                 \end{gathered} \; \right) \\
-                        \text{\cuz \Dfref{aletheme}, AF reductio.}
+                        \text{\cuz \Dfref{aletheme}, WLOG.}
                 \end{gathered}
         \end{equation}
         \begin{equation}
@@ -2679,8 +2679,57 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \label{eq:pr-rank-0-aletheme-130}
                 \mycpar{$\VFA{Rank}{notStartAL} = 0$ \cuz AF reductio.}
         \end{equation}
-
-        \todo{Finish this proof}
+        From the soundness of \V{notStartAL},
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-150}
+                \V{S} \derivesRaw{\V{n}}{\V{drv}} \V{fore} \cat \V{X} \cat \V{aft}
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-0-aletheme-110}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-160}
+                \mycpar{$\V{n} \ge 0$ \cuz \eqref{eq:pr-rank-0-aletheme-120},
+                        \eqref{eq:pr-rank-0-aletheme-150}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-170}
+                \mycpar{$\VFA{Dp}{notStartAL} \ge 0$ \cuz
+                        \Dfref{rank}, \eqref{eq:pr-rank-0-aletheme-150}, \eqref{eq:pr-rank-0-aletheme-160}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-180}
+                \mycpar{$\VFA{Rank}{notStartAL} \ge 0$ \cuz
+                        \Dfref{rank}, \eqref{eq:pr-rank-0-aletheme-170}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-190}
+                \mycpar{$\V{X} = \V{S}$ \cuz
+                        reduction due to contradiction between \eqref{eq:pr-rank-0-aletheme-130} and
+                        \eqref{eq:pr-rank-0-aletheme-180}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-200}
+                \mycpar{An altheme is zero rank only if
+                it is a start symbol aletheme
+                        \cuz \eqref{eq:pr-rank-0-aletheme-190}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-210}
+                \mycpar{An start symbol altheme is zero rank only if
+                all of the symbols in the predot string of its RHS are terminals
+                \cuz \Lmref{rank-0-start-symbol-aletheme}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-220}
+                \mycpar{An altheme is zero rank only if
+                it is a start symbol aletheme, and
+                all of the symbols in the predot string of its RHS are terminals
+                        \cuz \eqref{eq:pr-rank-0-aletheme-200},
+                                \eqref{eq:pr-rank-0-aletheme-210}.}
+        \end{equation}
+        With \eqref{eq:pr-rank-0-aletheme-220} we have the ``only if''
+        direction.  Together with \eqref{eq:pr-rank-0-aletheme-100}
+        above, this gives us the lemma.
+        \todo{Check this proof}
         \myqed
 \end{proof}
 
