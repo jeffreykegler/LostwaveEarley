@@ -2649,10 +2649,37 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \begin{proof}
         The ``if'' direction follows directly from
-        \Lmref{rank-0-start-symbol-aletheme}.
+                cuz \Lmref{rank-0-start-symbol-aletheme}:
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-100}
+                \mycpar{An altheme is zero rank if
+                it is a start symbol aletheme, and
+                all of the symbols in the predot string of its RHS are terminals
+                \cuz \Lmref{rank-0-start-symbol-aletheme}.}
+        \end{equation}
         For the ``only if'' direction, we must show that
         only start symbol alethemes are zero rank alethemes.
-        We do this by reductio.
+        We do this by reductio, assuming that there is a
+        sound altheme whose LHS is not the start symbol
+        but which has zero rank.
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-110}
+                \begin{gathered}
+                \V{notStartAL} = \left( \; \begin{gathered} \V{drv},\V{fore},\V{aft},\V{pre},\V{post}, \\
+                        \V{X},\V{origin},\V{current} \\
+                \end{gathered} \; \right) \\
+                        \text{\cuz \Dfref{aletheme}, AF reductio.}
+                \end{gathered}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-120}
+                \mycpar{$\V{X} \neq \V{S}$ \cuz AF reductio.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-0-aletheme-130}
+                \mycpar{$\VFA{Rank}{notStartAL} = 0$ \cuz AF reductio.}
+        \end{equation}
+
         \todo{Finish this proof}
         \myqed
 \end{proof}
