@@ -1057,20 +1057,10 @@ of \V{stem}.
 \dfEnd
 \end{definition}
 
-\begin{definition}[Start edge]
-        \label{df:start-edge}
-        The \textbf{start Earley edge} is a prediction of the
-        start rule.
-        Specifically, if $\V{S} \de \V{rhs}$ is the start
-        rule, the start Earley edge is
-        $\V{S} \de \mydot \V{rhs}$.
-        \dfEnd
-\end{definition}
-
 \begin{definition}[Start aletheme]
         \label{df:start-aletheme}
-        The start Earley aletheme is the aletheme corresponding
-        to the start Earley edge. \dfEnd
+        The start aletheme is the aletheme corresponding
+        to the start edge \Dfref{ee-types}.\dfEnd
         \dfEnd
 \end{definition}
 
@@ -2409,6 +2399,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 \end{proof}
 
 \begin{definition}[Start symbol aletheme]
+        \label{df:start-symbol-aletheme}
         A \textbf{start symbol aletheme} is an aletheme
         whose LHS symbol is the start symbol.
         \dfEnd
@@ -2750,14 +2741,46 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 \end{proof}
 
 \begin{lemma}[Start aletheme]
-\label[lm:start-aletheme]
+\label{lm:start-aletheme}
         The start altheme \Dfref{start-aletheme} for a derivation \V{drv} is
-        \[ (\V{drv},\epsilon,\epsilon,\epsilon,\V{rhs},\V{S},0,0), \]
-        where $\V{S} \de \V{rhs}$ is the start rule.
+        \[ \V{startAL} = (\V{drv},\epsilon,\epsilon,\epsilon,\V{rhs},\V{S},0,0), \]
+        where $\V{S} \de \V{rhs}$ is the start rule,
+        and the rank of \V{startAL} is zero.
 \end{lemma}
 
 \begin{proof}
-        \todo{Prove this}
+        Let \V{drv} be a full derivation.
+        \begin{equation}
+        \label{eq:pr-start-aletheme-100}
+                \mycpar{The start aletheme is a start symbol aletheme \\
+                \cuz \Dfref{start-symbol-aletheme}, \Lmref{start-aletheme}.}
+        \end{equation}
+        We let an arbitrary start aletheme be
+        \begin{equation}
+        \label{eq:pr-start-aletheme-110}
+                \begin{gathered}
+                \V{startAL} = \left( \; \begin{gathered} \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
+                        \V{S},0,\V{current} \\
+                \end{gathered} \; \right) \\
+                        \text{\cuz \Dfref{start-symbol-aletheme}, \eqref{eq:pr-start-aletheme-100}, WLOG.}
+                \end{gathered}
+        \end{equation}
+        In \eqref{eq:pr-start-aletheme-110}, we seek to find the values of \V{pre}, \V{post}
+        and \V{current}.
+        Without loss of generality, we let the start edge be
+        \begin{equation}
+        \label{eq:pr-start-aletheme-120}
+                \V{S} \de \mydot \V{rhs}
+                \cuz \Dfref{dedicated-start}, \Dfref{ee-types}.
+        \end{equation}
+        Since \V{startAL} is the aletheme for the start edge,
+        \begin{equation}
+        \label{eq:pr-start-aletheme-130}
+                \mycpar{$(\V{S} \de \mydot \V{rhs}) = (\V{S} \de \V{pre} \mydot \V{post})$ \\
+                \cuz \Dfref{ee-to-al}, \Dfref{start-aletheme},
+                        \eqref{eq:pr-start-aletheme-110}, \eqref{eq:pr-start-aletheme-120}.}
+        \end{equation}
+        \todo{Finish this proof}
         \myqed
 \end{proof}
 
