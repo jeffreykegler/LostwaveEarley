@@ -973,7 +973,7 @@ the target of the predecessor must be the source of the successor.
 \obEnd
 \end{observation}
 
-\begin{definition}
+\begin{definition}[Partial derivation notation]
 \label{ob:partial-derivation-notation}
         We notate a partial derivation from \V{src} to \V{tgt} as
         \[ \V{src} \derivesRaw{\V{L}}{\V{X}} \V{tgt}, \]
@@ -1043,7 +1043,7 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 \label{df:prediction-stem}
         Suppose, without loss of generality, that
 \begin{equation}
-\V{down} = (\V{fore},\V{aft},\epsilon,\V{rhs},\V{B},\V{current},\V{current})
+        \V{down} = (\V{drv},\V{fore},\V{aft},\epsilon,\V{rhs},\V{B},\V{current},\V{current})
 \end{equation}
 is a sound aletheme.
 Then we say that
@@ -1055,6 +1055,23 @@ We also say that \V{down} is the \textbf{downstream channel}
 (or simply \textbf{downstream})
 of \V{stem}.
 \dfEnd
+\end{definition}
+
+\begin{definition}[Start edge]
+        \label{df:start-edge}
+        The \textbf{start Earley edge} is a prediction of the
+        start rule.
+        Specifically, if $\V{S} \de \V{rhs}$ is the start
+        rule, the start Earley edge is
+        $\V{S} \de \mydot \V{rhs}$.
+        \dfEnd
+\end{definition}
+
+\begin{definition}[Start aletheme]
+        \label{df:start-aletheme}
+        The start Earley aletheme is the aletheme corresponding
+        to the start Earley edge. \dfEnd
+        \dfEnd
 \end{definition}
 
 \needspace{6in}
@@ -2729,6 +2746,18 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         With \eqref{eq:pr-rank-0-aletheme-220} we have the ``only if''
         direction.  Together with \eqref{eq:pr-rank-0-aletheme-100}
         above, this gives us the lemma.
+        \myqed
+\end{proof}
+
+\begin{lemma}[Start aletheme]
+\label[lm:start-aletheme]
+        The start altheme \Dfref{start-aletheme} for a derivation \V{drv} is
+        \[ (\V{drv},\epsilon,\epsilon,\epsilon,\V{rhs},\V{S},0,0), \]
+        where $\V{S} \de \V{rhs}$ is the start rule.
+\end{lemma}
+
+\begin{proof}
+        \todo{Prove this}
         \myqed
 \end{proof}
 
