@@ -3500,10 +3500,10 @@ for the lemma.
 \begin{lemma}[Row step]
         \label{lm:row-step}
         When running \LEV,
-        the chart is complete
-        as far as rank $\V{r}+1$ of row $\V{i}+1$
-        if it is complete
-        as far as rank \V{r} of row $\V{i}+1$.
+        if the chart is complete
+        as far as rank \V{r} of row $\V{i}+1$,
+        then the chart is complete
+        as far as rank $\V{r}+1$ of row $\V{i}+1$.
         \lmEnd
 \end{lemma}
 
@@ -3562,7 +3562,24 @@ for the lemma.
                 \cuz \Lmref{prediction-completeness},
                 \eqref{eq:pr-row-step-950}, \eqref{eq:pr-row-step-1030}.}
         \end{equation}
-        \todo{Finish this proof}
+        \begin{equation}
+                \label{eq:pr-row-step-1070}
+                \mycpar{\V{newAL} is either the start aletheme,
+                a scansion,
+                a reduction,
+                or a predicted aletheme \\
+                \cuz \Dfref{ee-types}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-row-step-1080}
+                \mycpar{Either \V{newAL} is a nulling completion,
+                or \LEV will record the Earley edge for \V{newAL} in the chart \\
+                \cuz \eqref{eq:pr-row-step-1020}, \eqref{eq:pr-row-step-1040}, \eqref{eq:pr-row-step-1050},
+                \eqref{eq:pr-row-step-1060}, \eqref{eq:pr-row-step-1070}.}
+        \end{equation}
+        Since \V{newAL} was arbitrarily chosen,
+        the lemma follows from \eqref{eq:pr-row-step-1080}.
+        \todo{Check this proof}
         \myqed
 \end{proof}
 
