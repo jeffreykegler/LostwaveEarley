@@ -2406,7 +2406,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 \end{definition}
 
 \begin{lemma}[Start symbol aletheme]
-        \label{lm:start-sym-aletheme}
+        \label{lm:start-symbol-aletheme}
         Let \V{drv} be a derivation and let
         \[ \V{S} \de \V{pre} \cat \V{post} \]
         be the start rule of \V{g},
@@ -2613,14 +2613,14 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                                 \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
                                 \V{S},0,\V{current} \\
                         \end{gathered} \; \right) \\
-                        \text{\cuz \Lmref{start-sym-aletheme},
+                        \text{\cuz \Lmref{start-symbol-aletheme},
                                 \eqref{eq:pr-rank-0-start-symbol-aletheme-020}, WLOG.}
                 \end{gathered}
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-0-start-symbol-aletheme-040}
                 \mycpar{$\VFA{Rank}{startAL} = 2 \mult \VFA{Ht}{startAL}$ \\
-                \cuz \Lmref{start-sym-aletheme},
+                \cuz \Lmref{start-symbol-aletheme},
                         \eqref{eq:pr-rank-0-start-symbol-aletheme-020}.}
         \end{equation}
         \begin{equation}
@@ -2744,8 +2744,8 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 \label{lm:start-aletheme}
         The start altheme \Dfref{start-aletheme} for a derivation \V{drv} is
         \[ \V{startAL} = (\V{drv},\epsilon,\epsilon,\epsilon,\V{rhs},\V{S},0,0), \]
-        where $\V{S} \de \V{rhs}$ is the start rule,
-        and the rank of \V{startAL} is zero.
+        where $\V{S} \de \V{rhs}$ is the start rule.
+        The rank of \V{startAL} is zero.
 \end{lemma}
 
 \begin{proof}
@@ -2753,7 +2753,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \begin{equation}
         \label{eq:pr-start-aletheme-100}
                 \mycpar{The start aletheme is a start symbol aletheme \\
-                \cuz \Dfref{start-symbol-aletheme}, \Lmref{start-aletheme}.}
+                \cuz \Dfref{start-symbol-aletheme}.}
         \end{equation}
         We let an arbitrary start aletheme be
         \begin{equation}
@@ -2762,7 +2762,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \V{startAL} = \left( \; \begin{gathered} \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
                         \V{S},0,\V{current} \\
                 \end{gathered} \; \right) \\
-                        \text{\cuz \Dfref{start-symbol-aletheme}, \eqref{eq:pr-start-aletheme-100}, WLOG.}
+                        \text{\cuz \Lmref{start-symbol-aletheme}, \eqref{eq:pr-start-aletheme-100}, WLOG.}
                 \end{gathered}
         \end{equation}
         In \eqref{eq:pr-start-aletheme-110}, we seek to find the values of \V{pre}, \V{post}
@@ -2812,7 +2812,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \begin{equation}
         \label{eq:pr-start-aletheme-190}
         \VFA{Rank}{startAL} = 2 \mult \VFA{Ht}{startAL}
-                \cuz \Lmref{start-sym-aletheme}, \eqref{eq:pr-start-aletheme-100}.
+                \cuz \Lmref{start-symbol-aletheme}, \eqref{eq:pr-start-aletheme-100}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-aletheme-200}
