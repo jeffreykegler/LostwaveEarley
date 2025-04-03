@@ -2788,6 +2788,27 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \label{eq:pr-start-aletheme-150}
                 \V{post} = \V{rhs} \cuz \eqref{eq:pr-start-aletheme-130}.
         \end{equation}
+        By the soundness of \V{startAL},
+        \begin{equation}
+        \label{eq:pr-start-aletheme-160}
+                \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}
+                        \cuz \Dfref{aletheme}, \eqref{eq:pr-start-aletheme-110}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-170}
+                \V{current} = 0 \cuz \eqref{eq:pr-start-aletheme-140}, \eqref{eq:pr-start-aletheme-160}.
+        \end{equation}
+        With the above, we have the first part of the lemma:
+        \begin{equation}
+        \label{eq:pr-start-aletheme-180}
+                \begin{gathered}
+                \V{startAL} = \left( \; \begin{gathered} \V{drv},\epsilon,\epsilon,\epsilon,\V{rhs}, \\
+                        \V{S},0,0 \\
+                \end{gathered} \; \right) \\
+                        \text{\cuz \Dfref{start-symbol-aletheme}, \eqref{eq:pr-start-aletheme-100}, WLOG.}
+                \end{gathered}
+        \end{equation}
+        It remains to show the rank of \V{startAL}.
         \todo{Finish this proof}
         \myqed
 \end{proof}
