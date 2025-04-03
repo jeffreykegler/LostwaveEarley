@@ -1261,6 +1261,8 @@ Based on the pseudocode, we make a series of observations.
         and before the activation loop for row $\V{i}+1$.
 \end{observation}
 
+\FloatBarrier
+
 \begin{algorithm}[ht]
         \caption{Add Tangible Reductions}
 \label{alg:tangible-reduction}
@@ -1271,6 +1273,7 @@ Based on the pseudocode, we make a series of observations.
         \label{li:tangible-reduction-020}
         \State $\V{tribCurrent} \gets \text{current location of \V{tributary}}$
         \label{li:tangible-reduction-030}
+        \LComment{This procedure is never called with $\V{tribCurrent} = 0$}
         \State $\V{tribLHS} \gets \text{LHS of \V{tributary}`s rule}$
         \label{li:tangible-reduction-040}
         \LComment{Find the row where \V{tributary} starts}
@@ -1297,6 +1300,14 @@ Based on the pseudocode, we make a series of observations.
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\FloatBarrier
+
+The caller \Algref{finish-row} ensures that
+\Algref{tangible-reduction} is never called when
+\[ \V{tribCurrent} = 0. \]
+
+\FloatBarrier
 
 \begin{algorithm}[ht]
         \caption{Add Scansions}
@@ -1370,6 +1381,9 @@ Based on the pseudocode, we make a series of observations.
 \begin{algorithmic}[1]
         \Procedure{AddIntangibleReduction}{\V{mainstem}}
         \State \textbf{let} \V{mainstem} \text{be} $(\V{dottedRule}, \V{origin}, \V{current})$
+        \If {$\V{current} = 0$}
+             \State \textbf{return} \Comment{No reductions in row 0}
+        \EndIf
         \State $\V{newDotted} \gets \Call{AdvanceDot}{\V{dotted}}$
         \State \Call{RecordEdge}{\V{newDotted}, \V{origin}, \V{current}}
         \label{li:intangible-reduction-record-edge}
