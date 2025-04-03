@@ -2809,7 +2809,33 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \end{gathered}
         \end{equation}
         It remains to show the rank of \V{startAL}.
-        \todo{Finish this proof}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-190}
+        \VFA{Rank}{startAL} = 2 \mult \VFA{Ht}{startAL}
+                \cuz \Lmref{start-sym-aletheme}, \eqref{eq:pr-start-aletheme-100}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-200}
+                \mycpar{Let \V{n1} be the minimum length of $\V{pre} \destarV{g} \Velement{w}{0,0}$ \\
+                        \cuz \eqref{eq:pr-start-aletheme-160}, \eqref{eq:pr-start-aletheme-170}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-210}
+                \VFA{Ht}{startAL} = \V{n1} \cuz \Dfref{rank}, \eqref{eq:pr-start-aletheme-200}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-220}
+                \V{n1} = 0 \cuz \eqref{eq:pr-start-aletheme-140}, \eqref{eq:pr-start-aletheme-200}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-230}
+        \VFA{Rank}{startAL} = 0
+                \cuz \eqref{eq:pr-start-aletheme-190}, \eqref{eq:pr-start-aletheme-210},
+                \eqref{eq:pr-start-aletheme-220}.
+        \end{equation}
+        With \eqref{eq:pr-start-aletheme-180} and \eqref{eq:pr-start-aletheme-230},
+        we have the lemma.
+        \todo{Check this proof}
         \myqed
 \end{proof}
 
