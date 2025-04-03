@@ -3112,7 +3112,8 @@ for the lemma.
         of row $\V{i}+1$,
         and \V{downAL} is a sound intangible reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \LEV will record the Earley edge
+        then either either \V{downAL} is a nulling completion,
+        or \LEV will record the Earley edge
         for \V{downAL} in the chart.
 \end{lemma}
 
@@ -3234,7 +3235,8 @@ for the lemma.
         of row $\V{i}+1$,
         and \V{downAL} is a reduction aletheme
         of rank $\V{r}+1$ in row $\V{i}+1$,
-        then \LEV will record the Earley edge
+        then either \V{downAL} is a nulling completion,
+        or \LEV will record the Earley edge
         for \V{downAL} in the chart.
         \lmEnd
 \end{lemma}
@@ -3540,18 +3542,27 @@ for the lemma.
         \begin{equation}
                 \label{eq:pr-row-step-1040}
                 \mycpar{If \V{newAL} is a scansion aletheme,
-                either \V{newAL} is a nulling completion,
-                or \LEV will record the Earley edge for \V{newAL} in the chart
+                then \LEV will record the Earley edge for \V{newAL} in the chart \\
                 \cuz \Lmref{scansion-completeness},
                 \eqref{eq:pr-row-step-950}, \eqref{eq:pr-row-step-1030}.}
         \end{equation}
+        \begin{equation}
+                \label{eq:pr-row-step-1050}
+                \mycpar{If \V{newAL} is a reduction aletheme,
+                either \V{newAL} is a nulling completion,
+                or \LEV will record the Earley edge for \V{newAL} in the chart
+                \cuz \Lmref{red-comp},
+                \eqref{eq:pr-row-step-950}, \eqref{eq:pr-row-step-1030}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-row-step-1060}
+                \mycpar{If \V{newAL} is a predicted aletheme,
+                either \V{newAL} is a nulling completion,
+                or \LEV will record the Earley edge for \V{newAL} in the chart
+                \cuz \Lmref{prediction-completeness},
+                \eqref{eq:pr-row-step-950}, \eqref{eq:pr-row-step-1030}.}
+        \end{equation}
         \todo{Finish this proof}
-        % \label{lm:prediction-completeness}
-        % \label{lm:red-comp}
-        % If \
-        % then either \V{downAL} is a nulling completion,
-        % or \LEV will record the Earley edge
-        % for \V{downAL} in the chart.
         \myqed
 \end{proof}
 
