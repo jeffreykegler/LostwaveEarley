@@ -2861,12 +2861,52 @@ is equal to the count of its predot symbols.
 \end{lemma}
 
 \begin{proof}
-\todo{Write this proof}
+        Let \V{drv} be a full derivation.
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1000}
+                \mycpar{Let \V{startAL} be an arbitrary sound
+                start symbol aletheme \\
+                \cuz AF lemma.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1010}
+                \begin{gathered}
+                \V{startAL} = \left( \; \begin{gathered}
+                                \V{drv},\epsilon,\epsilon,\V{pre},\V{post}, \\
+                                \V{S},0,\V{current} \\
+                        \end{gathered} \; \right) \\
+                        \text{\cuz \Lmref{start-symbol-aletheme},
+                                \eqref{eq:pr-start-symbol-aletheme-location-1000}, WLOG.}
+                \end{gathered}
+        \end{equation}
+        By the soundness of \V{startAL},
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1020}
+                \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-start-symbol-aletheme-location-1010}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1030}
+                \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}
+                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1010}.
+                \eqref{eq:pr-start-symbol-aletheme-location-1020}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1040}
+                \VFA{Rank}{startAL} = 0
+                        \cuz \Lmref{start-aletheme}, \eqref{eq:pr-start-symbol-aletheme-location-1000}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1050}
+                \VFA{Ht}{startAL} = 0
+                        \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-1040}.
+        \end{equation}
+        \todo{Finish this proof}
 \myqed
 \end{proof}
 
-\begin{lemma}[Start symbol aletheme location]
-\label{start-symbol-aletheme-location}
+\begin{lemma}[Start aletheme location]
+\label{start-aletheme-location}
 An altheme is a rank 0 aletheme in row 0
 iff it is the start aletheme.
 \lmEnd
