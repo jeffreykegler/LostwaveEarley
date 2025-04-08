@@ -2861,13 +2861,21 @@ is equal to the count of its predot symbols.
 \end{lemma}
 
 \begin{proof}
-        Let \V{drv} be a full derivation.
+        Consider the arbitrary sound letheme
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-900}
+                \V{startAL} = \left( \; \begin{gathered}
+                        \V{drv},\V{fore},\V{aft},\V{pre},\V{post}, \\
+                                \V{S},\V{origin},\V{current} \\
+                        \end{gathered} \; \right) \\
+                 \text{\cuz WLOG,}
+        \end{equation}
+        where we assume for the lemma that
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1000}
-                \mycpar{Let \V{startAL} be an arbitrary sound
-                start symbol aletheme \\
-                \cuz AF lemma.}
+                \mycpar{\V{startAL} is a start symbol aletheme \cuz AF lemma.}
         \end{equation}
+        Because \V{startAL} is a start symbol aletheme, we know that
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1010}
                 \begin{gathered}
@@ -2876,62 +2884,41 @@ is equal to the count of its predot symbols.
                                 \V{S},0,\V{current} \\
                         \end{gathered} \; \right) \\
                         \text{\cuz \Lmref{start-symbol-aletheme},
-                                \eqref{eq:pr-start-symbol-aletheme-location-1000}, WLOG.}
+                                \eqref{eq:pr-start-symbol-aletheme-location-1000}.}
                 \end{gathered}
-        \end{equation}
-        By the soundness of \V{startAL},
-        \begin{equation}
-        \label{eq:pr-start-symbol-aletheme-location-1020}
-                \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-start-symbol-aletheme-location-1010}.
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-start-symbol-aletheme-location-1030}
-                \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}
-                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1010}.
-                \eqref{eq:pr-start-symbol-aletheme-location-1020}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1040}
                 \VFA{Rank}{startAL} = 0
-                        \cuz \Lmref{start-aletheme}, \eqref{eq:pr-start-symbol-aletheme-location-1000}.
+                        \cuz \Lmref{start-symbol-aletheme}, \eqref{eq:pr-start-symbol-aletheme-location-1000}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1050}
                 \VFA{Ht}{startAL} = 0
                         \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-1040}.
         \end{equation}
+        From the soundness of \V{startAL} we have
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1060}
                 \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-start-symbol-aletheme-location-1010}.
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-start-symbol-aletheme-location-1070}
-                \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}
-                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1010}.
-                \eqref{eq:pr-start-symbol-aletheme-location-1020}.
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-start-symbol-aletheme-location-1080}
-                \VFA{Rank}{startAL} = 0
-                        \cuz \Lmref{start-aletheme}, \eqref{eq:pr-start-symbol-aletheme-location-1000}.
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-start-symbol-aletheme-location-1090}
-                \mycpar{In \eqref{eq:pr-start-symbol-aletheme-location-1060},
-                let \V{n1} be its minimum length.}
+                \cuz \Dfref{aletheme},
+                \eqref{eq:pr-start-symbol-aletheme-location-0900},
+                \eqref{eq:pr-start-symbol-aletheme-location-1010}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1095}
-                \V{pre} \derivesRaw{\V{n1}}{\V{drv}} \Velement{w}{0,\V{current}}
-                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1060}.
+                \V{fore} \cat \V{pre} \derivesRaw{\V{n1}}{\V{drv}} \Velement{w}{0,\V{current}}
+                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1060},
                 \eqref{eq:pr-start-symbol-aletheme-location-1090}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1098}
+                \mycpar{Let \V{n1} be the minimum length of \eqref{eq:pr-start-symbol-aletheme-location-1095}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1100}
                 \VFA{Ht}{startAL} = \V{n1}
-                        \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-1090}.
+                        \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-1098}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1200}
@@ -2942,10 +2929,32 @@ is equal to the count of its predot symbols.
         \label{eq:pr-start-symbol-aletheme-location-1210}
                 \V{pre} \derivesRaw{0}{\V{drv}} \Velement{w}{0,\V{current}}
                 \cuz \eqref{eq:pr-start-symbol-aletheme-location-1095},
-                \eqref{eq:pr-start-symbol-aletheme-location-1020}.
+                \eqref{eq:pr-start-symbol-aletheme-location-1060}.
         \end{equation}
-        \todo{Finish this proof}
-\myqed
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1220}
+                \V{pre} = \Velement{w}{0,\V{current}}
+                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1210}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1230}
+                \Vsize{pre} = \size{\Velement{w}{0,\V{current}}}
+                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1220}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1240}
+                \size{\Velement{w}{0,\V{current}}} = \V{current}
+                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1230}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-symbol-aletheme-location-1250}
+                \Vsize{pre} = \V{current}
+                \eqref{eq:pr-start-symbol-aletheme-location-1230}, \eqref{eq:pr-start-symbol-aletheme-location-1240}.
+        \end{equation}
+        With \eqref{eq:pr-start-symbol-aletheme-location-1000} as the antecedant,
+and \eqref{eq:pr-start-symbol-aletheme-location-1250} as the consequent,
+we have the lemma.  \myqed
+        \todo{Check this proof}
 \end{proof}
 
 \begin{lemma}[Start aletheme location]
