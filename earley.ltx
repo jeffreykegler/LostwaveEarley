@@ -827,6 +827,42 @@ and is a special feature of the \LEV.
         \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
 \end{definition}
 
+\begin{lemma}[Rank well-definedness]
+\label{lm:rank-welldef}
+        The rank of a sound aletheme is well-defined.  \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1000}
+                \mycpar{Let $\V{al} =
+                (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current})$
+                be a sound aletheme
+                \cuz \Dfref{aletheme}.}
+        \end{equation}
+        From the soundness of \V{al}, we know that
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1010}
+                \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
+                is well-defined
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000},}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1020}
+                \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
+                is well-defined \\
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}, and}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1030}
+                \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
+                is well-defined
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}.}
+        \end{equation}
+        \todo{Finish this proof}
+        \myqed
+\end{proof}
+
 \begin{definition}[Transition expansion]
         \label{df:transition-expansion}
 In the context of a derivation, expansions are defined recursively,
