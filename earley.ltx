@@ -2968,38 +2968,39 @@ is equal to the count of its predot symbols.
                 \VFA{Ht}{startAL} = 0
                         \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-1040}.
         \end{equation}
-        From the soundness of \V{startAL} we have
-        \begin{equation}
-        \label{eq:pr-start-symbol-aletheme-location-1060}
-                \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}
-                \cuz \Dfref{aletheme},
-                \eqref{eq:pr-start-symbol-aletheme-location-0900},
-                \eqref{eq:pr-start-symbol-aletheme-location-1010}.
-        \end{equation}
+        From the well-definedness of \VFA{Rank}{startAL},
+        and therefore of \VFA{Ht}{startAL}, we have
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1095}
-                \V{fore} \cat \V{pre} \derivesRaw{\V{n1}}{\V{drv}} \Velement{w}{0,\V{current}}
-                \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-1060}.
+                \mycpar{\V{drv2} is a partial derivation such that \\
+                $\V{fore} \cat \V{pre} \derivesRaw{\V{n1}}{\V{drv2}} \Velement{w}{0,\V{current}}$ \\
+                such that \V{n1} is of minimum length
+                \cuz \Dfref{rank},
+                \Lmref{rank-welldef},
+                \eqref{eq:pr-start-symbol-aletheme-location-0900}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1098}
-                \mycpar{Let \V{n1} be the minimum length of \eqref{eq:pr-start-symbol-aletheme-location-1095}.}
+                \mycpar{\VFA{Ht}{startAL} = \V{n1}
+                        \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-0900},
+                                \eqref{eq:pr-start-symbol-aletheme-location-1095}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1100}
-                \VFA{Ht}{startAL} = \V{n1}
-                        \cuz \Dfref{rank}, \eqref{eq:pr-start-symbol-aletheme-location-1098}.
+                \V{fore} = \epsilon
+                        \cuz \eqref{eq:pr-start-symbol-aletheme-location-0900}, \eqref{eq:pr-start-symbol-aletheme-location-1010}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1200}
                 \V{n1} = 0
-                        \cuz \eqref{eq:pr-start-symbol-aletheme-location-1050}, \eqref{eq:pr-start-symbol-aletheme-location-1100}.
+                        \cuz \eqref{eq:pr-start-symbol-aletheme-location-1050}, \eqref{eq:pr-start-symbol-aletheme-location-1098}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1210}
                 \V{pre} \derivesRaw{0}{\V{drv}} \Velement{w}{0,\V{current}}
                 \cuz \eqref{eq:pr-start-symbol-aletheme-location-1095},
-                \eqref{eq:pr-start-symbol-aletheme-location-1060}.
+                \eqref{eq:pr-start-symbol-aletheme-location-1100}.
+                \eqref{eq:pr-start-symbol-aletheme-location-1200}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1220}
