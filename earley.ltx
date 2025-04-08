@@ -2924,7 +2924,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 \end{proof}
 
 \begin{lemma}[Start symbol aletheme location]
-\label{start-symbol-aletheme-location}
+\label{lm:start-symbol-aletheme-location}
 The current location of a start symbol aletheme
 is equal to the count of its predot symbols.
 \lmEnd
@@ -3029,13 +3029,78 @@ we have the lemma.  \myqed
 
 \begin{lemma}[Start aletheme location]
 \label{start-aletheme-location}
-An altheme is a rank 0 aletheme in row 0
+A sound altheme is a rank 0 aletheme in row 0
 iff it is the start aletheme.
 \lmEnd
 \end{lemma}
 
 \begin{proof}
-\todo{Write this proof}
+The ``if'' direction follows direction from
+\Lmref{start-aletheme}.
+For the ``only if'' direction, we proceed by
+reductio,
+assuming for the reduction
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1000}
+                \mycpar{that \V{badAL} is a sound rank 0, row 0
+                        aletheme that is not the start aletheme
+                        \cuz AF reductio.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1010}
+              \VFA{Rank}{badAL} = 0 \cuz \eqref{eq:pr-start-aletheme-location-1000}.
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1020}
+                \mycpar{\V{badAL} is a start symbol aletheme
+                        \cuz \Lmref{rank-0-aletheme}, \eqref{eq:pr-start-aletheme-location-1010}.}
+        \end{equation}
+        ``Current location'' is another term for row number, and therefore
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1025}
+                \mycpar{The current location of \V{badAL} is zero
+                        \cuz \eqref{eq:pr-start-aletheme-location-1000}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1030}
+                \mycpar{The number of predot symbols in \V{badAL} is zero
+                        \cuz \Lmref{start-symbol-aletheme-location},
+                                \eqref{eq:pr-start-aletheme-location-1025}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1040}
+                \mycpar{\V{badAL} has no predot symbols \cuz
+                        \eqref{eq:pr-start-aletheme-location-1030}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1050}
+                \mycpar{The LHS of \V{badAL} is \V{S} \cuz
+                        \eqref{eq:pr-start-aletheme-location-1020}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1060}
+                \mycpar{The corresponding edge of \V{badAL} is the start edge
+                        \Dfref{ee-types},
+                        \eqref{eq:pr-start-aletheme-location-1040},
+                        \eqref{eq:pr-start-aletheme-location-1050}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1070}
+                \mycpar{\V{badAL} is the start aletheme 
+                \cuz \Dfref{start-aletheme}, \eqref{eq:pr-start-aletheme-location-1060}.}
+        \end{equation}
+        With \eqref{eq:pr-start-aletheme-location-1070} and
+        \eqref{eq:pr-start-aletheme-location-1000} we have a contradiction.
+        The reductio shows that \V{badAL} cannot exist, and from the reductio
+        we conclude that
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1200}
+                \mycpar{every sound rank 0, row 0
+                        aletheme is the start aletheme \\
+                        \cuz contradiction between \eqref{eq:pr-start-aletheme-location-1070} and
+                                \eqref{eq:pr-start-aletheme-location-1000}.}
+        \end{equation}
+\todo{Finish this proof}
 \myqed
 \end{proof}
 
