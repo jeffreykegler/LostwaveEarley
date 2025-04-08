@@ -3035,20 +3035,33 @@ iff it is the start aletheme.
 \end{lemma}
 
 \begin{proof}
-The ``if'' direction follows direction from
-\Lmref{start-aletheme}.
-For the ``only if'' direction, we proceed by
-reductio,
-assuming for the reduction
+        We have already shown
+the ``if'' direction.
         \begin{equation}
-        \label{eq:pr-start-aletheme-location-1000}
-                \mycpar{that \V{badAL} is a sound rank 0, row 0
-                        aletheme that is not the start aletheme
-                        \cuz AF reductio.}
+        \label{eq:pr-start-aletheme-location-0900}
+        \mycpar{A sound altheme is a rank 0 aletheme in row 0
+                \textbf{if} it is a start aletheme
+                \cuz \Lmref{start-aletheme}.}
         \end{equation}
         \begin{equation}
+        \label{eq:pr-start-aletheme-location-1000}
+                \mycpar{\V{badAL} is a sound aletheme \cuz AF ``only if'' direction.}
+        \end{equation}
+For the ``only if'' direction, we proceed by
+reductio,
+assuming for the reduction that
+        \begin{equation}
         \label{eq:pr-start-aletheme-location-1010}
-              \VFA{Rank}{badAL} = 0 \cuz \eqref{eq:pr-start-aletheme-location-1000}.
+                \mycpar{$\VFA{Rank}{badAL} = 0$ \cuz AF direction,}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1013}
+                \mycpar{The current location of \V{badAL} is row 0 \cuz AF direction, and}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-start-aletheme-location-1016}
+                \mycpar{\V{badAL} is not a start aletheme
+                        \cuz AF reductio.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-aletheme-location-1020}
@@ -3057,15 +3070,10 @@ assuming for the reduction
         \end{equation}
         ``Current location'' is another term for row number, and therefore
         \begin{equation}
-        \label{eq:pr-start-aletheme-location-1025}
-                \mycpar{The current location of \V{badAL} is zero
-                        \cuz \eqref{eq:pr-start-aletheme-location-1000}.}
-        \end{equation}
-        \begin{equation}
         \label{eq:pr-start-aletheme-location-1030}
                 \mycpar{The number of predot symbols in \V{badAL} is zero
-                        \cuz \Lmref{start-symbol-aletheme-location},
-                                \eqref{eq:pr-start-aletheme-location-1025}.}
+                        \cuz \Lmref{start-symbol-aletheme-location}, \eqref{eq:pr-start-aletheme-location-1013},
+                                \eqref{eq:pr-start-aletheme-location-1020}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-aletheme-location-1040}
@@ -3075,6 +3083,7 @@ assuming for the reduction
         \begin{equation}
         \label{eq:pr-start-aletheme-location-1050}
                 \mycpar{The LHS of \V{badAL} is \V{S} \cuz
+                        \Dfref{start-symbol-aletheme},
                         \eqref{eq:pr-start-aletheme-location-1020}.}
         \end{equation}
         \begin{equation}
