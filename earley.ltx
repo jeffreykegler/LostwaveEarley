@@ -2931,7 +2931,6 @@ is equal to the count of its predot symbols.
 \end{lemma}
 
 \begin{proof}
-        \todo{Rewrite this proof}
         Consider the arbitrary sound letheme
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-0900}
@@ -2955,6 +2954,7 @@ is equal to the count of its predot symbols.
                                 \V{S},0,\V{current} \\
                         \end{gathered} \; \right) \\
                         \text{\cuz \Lmref{start-symbol-aletheme},
+                                \eqref{eq:pr-start-symbol-aletheme-location-0900},
                                 \eqref{eq:pr-start-symbol-aletheme-location-1000}.}
                 \end{gathered}
         \end{equation}
@@ -2974,7 +2974,7 @@ is equal to the count of its predot symbols.
         \label{eq:pr-start-symbol-aletheme-location-1095}
                 \mycpar{\V{drv2} is a partial derivation such that \\
                 $\V{fore} \cat \V{pre} \derivesRaw{\V{n1}}{\V{drv2}} \Velement{w}{0,\V{current}}$ \\
-                such that \V{n1} is of minimum length
+                where \V{n1} is of minimum length
                 \cuz \Dfref{rank},
                 \Lmref{rank-welldef},
                 \eqref{eq:pr-start-symbol-aletheme-location-0900}.}
@@ -2997,9 +2997,9 @@ is equal to the count of its predot symbols.
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1210}
-                \V{pre} \derivesRaw{0}{\V{drv}} \Velement{w}{0,\V{current}}
+                \V{pre} \derivesRaw{0}{\V{drv2}} \Velement{w}{0,\V{current}}
                 \cuz \eqref{eq:pr-start-symbol-aletheme-location-1095},
-                \eqref{eq:pr-start-symbol-aletheme-location-1100}.
+                \eqref{eq:pr-start-symbol-aletheme-location-1100},
                 \eqref{eq:pr-start-symbol-aletheme-location-1200}.
         \end{equation}
         \begin{equation}
@@ -3020,7 +3020,7 @@ is equal to the count of its predot symbols.
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-1250}
                 \Vsize{pre} = \V{current}
-                \eqref{eq:pr-start-symbol-aletheme-location-1230}, \eqref{eq:pr-start-symbol-aletheme-location-1240}.
+                \cuz \eqref{eq:pr-start-symbol-aletheme-location-1230}, \eqref{eq:pr-start-symbol-aletheme-location-1240}.
         \end{equation}
         With \eqref{eq:pr-start-symbol-aletheme-location-1000} as the antecedant,
 and \eqref{eq:pr-start-symbol-aletheme-location-1250} as the consequent,
