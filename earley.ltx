@@ -1072,7 +1072,8 @@ the target of the predecessor must be the source of the successor.
 \begin{definition}[Confirmation mainstem]
         \label{df:conf-stem}
         Suppose, without loss of generality, that
-        \[ \V{down} = (\V{drv},\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}) \]
+        \[ \V{down} = (\V{drv},\V{fore},\V{aft},(\V{antepre}\cat\V{B}),\V{post},\V{lhs},\V{origin},\V{current}), \]
+        where $\V{antepre} \in \V{STR}$ and $\V{B} \in (\V{N}\cup\V{T})$,
         is an confirmed aletheme.
 Then we say that
 an aletheme of the form
@@ -3444,7 +3445,7 @@ for the lemma.
                 \V{drv},\V{fore},\V{aft},(\V{antepredot}\cat\V{B:pd}),\V{postdot}, \\
                 \V{lhs},\V{origin},\V{i}
                 \; \end{gathered} \right) \\
-        \mycpar{where $\V{antepredot}, \V{postdot} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
+        \mycpar{where $\V{antepredot} \in \V{STR}$ and $\V{B} \in \V{N}$ \\
         \cuz AF lemma, \Dfref{ee-types}, \eqref{eq:pr-ri-comp-005}, WLOG.}
         \end{gathered}
 \end{equation}
@@ -3461,7 +3462,7 @@ for the lemma.
 \begin{equation}
         \label{eq:pr-ri-comp-030}
         \mycpar{\V{i} is the current location of \V{downEE} less the length of
-        the terminal string produced by the predot symbol instance.
+        the terminal string produced by the predot symbol instance \\
         \cuz \eqref{eq:pr-ri-comp-020}.}
 \end{equation}
 Noting that a reduction is a confirmation,
@@ -3471,7 +3472,8 @@ Noting that a reduction is a confirmation,
         $\V{lhs},\V{origin},\V{i})$ \\
         is the mainstem of \V{downAL} at \V{i} \\
         and $\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$ \\
-        \cuz \Lmref{conf-stem}, \eqref{eq:pr-ri-comp-007}, \eqref{eq:pr-ri-comp-030}.}
+        \cuz \Lmref{conf-stem}, \Dfref{conf-stem},
+                \eqref{eq:pr-ri-comp-007}, \eqref{eq:pr-ri-comp-030}.}
 \end{equation}
         The EE of \V{stemAL} is
 \begin{equation}
@@ -3520,9 +3522,9 @@ Keeping in mind that \V{stemEE} is an incompletion,
 with a nullable postdot symbol,
 \begin{equation}
 \label{eq:pr-ri-comp-330}
-        \mycpar{When \V{stemEE} is activated, \Algref{intangible-reduction}
+        \mycpar{when \V{stemEE} is activated, \Algref{intangible-reduction}
         is run for \V{stemEE} \\
-        \cuz lines \ref{li:finish-row-090}--\ref{li:finish-row-130} of \Algref{finish-row}
+        \cuz lines \ref{li:finish-row-100}--\ref{li:finish-row-130} of \Algref{finish-row},
                 \eqref{eq:pr-ri-comp-020}, \eqref{eq:pr-ri-comp-050}.}
 \end{equation}
 \begin{equation}
