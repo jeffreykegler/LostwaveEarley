@@ -3044,7 +3044,7 @@ We have already shown the ``if'' direction:
         \end{equation}
 For the ``only if'' direction, we proceed by
 reductio,
-assuming for the reduction that
+assuming for the reductio that
         \begin{equation}
         \label{eq:pr-start-aletheme-location-1000}
                 \mycpar{\V{badAL} is a sound aletheme \cuz AF ``only if'' direction,}
@@ -3094,21 +3094,28 @@ assuming for the reduction that
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-aletheme-location-1070}
-                \mycpar{\V{badAL} is the start aletheme 
+                \mycpar{\V{badAL} is the start aletheme
                 \cuz \Dfref{start-aletheme}, \eqref{eq:pr-start-aletheme-location-1060}.}
         \end{equation}
         With \eqref{eq:pr-start-aletheme-location-1070} and
         \eqref{eq:pr-start-aletheme-location-1000} we have a contradiction.
         The reductio shows that \V{badAL} cannot exist, and from the reductio
-        we conclude that
+        we conclude \eqref{eq:pr-start-aletheme-location-1070}.
+        Taking \eqref{eq:pr-start-aletheme-location-1000}, \eqref{eq:pr-start-aletheme-location-1010},
+        \eqref{eq:pr-start-aletheme-location-1013} as the antecedant and
+        \eqref{eq:pr-start-aletheme-location-1070} as the consequent, we have
         \begin{equation}
-        \label{eq:pr-start-aletheme-location-1200}
-                \mycpar{every sound rank 0, row 0
-                        aletheme is the start aletheme \\
-                        \cuz contradiction between \eqref{eq:pr-start-aletheme-location-1070} and
-                                \eqref{eq:pr-start-aletheme-location-1000}.}
+        \label{eq:pr-start-aletheme-location-1080}
+        \mycpar{A sound altheme is a rank 0 aletheme in row 0
+                \textbf{only if} it is a start aletheme
+                \cuz reductio from
+                \eqref{eq:pr-start-aletheme-location-1000}--\eqref{eq:pr-start-aletheme-location-1070}.}
         \end{equation}
-\todo{Finish this proof}
+        With
+        \eqref{eq:pr-start-aletheme-location-1000} and
+        \eqref{eq:pr-start-aletheme-location-1080}, we have both directions,
+                and the lemma.
+\todo{Check this proof}
 \myqed
 \end{proof}
 
