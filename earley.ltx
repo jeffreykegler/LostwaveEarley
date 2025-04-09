@@ -3427,7 +3427,6 @@ for the lemma.
         then either either \V{downAL} is a nulling completion,
         or \LEV will record the Earley edge
         for \V{downAL} in the chart.
-        \todo{Revise to be useable in row 0}
 \end{lemma}
 
 \begin{proof}
@@ -3786,6 +3785,33 @@ for the lemma.
 \myqed
 \end{proof}
 
+\begin{lemma}[Row zero basis]
+        \label{lm:row-0-basis}
+        After starting \LEV,
+        the chart is complete as far as rank 0
+        of row 0.
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        Proof omitted. \todo{Write this proof}
+        \myqed
+\end{proof}
+
+\begin{lemma}[Row zero step]
+        \label{lm:row-0-step}
+        If \LEV is complete as far as rank \V{r}
+        of row 0, then \LEV is complete as far as
+        rank $\V{r}+1$ of row 0.
+        \todo{Use row 0 version of row step}
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        Proof omitted. \todo{Write this proof}
+        \myqed
+\end{proof}
+
 \begin{lemma}[Chart basis]
         \label{lm:chart-basis}
         After starting \LEV,
@@ -3794,8 +3820,9 @@ for the lemma.
 \end{lemma}
 
 \begin{proof}
-        Proof omitted. \todo{Write this proof}
-        \todo{Use row 0 version of row step}
+        By induction on the rank,
+        using \Lmref{chart-basis} as the basis
+        and \Lmref{row-0-step} as the step.
         \myqed
 \end{proof}
 
