@@ -3673,9 +3673,9 @@ for the lemma.
         \label{lm:prediction-completeness}
         When running \LEV,
         if the chart is complete as far as rank \V{r}
-        of row $\V{i}+1$,
+        of row \V{i},
         and \V{downAL} is a prediction aletheme
-        of rank $\V{r}+1$ in row $\V{i}+1$,
+        of rank $\V{r}+1$ in row \V{i},
         then either \V{downAL} is a nulling completion,
         or \LEV will record the Earley edge
         for \V{downAL} in the chart.
@@ -3688,7 +3688,7 @@ for the lemma.
         \label{eq:pred-comp-010}
         \mycpar{Let \V{downAL}
         be an arbitrary sound prediction aletheme of rank
-        $\V{r}+1$ in row $\V{i}+1$
+        $\V{r}+1$ in row \V{i}
         \cuz AF lemma.}
 \end{equation}
 \begin{equation}
@@ -3696,15 +3696,15 @@ for the lemma.
         \begin{gathered}
         \V{downAL} = \left( \begin{gathered} \;
                 \V{drv},\V{fore},\V{aft},\epsilon,\V{rhs}, \\
-                \V{Z:f},(\V{i}+1),(\V{i}+1)
+                \V{Z:f},\V{i},\V{i}
                 \; \end{gathered} \right) \\
-                \mycpar{where $\V{fore}, \V{pre}, \V{rhs} \in \V{STR}$ and $\V{Z} \in \V{N}$ \\
+                \mycpar{where $\V{fore}, \V{aft}, \V{rhs} \in \V{STR}$ and $\V{Z} \in \V{N}$ \\
         \cuz AF lemma, \Dfref{ee-types}, \eqref{eq:pred-comp-010}, WLOG.}
         \end{gathered}
 \end{equation}
 \begin{equation}
         \label{eq:pred-comp-030}
-        \mycpar{$\V{downEE} = (\V{Z} \de \mydot \V{rhs}, (\V{i}+1)), (\V{i}+1))$ \\
+        \mycpar{$\V{downEE} = (\V{Z} \de \mydot \V{rhs}, \V{i}, \V{i})$ \\
                 \cuz \Dfref{ee-to-al}, \eqref{eq:pred-comp-020}.}
 \end{equation}
 \begin{equation}
@@ -3712,20 +3712,19 @@ for the lemma.
         \begin{gathered}
         \V{stemAL} = \left( \begin{gathered}
                         \V{drv},\V{foreY},\V{aftY}, \\
-                        \V{pre},(\V{Z:f}\cat\V{post}),\V{Y},\V{origin},(\V{i}+1)
+                        \V{pre},(\V{Z:f}\cat\V{post}),\V{Y},\V{origin},\V{i}
                 \end{gathered} \right) \\
-        \mycpar{is the mainstem of \V{downAL} at $\V{i}+1$ \\
+        \mycpar{is the mainstem of \V{downAL} at \V{i} \\
                 and $\VFA{Rank}{stemAL} = \VFA{Rank}{downAL} \subtract 1$ \\
-                \cuz \Lmref{pred-stem}, \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-030}, WLOG.}
+                \cuz \Lmref{pred-stem}, \Dfref{prediction-stem},
+                \eqref{eq:pred-comp-020}, \eqref{eq:pred-comp-030}, WLOG.}
         \end{gathered}
 \end{equation}
-        The EE of \V{stemAL} is
 \begin{equation}
 \label{eq:pred-comp-050}
-        \begin{gathered}
-                \V{stemEE} = (\V{Y} \de \V{pre} \mydot \V{Z:f} \cat \V{post}, \V{origin},(\V{i}+1)) \\
-        \cuz \Dfref{ee-to-al}, \eqref{eq:pred-comp-040}.
-        \end{gathered}
+        \mycpar{The EE of \V{stemAL} is \\
+        $\V{stemEE} = ((\V{Y} \de \V{pre} \mydot (\V{Z:f}) \cat \V{post}), \V{origin},\V{i})$ \\
+        \cuz \Dfref{ee-to-al}, \eqref{eq:pred-comp-040}.}
 \end{equation}
 \begin{equation}
 \label{eq:pred-comp-210}
@@ -3743,7 +3742,7 @@ for the lemma.
 \end{equation}
 \begin{equation}
 \label{eq:pred-comp-240}
-        \mycpar{The chart is complete as far as rank \V{r} of row $\V{i}+1$ \\
+        \mycpar{The chart is complete as far as rank \V{r} of row \V{i} \\
         \cuz AF lemma.}
 \end{equation}
 \begin{equation}
@@ -3765,7 +3764,7 @@ for the lemma.
 Keeping in mind that \V{stemEE} is an incompletion,
 \begin{equation}
 \label{eq:pred-comp-330}
-        \mycpar{When \V{stemEE} is activated, \Algref{predictions}
+        \mycpar{when \V{stemEE} is activated, \Algref{predictions}
         is run for \V{stemEE} \\
         \cuz lines \ref{li:finish-row-100}--\ref{li:finish-row-150} of \Algref{finish-row},
                 \eqref{eq:pred-comp-050}.}
