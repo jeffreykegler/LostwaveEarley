@@ -1158,7 +1158,7 @@ of \V{stem}.
 \label{alg:add-row-0}
 \begin{algorithmic}[1]
         \Procedure{AddRow0}{}
-        \State \Call {AddStartStates}{}
+        \State \Call {AddStartEdge}{}
         \State \Call {FinishRow}{0}
 \EndProcedure
 \end{algorithmic}
@@ -1322,6 +1322,13 @@ Based on the pseudocode, we make a series of observations.
         \obEnd
 \end{observation}
 
+\begin{observation}[Start edge timing]
+        \label{ob:start-edge-timing}
+        The start edge is recorded before the
+        activation loop for row 0.
+        \obEnd
+\end{observation}
+
 \begin{observation}[Scansion timing]
         \label{ob:scansion-timing}
         Scansion occurs between activation loops.
@@ -1329,6 +1336,19 @@ Based on the pseudocode, we make a series of observations.
         are recorded by \Algref{scansion},
         which is called after the activation loop for row \V{i},
         and before the activation loop for row $\V{i}+1$.
+        \obEnd
+\end{observation}
+
+\begin{observation}[Start edge timing 2]
+        \label{ob:start-edge-timing-2}
+        The start edge is recorded before the
+        recording of scansions
+        and before the activation loops for all rows.
+        This follows from
+        \Obref{activation-after-previous-row},
+        \Obref{start-edge-timing}, and
+        \Obref{scansion-timing}.
+        \obEnd
 \end{observation}
 
 \FloatBarrier
@@ -1378,6 +1398,17 @@ The caller \Algref{finish-row} ensures that
 \[ \V{tribCurrent} = 0. \]
 
 \FloatBarrier
+
+\begin{algorithm}[ht]
+        \caption{AddStartEdge}
+\label{alg:start-edge}
+\begin{algorithmic}[1]
+        \Procedure{AddStartEdge}{}
+        \LComment {Let $\V{S} \de \alpha$ be the start rule}
+        \State \Call{RecordEdge}{$(\V{S} \de \mydot \alpha), 0, 0)$}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \begin{algorithm}[ht]
         \caption{Add Scansions}
