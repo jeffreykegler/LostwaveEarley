@@ -3980,7 +3980,45 @@ for the lemma.
 \end{lemma}
 
 \begin{proof}
-        Proof omitted. \todo{Write this proof}
+        \begin{equation}
+        \label{eq:pr-row-basis-1000}
+                \mycpar{Let \V{zeroAL} be an arbitrary aletheme \cuz AF lemma.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1003}
+                \mycpar{\V{zeroAL} has rank 0 \cuz AF lemma.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1006}
+                \mycpar{\V{zeroAL} is in row $\V{i}+1$ \cuz AF lemma.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1010}
+               \mycpar{\V{zeroAL} is a start symbol aletheme
+                \cuz \Lmref{rank-0-aletheme}, \eqref{eq:pr-row-basis-1003}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1020}
+               \mycpar{The symbols of \V{zeroAL} before the dot are all terminals
+                \cuz \Lmref{rank-0-aletheme}, \eqref{eq:pr-row-basis-1003}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1030}
+                \mycpar{\V{zeroAL} has $\V{i}+1$ terminals before the dot
+                        \cuz \Lmref{start-symbol-aletheme-location}
+                                \eqref{eq:pr-row-basis-1010}, \eqref{eq:pr-row-basis-1020}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1040}
+             \mycpar{\V{zeroAL} has a predot symbol, and it is a terminal
+                                \eqref{eq:pr-row-basis-1020}, \eqref{eq:pr-row-basis-1030}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1050}
+                \mycpar{\V{zeroAL} is a scansion
+                        \cuz \Dfref{ee-types}, \eqref{eq:pr-row-basis-1040}.}
+        \end{equation}
+        \todo{Write this proof}
         \myqed
 \end{proof}
 
