@@ -3974,7 +3974,7 @@ for the lemma.
 
 \begin{lemma}[Row basis]
         \label{lm:row-basis}
-        If \LEV is complete as far as row \V{i},
+        If \LEV is complete as far as row~\V{i},
         then \LEV is complete as far as rank 0 of row $\V{i}+1$.
         \lmEnd
 \end{lemma}
@@ -3982,7 +3982,7 @@ for the lemma.
 \begin{proof}
         \begin{equation}
         \label{eq:pr-row-basis-1000}
-                \mycpar{Let \V{zeroAL} be an arbitrary aletheme \cuz AF lemma.}
+                \mycpar{Let \V{zeroAL} be an arbitrary sound aletheme \cuz AF lemma.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-row-basis-1003}
@@ -3999,26 +3999,42 @@ for the lemma.
         \end{equation}
         \begin{equation}
         \label{eq:pr-row-basis-1020}
-               \mycpar{The symbols of \V{zeroAL} before the dot are all terminals
+               \mycpar{The symbols of \V{zeroAL} before the dot are all terminals \\
                 \cuz \Lmref{rank-0-aletheme}, \eqref{eq:pr-row-basis-1003}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-row-basis-1030}
-                \mycpar{\V{zeroAL} has $\V{i}+1$ terminals before the dot
+                \mycpar{\V{zeroAL} has $\V{i}+1$ terminals before the dot \\
                         \cuz \Lmref{start-symbol-aletheme-location}
                                 \eqref{eq:pr-row-basis-1010}, \eqref{eq:pr-row-basis-1020}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-row-basis-1040}
-             \mycpar{\V{zeroAL} has a predot symbol, and it is a terminal
-                                \eqref{eq:pr-row-basis-1020}, \eqref{eq:pr-row-basis-1030}.}
+             \mycpar{\V{zeroAL} has a predot symbol, and it is a terminal \\
+                \cuz \eqref{eq:pr-row-basis-1020}, \eqref{eq:pr-row-basis-1030}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-row-basis-1050}
                 \mycpar{\V{zeroAL} is a scansion
                         \cuz \Dfref{ee-types}, \eqref{eq:pr-row-basis-1040}.}
         \end{equation}
+        \begin{equation}
+        \label{eq:pr-row-basis-1060}
+                \mycpar{\LEV is complete as far as row \V{i} \cuz AF lemma.}
+        \end{equation}
         \todo{Write this proof}
+        \begin{equation}
+        \label{eq:pr-row-basis-1070}
+            \mycpar{\LEV will record the Earley edge
+                for \V{downAL} in the chart
+                \cuz \Lmref{scansion-completeness},
+                        \eqref{eq:pr-row-basis-1000},
+                        \eqref{eq:pr-row-basis-1006},
+                        \eqref{eq:pr-row-basis-1050},
+                        \eqref{eq:pr-row-basis-1060}.}
+        \end{equation}
+        With \eqref{eq:pr-row-basis-1070},
+        we have the lemma.
         \myqed
 \end{proof}
 
