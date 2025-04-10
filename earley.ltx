@@ -3852,7 +3852,6 @@ for the lemma.
         If \LEV is complete as far as rank \V{r}
         of row 0, then \LEV is complete as far as
         rank $\V{r}+1$ of row 0.
-        \todo{Use row 0 version of row step}
         \lmEnd
 \end{lemma}
 
@@ -3860,7 +3859,7 @@ for the lemma.
         \begin{equation}
                 \label{eq:pr-row-0-step-950}
                 \mycpar{Let \V{newAL} be a sound aletheme
-                of rank $\V{r}+1$ in row 0
+                of rank $\V{r}+1$ in row 0 \\
                 \cuz AF lemma.}
         \end{equation}
         \begin{equation}
@@ -3885,7 +3884,7 @@ for the lemma.
         \begin{equation}
                 \label{eq:pr-row-0-step-1030}
                 \mycpar{The chart is complete
-                        as far as rank \V{r} of 0 \\
+                        as far as rank \V{r} of row 0 \\
                         \cuz AF lemma.}
         \end{equation}
         \begin{equation}
@@ -3916,22 +3915,17 @@ for the lemma.
                         \eqref{eq:pr-row-0-step-1034}.}
         \end{equation}
         \begin{equation}
-                \label{eq:pr-row-0-step-2140}
-                \mycpar{If \V{newAL} is not a tangible reduction aletheme,
-                \cuz \eqref{eq:pr-row-0-step-1036}, vacuously.}
-        \end{equation}
-        \begin{equation}
                 \label{eq:pr-row-0-step-2200}
                 \mycpar{If \V{newAL} is a tangible reduction aletheme,
                 either \V{newAL} is a nulling completion,
                 or \LEV will record the Earley edge for \V{newAL} in the chart
-                \cuz \eqref{eq:pr-row-0-step-2140}, vacuously.}
+                \cuz \eqref{eq:pr-row-0-step-2120}, vacuously.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-row-0-step-2300}
                 \mycpar{If \V{newAL} is an intangible reduction aletheme,
                 either \V{newAL} is a nulling completion,
-                or \LEV will record the Earley edge for \V{newAL} in the chart
+                or \LEV will record the Earley edge for \V{newAL} in the chart \\
                 \cuz \Lmref{ri-comp},
                 \eqref{eq:pr-row-0-step-950}, \eqref{eq:pr-row-0-step-1030}.}
         \end{equation}
@@ -3950,7 +3944,7 @@ for the lemma.
                 a tangible reduction,
                 an intangible reduction,
                 or a predicted aletheme \\
-                \cuz \Dfref{ee-types}.}
+                \cuz \Dfref{ee-types}, \Dfref{tangible-reduction}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-row-0-step-2600}
@@ -3962,7 +3956,6 @@ for the lemma.
         Since \V{newAL} was arbitrarily chosen,
         the lemma follows from \eqref{eq:pr-row-0-step-2600}.
         \myqed
-        \todo{Check this proof}
 \end{proof}
 
 \begin{lemma}[Chart basis]
