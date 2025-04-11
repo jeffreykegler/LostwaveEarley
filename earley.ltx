@@ -423,7 +423,7 @@ print were preserved,
 few would take the time to go through them.
 
 For this reason, traditional math presentation
-emphasized terseness over readabilitity.
+emphasized terseness over readability.
 Our presentation makes math take several times
 as much space as the traditional method.
 Therefore If we did not have electronic distribution,
@@ -752,7 +752,7 @@ We say that
         For example, \eqref{eq:df-instance-010}
         would almost always be written \V{A:f}.
 
-        When the minor indentifier is omitted,
+        When the minor identifier is omitted,
         the reference is to the first occurrence in the derivation
         of an instance with that symbol and major identifier.
         The tag ``\texttt{f}'', as in \V{A:f}, is frequently used.
@@ -1029,11 +1029,11 @@ if they are non-trivial transitions.
 \begin{itemize}
         \item \V{fromStep} is the index in \V{fdrv} of the
 step which contains \V{A:f};
-\item \V{lhsIX} is the index of \V{A:f} in \VVelement{fdrv}{fromStep},
+\item \V{lhsIx} is the index of \V{A:f} in \VVelement{fdrv}{fromStep},
 \item \V{toStep} is the index in \V{fdrv} of the step which contains \V{str:f}.
 \end{itemize}
 This implies that
-\[ \element{\VVelement{fdrv}{fromStep}}{\V{lhsIX}} = \V{A:f}. \]
+\[ \element{\VVelement{fdrv}{fromStep}}{\V{lhsIx}} = \V{A:f}. \]
 We call \V{A:f} the \textbf{source} of \V{drv}
 and we call \V{str:f} the \textbf{target} of \V{drv}.
 When it is clear we are speaking of a partial derivation, we often
@@ -2648,7 +2648,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \end{gathered} \; \right) \\
                 \cuz \Dfref{aletheme}.
         \end{equation}
-        be a sound altheme with \V{S} on its LHS,
+        be a sound aletheme with \V{S} on its LHS,
         where we seek to determine the values of
         \V{fore}, \V{aft}, \V{origin}, and \V{current}.
         The only transition that contains \V{S} is
@@ -2854,7 +2854,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \begin{lemma}[Zero rank aletheme]
         \label{lm:rank-0-aletheme}
-        An altheme is zero rank iff
+        An aletheme is zero rank iff
         \begin{itemize}
                 \item it is a start symbol aletheme, and
                 \item all of the symbols in the predot string of its RHS are terminals.
@@ -2867,7 +2867,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 cuz \Lmref{rank-0-start-symbol-aletheme}:
         \begin{equation}
         \label{eq:pr-rank-0-aletheme-100}
-                \mycpar{An altheme is zero rank if
+                \mycpar{An aletheme is zero rank if
                 it is a start symbol aletheme, and
                 all of the symbols in the predot string of its RHS are terminals
                 \cuz \Lmref{rank-0-start-symbol-aletheme}.}
@@ -2875,7 +2875,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         For the ``only if'' direction, we must show that
         only start symbol alethemes are zero rank alethemes.
         We do this by reductio, assuming that there is a
-        sound altheme whose LHS is not the start symbol
+        sound aletheme whose LHS is not the start symbol
         but which has zero rank.
         \begin{equation}
         \label{eq:pr-rank-0-aletheme-110}
@@ -2923,19 +2923,19 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-0-aletheme-200}
-                \mycpar{An altheme is zero rank only if
+                \mycpar{An aletheme is zero rank only if
                 it is a start symbol aletheme
                         \cuz \eqref{eq:pr-rank-0-aletheme-110}, \eqref{eq:pr-rank-0-aletheme-190}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-0-aletheme-210}
-                \mycpar{A start symbol altheme is zero rank only if
+                \mycpar{A start symbol aletheme is zero rank only if
                 all of the symbols in the predot string of its RHS are terminals \\
                 \cuz \Lmref{rank-0-start-symbol-aletheme}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-0-aletheme-220}
-                \mycpar{An altheme is zero rank only if
+                \mycpar{An aletheme is zero rank only if
                 it is a start symbol aletheme, and
                 all of the symbols in the predot string of its RHS are terminals
                         \cuz \eqref{eq:pr-rank-0-aletheme-200},
@@ -2949,7 +2949,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \begin{lemma}[Start aletheme]
 \label{lm:start-aletheme}
-        The start altheme \Dfref{start-aletheme} for a derivation \V{drv} is
+        The start aletheme \Dfref{start-aletheme} for a derivation \V{drv} is
         \[ \V{startAL} = (\V{drv},\epsilon,\epsilon,\epsilon,\V{rhs},\V{S},0,0), \]
         where $\V{S} \de \V{rhs}$ is the start rule.
         The rank of \V{startAL} is zero.
@@ -3054,7 +3054,7 @@ is equal to the count of its predot symbols.
 \end{lemma}
 
 \begin{proof}
-        Consider the arbitrary sound letheme
+        Consider the arbitrary sound aletheme
         \begin{equation}
         \label{eq:pr-start-symbol-aletheme-location-0900}
                 \V{startAL} = \left( \; \begin{gathered}
@@ -3152,7 +3152,7 @@ we have the lemma.  \myqed
 
 \begin{lemma}[Start aletheme location]
 \label{lm:start-aletheme-location}
-A sound altheme is a rank 0 aletheme in row 0
+A sound aletheme is a rank 0 aletheme in row 0
 iff it is the start aletheme.
 \lmEnd
 \end{lemma}
@@ -3161,7 +3161,7 @@ iff it is the start aletheme.
 We have already shown the ``if'' direction:
         \begin{equation}
         \label{eq:pr-start-aletheme-location-0900}
-        \mycpar{A sound altheme is a rank 0 aletheme in row 0
+        \mycpar{A sound aletheme is a rank 0 aletheme in row 0
                 \textbf{if} it is a start aletheme
                 \cuz \Lmref{start-aletheme}.}
         \end{equation}
@@ -3230,7 +3230,7 @@ assuming for the reductio that
         \eqref{eq:pr-start-aletheme-location-1070} as the consequent, we have
         \begin{equation}
         \label{eq:pr-start-aletheme-location-1080}
-        \mycpar{A sound altheme is a rank 0 aletheme in row 0
+        \mycpar{A sound aletheme is a rank 0 aletheme in row 0
                 \textbf{only if} it is a start aletheme
                 \cuz reductio from
                 \eqref{eq:pr-start-aletheme-location-1000}--\eqref{eq:pr-start-aletheme-location-1070}.}
