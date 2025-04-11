@@ -405,6 +405,90 @@ and with the traditional proof of correctness
 for Earley's algorithm~\cite[pp. 323-325]{AH1972v1}
 will be helpful.
 
+\section{About the presentation}
+
+The presentation of the proofs in this document
+is much more verbose than the traditional presentation.
+We also depart from standard notation in some important
+respects.
+These departures may justify some explanation.
+
+Traditional math presentation evolved in the day when
+the printed page was the necessary means for preserving
+and distributing math.
+Math that did not make it onto the printed page was
+likely to be lost forever ---
+even if the notes of math that did not make it into
+print were preserved,
+few would take the time to go through them.
+
+For this reason, traditional math presentation
+emphasized terseness over readabilitity.
+Our presentation makes math take several times
+as much space as the traditional method.
+Therefore If we did not have electronic distribution,
+our presentation would force several times as much
+math into obscurity and probable extinction.
+Or rather, our presentation would force the journal
+editors to demand a rewrite,
+with the rejection as the penalty for failure to
+do so.
+
+We believe our presentation will be a much easier read
+than its traditionally terse equivalent.
+While many pages longer, each of our pages can
+be read smoothly.
+As an example for comparison,
+a reader of~\cite{AH1972v1}
+must stop many times on most pages to puzzle out
+an elided sequences of the reasoning.
+Even so, even a careful reader is likely to miss
+some of the tricky reasoning hidden in the elisions.
+
+The requirement to ``read between the lines'' for
+the handling of corner cases and the navigation
+of slippery arguments is a barrier to Parsing Theory
+for even mathematicians expert in other fields.
+It prevents even many programmers comfortable with
+math, including many who would benefit,
+and who would benefit the field, from investigating
+and exploiting results in our literature.
+
+\subsection{Perspicuity}
+
+\todo{Revise and extend these remarks}
+
+Another advantage we claim for our style of presentation
+is perspicuity.
+By ``perspicuity'', we mean that our proofs do not merely
+establish formal correctness, nice as that is to do,
+but give insight into \textbf{why} the algorithm is
+correct.
+This level of insight is important in two respects.
+First, it provides guidance for dealing with real-life
+considerations in implementing and maintaining the algorithm.
+Second, this perspicuity provides guidance for workers trying to add features,
+telling them which changes to \LEV will break it,
+and which will not.
+
+The history of \LEV itself provides a real example of the loss
+that results from taking less perspicuous approaches.
+In retrospect, the improvement that takes us from Earley's
+original algorithm to \LEV seems almost obvious,
+although how to prove it correct is perhaps not so obvious.
+The authors of the standard proof~\cite[pp. 323-325]{AH1972v1}
+certainly spent enough time with Earley's algorithm
+and their skill is not open to doubt --- the proof
+in this paper owes much to them.
+But they did not see the \LEV improvement.  Why?
+
+We would claim that the traditional notation,
+which made it hard to reason in terms of,
+or even refer to,
+individual derivations and symbol instances,
+kept \LEV from being discovered for over half
+a century.
+
 \section{Conventions}
 \noindent $\bullet$
 ``AF'' and its capitalization variants abbreviates
