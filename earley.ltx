@@ -446,6 +446,27 @@ those whom it reaches by electronic distribution.
 We will deal with the problems of hardcopy
 distribution when and if they present themselves.
 
+\subsection{Automation}
+
+The proofs in this document are ``hand proofs'',
+but in the future automated verification of proofs will
+likely become the standard.\footnote{%
+        See Rau and Nipkow~\cite{RauNipkow2024}
+        for report of a
+        formalized proof for an epsilon-free
+        version of Earley,
+        as well as a survey on progress in
+        automated verification of parsing
+        algorithms.}
+Current indications are that automatically
+verified proofs will need to be based
+on paper proofs,
+and that papers proofs adequate for
+this purpose will need to be detailed.\footnote{%
+        Rau and Nipkow~\cite{RauNipkow2024} base
+        their automated proof on
+        Jones' extensive proof~\cite{Jones1975}.}
+
 \subsection{Accessiblity}
 
 We believe our presentation will be a much easier read
@@ -470,23 +491,23 @@ and who could benefit the field,
 from investigating
 and exploiting results in our literature.
 
-\subsection{Reliability}
-
-There is evidence that
-the opaqueness of the traditionally terse presentation,
-also is an obstacle for the greats in the field.
-There have been several influential errors in the basic
-texts of Earley parsing.
-
-In Jay Earley's original presentations,
-his algorithm had a serious bug,
-and therefore his proof of correctness was wrong.\footnote{
-        The correctness proof and the first presentation
-        of Earley's algorithm are in Earley's Ph.D. thesis~\cite{Earley1968}.
-        Earley's ACM article~\cite{Earley1970} reproduces the
-        problematic algorithm.
-        This issue is well laid out by Aycock and Horspool~\cite{AH2002}.
-}
+% \subsection{Reliability}
+%
+% There is evidence that
+% the opaqueness of the traditionally terse presentation,
+% also is an obstacle for the greats in the field.
+% There have been several influential errors in the basic
+% texts of Earley parsing.
+%
+% In Jay Earley's original presentations,
+% his algorithm had a serious bug,
+% and therefore his proof of correctness was wrong.\footnote{
+%         The correctness proof and the first presentation
+%         of Earley's algorithm are in Earley's Ph.D. thesis~\cite{Earley1968}.
+%         Earley's ACM article~\cite{Earley1970} reproduces the
+%         problematic algorithm.
+%         This issue is well laid out by Aycock and Horspool~\cite{AH2002}.
+% }
 
 % Second, according to Tomita there is a mistake in the parse tree
 % representation. See page 153 of "Grune and Jacobs 1990", page
@@ -4292,7 +4313,9 @@ for the lemma.
 
 \FloatBarrier
 
+
 {
+
 \clearpage
 
 % Ragged right, do not hyphenate.
@@ -4308,14 +4331,14 @@ for the lemma.
 
 \bibitem{AU1972v1}
 \newblock{Aho, Alfred V., and Jeffrey D. Ullman.}
-\newblock{\em The theory of parsing, translation, and compiling. Vol. 1.}
+\newblock{{\em The theory of parsing, translation, and compiling}, Vol. 1.}
 \newblock{Prentice-Hall, 1972.}
 
 \bibitem{AH2002}
-John~Aycock and R.~Nigel~Horspool.
+\newblock{John~Aycock and R.~Nigel~Horspool.}
 \newblock{``Practical Earley Parsing''.}
-\newblock{\em The Computer Journal},
-    Vol. 45, No. 6, 2002, pp. 620-630.
+\newblock{{\em The Computer Journal},
+                Vol. 45, No. 6, 2002, pp. 620-630.}
 
 \bibitem{Earley1968}
 \newblock{Jay Earley.}
@@ -4325,26 +4348,32 @@ John~Aycock and R.~Nigel~Horspool.
 \bibitem{Earley1970}
 \newblock{Jay Earley.}
 \newblock{``An efficient context-free parsing algorithm''.}
-                \newblock{{\em Communications of the Association for Computing Machinery},
-                13(2):94--102, 1970.}
+\newblock{{\em Communications of the Association for Computing Machinery}, 13(2):94--102.}
+\newblock{ACM, 1970.}
 
 \bibitem{GJ2008}
 \newblock{Dirk~Grune and Ceriel~J.H Jacobs.}
 \newblock{\em Parsing Techniques: A Practical Guide}.
 \newblock{Springer, Amsterdam, 2008.}
 
+\bibitem{Jones1975}
+\newblock{C B Jones.}
+\newblock{``Formal development of correct algorithms: An example based on Earley’s recogniser''.}
+\newblock{{\em Proceedings of ACM Conference on Proving Assertions about Programs}, pages 150–169.}
+\newblock{ACM, 1972.}
+\newblock{\url{doi:10.1145/800235.807083}. Retrieved 12 April 2025.}
+
 \bibitem{Kegler2023}
 \newblock{Jeffrey Kegler.}
 \newblock{``Marpa, A practical general parser: the recognizer''.}
 \newblock{\url{https://arxiv.org/abs/1910.08129}.
-   Retrieved 2 December, 2024.}
+   Retrieved 2 December 2024.}
 
 \bibitem{llguidance}
 \newblock{llguidance team.}
 \newblock{``Low-level guidance parser''.}
-\newblock{
-  \url{https://github.com/microsoft/llguidance}.
-  Retrieved 2 December, 2024.}
+\newblock{\url{https://github.com/microsoft/llguidance}.
+                Retrieved 2 December 2024.}
 
 \bibitem{RauNipkow2024}
 \newblock{Martin Rau and Tobias Nipkow.}
@@ -4352,20 +4381,19 @@ John~Aycock and R.~Nigel~Horspool.
 \newblock{\em 15th International Conference on Interactive Theorem Proving (ITP 2024), Leibniz International Proceedings in Informatics (LIPIcs).}
 \newblock{Volume 309, pp. 31:1-31:18.}
 \newblock{Schloss Dagstuhl – Leibniz-Zentrum für Informatik, 2024.}
-\newblock{\url{https://doi.org/10.4230/LIPIcs.ITP.2024.31}.
-    Retrieved April 11, 2025.}
+\newblock{\url{https://doi.org/10.4230/LIPIcs.ITP.2024.31}.  Retrieved 11April 11 2025.}
 
-\bibitem{Tomita1987}
-\newblock{Masaru Tomita.}
-\newblock{``An efficient augmented-context-free parsing algorithm''.}
-\newblock{Comput. Linguist., 13(1–2):31–46, January 1987.}
-\end{thebibliography}
+ \bibitem{Tomita1987}
+ \newblock{Masaru Tomita.}
+ \newblock{``An efficient augmented-context-free parsing algorithm''.}
+ \newblock{Comput. Linguist., 13(1–2):31–46, January 1987.}
+ \end{thebibliography}
 
 } % RaggedRight
 
-% \clearpage
-% \phantomsection
-% \listofalgorithms
+\clearpage
+\phantomsection
+\listofalgorithms
 
 \clearpage
 \phantomsection
