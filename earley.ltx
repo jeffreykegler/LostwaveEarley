@@ -402,20 +402,28 @@ This document contains a proof of correctness for \LEV.
 It assumes familiarity with parsing theory.
 Familiarity with the code in \LEV
 and with the traditional proof of correctness
-for Earley's algorithm~\cite[pp. 323-325]{AH1972v1}
+for Earley's algorithm~\cite[pp. 323-325]{AU1972v1}
 will be helpful.
 
 \section{About the presentation}
 
 \todo{Revise and extend these remarks}
 
-The presentation of the proofs in this document
-is much more verbose than the traditional presentation.
-We also depart from standard notation in some important
-respects.
-These departures may justify some explanation.
+The the proofs in this document
+are more verbose than the traditional hand proofs.
+Some explanation may be justified.
 
 \subsection{Readibility}
+
+Traditional math presentation is extremely terse.
+The experience of having to stop to puzzle out
+elided reasoning sequences is common,
+and in fact expected,
+even by experts in the subfield
+of the article.
+In this respect,
+the presentation in this document
+can be compared with that of
 
 Traditional math presentation evolved in the day when
 the printed page was the necessary means for preserving
@@ -428,24 +436,24 @@ few would take the time to go through them.
 
 For this reason, traditional math presentation
 emphasized terseness over readability.
-Our presentation makes math take several times
-as much space as the traditional method.
-Therefore If we did not have electronic distribution,
-our presentation would force several times as much
-math into obscurity and probable extinction.
-Or rather, our presentation would force the journal
-editors to demand a rewrite,
-with the rejection as the penalty for failure to
-do so.
+Those truly interested in the telegraphic math would
+usually manage to puzzle it out,
+and other math would be preserved for those
+who might be interested in it.
+
+We expect this presentation to be very helpful for
+those whom it reaches by electronic distribution.
+We will deal with the problems of hardcopy
+distribution when and if they present themselves.
 
 \subsection{Accessiblity}
 
 We believe our presentation will be a much easier read
 than its traditionally terse equivalent.
-While many pages longer, each of our pages can
-be read smoothly.
 As an example for comparison,
-a reader of~\cite{AH1972v1}
+a reader of the standard presentation
+of the proof of Earley's Algorithm
+in Aho and Ullman~\cite[pp. 320-332]{AU1972v1}
 must stop many times on most pages to puzzle out
 an elided sequences of the reasoning.
 Even so, even a careful reader is likely to miss
@@ -453,14 +461,46 @@ some of the tricky reasoning hidden in the elisions.
 
 The requirement to ``read between the lines'' for
 the handling of corner cases and the navigation
-of slippery arguments is a barrier to Parsing Theory
-for even mathematicians expert in other fields.
-It prevents even many programmers comfortable with
-math, including many who would benefit,
-and who would benefit the field, from investigating
+of slippery arguments is a barrier to entry
+into Parsing Theory
+even for mathematicians expert in other fields.
+It prevents even those programmers who are comfortable with
+math, including many
+and who could benefit the field,
+from investigating
 and exploiting results in our literature.
 
 \subsection{Reliability}
+
+There is evidence that
+the opaqueness of the traditionally terse presentation,
+also is an obstacle for the greats in the field.
+There have been several influential errors in the basic
+texts of Earley parsing.
+
+In Jay Earley's original presentations,
+his algorithm had a serious bug,
+and therefore his proof of correctness was wrong.\footnote{
+        The correctness proof and the first presentation
+        of Earley's algorithm are in Earley's Ph.D. thesis~\cite{Earley1968}.
+        Earley's ACM article~\cite{Earley1970} reproduces the
+        problematic algorithm.
+        This issue is well laid out by Aycock and Horspool~\cite{AH2002}.
+}
+
+% Second, according to Tomita there is a mistake in the parse tree
+% representation. See page 153 of "Grune and Jacobs 1990", page
+% 210 of "Grune and Jacobs 2008", and the bibliography entry for
+% Earley 1970 in "Grune and Jacobs 2008". In the printed edition
+% of the 2008 bibliography, the entry is on page 578, and on the web
+% (ftp://ftp.cs.vu.nl/pub/dick/PTAPG_2nd_Edition/CompleteList.pdf), it's
+% on pp. 583-584.
+
+% Add Rau & Nipkow ref to Tomita issue.
+% Add A&H bug.
+
+\todo{Expand, rewrite from here}
+
 \subsection{Perspicuity}
 
 Another advantage we claim for our style of presentation
@@ -481,7 +521,7 @@ that results from taking less perspicuous approaches.
 In retrospect, the improvement that takes us from Earley's
 original algorithm to \LEV seems almost obvious,
 although how to prove it correct is perhaps not so obvious.
-The authors of the standard proof~\cite[pp. 323-325]{AH1972v1}
+The authors of the standard proof~\cite[pp. 323-325]{AU1972v1}
 certainly spent enough time with Earley's algorithm
 and their skill is not open to doubt --- the proof
 in this paper owes much to them.
@@ -4266,10 +4306,32 @@ for the lemma.
 
 \begin{thebibliography}{10}
 
-\bibitem{AH1972v1}
+\bibitem{AU1972v1}
 \newblock{Aho, Alfred V., and Jeffrey D. Ullman.}
 \newblock{\em The theory of parsing, translation, and compiling. Vol. 1.}
 \newblock{Prentice-Hall, 1972.}
+
+\bibitem{AH2002}
+John~Aycock and R.~Nigel~Horspool.
+\newblock{``Practical Earley Parsing''.}
+\newblock{\em The Computer Journal},
+    Vol. 45, No. 6, 2002, pp. 620-630.
+
+\bibitem{Earley1968}
+\newblock{Jay Earley.}
+\newblock{``An Efficient Context-Free Parsing Algorithm''.}
+\newblock{Ph.D. Thesis, Carnegie Mellon University, 1968.}
+
+\bibitem{Earley1970}
+\newblock{Jay Earley.}
+\newblock{``An efficient context-free parsing algorithm''.}
+                \newblock{{\em Communications of the Association for Computing Machinery},
+                13(2):94--102, 1970.}
+
+\bibitem{GJ2008}
+\newblock{Dirk~Grune and Ceriel~J.H Jacobs.}
+\newblock{\em Parsing Techniques: A Practical Guide}.
+\newblock{Springer, Amsterdam, 2008.}
 
 \bibitem{Kegler2023}
 \newblock{Jeffrey Kegler.}
@@ -4279,20 +4341,24 @@ for the lemma.
 
 \bibitem{llguidance}
 \newblock{llguidance team.}
-\newblock{"Low-level guidance parser".}
+\newblock{``Low-level guidance parser''.}
 \newblock{
   \url{https://github.com/microsoft/llguidance}.
   Retrieved 2 December, 2024.}
 
 \bibitem{RauNipkow2024}
-\newblock{Rau, Martin, and Tobias Nipkow.}
-\newblock{"A Verified Earley Parser."}
+\newblock{Martin Rau and Tobias Nipkow.}
+\newblock{``A Verified Earley Parser''.}
 \newblock{\em 15th International Conference on Interactive Theorem Proving (ITP 2024), Leibniz International Proceedings in Informatics (LIPIcs).}
 \newblock{Volume 309, pp. 31:1-31:18.}
 \newblock{Schloss Dagstuhl – Leibniz-Zentrum für Informatik, 2024.}
 \newblock{\url{https://doi.org/10.4230/LIPIcs.ITP.2024.31}.
     Retrieved April 11, 2025.}
 
+\bibitem{Tomita1987}
+\newblock{Masaru Tomita.}
+\newblock{``An efficient augmented-context-free parsing algorithm''.}
+\newblock{Comput. Linguist., 13(1–2):31–46, January 1987.}
 \end{thebibliography}
 
 } % RaggedRight
