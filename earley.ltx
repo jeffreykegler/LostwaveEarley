@@ -4257,6 +4257,46 @@ for the lemma.
         \myqed
 \end{proof}
 
+\begin{remark}[Vacuously true steps]
+        For most rows, most steps are complete vacuously.
+        That is, typically there are no alethemes of that
+        rank, and therefore all EE's corresponding to those
+        non-existent alethemes are in the chart.
+
+        It is also true of most
+        rows greater than 0, that
+        the basis will be vacuously true ---
+        that there will be no alethemes in that
+        row of rank~0.
+        \rmEnd
+\end{remark}
+
+\begin{remark}[Same-row upstream scansion vs. basis scansion]
+        In every row \V{i} there is a same-row upstream path:
+        a sequence, call it \V{EEs}, which is longest sequences of EE's such that
+        \begin{itemize}
+                \item all the EE's in \V{EEs} are in row \V{i}, and
+                \item for every successive pair of elements of \V{EEs}, the first EE
+                is an inflow of the second EE.
+        \end{itemize}
+        Except in row 0, the first EE in \V{EEs} will always be a scansion,
+        which we can call the row's ``root scansion''.
+        In rows with a root scansion (that is, in rows greater
+        than zero) all the other EE's in that row will be
+        downstream from the root scansion.
+
+        For understanding \Lmref{chart-step}, it is important to
+        realize that the row's root scansion will have rank 0
+        only in rare cases. Specifically, row \V{i} has a rank 0 scansion
+        only if the start rule's first \V{i} symbols are
+        terminals.
+        In other words, the base row \V{i} has a rank 0 scansion
+        only if the start rule has
+        a prefix entirely composed of terminals,
+        and of length at least~\V{i}
+        \Lmref{start-symbol-aletheme-location}.  \rmEnd
+\end{remark}
+
 \begin{lemma}[Chart step]
         \label{lm:chart-step}
         When running \LEV,
