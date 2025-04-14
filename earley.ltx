@@ -761,7 +761,7 @@ We say that
         Each occurrence can be identified by the index of the step (\V{stepIX}),
         within the derivation (\V{drv}),
         and the index (\V{pos}) of the symbol occurrence within the string,
-        so that the triple $(\V{stepIX}, \V{pos}, \V{drv})$ represents
+        so that the triple $(\V{drv}, \V{stepIX}, \V{pos})$ represents
         a symbol instance.
         More practically, we will tag symbols with an instance identifier,
         separated from the symbol name by a colon, for example,
@@ -777,7 +777,8 @@ We say that
         ``\texttt{f}'' is the major identifier, and
         ``\texttt{0}'' is the minor identifier.
 
-        The major identifier of the tag is inherited by its trivial productions.
+        The major identifier of the tag is inherited by its trivially
+        derived symbols.
         The minor identifier of the tag is used to distinguish symbol instances
         with the same major identifier.
 
@@ -786,7 +787,7 @@ We say that
         would almost always be written \V{A:f}.
 
         When the minor identifier is omitted,
-        the reference is to the first occurrence in the derivation
+        the reference is to the first occurrence in the derivation,
         of an instance with that symbol and major identifier.
         The tag ``\texttt{f}'', as in \V{A:f}, is frequently used.
         The ``\texttt{f}''is intended to suggest that the instance is the current
@@ -829,8 +830,8 @@ it is a \textbf{sentence}.
         \begin{gather}
                 \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
                 \land \; \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft} \\
-                \land \; \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}} \\
-                \land \; \V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}. \quad \dfEnd
+                \land \; \V{fore} \destarV{drv} \Velement{w}{0,\V{origin}} \\
+                \land \; \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}. \quad \dfEnd
         \end{gather}
 \end{definition}
 
