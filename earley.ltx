@@ -734,6 +734,19 @@ We say that
         \dfEnd
 \end{definition}
 
+\begin{remark}[Full derivations are unambiguous]
+        We use full derivations (and later, partial derivations) to refer
+        to specific derivations, and therefore they are always unambiguous.
+        When we wish to refer an ambiguous derivation, we will use the underset
+        variable \V{g} to indicate that any of the derivations allowed by
+        the grammar \V{g} may be used.
+        For example,
+        \[ \V{A} \destarV{g} \epsilon \]
+        indicates there is a derivation using grammar \V{g} in which symbol \V{A} is nulled,
+        and therefore that \V{A} is nullable.
+        \rmEnd
+\end{remark}
+
 \begin{definition}[Trivial derivation]
         In the SF transition
         \[ ( (\alpha \cat \V{A} \cat \beta), (\alpha \cat \V{rhsA} \cat \beta) ), \]
@@ -901,6 +914,7 @@ We note that aletheme-to-edge correspondence is a many-to-one relationship.
 \end{definition}
 
 \begin{definition}[Soundness]
+\label{df:soundness}
 Let \V{aleths} be the set of sound
 alethemes for a grammar \V{g} and an input \V{w}.
 Let \V{edges} be a set of Earley edges.
@@ -909,7 +923,7 @@ with respect to \V{aleths}
 iff \V{edges} does not contain any nulling completions,
 and if every element of \V{edges}
 corresponds to an element of \V{aleths}.
-\qquad \dfEnd
+\dfEnd
 \end{definition}
 
 \begin{definition}[Completeness]
@@ -924,96 +938,12 @@ or an Earley edge corresponding to \V{al} is in the Earley chart.
 \dfEnd
 \end{definition}
 
-We note that our definition of \Dfref{completeness},
-nulling completions.
+We note that our definitions of \Dfref{completeness}
+and of \Dfref{soundness}
+exclude nulling completions.
 This differs from
 the usual definition of completeness in Earley parsing,
 and is a special feature of the \LEV.
-
-\begin{definition}[Rank]
-        \label{df:rank}
-        Let
-        \[ \V{x} = (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
-        be an aletheme.
-        The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest derivation such
-        that
-        \[ \V{S} \destarV{g} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
-        The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest derivation such
-        that
-        \[ \V{fore} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}. \]
-        The \textbf{rank} of \V{x} is
-        \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
-\end{definition}
-
-\begin{lemma}[Rank well-definedness]
-\label{lm:rank-welldef}
-        The rank of a sound aletheme is well-defined.  \lmEnd
-\end{lemma}
-
-\begin{proof}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1000}
-                \mycpar{Let $\V{al} =
-                (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current})$
-                be a sound aletheme
-                \cuz \Dfref{aletheme}.}
-        \end{equation}
-        From the soundness of \V{al}, we know that
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1010}
-                \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
-                is well-defined
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000},}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1020}
-                \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
-                is well-defined \\
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}, and}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1030}
-                \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
-                is well-defined
-                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1040}
-                \mycpar{$\VFA{Dp}{al} = \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
-                \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1050}
-                \mycpar{$\VFA{Dp}{al}$ is well-defined
-                \cuz \eqref{eq:pr-rank-welldef-1010}, \eqref{eq:pr-rank-welldef-1040}.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1060}
-                \mycpar{$\V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$
-                is well-defined \\
-                \cuz \eqref{eq:pr-rank-welldef-1020}, \eqref{eq:pr-rank-welldef-1030}.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1070}
-                \mycpar{$\VFA{Ht}{al} = \V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$ \\
-                \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1080}
-                \mycpar{$\VFA{Ht}{al}$ is well-defined \cuz
-                        \eqref{eq:pr-rank-welldef-1060}, \eqref{eq:pr-rank-welldef-1070}.}
-        \end{equation}
-        \begin{equation}
-        \label{eq:pr-rank-welldef-1090}
-                \mycpar{$\VFA{Rank}{al}$ is well-defined \cuz
-                        \Dfref{rank}, \eqref{eq:pr-rank-welldef-1050}, \eqref{eq:pr-rank-welldef-1080}.}
-        \end{equation}
-        From
-        \eqref{eq:pr-rank-welldef-1000} as the antecedant and
-        \eqref{eq:pr-rank-welldef-1090} as the consequent,
-        the lemma follows.
-        \myqed
-\end{proof}
 
 \begin{definition}[Transition expansion]
         \label{df:transition-expansion}
@@ -1295,6 +1225,91 @@ of \V{stem}.
         to the start edge \Dfref{ee-types}.\dfEnd
         \dfEnd
 \end{definition}
+
+\begin{definition}[Rank]
+        \label{df:rank}
+        Let
+        \[ \V{x} = (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current}) \]
+        be an aletheme.
+        The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest partial derivation \V{drv} such
+        that
+        \[ \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
+        The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest partial derivation \V{drv} such
+        that
+        \[ \V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}. \]
+        The \textbf{rank} of \V{x} is
+        \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
+\end{definition}
+
+\begin{lemma}[Rank well-definedness]
+\label{lm:rank-welldef}
+        The rank of a sound aletheme is well-defined.  \lmEnd
+\end{lemma}
+
+\begin{proof}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1000}
+                \mycpar{Let $\V{al} =
+                (\V{drv},\V{fore},\V{aft},\V{pre},\V{post},\V{lhs},\V{origin},\V{current})$
+                be a sound aletheme
+                \cuz \Dfref{aletheme}.}
+        \end{equation}
+        From the soundness of \V{al}, we know that
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1010}
+                \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
+                is well-defined
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000},}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1020}
+                \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
+                is well-defined \\
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}, and}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1030}
+                \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
+                is well-defined
+                \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1040}
+                \mycpar{$\VFA{Dp}{al} = \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
+                \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1050}
+                \mycpar{$\VFA{Dp}{al}$ is well-defined
+                \cuz \eqref{eq:pr-rank-welldef-1010}, \eqref{eq:pr-rank-welldef-1040}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1060}
+                \mycpar{$\V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$
+                is well-defined \\
+                \cuz \eqref{eq:pr-rank-welldef-1020}, \eqref{eq:pr-rank-welldef-1030}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1070}
+                \mycpar{$\VFA{Ht}{al} = \V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$ \\
+                \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1080}
+                \mycpar{$\VFA{Ht}{al}$ is well-defined \cuz
+                        \eqref{eq:pr-rank-welldef-1060}, \eqref{eq:pr-rank-welldef-1070}.}
+        \end{equation}
+        \begin{equation}
+        \label{eq:pr-rank-welldef-1090}
+                \mycpar{$\VFA{Rank}{al}$ is well-defined \cuz
+                        \Dfref{rank}, \eqref{eq:pr-rank-welldef-1050}, \eqref{eq:pr-rank-welldef-1080}.}
+        \end{equation}
+        From
+        \eqref{eq:pr-rank-welldef-1000} as the antecedant and
+        \eqref{eq:pr-rank-welldef-1090} as the consequent,
+        the lemma follows.
+        \myqed
+\end{proof}
 
 \needspace{6in}
 \section{Algorithm}
@@ -4283,8 +4298,8 @@ for the lemma.
         \myqed
 \end{proof}
 
-\begin{remark}[Vacuously true steps]
-        For most rows, most steps are complete vacuously.
+\begin{remark}[Vacuously complete ranks]
+        For most rows, most ranks are complete vacuously.
         That is, typically there are no alethemes of that
         rank, and therefore all EE's corresponding to those
         non-existent alethemes are in the chart.
