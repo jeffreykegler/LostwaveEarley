@@ -668,7 +668,7 @@ We say that
 \item an Earley edge is a \textbf{start edge}
         if its LHS is the start symbol and
         it has no predot symbol;
-\item an Earley edge is \textbf{predicted}, or a \textbf{prediction}
+\item an Earley edge is \textbf{predicted}, or a \textbf{prediction},
         if its LHS is not the start symbol and
         it has no predot symbol;
 \item an Earley edge is \textbf{confirmed}, or a \textbf{confirmation},
@@ -677,8 +677,8 @@ We say that
         if its predot symbol is a terminal,
          $\element{\alpha}{\lastix{\alpha}} \in \V{T}$;
 \item an Earley edge is \textbf{reduced}, or a \textbf{reduction},
-        if its predot symbol is a non-terminal;
-        $\element{\alpha}{\lastix{\alpha}} \in \V{N}$; \qquad \dfEnd
+        if its predot symbol is a non-terminal,
+        $\element{\alpha}{\lastix{\alpha}} \in \V{N}$. \qquad \dfEnd
 \end{itemize}
 \end{definition}
 
@@ -686,13 +686,15 @@ We say that
 \label{df:string}
         A \textbf{string} is a sequence whose members are
         elements of the set $(\V{N}\cup\V{T})$.
-        In this document, we will use the symbol \V{STR} for set of finite
+        In this document, we will use the symbol \V{STR}
+        for the set of finite
         strings,
         and $\V{STR}^+$ for set of non-empty finite strings:
         \[ \V{STR}^+ = \V{STR} \subtract \epsilon. \]
         A \textbf{terminal string} is a sequence whose members are
         elements of the set \V{T}.
-        In this document, we will use the symbol \V{TSTR} for set of finite
+        In this document, we will use the symbol \V{TSTR}
+        for the set of finite
         terminal strings,
         and $\V{TSTR}^+$ for set of non-empty finite terminal strings:
         \[ \V{TSTR}^+ = \V{TSTR} \subtract \epsilon.  \dfEnd \]
@@ -725,7 +727,7 @@ We say that
         A derivation, call it \V{drv}, is a sequence of strings
         \begin{itemize}
                 \item the first of which consists only of the start symbol, \V{S}; and
-                \item and such that every consecutive pair of the sequence is a string transition.
+                \item such that every consecutive pair of the sequence is a string transition.
         \end{itemize}
         The individual members of a derivation are strings,
         and in the context of the derivation are called \V{steps}.
@@ -734,7 +736,7 @@ We say that
 
 \begin{definition}[Trivial derivation]
         In the SF transition
-        \[ ( (\alpha \cat \V{A} \cat \beta), (\alpha \cat \V{rhsA} \cat \beta), \]
+        \[ ( (\alpha \cat \V{A} \cat \beta), (\alpha \cat \V{rhsA} \cat \beta) ), \]
         where $\V{A} \de \V{rhsA} \in \V{P}$,
         the symbols in
         $\alpha$ and $\beta$ are simply copied --- they can
