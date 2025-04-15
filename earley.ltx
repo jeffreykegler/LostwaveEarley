@@ -1206,7 +1206,7 @@ is the place where the mainstem and tributary ``join'' to form the downstream.
 is a sound aletheme.
 Then we say that
 any sound aletheme of the form
-        \[ \V{main} = (\V{drv},\V{fore},\V{aft},\V{pre},\V{B}\cat\V{post},\V{A},\V{origin},\V{current}) \]
+        \[ \V{main} = (\V{drv},\V{fore},\V{aft},\V{pre},(\V{B}\cat\V{post}),\V{A},\V{origin},\V{current}) \]
         is a \textbf{mainstem} of
         \V{down}.
 We also say that \V{down} is the \textbf{downstream channel}
@@ -1271,9 +1271,17 @@ of \V{stem}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-welldef-1040}
-                \mycpar{$\VFA{Dp}{al} = \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
+                \mycpar{$\VFA{Dp}{al} = \V{S} \destarV{drv2} \V{fore} \cat \V{lhs} \cat \V{aft}$ \\
+                where \V{drv2} is the shortest derivation of $\V{fore} \cat \V{lhs} \cat \V{aft}$
+                from \V{S}
                 \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
         \end{equation}
+        \begin{MYsloppy} We know that a derivation \V{drv2} exists.
+                If no derivation of
+                $\V{fore} \cat \V{lhs} \cat \V{aft}$ from \V{S}
+        is shorter than \V{drv}, then $\V{drv2} = \V{drv}$.
+        Therefore,
+        \end{MYsloppy}
         \begin{equation}
         \label{eq:pr-rank-welldef-1050}
                 \mycpar{$\VFA{Dp}{al}$ is well-defined
@@ -1287,9 +1295,18 @@ of \V{stem}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-welldef-1070}
-                \mycpar{$\VFA{Ht}{al} = \V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$ \\
+                \mycpar{$\VFA{Ht}{al} = \V{fore} \cat \V{pre} \destarV{drv3} \Velement{w}{0,\V{current}}$ \\
+                where \V{drv3} is the shortest derivation of \Velement{w}{0,\V{current}}
+                from $\V{fore} \cat \V{pre}$
                 \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
         \end{equation}
+        \begin{MYsloppy} Similarly to \eqref{eq:pr-rank-welldef-1040},
+                we know that a derivation \V{drv3} exists.
+                If no derivation of \Velement{w}{0,\V{current}}
+                from $\V{fore} \cat \V{pre}$
+        is shorter than \V{drv}, then $\V{drv3} = \V{drv}$.
+        Therefore,
+        \end{MYsloppy}
         \begin{equation}
         \label{eq:pr-rank-welldef-1080}
                 \mycpar{$\VFA{Ht}{al}$ is well-defined \cuz
