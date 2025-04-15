@@ -44,7 +44,7 @@
 % p. 10.
 \makeatletter
 \providecommand\@dotsep{5}
-\def\listtodoname{List of TODOs}
+\def\listtodoname{List of TODO's}
 \def\listoftodos{\@starttoc{tdo}\listtodoname}
 \makeatother
 
@@ -140,8 +140,6 @@
 \newcommand{\var}[1]{\ensuremath{\texttt{#1}}}
 \newcommand{\V}[1]{\ensuremath{\texttt{\mbox{#1}}}}
 
-\newcommand{\cfg}{CFG}
-
 \newcommand{\de}{\mathrel{::=}}
 \newcommand{\derives}{\Rightarrow}
 \newcommand{\derivesRaw}[2]
@@ -169,8 +167,6 @@
 \newcommand{\set}[1]{{\left\lbrace #1 \right\rbrace} }
 \newcommand{\bigset}[1]{{\bigl\lbrace #1 \bigr\rbrace} }
 \newcommand{\Bigset}[1]{{\Bigl\lbrace #1 \Bigr\rbrace} }
-
-\DeclareMathOperator{\wrt}{wrt}
 
 % use internal counter of algorithmicx
 \newcommand{\algnested}{ %
@@ -430,7 +426,7 @@ and more math would be preserved.
 
 We expect this presentation to be very helpful for
 those whom it reaches by electronic distribution.
-We will be happy to deal with the problems of hardcopy
+We will be happy to deal with the problems of paper
 distribution when and if they present themselves.
 
 \subsection{Automation}
@@ -456,7 +452,7 @@ verification will need to be detailed.\footnote{%
         their automated proof on
         Jones' extensive proof~\cite{Jones1975}.}
 
-\subsection{Accessiblity}
+\subsection{Accessibility}
 
 We believe our presentation will be a much easier read
 than its traditionally terse equivalent.
@@ -553,10 +549,6 @@ For example, ``AF theorem'' abbreviate
 ``Wlog'' and its capitalization variants abbreviate
 ``without log of generality''.
 \par
-\noindent $\bullet$
-``Wrt'' and its capitalization variants abbreviate
-    ``with respect to''.
-    \par
 \noindent $\bullet$
 Ranges are inclusive start,
     exclusive end, so that, for example,
@@ -1335,8 +1327,8 @@ of \V{stem}.
 \label{alg:add-row-0}
 \begin{algorithmic}[1]
         \Procedure{AddRow0}{}
-        \State \Call {AddStartEdge}{}
-        \State \Call {FinishRow}{0}
+        \State \Call{AddStartEdge}{}
+        \State \Call{FinishRow}{0}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -1346,8 +1338,8 @@ of \V{stem}.
 \label{alg:add-row-n}
 \begin{algorithmic}[1]
         \Procedure{AddRow}{\V{n}}
-        \State \Call {AddScansions}{\V{n}}
-        \State \Call {FinishRow}{\V{n}}
+        \State \Call{AddScansions}{\V{n}}
+        \State \Call{FinishRow}{\V{n}}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -2212,7 +2204,7 @@ We are now in a position to define our proxy aletheme.
 For the lemma, it remains to determine the rank of \V{proxAL}.
 \begin{equation}
 \label{eq:pr-red-trib-310}
-        \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
+        \mycpar{Let \V{DownMinD}, ``\V{downAl} minimum depth''  be the minimum number of steps in the derivation \\
         $\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
@@ -2222,7 +2214,7 @@ For the lemma, it remains to determine the rank of \V{proxAL}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-330}
-        \mycpar{Let \V{TribMinD}, ``tribAl minimum depth''  be the minimum number of steps in the derivation \\
+        \mycpar{Let \V{TribMinD}, ``\V{tribAL} minimum depth''  be the minimum number of steps in the derivation \\
         $\V{S} \destarV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
@@ -2519,7 +2511,7 @@ At this point,
 For the lemma, it remains to determine the rank of \V{stemAL}.
 \begin{equation}
 \label{eq:pr-pred-stem-310}
-        \mycpar{Let \V{DownMinD}, ``downAl minimum depth''  be the minimum number of steps in the derivation \\
+        \mycpar{Let \V{DownMinD}, ``\V{downAl} minimum depth''  be the minimum number of steps in the derivation \\
         $\V{S} \destarV{drv} \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}.$}
 \end{equation}
 \begin{equation}
@@ -2529,7 +2521,7 @@ For the lemma, it remains to determine the rank of \V{stemAL}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-330}
-        \mycpar{Let \V{StemMinD}, ``stemAl minimum depth''  be the minimum number of steps in the derivation \\
+        \mycpar{Let \V{StemMinD}, ``\V{stemAL} minimum depth''  be the minimum number of steps in the derivation \\
         $\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}.$}
 \end{equation}
 \begin{equation}
