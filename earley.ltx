@@ -1719,32 +1719,24 @@ Based on the pseudocode, we make a series of observations.
 
 \begin{lemma}[Confirmation mainstem inflow]
         \label{lm:conf-stem}
-        Let \V{downAL} be a confirmed aletheme,
-        whose predot symbol is \V{B},
-        whose current location is \V{current},
-        and where \V{j} is such that
+        Let \V{downAL} be a sound confirmed aletheme,
+        whose predot symbol is \V{B}, and
+        whose current location is \V{current}.
+        Let \V{j} be such that
         \[
                 0 \le \V{j} \le \V{current} \land
                 \V{B} \destarV{g} \Velement{w}{\V{j},\V{current}}.
         \]
-        Then \V{downAL} has a mainstem \V{stemAL}
-        at joint location \V{j},
-        the current location of \V{stemAL} is \V{j},
-        and
-        \[
-                \VFA{Rank}{stemAL} < \VFA{Rank}{downAL}. \quad \lmEnd
-        \]
+        Then
+        \begin{itemize}
+                \item \V{downAL} has a mainstem \V{stemAL} at joint location \V{j},
+                \item the current location of \V{stemAL} is \V{j}, and
+        \item $\VFA{Rank}{stemAL} < \VFA{Rank}{downAL}$. \lmEnd
+        \end{itemize}
 \end{lemma}
 
 \begin{proof}
-Our proof strategy is to assume a confirmed aletheme,
-described as in
-the statement of the lemma and otherwise arbitrary,
-and then to show
-that we have the mainstem described in
-the statement of the lemma.
-
-We assumed for the lemma the following confirmed aletheme:
+We assume for the lemma the following sound confirmed aletheme:
 \begin{equation}
 \label{eq:pr-conf-stem-010}
         \begin{gathered}
