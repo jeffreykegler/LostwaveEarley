@@ -12,6 +12,7 @@ all:
 # cannot figure out how to put aspell tex-command options into file
 aspell:
 	cat earley.ltx | ASPELL_CONF="add-extra-dicts ./aspell-ignore.txt; \
+		add-tex-command NOaspell p; \
 		add-tex-command Call p; \
 		add-tex-command Function p; \
 		add-tex-command newblock p; \
@@ -22,7 +23,9 @@ aspell:
 		add-tex-command derivesV p; \
 		add-tex-command destarV p; \
 	   	add-tex-command V p; \
+	   	add-tex-command Vsize p; \
 	   	add-tex-command VFA pp; \
+	   	add-tex-command element pp; \
 	   	add-tex-command Velement pp; \
 	   	add-tex-command VVelement pp; \
 	   	add-tex-command Algref p; \

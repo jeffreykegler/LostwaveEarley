@@ -39,6 +39,10 @@
         ]{draftwatermark}
 }{}
 
+% Hack to turn off aspell -- for LaTex it's
+% a no-op
+\newcommand{\NOaspell}[1]{#1}
+
 % Fix conflict between todonotes and amsart packages
 % See http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/todonotes/todonotes.pdf,
 % p. 10.
@@ -353,7 +357,7 @@
 \newcommand{\lmEnd}{\thEnd}
 
 \newcommand{\naturals}{\ensuremath{\mathbb{N}}\xspace}
-\newcommand{\countables}{\ensuremath{\mathbb{CNT}}\xspace}
+\newcommand{\countables}{\ensuremath{\mathbb{\NOaspell{CNT}}}\xspace}
 \newcommand{\integers}{\ensuremath{\mathbb{Z}}\xspace}
 
 \hyphenation{oper-and oper-ands}
@@ -553,8 +557,8 @@ For example, ``AF theorem'' abbreviate
 Ranges are inclusive start,
     exclusive end, so that, for example,
         \begin{gather*}
-            \element{(\texttt{"abcd"})}{0,2} = \texttt{"ab"} \text{, and} \\
-            \element{(\texttt{"abcd"})}{2,3} = \texttt{"c"}.
+                \element{(\texttt{\NOaspell{"abcd"}})}{0,2} = \texttt{"ab"} \text{, and} \\
+                \element{(\texttt{\NOaspell{"abcd"}})}{2,3} = \texttt{"c"}.
         \end{gather*}
 \par
 \noindent $\bullet$ \TRUE is a boolean (or optional boolean) true; and
@@ -1358,7 +1362,7 @@ of \V{stem}.
                 so that \Vsize{row} increases during the running of the loop.}
         \label{li:finish-row-030}
         \State $\V{current} \gets \Velement{row}{\V{i}}$
-                \Comment {\VVelement{row}{i} is \V{i}'th Earley edge in row}
+                \Comment {\VVelement{row}{i} is \NOaspell{\V{i}'th} Earley edge in row}
         \label{li:finish-row-040}
         \If {\V{current} is complete}
         \label{li:finish-row-050}
@@ -1975,7 +1979,7 @@ From the reductio, we conclude
         \label{eq:pr-lm-ht-minimization-160}
         \mycpar{\V{HtRHS} is the minimal length for
         $\V{rhs} \destarV{g} \Velement{w}{\V{a},\V{b}}$
-        cuz \eqref{eq:pr-lm-ht-minimization-070}, \eqref{eq:pr-lm-ht-minimization-150}.}
+        \cuz \eqref{eq:pr-lm-ht-minimization-070}, \eqref{eq:pr-lm-ht-minimization-150}.}
 \end{equation}
 and therefore,
 \begin{equation}
@@ -2948,7 +2952,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
 
 \begin{proof}
         The ``if'' direction follows directly from
-                cuz \Lmref{rank-0-start-symbol-aletheme}:
+                \Lmref{rank-0-start-symbol-aletheme}:
         \begin{equation}
         \label{eq:pr-rank-0-aletheme-100}
                 \mycpar{An aletheme is zero rank if
@@ -4463,7 +4467,7 @@ for the lemma.
 % swapnumber would be cool, but is not in the thmtools in
 % the latest Raspbian
 \listoftheorems[ignoreall,onlynamed=observation,
-    show={lemma,ldef,theorem,example,remark,definition}]
+    show={lemma,\NOaspell{ldef},theorem,example,remark,definition}]
 
 \ifdraft{
     \clearpage
