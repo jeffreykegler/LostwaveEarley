@@ -1703,6 +1703,38 @@ Based on the pseudocode, we make a series of observations.
 
 \section{Soundness}
 
+The following lemma is useful for splicing subtrees from different derivations.
+
+\begin{lemma}[Splicing lemma]
+        \label{lm:splicing}
+        Let \V{B:f} be
+        a symbol instance in a full derivation \V{drv}.
+        Let \V{B:g} be a symbol instance in a full derivation \V{drv2}.
+        Let there be $\V{i},\V{j}$ such that $0 < \V{i} \le \V{j} \le \Vsize{w}$
+        and
+        \begin{equation*}
+                \mycpar{$\V{B:f} \destarV{drv} \Velement{w}{\V{i},\V{j}}$, and \\
+                $\V{B:g} \destarV{drv2} \Velement{w}{\V{i},\V{j}}$.}
+        \end{equation*}
+
+        Then there is a derivation \V{drv3} such that
+        \begin{equation}
+        \mycpar{when $\alpha$ and $\beta$ are both expansions of \V{B:g}, \\
+        if $\alpha \destarV{drv2} \beta$ then $\alpha \destarV{drv3} \beta,$ and}
+        \end{equation}
+        \begin{equation}
+                \mycpar{when both $\alpha$ and $\beta$ are not and do not contain \\
+                expansions of \V{B:f}, other than the trivial one of \V{B:f} itself, \\
+        if $\alpha \destarV{drv} \beta$ then $\alpha \destarV{drv3} \beta.$}
+        \end{equation}
+        \lmEnd
+\end{lemma}
+
+\begin{proof}
+        Proof omitted. \todo{Write this proof}
+        \myqed
+\end{proof}
+
 \begin{theorem}[\LEV is sound]
         \label{th:lev-sound}
         After running the algorithm of \LEV,
