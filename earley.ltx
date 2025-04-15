@@ -1435,7 +1435,7 @@ Based on the pseudocode, we make a series of observations.
 
 \begin{observation}[No Earley edge is recorded twice]
         There are no duplicate Earley edges.
-        That is, an Earley edge is recorded at most one.
+        That is, an Earley edge is recorded at most once.
         This is enforced at
         line \ref{li:record-edge-100} of \Algref{record-edge}.
         \obEnd
@@ -1453,7 +1453,7 @@ Based on the pseudocode, we make a series of observations.
         during activation events,
         the recorded edges are always edges other than the activated edge.
         No steps in the activation of an event \V{ev} overlap
-        steps in the the recording of \V{ev},
+        steps in the recording of \V{ev},
         and vice versa.
         \obEnd
 \end{observation}
@@ -1512,12 +1512,14 @@ Based on the pseudocode, we make a series of observations.
         \obEnd
 \end{observation}
 
+\begin{MYsloppy}
 \begin{observation}[Start edge recording]
         \label{ob:start-edge-recording}
         \LEV always records the start edge.
         See \Algref{earley}, \Algref{add-row-0}, and \Algref{start-edge}.
         \obEnd
 \end{observation}
+\end{MYsloppy}
 
 \begin{observation}[Start edge timing]
         \label{ob:start-edge-timing}
