@@ -946,7 +946,9 @@ and is a special feature of \LEV.
 In the context of a derivation, fanouts are defined recursively,
 as follows:
 \begin{itemize}
-                \begin{MYsloppy}
+\begin{MYsloppy}
+\item A symbol instance is a \textbf{fanout}
+        of itself, trivially.
 \item The symbol instance string \V{str} is an
 fanout of the LHS symbol instance of a transition \V{tr},
 if \V{str} is the direct fanout of the transition \V{tr}.
@@ -958,6 +960,22 @@ if \V{str4} is a direct fanout of a fanout of \V{A}.
 \V{str4} is a direct fanout of a fanout of \V{str3}.  \dfEnd
                 \end{MYsloppy}
 \end{itemize}
+\end{definition}
+
+\begin{definition}[Subtree inside/outside]
+        \label{df:subtree-inside}
+        Consider a symbol instance \V{A:f} in a derivative \V{drv}.
+        The symbol instance string $\alpha$ is \textbf{inside the subtree}
+        of \V{A:f} if it is composed entirely
+        of symbol instances from fanouts of \V{A:f}.
+        The symbol instance string $\alpha$ is \textbf{outside the subtree}
+        of \V{A:f} if none of
+        its symbol instances from fanouts of \V{A:f}.
+        We note that a symbol instance string may be neither inside or
+        outside of a subtree.
+        We also note
+        that the empty string is both inside and outside of every subtree.
+        \dfEnd
 \end{definition}
 
 \begin{definition}[Transition descendant]
@@ -1448,7 +1466,7 @@ Based on the pseudocode, we make a series of observations.
         \obEnd
 \end{observation}
 
-\begin{observation}[Recording and activation of an event do not overlap]
+\begin{observation}[Recording/activation non-overlap]
         While the activation loop \Algref{finish-row} records edges
         during activation events,
         the recorded edges are always edges other than the activated edge.
@@ -1727,16 +1745,6 @@ The following lemma is useful for splicing subtrees from different derivations.
                 \label{eq:lm-splicing-1080}
                 \mycpar{$\V{B:g} \destarV{drv2} \Velement{w}{\V{i},\V{j}}$.}
         \end{equation}
-
-        For the purposes of this lemma,
-        \begin{itemize}
-        \item we will say that a symbol instance
-        string $\alpha$ is a ``piece from the \V{B:f} subtree'' if it is composed entirely
-        of symbol instances from fanouts of \V{B:f} in \V{drv}, and
-        \item we will say that a symbol instance
-        string $\alpha$ is a ``piece outside of the \V{B:f} subtree'' if none of its
-        symbol instances are from fanouts of \V{B:f} in \V{drv}.
-        \end{itemize}
 
         Given \eqref{eq:lm-splicing-1000}, \eqref{eq:lm-splicing-1020}, \eqref{eq:lm-splicing-1040},
                 \eqref{eq:lm-splicing-1060}, and \eqref{eq:lm-splicing-1080},
