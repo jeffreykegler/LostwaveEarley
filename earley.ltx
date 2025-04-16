@@ -712,7 +712,7 @@ We say that
         where $\alpha$ and $\beta$ are strings.
         Overloading terminology a bit,
         \V{A} is called the \textbf{LHS symbol} of \V{tr},
-        \V{rhs} is called the \textbf{direct expansion} of \V{tr},
+        \V{rhs} is called the \textbf{direct fanout} of \V{tr},
         \V{Lstr} is called the \textbf{LHS step} of \V{tr},
         and \V{Rstr} is called the \textbf{RHS step} of \V{tr}.
         \dfEnd
@@ -941,21 +941,21 @@ This differs from
 the usual definition of completeness in Earley parsing,
 and is a special feature of \LEV.
 
-\begin{definition}[Transition expansion]
-        \label{df:transition-expansion}
-In the context of a derivation, expansions are defined recursively,
+\begin{definition}[Transition fanout]
+        \label{df:transition-fanout}
+In the context of a derivation, fanouts are defined recursively,
 as follows:
 \begin{itemize}
                 \begin{MYsloppy}
 \item The symbol instance string \V{str} is an
-expansion of the LHS symbol instance of a transition \V{tr},
-if \V{str} is the direct expansion of the transition \V{tr}.
-\item The direct expansion of a symbol instance string \V{str2} is the concatenation
-of the direct expansions of the symbol instances in \V{str2}.
-\item A symbol instance string \V{str4} is an expansion of \V{str3} if
-\V{str4} is a direct expansion of an expansion of \V{str3}.
-\item A symbol instance string \V{str4} is an expansion of the symbol instance \V{A}
-if \V{str4} is a direct expansion of an expansion of \V{A}.  \dfEnd
+fanout of the LHS symbol instance of a transition \V{tr},
+if \V{str} is the direct fanout of the transition \V{tr}.
+\item The direct fanout of a symbol instance string \V{str2} is the concatenation
+of the direct fanouts of the symbol instances in \V{str2}.
+\item A symbol instance string \V{str4} is an fanout of the symbol instance \V{A}
+if \V{str4} is a direct fanout of an fanout of \V{A}.
+\item A symbol instance string \V{str4} is an fanout of \V{str3} if
+\V{str4} is a direct fanout of an fanout of \V{str3}.  \dfEnd
                 \end{MYsloppy}
 \end{itemize}
 \end{definition}
@@ -966,7 +966,7 @@ In the context of a derivation,
 a transition is considered to be a \textbf{descendant}
 of the symbol instance \V{A:f} if its LHS symbol instance
 is \V{A:f} or if its LHS symbol instance
-is part of an expansion of \V{A:f}.
+is part of a fanout of \V{A:f}.
 A transition is considered to be an descendant
 of a string of symbol instances if it is a descendant
 of any symbol instance in the string.
@@ -982,7 +982,7 @@ if they are non-trivial transitions.
         We define a \textbf{partial derivation}
         from a symbol instance \V{A:f}
         to a symbol string instance \V{str:f},
-        where \V{str:f} is an expansion of \V{A:f},
+        where \V{str:f} is a fanout of \V{A:f},
         as a 4-tuple
         \[ \V{drv} = (\V{fdrv}, \V{fromStep}, \V{toStep}, \V{lhsIx}), \]
         where
@@ -1007,7 +1007,7 @@ Let \V{fdrv} be a full derivation.
 We define a \textbf{partial derivation}
 from a symbol string instance \V{src:f}
 to a symbol string instance \V{tgt:f},
-where \V{tgt:f} is an expansion of \V{src:f},
+where \V{tgt:f} is a fanout of \V{src:f},
 as a 5-tuple
 \[ \V{drv} = (\V{fdrv}, \V{fromStep}, \V{toStep}, \V{lhsIx1}, \V{lhsIx2}), \]
 where
@@ -1123,7 +1123,7 @@ the target of the predecessor must be the source of the successor.
 
 \begin{definition}[Unreachable symbol]
         An \textbf{unreachable symbol} is one which does
-        not appear in any expansion of the start symbol.
+        not appear in the fanout of the start symbol.
         That is, in grammar \V{g}, an unreachable symbol is a symbol \V{A} where
         there does not exist $\alpha, \beta \in \V{STR}$,
         such that $\V{S} \destarV{g} \alpha \cat \V{A} \cat \beta$.
@@ -1732,10 +1732,10 @@ The following lemma is useful for splicing subtrees from different derivations.
         \begin{itemize}
         \item we will say that a symbol instance
         string $\alpha$ is a ``piece from the \V{B:f} subtree'' if it is composed entirely
-        of symbol instances from expansions of \V{B:f} in \V{drv}, and
+        of symbol instances from fanouts of \V{B:f} in \V{drv}, and
         \item we will say that a symbol instance
         string $\alpha$ is a ``piece outside of the \V{B:f} subtree'' if none of its
-        symbol instances are from expansions of \V{B:f} in \V{drv}.
+        symbol instances are from fanouts of \V{B:f} in \V{drv}.
         \end{itemize}
 
         Given \eqref{eq:lm-splicing-1000}, \eqref{eq:lm-splicing-1020}, \eqref{eq:lm-splicing-1040},
@@ -1791,14 +1791,14 @@ The following lemma is useful for splicing subtrees from different derivations.
                 \V{stretch1} = \Velement{drv}{0,(\V{fIX}\subtract 1)
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
         \end{equation}
-        We define \V{stretch2} as a tail segment of \V{drv}, in which all expansions of \V{B:f}
+        We define \V{stretch2} as a tail segment of \V{drv}, in which all fanouts of \V{B:f}
         \V{B:f} itself.
         \begin{equation}
                 \label{eq:pr-splicing-1220}
-                Let \V{stretch2} be \Velement{drv}{(\V{fIX}\subtract 1),\Vsize{drv}}
-                with all expansions of \V{B:f} replaced by the single symbol
+                \mycpar{Let \V{stretch2} be \Velement{drv}{(\V{fIX}\subtract 1),\Vsize{drv}}
+                with all fanouts of \V{B:f} replaced by the single symbol
                 instance \V{B:f,n}, where a minor instance tag \V{n} in \V{B:f,n}
-                is inserted to make \V{B:f,n} unique in \V{drv}.
+                is inserted to make \V{B:f,n} unique in \V{drv}. \\
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
         \end{equation}
         Next we look more closely at the last symbol instance string of \V{stretch2},
@@ -2782,17 +2782,17 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \end{equation}
         \begin{equation}
                 \label{eq:pr-start-symbol-instance-060}
-                \mycpar{A new symbol can occur in a step only as part of an expansion
+                \mycpar{A new symbol can occur in a step only as part of a fanout
                 \cuz \Dfref{transition}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-start-symbol-instance-070}
-                \mycpar{A symbol in an expansion must be a RHS symbol \\
+                \mycpar{A symbol in a fanout must be a RHS symbol \\
                 \cuz \Dfref{transition}.}
         \end{equation}
         \begin{equation}
                 \label{eq:pr-start-symbol-instance-080}
-                \mycpar{\V{S} can never occur in an expansion
+                \mycpar{\V{S} can never occur in a fanout
                 \cuz \eqref{eq:pr-start-symbol-instance-010},
                         \eqref{eq:pr-start-symbol-instance-070}.}
         \end{equation}
