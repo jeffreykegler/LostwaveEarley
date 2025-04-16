@@ -1800,14 +1800,14 @@ The following lemma is useful for splicing subtrees from different derivations.
         \end{equation}
         \begin{equation}
                 \label{eq:pr-splicing-1100}
-                \mycpar{Let \V{fIX} be the step index of \V{B:f} in \V{drv}
+                \mycpar{Let \V{IXf} be the step index of \V{B:f} in \V{drv}
                 \cuz \eqref{eq:pr-splicing-1000}.}
         \end{equation}
         We narrow \V{drv} to the subtree under \V{B:f}, pruning away
         all symbol instances which are not descendants of \V{B:f}:
         \begin{equation}
                 \label{eq:pr-splicing-1200}
-                \mycpar{Let \V{Bsub} be \Velement{drv}{\V{fIX},\Vsize{drv}} with
+                \mycpar{Let \V{Bsub} be \Velement{drv}{\V{IXf},\Vsize{drv}} with
                 all the symbol instances which are not descendants of \V{B:f} removed \\
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
         \end{equation}
@@ -1816,14 +1816,14 @@ The following lemma is useful for splicing subtrees from different derivations.
         We define \V{stretch1} as the initial segment of \V{drv}, before the first occurrence of \V{B:f}.
         \begin{equation}
                 \label{eq:pr-splicing-1210}
-                \V{stretch1} = \Velement{drv}{0,(\V{fIX}\subtract 1)
+                \V{stretch1} = \Velement{drv}{0,(\V{IXf}\subtract 1)
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
         \end{equation}
         We define \V{stretch2} as a tail segment of \V{drv}, in which all fanouts of \V{B:f}
         \V{B:f} itself.
         \begin{equation}
                 \label{eq:pr-splicing-1220}
-                \mycpar{Let \V{stretch2} be \Velement{drv}{(\V{fIX}\subtract 1),\Vsize{drv}}
+                \mycpar{Let \V{stretch2} be \Velement{drv}{(\V{IXf}\subtract 1),\Vsize{drv}}
                 with all fanouts of \V{B:f} replaced by the single symbol
                 instance \V{B:f,n}, where a minor instance tag \V{n} in \V{B:f,n}
                 is inserted to make \V{B:f,n} unique in \V{drv}. \\
