@@ -1707,31 +1707,87 @@ The following lemma is useful for splicing subtrees from different derivations.
 
 \begin{lemma}[Splicing lemma]
         \label{lm:splicing}
-        Let \V{B:f} be
-        a symbol instance in a full derivation \V{drv}.
-        Let \V{B:g} be a symbol instance in a full derivation \V{drv2}.
-        Let there be $\V{i},\V{j}$ such that $0 < \V{i} \le \V{j} \le \Vsize{w}$
-        and
-        \begin{equation*}
-                \mycpar{$\V{B:f} \destarV{drv} \Velement{w}{\V{i},\V{j}}$, and \\
-                $\V{B:g} \destarV{drv2} \Velement{w}{\V{i},\V{j}}$.}
-        \end{equation*}
+        \begin{equation}
+                \label{eq:lm-splicing-1000}
+                \mycpar{Let \V{B:f} be a symbol instance in a full derivation \V{drv}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:lm-splicing-1020}
+                \mycpar{Let \V{B:g} be a symbol instance in a full derivation \V{drv2}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:lm-splicing-1040}
+                \mycpar{Let there be $\V{i},\V{j}$ such that $0 < \V{i} \le \V{j} \le \Vsize{w}$.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:lm-splicing-1060}
+                \mycpar{$\V{B:f} \destarV{drv} \Velement{w}{\V{i},\V{j}}$.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:lm-splicing-1080}
+                \mycpar{$\V{B:g} \destarV{drv2} \Velement{w}{\V{i},\V{j}}$.}
+        \end{equation}
 
-        Then there is a derivation \V{drv3} such that
+        For the purposes of this lemma,
+        \begin{itemize}
+        \item we will say that a symbol instance
+        string $\alpha$ is a ``piece from the \V{B:f} subtree'' if it is composed entirely
+        of symbol instances from expansions of \V{B:f} in \V{drv}, and
+        \item we will say that a symbol instance
+        string $\alpha$ is a ``piece outside of the \V{B:f} subtree'' if none of its
+        symbol instances are from expansions of \V{B:f} in \V{drv}.
+        \end{itemize}
+
+        Given \eqref{eq:lm-splicing-1000}, \eqref{eq:lm-splicing-1020}, \eqref{eq:lm-splicing-1040},
+                \eqref{eq:lm-splicing-1060}, and \eqref{eq:lm-splicing-1080},
+        there is a derivation \V{drv3} such that
         \begin{equation}
-        \mycpar{when $\alpha$ and $\beta$ are both expansions of \V{B:g}, \\
-        if $\alpha \destarV{drv2} \beta$ then $\alpha \destarV{drv3} \beta,$ and}
+                \label{eq:lm-splicing-1180}
+                \mycpar{if $\alpha$ and $\beta$ are both pieces of the \V{B:f} subtree, \\
+        then $\alpha \destarV{drv} \beta$ implies $\alpha \destarV{drv3} \beta,$}
         \end{equation}
+        and
         \begin{equation}
-                \mycpar{when both $\alpha$ and $\beta$ are not and do not contain \\
-                expansions of \V{B:f}, other than the trivial one of \V{B:f} itself, \\
-        if $\alpha \destarV{drv} \beta$ then $\alpha \destarV{drv3} \beta.$}
+                \label{eq:lm-splicing-1280}
+                \mycpar{if both $\alpha$ and $\beta$ are both peices outside of the \V{B:f} subtree, \\
+        then $\alpha \destarV{drv2} \beta$ implies $\alpha \destarV{drv3} \beta.$ \quad \lmEnd}
         \end{equation}
-        \lmEnd
 \end{lemma}
 
 \begin{proof}
-        Proof omitted. \todo{Write this proof}
+        A full proof begins by assuming two component derivations,
+        which are to be spliced together.
+        The full proof consists, first, of the construction of the derivation that merges
+        the two components,
+        and, second, of a proof by induction on the steps of the merged derivation
+        that the consequents \eqref{eq:lm-splicing-1180} and \eqref{eq:lm-splicing-1280}
+        do hold.
+        The second part of the proof is straightforward, and will be omitted.
+
+        We now proceed with the construction.
+        \begin{equation}
+                \label{eq:pr-splicing-1000}
+                \mycpar{\V{B:f} is a symbol instance in a full derivation \V{drv} \\
+                \cuz \eqref{eq:lm-splicing-1000}, AF lemma.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-splicing-1100}
+                \mycpar{Let \V{fIX} be the step index of \V{B:f} in \V{drv}
+                \cuz \eqref{eq:pr-splicing-1000}.}
+        \end{equation}
+        We narrow \V{drv} to the subtree under \V{B:f}, pruning away
+        all symbol instances which are not descendants of \V{B:f}:
+        \begin{equation}
+                \label{eq:pr-splicing-1200}
+                \mycpar{Let \V{Bsub} be \Velement{drv}{\V{fIX},\Vsize{drv}} with
+                all the symbol instances which are not descendants of \V{B:f} removed \\
+                \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
+        \end{equation}
+        We note that \V{Bsub} is a sequence of symbol instance strings, but it is not a derivation,
+        because the first step of \V{Bsub} is not the start symbol.
+
+
+        \todo{Finish the construction}
         \myqed
 \end{proof}
 
