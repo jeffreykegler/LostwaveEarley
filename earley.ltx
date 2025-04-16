@@ -965,18 +965,38 @@ if \V{str4} is a direct fanout of a fanout of \V{A}.
 \begin{definition}[Subtree inside/outside]
         \label{df:subtree-inside}
         Consider a symbol instance \V{A:f} in a derivative \V{drv}.
-        The symbol instance string $\alpha$ is \textbf{inside the subtree}
-        of \V{A:f} if it is composed entirely
-        of symbol instances from fanouts of \V{A:f}.
-        The symbol instance string $\alpha$ is \textbf{outside the subtree}
-        of \V{A:f} if none of
-        its symbol instances from fanouts of \V{A:f}.
-        We note that a symbol instance string may be neither inside or
-        outside of a subtree.
-        We also note
-        that the empty string is both inside and outside of every subtree.
-        \dfEnd
+        \begin{itemize}
+                \item A symbol instance \V{B:f} is \textbf{inside the subtree} of \V{A:f}
+                if \V{B:f} occurs in a fanout of \V{A:f}.
+        \item A symbol instance \V{B:f} is \textbf{properly outside the subtree} of \V{A:f}
+                if \V{B:f} is not inside the subtree of \V{A:f}.
+        \item A symbol instance \V{B:f} is \textbf{properly inside the subtree} of \V{A:f}
+                if \V{B:f} is inside the subtree of \V{A:f}, and is not \V{A:f}.
+        \item A symbol instance \V{B:f} is \textbf{outside the subtree} of \V{A:f}
+                if \V{B:f} is not properly inside the subtree of \V{A:f}.
+        \item The symbol instance string $\alpha$ is \textbf{inside the subtree}
+                of \V{A:f} if all of the symbol instances of $\alpha$ are inside the subtree of \V{A:f}.
+        \item The symbol instance string $\alpha$ is \textbf{outside the subtree}
+                of \V{A:f} if all of the symbol instances of $\alpha$ are outside the subtree of \V{A:f}.
+        \item The symbol instance string $\alpha$ is \textbf{properly inside the subtree}
+                of \V{A:f} if all of the symbol instances of $\alpha$ are properly inside the subtree of \V{A:f}.
+        \item The symbol instance string $\alpha$ is \textbf{properly outside the subtree}
+                of \V{A:f} if all of the symbol instances of $\alpha$ are properly outside the subtree of \V{A:f}. \dfEnd
+        \end{itemize}
 \end{definition}
+
+\begin{observation}[Subtree inside/outside]
+        \label{ob:subtree-inside}
+        We note in \Dfref{subtree-inside} that
+        \begin{itemize}
+        \item the distinction between proper and improper
+        inclusion is based on whether the root of the subtree is included,
+        \item it is possible for a symbol instance string to be neither inside or
+        outside of a subtree,
+        \item the root of every subtree is both inside and outside of that subtree,
+        \item the empty string is both inside and outside of every subtree. \obEnd
+        \end{itemize}
+\end{observation}
 
 \begin{definition}[Transition descendant]
         \label{df:transition-descendant}
@@ -1735,11 +1755,11 @@ The following lemma is useful for splicing subtrees from different derivations.
         \end{equation}
         \begin{equation}
                 \label{eq:lm-splicing-1040}
-                \mycpar{Let there be $\V{i},\V{j}$ such that $0 < \V{i} \le \V{j} \le \Vsize{w}$.}
+                \mycpar{Let there be $\V{i},\V{j}$ such that $0 < \V{i} \le \V{j} \le \Vsize{w}$,}
         \end{equation}
         \begin{equation}
                 \label{eq:lm-splicing-1060}
-                \mycpar{$\V{B:f} \destarV{drv} \Velement{w}{\V{i},\V{j}}$.}
+                \mycpar{$\V{B:f} \destarV{drv} \Velement{w}{\V{i},\V{j}}$, and}
         \end{equation}
         \begin{equation}
                 \label{eq:lm-splicing-1080}
