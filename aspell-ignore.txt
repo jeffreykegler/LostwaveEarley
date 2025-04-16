@@ -6,6 +6,7 @@ alethemes
 Alethemes
 alethes
 antecedant
+consequents
 definedness
 Earley
 Earley's
@@ -33,6 +34,7 @@ scansions
 sentential
 substrings
 subtree
+subtrees
 TODO's
 Ullman
 underset
