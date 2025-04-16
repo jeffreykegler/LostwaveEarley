@@ -8,6 +8,8 @@ alethes
 antecedant
 consequents
 definedness
+fanout
+fanouts
 Earley
 Earley's
 EE
