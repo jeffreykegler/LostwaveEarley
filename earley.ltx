@@ -1812,6 +1812,24 @@ The following lemma is useful for splicing subtrees from different derivations.
         \end{equation}
         We note that \V{Bsub} is a sequence of symbol instance strings, but it is not a derivation,
         because the first step of \V{Bsub} is not the start symbol.
+        Because of the construction of \V{Bsub},
+        its transitions are from a symbol instance properly inside the \V{B:f} subtree
+        to a symbol instance string properly inside the \V{B:f} subtree.
+        Only one non-trivial production is allowed per transition in a derivation
+        and, since the production in the symbol instance string of \V{drv}
+        from which some a symbol instance of \V{Bsub} was derived may have
+        been outside of the \V{B:f} subtree,
+        all the productions in a \V{Bsub} transition may be trivial.
+        We call a transition with no non-trivial productions, a ``stretch transition'',
+        \begin{equation}
+                \label{eq:pr-splicing-1205}
+                \mycpar{Every transition in \V{Bsub}
+                from a symbol instance properly inside the \V{B:f} subtree
+                to a symbol instance string properly inside the \V{B:f} subtree.
+                A transition in \V{Bsub} may be a stretch transition.
+                \cuz \eqref{eq:pr-splicing-1200}.}
+        \end{equation}
+
         We define \V{stretch1} as the initial segment of \V{drv}, before the first occurrence of \V{B:f}.
         \begin{equation}
                 \label{eq:pr-splicing-1210}
@@ -1851,6 +1869,7 @@ The following lemma is useful for splicing subtrees from different derivations.
         In \V{stretch2} those in the \V{B:f} subtree are replaced with
         trivial productions, and therefore \V{stretch2} is not, strictly speaking,
         a derivation.
+        \todo{Rewrite here}
         We call a transition with no non-trivial productions, a ``stretch transition'',
         and a derivation that contains stretch transitions,
         a ``stretched derivation''.
@@ -1879,9 +1898,49 @@ The following lemma is useful for splicing subtrees from different derivations.
                 $\VVelement{stretch3}{i} = \alpha \cat \VVelement{Bsub}{i} \cat \beta$ \\
                 \eqref{eq:pr-splicing-1200}, \eqref{eq:pr-splicing-1230}.}
         \end{equation}
-        \todo{Finish the construction}
+        Productions in \V{stretch3} are
+        \begin{description}
+                \item[prefix] from $\alpha$ to $\alpha$, in which case they are trivial,
+                \item[suffix] from $\beta$ to $\beta$, in which case they are also trivial, or
+                \item[Bsub] from some \VVelement{Bsub}{i} to \VVelement{Bsub}{i+1}, in which
+                        are from a symbol instance properly inside the \V{B:f} subtree
+                        to a symbol instance string properly inside the \V{B:f} subtree.
+        \end{description}
+        \begin{equation}
+                \label{eq:pr-splicing-1260}
+                \mycpar{All transitions in \V{stretch3} are stretch transitions,
+                or are from symbol string inside of the \V{B:f} subtree to a symbol instance string
+                inside of the \V{B:f} subtree
+                \cuz \eqref{eq:pr-splicing-1220}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-splicing-1270}
+                \mycpar{Let \V{stretched} be the concatenation of the sequences
+                \V{stretch1},
+                \V{stretch2}, and
+                \V{stretch3}
+                \cuz \eqref{eq:pr-splicing-1260}.}
+        \end{equation}
+        \begin{equation}
+                \label{eq:pr-splicing-1280}
+                \mycpar{Let \V{merged} be \V{stretched} with the stretch
+                transitions removed
+                \cuz \eqref{eq:pr-splicing-1270}.}
+        \end{equation}
+        \V{merged} in \eqref{eq:pr-splicing-1280} is the merged derivation we sought for
+        the first part of the proof.
 
+        It remains to show that \eqref{eq:lm-splicing-1180} and \eqref{eq:lm-splicing-1280}
+        hold for \V{merged}.
+        This can be done by an induction on the length of \V{merged},
+        using the facts established in
+        \eqref{eq:pr-splicing-1215},
+        \eqref{eq:pr-splicing-1225}, and
+        \eqref{eq:pr-splicing-1260}.
+        This induction is straightforward, but a bit tedious, and its details are omitted.
+        With the induction, we would have both parts, and the lemma.
         \myqed
+        \todo{Check this proof}
 \end{proof}
 
 \begin{theorem}[\LEV is sound]
