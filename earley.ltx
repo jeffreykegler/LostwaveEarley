@@ -1856,11 +1856,11 @@ The following lemma is useful for splicing subtrees from different derivations.
         a ``stretched derivation''.
         \V{stretch2} is a stretched derivation.
         \begin{equation}
-                \label{eq:pr-splicing-1215}
+                \label{eq:pr-splicing-1225}
                 \mycpar{All transitions in \V{stretch2} are stretch transitions,
                 or are from and to a symbol instance string
                 outside of the \V{B:f} subtree
-                \cuz \eqref{eq:pr-splicing-1210}.}
+                \cuz \eqref{eq:pr-splicing-1220}.}
         \end{equation}
         Next we look more closely at the last symbol instance string of \V{stretch2},
         noting that there is some $\alpha, \beta \in \V{STR}$ such that
@@ -1868,6 +1868,16 @@ The following lemma is useful for splicing subtrees from different derivations.
                 \label{eq:pr-splicing-1230}
                 \VlastElement{stretch2} = \alpha \cat \V{B:f} \cat \beta
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.
+        \end{equation}
+        \V{stretch3} will be \V{Bsub} ``wrapped'' in $\alpha$ and $\beta$,
+        or more precisely,
+        \begin{equation}
+                \label{eq:pr-splicing-1240}
+                \mycpar{\V{stretch3} is the sequence of symbol instance strings
+                of length \Vsize{Bsub} and such that
+                for all $0 \le \V{i} < \Vsize{Bsub}$, \\
+                $\VVelement{stretch3}{i} = \alpha \cat \VVelement{Bsub}{i} \cat \beta$ \\
+                \eqref{eq:pr-splicing-1200}, \eqref{eq:pr-splicing-1230}.}
         \end{equation}
         \todo{Finish the construction}
 
