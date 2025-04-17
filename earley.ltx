@@ -1831,7 +1831,7 @@ The following lemma is useful for splicing subtrees from different derivations.
         is replaced by \V{B:f} itself.
         \begin{equation}
                 \label{eq:pr-splicing-1220}
-                \mycpar{Let \V{stretch2} be \Velement{drv}{(\V{IXf}\subtract 1),\Vsize{drv}}
+                \mycpar{Let \V{stretch2} be \Velement{drv}{\V{IXf},\Vsize{drv}}
                 with all fanouts of \V{B:f} replaced by a single symbol
                 instance of the form \V{B:f,n}, where the minor instance tag \V{n}
                 makes the minor instance \V{B:f,n} unique within \V{drv}.
@@ -1844,10 +1844,24 @@ The following lemma is useful for splicing subtrees from different derivations.
         and letting the minor instance tag \V{n}
         be equal to the step index.
 
-        \todo{Finish the construction}
-        Replacement of the \V{B:f} subtree in \V{stretch2} removes its non-trivial
-        transitions and substitutes
-
+        Replacement of the \V{B:f} subtree in \V{stretch2} removes the non-trivial
+        productions of symbol instances in the \V{B:f} subtree, and substitutes for them
+        the trivial production from \V{B:f} to \V{B:f}.
+        In derivations, every transition has exactly one non-trivial production.
+        In \V{stretch2} those in the \V{B:f} subtree are replaced with
+        trivial productions, and therefore \V{stretch2} is not, strictly speaking,
+        a derivation.
+        We call a transition with no non-trivial productions, a ``stretch transition'',
+        and a derivation that contains stretch transitions,
+        a ``stretched derivation''.
+        \V{stretch2} is a stretched derivation.
+        \begin{equation}
+                \label{eq:pr-splicing-1215}
+                \mycpar{All transitions in \V{stretch2} are stretch transitions,
+                or are from and to a symbol instance string
+                outside of the \V{B:f} subtree
+                \cuz \eqref{eq:pr-splicing-1210}.}
+        \end{equation}
         Next we look more closely at the last symbol instance string of \V{stretch2},
         noting that there is some $\alpha, \beta \in \V{STR}$ such that
         \begin{equation}
@@ -1855,6 +1869,7 @@ The following lemma is useful for splicing subtrees from different derivations.
                 \VlastElement{stretch2} = \alpha \cat \V{B:f} \cat \beta
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.
         \end{equation}
+        \todo{Finish the construction}
 
         \myqed
 \end{proof}
