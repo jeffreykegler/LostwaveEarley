@@ -19,6 +19,7 @@ aspell:
 		add-tex-command Procedure p; \
 		add-tex-command @starttoc p; \
 		add-tex-command label p; \
+		add-tex-command item o; \
 		add-tex-command url p; \
 		add-tex-command derivesV p; \
 		add-tex-command destarV p; \
