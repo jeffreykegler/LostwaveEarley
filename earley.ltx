@@ -1803,12 +1803,11 @@ The following lemma is useful for splicing subtrees from different derivations.
                 \mycpar{Let \V{IXf} be the step index of \V{B:f} in \V{drv}
                 \cuz \eqref{eq:pr-splicing-1000}.}
         \end{equation}
-        We narrow \V{drv} to the subtree under \V{B:f}, pruning away
-        all symbol instances which are not descendants of \V{B:f}:
+        We narrow \V{drv} to the subtree under \V{B:f}.
         \begin{equation}
                 \label{eq:pr-splicing-1200}
                 \mycpar{Let \V{Bsub} be \Velement{drv}{\V{IXf},\Vsize{drv}} with
-                all the symbol instances which are not descendants of \V{B:f} removed \\
+                all the symbol instances properly outside of the \V{B:f} subtree removed \\
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
         \end{equation}
         We note that \V{Bsub} is a sequence of symbol instance strings, but it is not a derivation,
@@ -1816,11 +1815,21 @@ The following lemma is useful for splicing subtrees from different derivations.
         We define \V{stretch1} as the initial segment of \V{drv}, before the first occurrence of \V{B:f}.
         \begin{equation}
                 \label{eq:pr-splicing-1210}
-                \V{stretch1} = \Velement{drv}{0,(\V{IXf}\subtract 1)
-                \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
+                \V{stretch1} = \Velement{drv}{0,(\V{IXf}\subtract 1)}
+                \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.
         \end{equation}
-        We define \V{stretch2} as a tail segment of \V{drv}, in which all fanouts of \V{B:f}
-        \V{B:f} itself.
+        Since \V{stretch1} is a segment of \V{drv} before any of the symbol instances of the
+        \V{B:f} subtree, and since every successive pair of steps in \V{stretch1} is taken
+        from \V{drv},
+        \begin{equation}
+                \label{eq:pr-splicing-1215}
+                \mycpar{All transitions in \V{stretch1} are from and to a symbol instance string
+                outside of the \V{B:f} subtree
+                \cuz \eqref{eq:pr-splicing-1210}.}
+        \end{equation}
+        We define \V{stretch2} as a tail segment of \V{drv}, in which every symbol instance strings in the fanouts of \V{B:f}
+        is replaced by \V{B:f} itself.
+        \todo{Finish the construction}
         \begin{equation}
                 \label{eq:pr-splicing-1220}
                 \mycpar{Let \V{stretch2} be \Velement{drv}{(\V{IXf}\subtract 1),\Vsize{drv}}
@@ -1837,7 +1846,6 @@ The following lemma is useful for splicing subtrees from different derivations.
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.
         \end{equation}
 
-        \todo{Finish the construction}
         \myqed
 \end{proof}
 
