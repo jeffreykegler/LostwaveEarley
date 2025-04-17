@@ -712,7 +712,7 @@ We say that
         where $\alpha$ and $\beta$ are strings.
         Overloading terminology a bit,
         \V{A} is called the \textbf{LHS symbol} of \V{tr},
-        \V{rhs} is called the \textbf{direct fanout} of \V{tr},
+        \V{rhs} is called the \textbf{direct production} of \V{tr},
         \V{Lstr} is called the \textbf{LHS step} of \V{tr},
         and \V{Rstr} is called the \textbf{RHS step} of \V{tr}.
         \dfEnd
@@ -949,15 +949,15 @@ as follows:
 \begin{MYsloppy}
 \item A symbol instance is a \textbf{fanout}
         of itself, trivially.
-\item The symbol instance string \V{str} is an
-fanout of the LHS symbol instance of a transition \V{tr},
-if \V{str} is the direct fanout of the transition \V{tr}.
-\item The direct fanout of a symbol instance string \V{str2} is the concatenation
-of the direct fanouts of the symbol instances in \V{str2}.
-\item A symbol instance string \V{str4} is a fanout of the symbol instance \V{A}
-if \V{str4} is a direct fanout of a fanout of \V{A}.
-\item A symbol instance string \V{str4} is a fanout of \V{str3} if
-\V{str4} is a direct fanout of a fanout of \V{str3}.  \dfEnd
+\item The symbol instance string \V{str} is a
+        \textbf{fanout} of the LHS symbol instance of a transition \V{tr},
+        if \V{str} is the direct production of the transition \V{tr}.
+\item The \textbf{fanout} of a symbol instance string \V{str2} is the concatenation
+of the fanouts of the symbol instances in \V{str2}.
+\item A symbol instance string \V{str4} is a \textbf{fanout} of the symbol instance \V{A}
+if \V{str4} is a fanout of a fanout of \V{A}.
+\item A symbol instance string \V{str4} is a \textbf{fanout} of \V{str3} if
+\V{str4} is a fanout of a fanout of \V{str3}.  \dfEnd
                 \end{MYsloppy}
 \end{itemize}
 \end{definition}
