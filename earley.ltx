@@ -1827,17 +1827,24 @@ The following lemma is useful for splicing subtrees from different derivations.
                 outside of the \V{B:f} subtree
                 \cuz \eqref{eq:pr-splicing-1210}.}
         \end{equation}
-        We define \V{stretch2} as a tail segment of \V{drv}, in which every symbol instance strings in the fanouts of \V{B:f}
+        We define \V{stretch2} as a tail segment of \V{drv}, in which every fanout of \V{B:f}
         is replaced by \V{B:f} itself.
-        \todo{Finish the construction}
         \begin{equation}
                 \label{eq:pr-splicing-1220}
                 \mycpar{Let \V{stretch2} be \Velement{drv}{(\V{IXf}\subtract 1),\Vsize{drv}}
-                with all fanouts of \V{B:f} replaced by the single symbol
-                instance \V{B:f,n}, where a minor instance tag \V{n} in \V{B:f,n}
-                is inserted to make \V{B:f,n} unique in \V{drv}. \\
+                with all fanouts of \V{B:f} replaced by a single symbol
+                instance of the form \V{B:f,n}, where the minor instance tag \V{n}
+                makes the minor instance \V{B:f,n} unique within \V{drv}.
                 \cuz \eqref{eq:pr-splicing-1000}, \eqref{eq:pr-splicing-1100}.}
         \end{equation}
+        In \eqref{eq:pr-splicing-1220}, we required
+        \V{B:f,n} to be a symbol instance unique in \V{drv}.
+        One way this can be done is by insisting that the major instance tag \V{f}
+        identify a major instance of the symbol \V{B} unique within \V{drv},
+        and letting the minor instance tag \V{n}
+        be equal to the step index.
+
+        \todo{Finish the construction}
         Next we look more closely at the last symbol instance string of \V{stretch2},
         noting that there is some $\alpha, \beta \in \V{STR}$ such that
         \begin{equation}
