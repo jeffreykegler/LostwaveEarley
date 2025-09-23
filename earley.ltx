@@ -145,6 +145,8 @@
 \newcommand{\V}[1]{\ensuremath{\texttt{\mbox{#1}}}}
 
 \newcommand{\de}{\mathrel{::=}}
+
+% Delete these
 \newcommand{\derives}{\Rightarrow}
 \newcommand{\derivesRaw}[2]
     {\mathrel{\mbox{$\:\underset{#2}{\overset{#1}{\Rightarrow}}$}}}
@@ -164,6 +166,44 @@
 \newcommand{\derivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
 \newcommand{\derivrg}[2]{\mathrel{\mbox{$\:\stackrel{\!{#1}}%
         {\Rightarrow\!}\:$}}}
+
+% Traditional derivations
+\newcommand{\tderives}{\Rightarrow}
+\newcommand{\tderivesRaw}[2]
+    {\mathrel{\mbox{$\:\underset{#2}{\overset{#1}{\Rightarrow}}$}}}
+\newcommand{\tderivesW}[1]
+    {\mathrel{\mbox{$\:\underset{#1}{\Rightarrow}$}}}
+\newcommand{\tderivesV}[1]{\tderivesW{\V{#1}}}
+\newcommand{\tdestar}
+    {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
+\newcommand{\tdestarW}[1]
+    {\mathrel{\mbox{$\:\underset{#1}{\overset{\ast\:}{\Rightarrow}}$}}}
+\newcommand{\tdestarV}[1]{\tdestarW{\V{#1}}}
+\newcommand{\tdeplus}
+    {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
+\newcommand{\tdeplusW}[1]
+    {\mathrel{\mbox{$\:\underset{#1}{\overset{{+}\:}{\Rightarrow}}$}}}
+\newcommand{\tdeplusV}[1]{\tdeplusW{\V{#1}}}
+\newcommand{\tderivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
+\newcommand{\tderivrg}[2]{\mathrel{\mbox{$\:\stackrel{\!{#1}}%
+        {\Rightarrow\!}\:$}}}
+
+% Instance derivations
+\newcommand{\iderivesRaw}[2]
+    {\mathrel{\mbox{$\:\underset{#2}{\overset{#1}{\Rightarrow}}$}}}
+\newcommand{\iderives}[1]
+    {\mathrel{\mbox{$\:[#1]{\Rightarrow}$}}}
+\newcommand{\iderivesV}[1]{\iderives{\V{#1}}}
+\newcommand{\iderivesO}[2]
+    {\mathrel{\mbox{$\:[#1]{\overset{#2}{\Rightarrow}}$}}}
+\newcommand{\idestar}[1]{\iderivesO{#1}{\ast\:}}
+\newcommand{\idestarV}[1]{\idestar{\V{#1}}}
+\newcommand{\ideplus}
+    {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
+\newcommand{\ideplusV}[1]{\\ideplus{\V{#1}}}
+% \newcommand{\iderivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
+% \newcommand{\iderivrg}[2]{\mathrel{\mbox{$\:\stackrel{\!{#1}}%
+        % {\Rightarrow\!}\:$}}}
 
 % For the type subscript for powersets
 \newcommand{\setOf}[1]{{{#1}^{\mbox{\normalsize $\ast$}}}}
@@ -1772,7 +1812,7 @@ The following lemma is useful for splicing subtrees from different derivations.
         \begin{equation}
                 \label{eq:lm-splicing-1180}
                 \mycpar{if $\alpha$ and $\beta$ are both inside of the \V{B:f} subtree, \\
-        then $\alpha \destarV{drv} \beta$ implies $\alpha \destarV{drv3} \beta,$}
+        then $\alpha \idestarV{drv} \beta$ implies $\alpha \idestarV{drv3} \beta,$}
         \end{equation}
         and
         \begin{equation}
