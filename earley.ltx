@@ -189,18 +189,21 @@
         {\Rightarrow\!}\:$}}}
 
 % Instance derivations
-\newcommand{\iderivesRaw}[2]
-    {\mathrel{\mbox{$\:\underset{#2}{\overset{#1}{\Rightarrow}}$}}}
+% Forms with no overset
+% final "V" means wrap variable name
 \newcommand{\iderives}[1]
-    {\mathrel{\mbox{$\:[#1]{\Rightarrow}$}}}
+    {\mathrel{\mbox{$\:[#1]\mkern-3mu{\rightarrow}$}}}
 \newcommand{\iderivesV}[1]{\iderives{\V{#1}}}
+
+% Forms with an overset
 \newcommand{\iderivesO}[2]
-    {\mathrel{\mbox{$\:[#1]{\overset{#2}{\Rightarrow}}$}}}
+    {\mathrel{\mbox{$\:[#1]\mkern-3mu{\overset{#2}{\rightarrow}}$}}}
 \newcommand{\idestar}[1]{\iderivesO{#1}{\ast\:}}
 \newcommand{\idestarV}[1]{\idestar{\V{#1}}}
-\newcommand{\ideplus}
-    {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
-\newcommand{\ideplusV}[1]{\\ideplus{\V{#1}}}
+\newcommand{\ideplus}[1]{\iderivesO{#1}{{+}}}
+\newcommand{\ideplusV}[1]{\ideplus{\V{#1}}}
+% \newcommand{\ideplus}
+    % {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
 % \newcommand{\iderivg}[1]{\mathrel{\mbox{$\:\Rightarrow\:$}}}
 % \newcommand{\iderivrg}[2]{\mathrel{\mbox{$\:\stackrel{\!{#1}}%
         % {\Rightarrow\!}\:$}}}
@@ -1168,7 +1171,7 @@ the target of the predecessor must be the source of the successor.
 \begin{definition}[Partial derivation notation]
 \label{ob:partial-derivation-notation}
         We notate a partial derivation from \V{src} to \V{tgt} as
-        \[ \V{src} \derivesRaw{\V{L}}{\V{X}} \V{tgt}, \]
+        \[ \V{src} \iderivesO{\V{L}}{\V{X}} \V{tgt}, \]
         where \V{L} is a length indicator,
         and \V{X} is a derivation indicator.
         The length indicator \V{L} may be a natural number constant
