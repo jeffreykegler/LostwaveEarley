@@ -1196,7 +1196,7 @@ the target of the predecessor must be the source of the successor.
 
 \begin{definition}[Cycle]
         A \textbf{cycle} in a grammar \V{g} is a
-        derivation $\V{A} \deplusV{g} \V{A}$,
+        derivation $\V{A} \tderivesV{g} \V{A}$,
         that is, a derivation where a symbol
         non-trivially derives itself.
         \dfEnd
@@ -1214,9 +1214,10 @@ the target of the predecessor must be the source of the successor.
 \begin{definition}[Unproductive symbol]
         An \textbf{unproductive symbol} is one which does
         not derive a sentence.
-        That is, in grammar \V{g}, an unproductive symbol is
-        a symbol \V{A} where there is no string $\gamma \in \V{T}^\ast$
-        such that $\V{A} \destarV{g} \gamma$.
+        That is, in a FID \V{drv}, an unproductive symbol is
+        a symbol \V{A} where there is no symbol instance string $\gamma$ in \V{g}
+        such that there is no symbol instance \V{Ai}
+        where $\V{Ai} \idestarV{drv} \gamma$.
         We note that, by this definition, nullable symbols and terminals are always
         productive.
         \dfEnd
