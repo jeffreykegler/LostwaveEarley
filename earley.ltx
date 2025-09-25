@@ -1161,7 +1161,9 @@ the target of the predecessor must be the source of the successor.
 
 \begin{definition}[Partial derivation notation]
 \label{ob:partial-derivation-notation}
-        We notate a partial derivation from \V{src} to \V{tgt} as
+        We notate a partial\hfill
+        \linebreak
+        derivation from \V{src} to \V{tgt} as
         \[ \V{src} \iderivesO{\V{L}}{\V{X}} \V{tgt}, \]
         where \V{L} is a length indicator,
         and \V{X} is a derivation indicator.
@@ -1198,19 +1200,22 @@ the target of the predecessor must be the source of the successor.
         not appear in the fanout of the start symbol.
         That is, in grammar \V{g}, an unreachable symbol is a symbol \V{A} where
         there does not exist $\alpha, \beta \in \V{STR}$,
-        such that $\V{S} \destarV{g} \alpha \cat \V{A} \cat \beta$.
+        such that $\V{S} \tdestarV{g} \alpha \cat \V{A} \cat \beta$.
+        An \textbf{unreachable symbol instance} is an instance of
+        an unreachable symbol.
         \dfEnd
 \end{definition}
 
 \begin{definition}[Unproductive symbol]
         An \textbf{unproductive symbol} is one which does
         not derive a sentence.
-        That is, in a FID \V{drv}, an unproductive symbol is
-        a symbol \V{A} where there is no symbol instance string $\gamma$ in \V{g}
-        such that there is no symbol instance \V{Ai}
-        where $\V{Ai} \idestarV{drv} \gamma$.
+        That is, for a grammar \V{g}, an unproductive symbol is
+        a symbol \V{A} where there is no terminal string $\gamma \in \V{TSTR}$
+        such that $\V{A} \tdestarV{g} \gamma$.
         We note that, by this definition, nullable symbols and terminals are always
         productive.
+        An \textbf{unproductive symbol instance} is an instance of
+        an unproductive symbol.
         \dfEnd
 \end{definition}
 
