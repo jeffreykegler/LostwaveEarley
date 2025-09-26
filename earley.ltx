@@ -157,12 +157,12 @@
     {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
 \newcommand{\destarW}[1]
     {\mathrel{\mbox{$\:\underset{#1}{\overset{\ast\:}{\Rightarrow}}$}}}
-\newcommand{\destarV}[1]{\destarW{\V{#1}}}
-\newcommand{\deplus}
-    {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
-\newcommand{\deplusW}[1]
-    {\mathrel{\mbox{$\:\underset{#1}{\overset{{+}\:}{\Rightarrow}}$}}}
-\newcommand{\deplusV}[1]{\deplusW{\V{#1}}}
+% \newcommand{\destarV}[1]{\destarW{\V{#1}}}
+% \newcommand{\deplus}
+    % {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
+% \newcommand{\deplusW}[1]
+    % {\mathrel{\mbox{$\:\underset{#1}{\overset{{+}\:}{\Rightarrow}}$}}}
+% \newcommand{\deplusV}[1]{\deplusW{\V{#1}}}
 
 % Traditional derivations
 \newcommand{\tderives}{\Rightarrow}
@@ -767,13 +767,6 @@ We say that
 \begin{remark}[Full derivations are unambiguous]
         We use full derivations (and later, partial derivations) to refer
         to specific derivations, and therefore they are always unambiguous.
-        When we wish to refer an ambiguous derivation, we will use the underset
-        variable \V{g} to indicate that any of the derivations allowed by
-        the grammar \V{g} may be used.
-        For example,
-        \[ \V{A} \destarV{g} \epsilon \]
-        indicates there is a derivation using grammar \V{g} in which symbol \V{A} is nulled,
-        and therefore that \V{A} is nullable.
         \rmEnd
 \end{remark}
 
@@ -872,9 +865,9 @@ it is a \textbf{sentence}.
         An aletheme is considered \textbf{sound} if and only if
         \begin{gather}
                 \V{A} \de \V{pre} \cat \V{post} \in \V{P} \\
-                \land \; \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft} \\
-                \land \; \V{fore} \destarV{drv} \Velement{w}{0,\V{origin}} \\
-                \land \; \V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}. \quad \dfEnd
+                \land \; \V{S} \idestarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft} \\
+                \land \; \V{fore} \idestarV{drv} \Velement{w}{0,\V{origin}} \\
+                \land \; \V{pre} \idestarV{drv} \Velement{w}{\V{origin},\V{current}}. \quad \dfEnd
         \end{gather}
 \end{definition}
 
@@ -1307,10 +1300,10 @@ of \V{stem}.
         be an aletheme.
         The \textbf{depth} of \V{x}, \VFA{Dp}{x}, is the length of the shortest partial derivation \V{drv} such
         that
-        \[ \V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
+        \[ \V{S} \idestarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}. \]
         The \textbf{height} of \V{x}, \VFA{Ht}{x}, is the length of the shortest partial derivation \V{drv} such
         that
-        \[ \V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}. \]
+        \[ \V{fore} \cat \V{pre} \idestarV{drv} \Velement{w}{0,\V{current}}. \]
         The \textbf{rank} of \V{x} is
         \[ \VFA{Rank}{x} = \VFA{Dp}{x} + 2 \mult \VFA{Ht}{x}. \quad \dfEnd \]
 \end{definition}
@@ -1331,25 +1324,25 @@ of \V{stem}.
         From the soundness of \V{al}, we know that
         \begin{equation}
         \label{eq:pr-rank-welldef-1010}
-                \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
+                \mycpar{$\V{S} \idestarV{drv} \V{fore} \cat \V{lhs} \cat \V{aft}$
                 is well-defined
                 \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000},}
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-welldef-1020}
-                \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
+                \mycpar{$\V{pre} \idestarV{drv} \Velement{w}{\V{origin},\V{current}}$
                 is well-defined \\
                 \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}, and}
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-welldef-1030}
-                \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
+                \mycpar{$\V{fore} \idestarV{drv} \Velement{w}{0,\V{origin}}$
                 is well-defined
                 \cuz \Dfref{aletheme}, \eqref{eq:pr-rank-welldef-1000}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-welldef-1040}
-                \mycpar{$\VFA{Dp}{al} = \V{S} \destarV{drv2} \V{fore} \cat \V{lhs} \cat \V{aft}$ \\
+                \mycpar{$\VFA{Dp}{al} = \V{S} \idestarV{drv2} \V{fore} \cat \V{lhs} \cat \V{aft}$ \\
                 where \V{drv2} is the shortest derivation of $\V{fore} \cat \V{lhs} \cat \V{aft}$
                 from \V{S}
                 \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
@@ -1367,13 +1360,13 @@ of \V{stem}.
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-welldef-1060}
-                \mycpar{$\V{fore} \cat \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$
+                \mycpar{$\V{fore} \cat \V{pre} \idestarV{drv} \Velement{w}{0,\V{current}}$
                 is well-defined \\
                 \cuz \eqref{eq:pr-rank-welldef-1020}, \eqref{eq:pr-rank-welldef-1030}.}
         \end{equation}
         \begin{equation}
         \label{eq:pr-rank-welldef-1070}
-                \mycpar{$\VFA{Ht}{al} = \V{fore} \cat \V{pre} \destarV{drv3} \Velement{w}{0,\V{current}}$ \\
+                \mycpar{$\VFA{Ht}{al} = \V{fore} \cat \V{pre} \idestarV{drv3} \Velement{w}{0,\V{current}}$ \\
                 where \V{drv3} is the shortest derivation of \Velement{w}{0,\V{current}}
                 from $\V{fore} \cat \V{pre}$
                 \cuz \Dfref{rank}, \eqref{eq:pr-rank-welldef-1000}.}
@@ -1799,11 +1792,11 @@ The following lemma is useful for splicing subtrees from different derivations.
         \end{equation}
         \begin{equation}
                 \label{eq:lm-splicing-1060}
-                \mycpar{$\V{B:f} \destarV{drv} \Velement{w}{\V{i},\V{j}}$, and}
+                \mycpar{$\V{B:f} \idestarV{drv} \Velement{w}{\V{i},\V{j}}$, and}
         \end{equation}
         \begin{equation}
                 \label{eq:lm-splicing-1080}
-                \mycpar{$\V{B:g} \destarV{drv2} \Velement{w}{\V{i},\V{j}}$.}
+                \mycpar{$\V{B:g} \idestarV{drv2} \Velement{w}{\V{i},\V{j}}$.}
         \end{equation}
 
         Given \eqref{eq:lm-splicing-1000}, \eqref{eq:lm-splicing-1020}, \eqref{eq:lm-splicing-1040},
@@ -1818,7 +1811,7 @@ The following lemma is useful for splicing subtrees from different derivations.
         \begin{equation}
                 \label{eq:lm-splicing-1280}
                 \mycpar{if $\alpha$ and $\beta$ are both outside of the \V{B:f} subtree, \\
-        then $\alpha \destarV{drv2} \beta$ implies $\alpha \destarV{drv3} \beta.$ \quad \lmEnd}
+        then $\alpha \idestarV{drv2} \beta$ implies $\alpha \idestarV{drv3} \beta.$ \quad \lmEnd}
         \end{equation}
 \end{lemma}
 
@@ -2006,7 +1999,7 @@ The following lemma is useful for splicing subtrees from different derivations.
         Let \V{j} be such that
         \[
                 0 \le \V{j} \le \V{current} \land
-                \V{B} \destarV{g} \Velement{w}{\V{j},\V{current}}.
+                \V{B} \idestarV{g} \Velement{w}{\V{j},\V{current}}.
         \]
         Then
         \begin{itemize}
@@ -2034,7 +2027,7 @@ We also assumed for the lemma that
 \label{eq:pr-conf-stem-020}
         \begin{gathered}
                 0 \le \V{j} \le \V{current} \\
-                \land \; \V{B} \destarV{drv} \Velement{w}{\V{j},\V{current}} \\
+                \land \; \V{B} \idestarV{drv} \Velement{w}{\V{j},\V{current}} \\
                 \text{\cuz AF lemma, WLOG.}
         \end{gathered}
 \end{equation}
@@ -2044,19 +2037,19 @@ From \V{downAL} we can conclude
         \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-040}
-        \mycpar{$\V{antepre}\cat\V{B} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
+        \mycpar{$\V{antepre}\cat\V{B} \idestarV{drv} \Velement{w}{\V{origin},\V{current}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-050}
         \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-060}
-        \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
+        \mycpar{$\V{fore} \idestarV{drv} \Velement{w}{0,\V{origin}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.}
 \end{gather}
 We can deduce one useful new derivation:
 \begin{gather}
 \label{eq:pr-conf-stem-070}
-        \mycpar{$\V{antepre} \destarV{drv} \Velement{w}{\V{origin},\V{j}}$
+        \mycpar{$\V{antepre} \idestarV{drv} \Velement{w}{\V{origin},\V{j}}$
               \cuz \eqref{eq:pr-conf-stem-020}, \eqref{eq:pr-conf-stem-040}.}
 \end{gather}
 With the foregoing, we have our mainstem aletheme:
@@ -2086,7 +2079,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-110}
         \mycpar{Let \V{n1} be the minimum number of steps in the derivation \\
-        $\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
+        $\V{S} \idestarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-conf-stem-120}
@@ -2106,7 +2099,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-130}
         \mycpar{Let \V{n2} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        $\V{fore} \cat \V{antepre} \cat \V{B} \idestarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.
         }
 \end{equation}
@@ -2118,7 +2111,7 @@ and its downstream.
 \begin{equation}
 \label{eq:pr-conf-stem-150}
         \mycpar{Let \V{n3} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \destarV{g} \Velement{w}{0,\V{j}}$ \\
+        $\V{fore} \cat \V{antepre} \idestarV{g} \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-conf-stem-040}, \eqref{eq:pr-conf-stem-060}.}
 \end{equation}
 \begin{equation}
@@ -2167,10 +2160,10 @@ we have the lemma.
         where $\V{B} \in \V{N}$
         and $0 \le \V{a} < \V{b} < \Vsize{w}$,} \\
         \label{eq:lm-ht-minimization-055}
-        \mycpar{let $\V{B} \derivesV{drv} \V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}$ \\
+        \mycpar{let $\V{B} \derivesV{drv} \V{rhs} \idestarV{drv} \Velement{w}{\V{a},\V{b}}$ \\
         be a minimal length derivation of length \V{HtB}, and} \\
         \label{eq:lm-ht-minimization-060}
-        \mycpar{let \V{HtRHS} be the length of $\V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}.$}
+        \mycpar{let \V{HtRHS} be the length of $\V{rhs} \idestarV{drv} \Velement{w}{\V{a},\V{b}}.$}
 \end{gather}
         Then
 \begin{equation}
@@ -2179,7 +2172,7 @@ we have the lemma.
 \end{equation}
 \begin{equation}
 \label{eq:lm-ht-minimization-070}
-        \mycpar{$\V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}$ is a minimal
+        \mycpar{$\V{rhs} \idestarV{drv} \Velement{w}{\V{a},\V{b}}$ is a minimal
         length derivation. \lmEnd}
 \end{equation}
 \end{lemma}
@@ -2194,18 +2187,18 @@ we have the lemma.
 It remains to show \eqref{eq:lm-ht-minimization-070}, which we do via the
 following reductio.
 
-For the reductio, we assume that there is a derivation $\V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}},$
+For the reductio, we assume that there is a derivation $\V{rhs} \idestarV{drv2} \Velement{w}{\V{a},\V{b}},$
 which is shorter than that of
 \eqref{eq:lm-ht-minimization-055}.
 More specifically, we assume
 \begin{equation}
         \label{eq:pr-lm-ht-minimization-050}
-        \mycpar{$\V{B} \derivesV{drv} \V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}},$
+        \mycpar{$\V{B} \derivesV{drv} \V{rhs} \idestarV{drv} \Velement{w}{\V{a},\V{b}},$
         is a minimal derivation of length \V{HtB} \cuz AF lemma, and}
 \end{equation}
 \begin{equation}
 \label{eq:pr-lm-ht-minimization-070}
-        \mycpar{$\V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}}$ is a minimal
+        \mycpar{$\V{rhs} \idestarV{drv2} \Velement{w}{\V{a},\V{b}}$ is a minimal
         length derivation of length \V{HtRHS2} \cuz WLOG,}
 \end{equation}
 \begin{equation}
@@ -2219,7 +2212,7 @@ Then
 \end{equation}
 \begin{equation}
         \label{eq:pr-lm-ht-minimization-100}
-        \mycpar{$\V{B} \derivesV{g} \V{rhs} \destarV{drv2} \Velement{w}{\V{a},\V{b}}$ \\
+        \mycpar{$\V{B} \derivesV{g} \V{rhs} \idestarV{drv2} \Velement{w}{\V{a},\V{b}}$ \\
         is a derivation of length $\V{HtRHS2}+1$ \cuz
                 \eqref{eq:pr-lm-ht-minimization-070}, \eqref{eq:pr-lm-ht-minimization-090}, and}
 \end{equation}
@@ -2265,13 +2258,13 @@ From the reductio, we conclude
 \begin{equation}
         \label{eq:pr-lm-ht-minimization-160}
         \mycpar{\V{HtRHS} is the minimal length for
-        $\V{rhs} \destarV{g} \Velement{w}{\V{a},\V{b}}$
+        $\V{rhs} \idestarV{g} \Velement{w}{\V{a},\V{b}}$
         \cuz \eqref{eq:pr-lm-ht-minimization-070}, \eqref{eq:pr-lm-ht-minimization-150}.}
 \end{equation}
 and therefore,
 \begin{equation}
 \label{eq:lm-ht-minimization-170}
-        \mycpar{$\V{rhs} \destarV{drv} \Velement{w}{\V{a},\V{b}}$ is a minimal
+        \mycpar{$\V{rhs} \idestarV{drv} \Velement{w}{\V{a},\V{b}}$ is a minimal
         length derivation \cuz \eqref{eq:lm-ht-minimization-060},
                 \eqref{eq:pr-lm-ht-minimization-160},}
 \end{equation}
@@ -2291,7 +2284,7 @@ what we need for this lemma.  \myqed
         and where \V{j} is such that
         \[
                 0 \le \V{j} \le \V{current} \land
-                \V{B:pd} \destarV{drv} \Velement{w}{\V{j},\V{current}}.
+                \V{B:pd} \idestarV{drv} \Velement{w}{\V{j},\V{current}}.
         \]
         Then \V{downAL} has
         a direct tributary, call it \V{tribAL},
@@ -2336,7 +2329,7 @@ We also assume for the lemma that
 \label{eq:pr-red-trib-020}
         \begin{gathered}
                 0 \le \V{j} \le \V{current} \\
-                \land \; \V{B:pd} \destarV{drv} \Velement{w}{\V{j},\V{current}} \\
+                \land \; \V{B:pd} \idestarV{drv} \Velement{w}{\V{j},\V{current}} \\
                 \text{\cuz AF lemma, WLOG.}
         \end{gathered}
 \end{equation}
@@ -2346,13 +2339,13 @@ From \V{downAL} we can conclude
         \mycpar{$\V{A} \de \V{antepre}\cat\V{B} \cat \V{post} \in \V{P}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-040}
-        \mycpar{$\V{antepre}\cat\V{B:pd} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
+        \mycpar{$\V{antepre}\cat\V{B:pd} \idestarV{drv} \Velement{w}{\V{origin},\V{current}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-050}
-        \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{A} \cat \V{aft}$
+        \mycpar{$\V{S} \idestarV{drv} \V{fore} \cat \V{A} \cat \V{aft}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.} \\
 \label{eq:pr-red-trib-060}
-        \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
+        \mycpar{$\V{fore} \idestarV{drv} \Velement{w}{0,\V{origin}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-010}.}
 \end{gather}
 
@@ -2364,7 +2357,7 @@ Because $\V{B} \in \V{N}$ we know that,
 so that
 \begin{equation}
 \label{eq:pr-red-trib-080}
-        \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        \mycpar{$\V{S} \idestarV{drv} \V{fore} \cat \V{A} \cat \V{aft}$ \\
         $\derivesV{drv} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
         $\derivesV{drv} \V{fore} \cat \V{antepre} \cat \V{rhs} \cat \V{post} \cat \V{aft}$ \\
                 \cuz \eqref{eq:pr-red-trib-010}, \eqref{eq:pr-red-trib-030}, \eqref{eq:pr-red-trib-050}.}
@@ -2372,7 +2365,7 @@ so that
 We simplify \eqref{eq:pr-red-trib-080} to
 \begin{equation}
 \label{eq:pr-red-trib-090}
-        \mycpar{$\V{S} \destarV{drv} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
+        \mycpar{$\V{S} \idestarV{drv} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
                 \cuz \eqref{eq:pr-red-trib-080},}
 \end{equation}
 and deduce a few more facts that we will need:
@@ -2386,21 +2379,21 @@ and deduce a few more facts that we will need:
 \begin{equation}
 \label{eq:pr-red-trib-155}
         \begin{gathered}
-                \V{rhs} \destarV{drv} \Velement{w}{\V{j},\V{current}}
+                \V{rhs} \idestarV{drv} \Velement{w}{\V{j},\V{current}}
               \cuz \eqref{eq:pr-red-trib-150}.
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-160}
         \begin{gathered}
-                \V{antepre} \destarV{drv} \Velement{w}{\V{origin},\V{j}} \\
+                \V{antepre} \idestarV{drv} \Velement{w}{\V{origin},\V{j}} \\
                 \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
         \end{gathered}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-170}
         \begin{gathered}
-                \V{fore} \cat \V{antepre} \destarV{drv} \Velement{w}{0,\V{j}} \\
+                \V{fore} \cat \V{antepre} \idestarV{drv} \Velement{w}{0,\V{j}} \\
                 \cuz \Dfref{aletheme}, \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-160}.
         \end{gathered}
 \end{equation}
@@ -2443,7 +2436,7 @@ Defining \V{drv2}, we
 \begin{equation}
 \label{eq:pr-red-trib-220}
         \mycpar{let \V{drv2} be identical to \V{drv} except that \\
-                $\V{B:pd} \derivesV{drv2} \V{rhs2} \destarV{drv2} \Velement{w}{\V{j},\V{current}}$, \\
+                $\V{B:pd} \derivesV{drv2} \V{rhs2} \idestarV{drv2} \Velement{w}{\V{j},\V{current}}$, \\
                 where $\V{B} \de \V{rhs2} \in \V{P}$, \\
                 is a minimal length derivation.}
 \end{equation}
@@ -2466,16 +2459,16 @@ Breaking out \eqref{eq:pr-red-trib-220},
 To define \V{proxAL}, it remains to deduce a few facts.
 \begin{equation}
 \label{eq:pr-red-trib-250}
-        \mycpar{$\V{S} \destarV{drv2} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
+        \mycpar{$\V{S} \idestarV{drv2} \V{fore} \cat \V{antepre} \cat \V{B:pd} \cat \V{post} \cat \V{aft}$ \\
                 \cuz \eqref{eq:pr-red-trib-090}, \eqref{eq:pr-red-trib-240}.}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-260}
-        \V{rhs} \destarV{drv2} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-220}.
+        \V{rhs} \idestarV{drv2} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-220}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-270}
-        \V{fore} \cat \V{antepre} \destarV{drv2} \Velement{w}{0,\V{j}}
+        \V{fore} \cat \V{antepre} \idestarV{drv2} \Velement{w}{0,\V{j}}
                 \cuz \eqref{eq:pr-red-trib-170}, \eqref{eq:pr-red-trib-240}.
 \end{equation}
 We are now in a position to define our proxy aletheme.
@@ -2496,7 +2489,7 @@ For the lemma, it remains to determine the rank of \V{proxAL}.
 \begin{equation}
 \label{eq:pr-red-trib-310}
         \mycpar{Let \V{DownMinD}, ``\V{downAl} minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
+        $\V{S} \idestarV{g} \V{fore} \cat \V{A} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-320}
@@ -2506,7 +2499,7 @@ For the lemma, it remains to determine the rank of \V{proxAL}.
 \begin{equation}
 \label{eq:pr-red-trib-330}
         \mycpar{Let \V{TribMinD}, ``\V{tribAL} minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destarV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
+        $\V{S} \idestarV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-340}
@@ -2517,7 +2510,7 @@ Whatever the value of \V{TribMinD},
 because of the derivation
 \begin{equation}
 \label{eq:pr-red-trib-350}
-        \mycpar{$\V{S} \destarV{g} \V{fore} \cat \V{A} \cat \V{aft}$ \\
+        \mycpar{$\V{S} \idestarV{g} \V{fore} \cat \V{A} \cat \V{aft}$ \\
         $\derivesV{g} \V{fore} \cat \V{antepre} \cat \V{B} \cat \V{post} \cat \V{aft},$
         }
 \end{equation}
@@ -2536,7 +2529,7 @@ so that
 \begin{equation}
 \label{eq:pr-red-trib-450}
         \mycpar{Let \V{downMinH} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{B} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        $\V{fore} \cat \V{antepre} \cat \V{B} \idestarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.
         }
 \end{equation}
@@ -2548,7 +2541,7 @@ so that
 \begin{equation}
 \label{eq:pr-red-trib-470}
         \mycpar{Let \V{tribMinH} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \cat \V{rhs} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        $\V{fore} \cat \V{antepre} \cat \V{rhs} \idestarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-red-trib-040}, \eqref{eq:pr-red-trib-060}.}
 \end{equation}
 \begin{equation}
@@ -2559,18 +2552,18 @@ so that
 \begin{equation}
 \label{eq:pr-red-trib-490}
         \mycpar{Let \V{H1} be the minimum number of steps in the derivation \\
-        $\V{fore} \cat \V{antepre} \destarV{g} \Velement{w}{0,\V{j}}$ \\
+        $\V{fore} \cat \V{antepre} \idestarV{g} \Velement{w}{0,\V{j}}$ \\
         \cuz \eqref{eq:pr-red-trib-060}, \eqref{eq:pr-red-trib-170}.}
 \end{equation}
 We recall from above that
 \begin{equation}
 \label{eq:pr-red-trib-500}
-        \mycpar{$\V{B} \derivesV{drvs} \V{rhs} \destarV{drvs} \Velement{w}{\V{j},\V{current}}$
+        \mycpar{$\V{B} \derivesV{drvs} \V{rhs} \idestarV{drvs} \Velement{w}{\V{j},\V{current}}$
         \cuz \eqref{eq:pr-red-trib-080}, and}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-510}
-        \V{B} \destarV{drvs} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500}.
+        \V{B} \idestarV{drvs} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500}.
 \end{equation}
 are minimal derivations.
 \begin{equation}
@@ -2661,12 +2654,12 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
         from \V{S} to $\V{foreZ}\cat\V{Z}\cat\V{aftZ}$
         where $\V{Z} \in \V{N}, \V{foreZ}, \V{aftZ} \in \V{STR}$,} \\
         \label{eq:lm-dp-minimization-055}
-        \mycpar{let $\V{S} \destarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}
+        \mycpar{let $\V{S} \idestarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}
         \derivesV{drv} \V{foreZ}\cat\V{Z}\cat\V{aftZ}$ \V{foreZ} \\
         be a minimal length derivation of length \V{DpZ}, and} \\
         \label{eq:lm-dp-minimization-060}
         \mycpar{let \V{DpY} be the derivation length of
-        $\V{S} \destarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}$.}
+        $\V{S} \idestarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}$.}
 \end{gather}
         Then
 \begin{equation}
@@ -2675,7 +2668,7 @@ and \eqref{eq:pr-red-trib-650}, we have the lemma.
 \end{equation}
 \begin{equation}
 \label{eq:lm-dp-minimization-070}
-        \mycpar{$\V{S} \destarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}$ is a minimal
+        \mycpar{$\V{S} \idestarV{drv} \V{foreY}\cat\V{Y}\cat\V{aftY}$ is a minimal
         length derivation. \lmEnd}
 \end{equation}
 \end{lemma}
@@ -2732,10 +2725,10 @@ From \V{downAL} we can conclude
         \mycpar{$\V{Z} \de \V{rhsZ} \in \V{P}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-010}.} \\
 \label{eq:pr-pred-stem-040}
-        \mycpar{$\V{S} \destarV{drv} \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}$
+        \mycpar{$\V{S} \idestarV{drv} \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-010}.} \\
 \label{eq:pr-pred-stem-050}
-        \mycpar{$\V{foreZ} \destarV{drv} \Velement{w}{0,\V{origin}}$
+        \mycpar{$\V{foreZ} \idestarV{drv} \Velement{w}{0,\V{origin}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-pred-stem-010}.}
 \end{gather}
 
@@ -2759,19 +2752,19 @@ such that
 \label{eq:pr-pred-stem-110}
         \mycpar{$\V{Y} \de \V{pre} \cat \V{Z} \cat \V{post} \in \V{P}$ \cuz WLOG,} \\
 \label{eq:pr-pred-stem-120}
-        \mycpar{$\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}$ \\
+        \mycpar{$\V{S} \idestarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}$ \\
         $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{Z:f} \cat \V{post} \cat \V{aftY}$ \\
         $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{rhsZ} \cat \V{post} \cat \V{aftY}$ \\
                 \cuz \eqref{eq:pr-pred-stem-030}, \eqref{eq:pr-pred-stem-040}, \eqref{eq:pr-pred-stem-110},} \\
 \label{eq:pr-pred-stem-130}
-        \mycpar{$\V{foreY} \destarV{drv} \Velement{w}{0,\V{j}}$ \cuz WLOG, and} \\
+        \mycpar{$\V{foreY} \idestarV{drv} \Velement{w}{0,\V{j}}$ \cuz WLOG, and} \\
 \label{eq:pr-pred-stem-140}
-        \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{j},\V{current}}$ \cuz WLOG.}
+        \mycpar{$\V{pre} \idestarV{drv} \Velement{w}{\V{j},\V{current}}$ \cuz WLOG.}
 \end{gather}
 We can simplify \eqref{eq:pr-pred-stem-120},
 \begin{equation}
 \label{eq:pr-pred-stem-150}
-        \V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}
+        \V{S} \idestarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}
               \cuz \eqref{eq:pr-pred-stem-120}.
 \end{equation}
 With the foregoing, we have our mainstem aletheme:
@@ -2803,7 +2796,7 @@ For the lemma, it remains to determine the rank of \V{stemAL}.
 \begin{equation}
 \label{eq:pr-pred-stem-310}
         \mycpar{Let \V{DownMinD}, ``\V{downAl} minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destarV{drv} \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}.$}
+        $\V{S} \idestarV{drv} \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-320}
@@ -2813,7 +2806,7 @@ For the lemma, it remains to determine the rank of \V{stemAL}.
 \begin{equation}
 \label{eq:pr-pred-stem-330}
         \mycpar{Let \V{StemMinD}, ``\V{stemAL} minimum depth''  be the minimum number of steps in the derivation \\
-        $\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}.$}
+        $\V{S} \idestarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}.$}
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-340}
@@ -2824,7 +2817,7 @@ Whatever the value of \V{downMinD},
 because of the derivation
 \begin{equation}
 \label{eq:pr-pred-stem-350}
-        \mycpar{$\V{S} \destarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}$ \\
+        \mycpar{$\V{S} \idestarV{drv} \V{foreY} \cat \V{Y} \cat \V{aftY}$ \\
         $\derivesV{drv} \V{foreY} \cat \V{pre} \cat \V{Z:f} \cat \V{post} \cat \V{aftZ}$ \\
         $= \V{foreZ} \cat \V{Z:f} \cat \V{aftZ}$ \\
         \cuz \eqref{eq:pr-pred-stem-090}, \eqref{eq:pr-pred-stem-100},
@@ -2845,13 +2838,13 @@ so that
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-380}
-        \V{foreZ} \destarV{g} \Velement{w}{0,\V{current}} \cuz
+        \V{foreZ} \idestarV{g} \Velement{w}{0,\V{current}} \cuz
                 \eqref{eq:pr-pred-stem-090}, \eqref{eq:pr-pred-stem-130}, \eqref{eq:pr-pred-stem-140}.
 \end{equation}
 \begin{equation}
 \label{eq:pr-pred-stem-450}
         \mycpar{Let \V{downMinH} be the minimum number of steps in the derivation \\
-                $\V{foreZ} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+                $\V{foreZ} \idestarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-pred-stem-380}.
         }
 \end{equation}
@@ -2863,7 +2856,7 @@ so that
 \begin{equation}
 \label{eq:pr-pred-stem-470}
         \mycpar{Let \V{stemMinH} be the minimum number of steps in the derivation \\
-        $\V{foreY} \cat \V{pre} \destarV{g} \Velement{w}{0,\V{current}}$ \\
+        $\V{foreY} \cat \V{pre} \idestarV{g} \Velement{w}{0,\V{current}}$ \\
         \cuz \eqref{eq:pr-pred-stem-130}, \eqref{eq:pr-pred-stem-140}.}
 \end{equation}
 \begin{equation}
@@ -3000,7 +2993,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
                 \end{gathered} \; \right),
         \end{equation*}
         \begin{equation*}
-                \mycpar{where $\V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$.}
+                \mycpar{where $\V{pre} \idestarV{drv} \Velement{w}{0,\V{current}}$.}
         \end{equation*}
         The rank of \V{startAL} will be $2 \mult \VFA{Ht}{startAL}$.
         \lmEnd
@@ -3071,7 +3064,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         From the soundness of \V{startAL}, we know that
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-110}
-                \mycpar{$\V{fore} \destarV{drv} \Velement{w}{0,\V{origin}}$
+                \mycpar{$\V{fore} \idestarV{drv} \Velement{w}{0,\V{origin}}$
                         \cuz \Dfref{aletheme}, \eqref{eq:pr-start-sym-aletheme-020}, and}
         \end{equation}
         since $\V{fore} = \epsilon$,
@@ -3083,12 +3076,12 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         Also from the soundness of \V{startAL}, we know that
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-130}
-                \mycpar{$\V{pre} \destarV{drv} \Velement{w}{\V{origin},\V{current}}$
+                \mycpar{$\V{pre} \idestarV{drv} \Velement{w}{\V{origin},\V{current}}$
                         \cuz \Dfref{aletheme}, \eqref{eq:pr-start-sym-aletheme-020}, so that}
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-sym-aletheme-140}
-                 \mycpar{$\V{pre} \destarV{drv} \Velement{w}{0,\V{current}}$ \cuz
+                 \mycpar{$\V{pre} \idestarV{drv} \Velement{w}{0,\V{current}}$ \cuz
                          \eqref{eq:pr-start-sym-aletheme-120},
                          \eqref{eq:pr-start-sym-aletheme-130}.}
          \end{equation}
@@ -3208,7 +3201,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \begin{equation}
         \label{eq:pr-rank-0-start-symbol-aletheme-050}
                 \mycpar{\VFA{Ht}{startAL} is the length of the shortest derivation \\
-                such that $\V{pre} \destarV{g} \Velement{w}{0,\V{current}}$
+                such that $\V{pre} \idestarV{g} \Velement{w}{0,\V{current}}$
                 \cuz \Dfref{rank}, \eqref{eq:pr-rank-0-start-symbol-aletheme-030}.}
         \end{equation}
         \begin{equation}
@@ -3373,7 +3366,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         By the soundness of \V{startAL},
         \begin{equation}
         \label{eq:pr-start-aletheme-160}
-                \V{pre} \destarV{drv} \Velement{w}{0,\V{current}}
+                \V{pre} \idestarV{drv} \Velement{w}{0,\V{current}}
                         \cuz \Dfref{aletheme}, \eqref{eq:pr-start-aletheme-110}.
         \end{equation}
         \begin{equation}
@@ -3399,7 +3392,7 @@ With \eqref{eq:pr-pred-stem-160}, \eqref{eq:pr-pred-stem-190}, and \eqref{eq:pr-
         \end{equation}
         \begin{equation}
         \label{eq:pr-start-aletheme-200}
-                \mycpar{Let \V{n1} be the minimum length of $\V{pre} \destarV{g} \Velement{w}{0,0}$ \\
+                \mycpar{Let \V{n1} be the minimum length of $\V{pre} \idestarV{g} \Velement{w}{0,0}$ \\
                         \cuz \eqref{eq:pr-start-aletheme-160}, \eqref{eq:pr-start-aletheme-170}.}
         \end{equation}
         \begin{equation}
@@ -3749,7 +3742,7 @@ assuming for the reductio that
         \label{eq:pr-rt-comp-020}
         \begin{gathered}
                 \existQ{\V{joint} \in \naturals}{\\
-                        \V{B:pd} \destarV{drv} \Velement{w}{\V{joint}, (\V{i}+1)} \\
+                        \V{B:pd} \idestarV{drv} \Velement{w}{\V{joint}, (\V{i}+1)} \\
                         \land \; \V{joint} < (\V{i}+1)} \\
         \text{\cuz AF lemma, \eqref{eq:pr-rt-comp-010}.}
         \end{gathered}
@@ -3922,7 +3915,7 @@ for the lemma.
         By assumption for the lemma, \V{downEE} is intangible so that
 \begin{equation}
         \label{eq:pr-ri-comp-020}
-        \mycpar{$\V{B:pd} \destarV{drv} \epsilon$ \cuz AF lemma, \eqref{eq:pr-ri-comp-010}.}
+        \mycpar{$\V{B:pd} \idestarV{drv} \epsilon$ \cuz AF lemma, \eqref{eq:pr-ri-comp-010}.}
 \end{equation}
 \begin{equation}
         \label{eq:pr-ri-comp-030}
@@ -4075,7 +4068,7 @@ for the lemma.
 \end{equation}
 \begin{equation}
         \label{eq:pr-scan-comp-020}
-        \mycpar{$\V{t:f} \destarV{drv} \Velement{w}{\V{i}}$
+        \mycpar{$\V{t:f} \idestarV{drv} \Velement{w}{\V{i}}$
                 \cuz AF lemma, \eqref{eq:pr-scan-comp-010}, \eqref{eq:pr-scan-comp-015}.}
 \end{equation}
 \begin{equation}
