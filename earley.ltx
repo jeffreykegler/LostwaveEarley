@@ -153,16 +153,8 @@
 \newcommand{\derivesW}[1]
     {\mathrel{\mbox{$\:\underset{#1}{\Rightarrow}$}}}
 \newcommand{\derivesV}[1]{\derivesW{\V{#1}}}
-\newcommand{\destar}
-    {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
-\newcommand{\destarW}[1]
-    {\mathrel{\mbox{$\:\underset{#1}{\overset{\ast\:}{\Rightarrow}}$}}}
-% \newcommand{\destarV}[1]{\destarW{\V{#1}}}
-% \newcommand{\deplus}
-    % {\mathrel{\mbox{$\:\stackrel{\!{+}}{\Rightarrow\!}\:$}}}
-% \newcommand{\deplusW}[1]
-    % {\mathrel{\mbox{$\:\underset{#1}{\overset{{+}\:}{\Rightarrow}}$}}}
-% \newcommand{\deplusV}[1]{\deplusW{\V{#1}}}
+% \newcommand{\destar}
+    % {\mathrel{\mbox{$\:\stackrel{\!{\ast}}{\Rightarrow\!}\:$}}}
 
 % Traditional derivations
 \newcommand{\tderives}{\Rightarrow}
@@ -2040,7 +2032,7 @@ From \V{downAL} we can conclude
         \mycpar{$\V{antepre}\cat\V{B} \idestarV{drv} \Velement{w}{\V{origin},\V{current}}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-050}
-        \mycpar{$\V{S} \destar \V{fore} \cat \V{A} \cat \V{aft}$
+        \mycpar{$\V{S} \idestar \V{fore} \cat \V{A} \cat \V{aft}$
               \cuz \Dfref{aletheme}, \eqref{eq:pr-conf-stem-010}.} \\
 \label{eq:pr-conf-stem-060}
         \mycpar{$\V{fore} \idestarV{drv} \Velement{w}{0,\V{origin}}$
@@ -2277,6 +2269,7 @@ what we need for this lemma.  \myqed
 
 \begin{lemma}[Reduction tributary inflow]
         \label{lm:red-trib}
+        \todo{Rewrite and recheck this}
         Let \V{downAL} be a reduced aletheme,
         whose derivation is \V{drv},
         whose predot symbol instance is \V{B:pd},
@@ -2372,7 +2365,7 @@ and deduce a few more facts that we will need:
 \begin{equation}
 \label{eq:pr-red-trib-150}
         \begin{gathered}
-                \V{B:pd} \derivesV{drv} \V{rhs} \destar \Velement{w}{\V{j},\V{current}}
+                \V{B:pd} \derivesV{drv} \V{rhs} \idestar{drv} \Velement{w}{\V{j},\V{current}}
               \cuz \eqref{eq:pr-red-trib-020}, \eqref{eq:pr-red-trib-040}.
         \end{gathered}
 \end{equation}
@@ -2569,12 +2562,12 @@ are minimal derivations.
 \begin{equation}
 \label{eq:pr-red-trib-520}
         \mycpar{Let \V{HtB} be the minimum number of steps in the derivation
-        $\V{B} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500}$, and}
+        $\V{B} \idestarV{drvs} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500}$, and}
 \end{equation}
 \begin{equation}
 \label{eq:pr-red-trib-530}
         \mycpar{let \V{HtRHS} be the minimum number of steps in the derivation
-        $\V{rhs} \destar \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500}.$}
+        $\V{rhs} \idestarV{drvs} \Velement{w}{\V{j},\V{current}} \cuz \eqref{eq:pr-red-trib-500}.$}
 \end{equation}
 Because \eqref{eq:pr-red-trib-520} and \eqref{eq:pr-red-trib-530}
 are minimal derivations,
